@@ -4,6 +4,9 @@
 
 ### Juan Pablo Cardenas Gonzalez
 
+### Conexion tabla film_text
+![alt text](image.png)
+
 1. #### Obtener los nombres de todos los actores y las películas en las que han actuado.
 
 ```sql
