@@ -23062,3 +23062,12975 @@ INNER JOIN almacen as a ON i.id_almacen = a.id_almacen;
 
 ```
 
+#### 7. Listar los nombres y apellidos de los empleados junto con las direcciones de los almacenes en los que trabajan.
+
+```sql
+SELECT e.nombre AS nombre_empleado, e.apellidos AS apellidos_empleado, d.direccion, a.id_almacen
+FROM empleado as e
+INNER JOIN direccion as d ON d.id_direccion = e.id_direccion
+INNER JOIN almacen as a ON a.id_almacen = e.id_almacen; 
++-----------------+--------------------+----------------------+------------+
+| nombre_empleado | apellidos_empleado | direccion            | id_almacen |
++-----------------+--------------------+----------------------+------------+
+| Mike            | Hillyer            | 23 Workhaven Lane    |          2 |
+| Jon             | Stephens           | 1411 Lillydale Drive |          2 |
+| Pepe            | Spilberg           | 1913 Hanoi Way       |          2 |
+| Ada             | Byron              | 1121 Loja Avenue     |          1 |
+| Ringo           | Rooksby            | 692 Joliet Street    |          1 |
++-----------------+--------------------+----------------------+------------+
+5 rows in set (0,00 sec)
+
+```
+
+#### 8.Obtener una lista de pagos realizados, incluyendo el cliente, el empleado que registró el pago y el alquiler correspondiente.
+
+```sql
+SELECT p.id_pago, p.total AS pago, c.nombre AS cliente, e.nombre As empleado, a.id_alquiler  
+FROM pago as p
+INNER JOIN cliente as c ON p.id_cliente = c.id_cliente
+INNER JOIN empleado as e ON p.id_empleado = e.id_empleado
+INNER JOIN alquiler as a ON a.id_alquiler = p.id_alquiler;
+
+|    6050 |  2.99 | PEARL       | Jon      |        8439 |
+|    6051 |  4.99 | PEARL       | Mike     |        8605 |
+|    6052 |  0.99 | PEARL       | Mike     |        9181 |
+|    6053 |  0.99 | PEARL       | Mike     |       11816 |
+|    6054 |  4.99 | PEARL       | Mike     |       12492 |
+|    6055 |  2.99 | PEARL       | Mike     |       12969 |
+|    6056 |  4.99 | PEARL       | Jon      |       13075 |
+|    6057 |  0.99 | PEARL       | Jon      |       14099 |
+|    6058 |  5.99 | PEARL       | Jon      |       14271 |
+|    6059 |  5.99 | PEARL       | Jon      |       14468 |
+|    6060 |  2.99 | PEARL       | Jon      |       14880 |
+|    6061 |  0.99 | PEARL       | Mike     |       15225 |
+|    6062 |  1.99 | PEARL       | Mike     |       15952 |
+|    6063 |  4.99 | ARLENE      | Mike     |         812 |
+|    6064 |  3.99 | ARLENE      | Mike     |         963 |
+|    6065 |  7.99 | ARLENE      | Jon      |        2226 |
+|    6066 |  4.99 | ARLENE      | Jon      |        3574 |
+|    6067 |  7.99 | ARLENE      | Mike     |        4345 |
+|    6068 |  7.99 | ARLENE      | Mike     |        4824 |
+|    6069 |  2.99 | ARLENE      | Jon      |        4955 |
+|    6070 |  4.99 | ARLENE      | Mike     |        5067 |
+|    6071 |  2.99 | ARLENE      | Mike     |        6159 |
+|    6072 |  2.99 | ARLENE      | Mike     |        6317 |
+|    6073 |  2.99 | ARLENE      | Jon      |        6350 |
+|    6074 |  3.99 | ARLENE      | Mike     |        6526 |
+|    6075 |  2.99 | ARLENE      | Jon      |        6532 |
+|    6076 |  4.99 | ARLENE      | Jon      |        7347 |
+|    6077 |  6.99 | ARLENE      | Mike     |        7524 |
+|    6078 |  7.99 | ARLENE      | Mike     |        8054 |
+|    6079 |  4.99 | ARLENE      | Jon      |        8110 |
+|    6080 |  4.99 | ARLENE      | Mike     |        9980 |
+|    6081 |  2.99 | ARLENE      | Jon      |        9993 |
+|    6082 |  2.99 | ARLENE      | Jon      |       10138 |
+|    6083 |  2.99 | ARLENE      | Mike     |       10793 |
+|    6084 |  1.99 | ARLENE      | Jon      |       11333 |
+|    6085 |  0.99 | ARLENE      | Jon      |       11384 |
+|    6086 |  5.99 | ARLENE      | Jon      |       11395 |
+|    6087 |  4.99 | ARLENE      | Jon      |       11437 |
+|    6088 |  5.99 | ARLENE      | Jon      |       14444 |
+|    6089 |  2.99 | MAUREEN     | Jon      |        3414 |
+|    6090 |  4.99 | MAUREEN     | Mike     |        3466 |
+|    6091 |  4.99 | MAUREEN     | Mike     |        3721 |
+|    6092 |  4.99 | MAUREEN     | Mike     |        4324 |
+|    6093 |  2.99 | MAUREEN     | Mike     |        5282 |
+|    6094 |  2.99 | MAUREEN     | Mike     |        5419 |
+|    6095 |  9.99 | MAUREEN     | Mike     |        6712 |
+|    6096 |  5.99 | MAUREEN     | Jon      |        7288 |
+|    6097 |  3.99 | MAUREEN     | Mike     |        7329 |
+|    6098 |  2.99 | MAUREEN     | Jon      |        8600 |
+|    6099 |  2.99 | MAUREEN     | Mike     |        8627 |
+|    6100 |  1.99 | MAUREEN     | Mike     |       12172 |
+|    6101 |  6.99 | MAUREEN     | Mike     |       14491 |
+|    6102 |  4.99 | MAUREEN     | Mike     |       14708 |
+|    6103 |  0.99 | MAUREEN     | Mike     |       14712 |
+|    6104 |  0.99 | MAUREEN     | Jon      |       14739 |
+|    6105 |  4.99 | MAUREEN     | Jon      |       14934 |
+|    6106 |  2.99 | MAUREEN     | Jon      |       15472 |
+|    6107 |  4.99 | MAUREEN     | Mike     |       15901 |
+|    6108 |  2.99 | MAUREEN     | Mike     |       15986 |
+|    6109 |  5.99 | MAUREEN     | Mike     |       16033 |
+|    6110 |  4.99 | COLLEEN     | Mike     |         111 |
+|    6111 |  3.99 | COLLEEN     | Mike     |        1023 |
+|    6112 |  2.99 | COLLEEN     | Mike     |        1679 |
+|    6113 |  1.99 | COLLEEN     | Jon      |        2155 |
+|    6114 |  6.99 | COLLEEN     | Mike     |        2164 |
+|    6115 |  0.99 | COLLEEN     | Jon      |        3065 |
+|    6116 |  5.99 | COLLEEN     | Mike     |        3576 |
+|    6117 |  2.99 | COLLEEN     | Jon      |        4340 |
+|    6118 |  4.99 | COLLEEN     | Jon      |        4459 |
+|    6119 |  2.99 | COLLEEN     | Mike     |        4680 |
+|    6120 |  3.99 | COLLEEN     | Mike     |        5046 |
+|    6121 |  7.99 | COLLEEN     | Mike     |        7132 |
+|    6122 |  2.99 | COLLEEN     | Mike     |        8219 |
+|    6123 |  0.99 | COLLEEN     | Mike     |        8234 |
+|    6124 |  0.99 | COLLEEN     | Mike     |        8384 |
+|    6125 |  4.99 | COLLEEN     | Jon      |        8417 |
+|    6126 |  2.99 | COLLEEN     | Mike     |        8936 |
+|    6127 |  2.99 | COLLEEN     | Jon      |        9521 |
+|    6128 |  3.99 | COLLEEN     | Jon      |       10999 |
+|    6129 |  0.99 | COLLEEN     | Jon      |       11892 |
+|    6130 |  4.99 | COLLEEN     | Jon      |       13379 |
+|    6131 |  0.99 | COLLEEN     | Jon      |       15406 |
+|    6132 |  4.99 | COLLEEN     | Jon      |       15976 |
+|    6133 |  4.99 | COLLEEN     | Jon      |       13374 |
+|    6134 |  4.99 | ALLISON     | Jon      |         492 |
+|    6135 |  0.99 | ALLISON     | Jon      |        1070 |
+|    6136 |  3.99 | ALLISON     | Jon      |        2284 |
+|    6137 |  2.99 | ALLISON     | Jon      |        2863 |
+|    6138 |  2.99 | ALLISON     | Jon      |        2934 |
+|    6139 |  3.99 | ALLISON     | Jon      |        3433 |
+|    6140 |  0.99 | ALLISON     | Jon      |        3538 |
+|    6141 |  8.99 | ALLISON     | Jon      |        3710 |
+|    6142 |  6.99 | ALLISON     | Mike     |        3715 |
+|    6143 |  0.99 | ALLISON     | Jon      |        3796 |
+|    6144 |  3.99 | ALLISON     | Mike     |        4217 |
+|    6145 |  4.99 | ALLISON     | Mike     |        4636 |
+|    6146 |  0.99 | ALLISON     | Mike     |        4909 |
+|    6147 |  2.99 | ALLISON     | Mike     |        5151 |
+|    6148 |  4.99 | ALLISON     | Mike     |        5320 |
+|    6149 |  0.99 | ALLISON     | Jon      |        5902 |
+|    6150 |  1.99 | ALLISON     | Jon      |        6141 |
+|    6151 |  2.99 | ALLISON     | Mike     |        6948 |
+|    6152 |  8.99 | ALLISON     | Jon      |        7509 |
+|    6153 |  0.99 | ALLISON     | Mike     |        7601 |
+|    6154 |  2.99 | ALLISON     | Mike     |        8147 |
+|    6155 |  4.99 | ALLISON     | Mike     |       10585 |
+|    6156 |  0.99 | ALLISON     | Mike     |       12304 |
+|    6157 |  2.99 | ALLISON     | Jon      |       12952 |
+|    6158 |  4.99 | ALLISON     | Jon      |       13458 |
+|    6159 |  3.98 | ALLISON     | Jon      |       12672 |
+|    6160 |  0.00 | ALLISON     | Mike     |       15234 |
+|    6161 |  4.99 | TAMARA      | Mike     |        2200 |
+|    6162 |  0.99 | TAMARA      | Mike     |        3208 |
+|    6163 |  7.99 | TAMARA      | Mike     |        3277 |
+|    6164 |  0.99 | TAMARA      | Jon      |        3280 |
+|    6165 |  4.99 | TAMARA      | Jon      |        3933 |
+|    6166 |  2.99 | TAMARA      | Jon      |        4458 |
+|    6167 |  4.99 | TAMARA      | Mike     |        4515 |
+|    6168 |  0.99 | TAMARA      | Jon      |        4694 |
+|    6169 |  2.99 | TAMARA      | Mike     |        5623 |
+|    6170 |  4.99 | TAMARA      | Jon      |        6155 |
+|    6171 |  4.99 | TAMARA      | Jon      |        6578 |
+|    6172 |  2.99 | TAMARA      | Mike     |        6880 |
+|    6173 |  0.99 | TAMARA      | Jon      |        7305 |
+|    6174 |  5.99 | TAMARA      | Jon      |        7308 |
+|    6175 |  0.99 | TAMARA      | Jon      |        7629 |
+|    6176 |  7.99 | TAMARA      | Jon      |        7640 |
+|    6177 |  3.99 | TAMARA      | Jon      |        9913 |
+|    6178 |  4.99 | TAMARA      | Mike     |       11521 |
+|    6179 |  2.99 | TAMARA      | Mike     |       12866 |
+|    6180 |  0.99 | TAMARA      | Jon      |       13306 |
+|    6181 |  4.99 | TAMARA      | Jon      |       13431 |
+|    6182 |  5.99 | TAMARA      | Mike     |       13679 |
+|    6183 |  4.99 | TAMARA      | Mike     |       15740 |
+|    6184 |  2.99 | TAMARA      | Jon      |       15912 |
+|    6185 |  0.99 | TAMARA      | Jon      |       13295 |
+|    6186 |  0.99 | JOY         | Mike     |          32 |
+|    6187 |  4.99 | JOY         | Mike     |        1078 |
+|    6188 |  3.99 | JOY         | Jon      |        1468 |
+|    6189 |  4.99 | JOY         | Mike     |        1744 |
+|    6190 |  0.99 | JOY         | Jon      |        1793 |
+|    6191 |  8.99 | JOY         | Jon      |        2450 |
+|    6192 |  0.99 | JOY         | Jon      |        2675 |
+|    6193 |  0.99 | JOY         | Mike     |        2777 |
+|    6194 |  3.99 | JOY         | Mike     |        4509 |
+|    6195 |  0.99 | JOY         | Mike     |        4935 |
+|    6196 |  4.99 | JOY         | Mike     |        5045 |
+|    6197 |  0.99 | JOY         | Mike     |        5061 |
+|    6198 |  2.99 | JOY         | Jon      |        5269 |
+|    6199 |  4.99 | JOY         | Jon      |        6126 |
+|    6200 |  2.99 | JOY         | Mike     |        6251 |
+|    6201 |  4.99 | JOY         | Jon      |        7333 |
+|    6202 |  4.99 | JOY         | Jon      |        7390 |
+|    6203 |  4.99 | JOY         | Jon      |        8032 |
+|    6204 |  0.99 | JOY         | Jon      |        8653 |
+|    6205 |  2.99 | JOY         | Mike     |        8815 |
+|    6206 |  3.99 | JOY         | Jon      |        9778 |
+|    6207 |  3.99 | JOY         | Jon      |       10050 |
+|    6208 |  9.99 | JOY         | Mike     |       10057 |
+|    6209 |  2.99 | JOY         | Jon      |       10874 |
+|    6210 |  5.99 | JOY         | Jon      |       11148 |
+|    6211 |  5.99 | JOY         | Mike     |       11552 |
+|    6212 |  2.99 | JOY         | Jon      |       11914 |
+|    6213 |  1.99 | JOY         | Mike     |       12079 |
+|    6214 |  7.99 | JOY         | Jon      |       12523 |
+|    6215 |  0.99 | JOY         | Jon      |       12542 |
+|    6216 |  0.99 | JOY         | Jon      |       14017 |
+|    6217 |  5.99 | JOY         | Mike     |       14073 |
+|    6218 |  2.99 | JOY         | Mike     |       14340 |
+|    6219 |  5.99 | GEORGIA     | Mike     |         329 |
+|    6220 |  6.99 | GEORGIA     | Mike     |         479 |
+|    6221 |  8.99 | GEORGIA     | Mike     |         512 |
+|    6222 |  0.99 | GEORGIA     | Jon      |        2423 |
+|    6223 |  9.99 | GEORGIA     | Jon      |        3561 |
+|    6224 |  2.99 | GEORGIA     | Mike     |        3839 |
+|    6225 |  0.99 | GEORGIA     | Jon      |        4289 |
+|    6226 |  0.99 | GEORGIA     | Jon      |        4969 |
+|    6227 |  2.99 | GEORGIA     | Mike     |        5096 |
+|    6228 |  5.99 | GEORGIA     | Mike     |        5560 |
+|    6229 |  0.99 | GEORGIA     | Mike     |        6862 |
+|    6230 |  1.99 | GEORGIA     | Mike     |        6877 |
+|    6231 |  0.99 | GEORGIA     | Mike     |        8556 |
+|    6232 |  5.99 | GEORGIA     | Jon      |        8949 |
+|    6233 |  2.99 | GEORGIA     | Jon      |        9711 |
+|    6234 |  2.99 | GEORGIA     | Jon      |       11113 |
+|    6235 |  7.99 | GEORGIA     | Mike     |       11202 |
+|    6236 |  5.99 | GEORGIA     | Mike     |       11581 |
+|    6237 |  0.99 | GEORGIA     | Mike     |       12214 |
+|    6238 |  8.99 | GEORGIA     | Jon      |       12230 |
+|    6239 |  3.99 | GEORGIA     | Mike     |       12231 |
+|    6240 |  6.99 | GEORGIA     | Jon      |       13983 |
+|    6241 |  0.99 | GEORGIA     | Mike     |       14026 |
+|    6242 |  4.99 | GEORGIA     | Mike     |       14478 |
+|    6243 |  2.99 | GEORGIA     | Jon      |       14806 |
+|    6244 |  3.99 | GEORGIA     | Mike     |       15389 |
+|    6245 |  4.99 | CONSTANCE   | Mike     |          28 |
+|    6246 |  3.99 | CONSTANCE   | Mike     |         805 |
+|    6247 |  0.99 | CONSTANCE   | Jon      |        1619 |
+|    6248 |  8.99 | CONSTANCE   | Mike     |        2833 |
+|    6249 |  5.99 | CONSTANCE   | Jon      |        6234 |
+|    6250 |  2.99 | CONSTANCE   | Mike     |        6309 |
+|    6251 |  5.99 | CONSTANCE   | Mike     |        7123 |
+|    6252 |  4.99 | CONSTANCE   | Jon      |        7653 |
+|    6253 |  0.99 | CONSTANCE   | Jon      |        7707 |
+|    6254 |  2.99 | CONSTANCE   | Mike     |        7749 |
+|    6255 |  2.99 | CONSTANCE   | Mike     |        7990 |
+|    6256 |  2.99 | CONSTANCE   | Mike     |        8306 |
+|    6257 |  4.99 | CONSTANCE   | Jon      |        8401 |
+|    6258 |  4.99 | CONSTANCE   | Jon      |        8655 |
+|    6259 |  0.99 | CONSTANCE   | Jon      |        9270 |
+|    6260 | 10.99 | CONSTANCE   | Jon      |        9330 |
+|    6261 |  2.99 | CONSTANCE   | Jon      |        9365 |
+|    6262 |  2.99 | CONSTANCE   | Jon      |       10157 |
+|    6263 |  6.99 | CONSTANCE   | Mike     |       10539 |
+|    6264 |  0.99 | CONSTANCE   | Jon      |       11861 |
+|    6265 |  2.99 | CONSTANCE   | Jon      |       12853 |
+|    6266 |  2.99 | CONSTANCE   | Jon      |       13707 |
+|    6267 |  0.99 | CONSTANCE   | Jon      |       14527 |
+|    6268 |  0.99 | CONSTANCE   | Jon      |       14857 |
+|    6269 |  2.99 | CONSTANCE   | Jon      |       15553 |
+|    6270 |  2.99 | LILLIE      | Jon      |        1992 |
+|    6271 |  2.99 | LILLIE      | Jon      |        2244 |
+|    6272 |  2.99 | LILLIE      | Mike     |        2424 |
+|    6273 |  4.99 | LILLIE      | Jon      |        2443 |
+|    6274 |  2.99 | LILLIE      | Mike     |        3832 |
+|    6275 |  5.99 | LILLIE      | Mike     |        4015 |
+|    6276 |  4.99 | LILLIE      | Mike     |        4885 |
+|    6277 |  5.99 | LILLIE      | Jon      |        5267 |
+|    6278 |  2.99 | LILLIE      | Mike     |        5846 |
+|    6279 |  4.99 | LILLIE      | Mike     |        6319 |
+|    6280 |  2.99 | LILLIE      | Mike     |        6794 |
+|    6281 |  8.99 | LILLIE      | Mike     |        7056 |
+|    6282 |  4.99 | LILLIE      | Jon      |        7387 |
+|    6283 |  5.99 | LILLIE      | Jon      |        8385 |
+|    6284 |  2.99 | LILLIE      | Jon      |        8530 |
+|    6285 |  0.99 | LILLIE      | Jon      |        8596 |
+|    6286 |  0.99 | LILLIE      | Mike     |        9574 |
+|    6287 |  4.99 | LILLIE      | Mike     |       10582 |
+|    6288 |  5.99 | LILLIE      | Mike     |       12443 |
+|    6289 |  2.99 | LILLIE      | Jon      |       14357 |
+|    6290 |  2.99 | LILLIE      | Jon      |       15285 |
+|    6291 |  1.99 | LILLIE      | Mike     |       15790 |
+|    6292 |  0.99 | LILLIE      | Jon      |       15821 |
+|    6293 |  4.99 | CLAUDIA     | Jon      |        1125 |
+|    6294 |  3.99 | CLAUDIA     | Jon      |        1245 |
+|    6295 |  0.99 | CLAUDIA     | Jon      |        1645 |
+|    6296 |  2.99 | CLAUDIA     | Mike     |        1674 |
+|    6297 |  5.99 | CLAUDIA     | Jon      |        1993 |
+|    6298 |  4.99 | CLAUDIA     | Mike     |        2005 |
+|    6299 |  5.99 | CLAUDIA     | Jon      |        2511 |
+|    6300 |  6.99 | CLAUDIA     | Jon      |        3185 |
+|    6301 |  4.99 | CLAUDIA     | Jon      |        3199 |
+|    6302 |  0.99 | CLAUDIA     | Jon      |        4686 |
+|    6303 |  7.99 | CLAUDIA     | Mike     |        4721 |
+|    6304 |  5.99 | CLAUDIA     | Jon      |       10133 |
+|    6305 |  0.99 | CLAUDIA     | Jon      |       10541 |
+|    6306 |  6.99 | CLAUDIA     | Jon      |       10580 |
+|    6307 |  7.99 | CLAUDIA     | Jon      |       10968 |
+|    6308 |  4.99 | CLAUDIA     | Mike     |       11050 |
+|    6309 |  0.99 | CLAUDIA     | Mike     |       11073 |
+|    6310 |  3.99 | CLAUDIA     | Mike     |       11481 |
+|    6311 |  3.99 | CLAUDIA     | Mike     |       11882 |
+|    6312 |  0.99 | CLAUDIA     | Mike     |       12226 |
+|    6313 |  4.99 | CLAUDIA     | Jon      |       12863 |
+|    6314 |  5.99 | CLAUDIA     | Mike     |       12921 |
+|    6315 |  2.99 | CLAUDIA     | Jon      |       13349 |
+|    6316 |  5.99 | CLAUDIA     | Jon      |       15037 |
+|    6317 |  2.99 | CLAUDIA     | Mike     |       15129 |
+|    6318 |  0.99 | CLAUDIA     | Mike     |       15778 |
+|    6319 |  2.99 | JACKIE      | Jon      |         807 |
+|    6320 |  0.99 | JACKIE      | Mike     |        1148 |
+|    6321 |  4.99 | JACKIE      | Mike     |        1493 |
+|    6322 |  0.99 | JACKIE      | Jon      |        1811 |
+|    6323 |  2.99 | JACKIE      | Jon      |        3581 |
+|    6324 |  6.99 | JACKIE      | Mike     |        3752 |
+|    6325 |  4.99 | JACKIE      | Mike     |        3968 |
+|    6326 |  2.99 | JACKIE      | Jon      |        4592 |
+|    6327 |  4.99 | JACKIE      | Mike     |        5790 |
+|    6328 |  2.99 | JACKIE      | Mike     |        6047 |
+|    6329 |  4.99 | JACKIE      | Jon      |        6352 |
+|    6330 |  4.99 | JACKIE      | Jon      |        6466 |
+|    6331 |  0.99 | JACKIE      | Mike     |        8120 |
+|    6332 |  6.99 | JACKIE      | Jon      |        8446 |
+|    6333 |  0.99 | JACKIE      | Jon      |        8781 |
+|    6334 |  5.99 | JACKIE      | Mike     |        9019 |
+|    6335 |  6.99 | JACKIE      | Jon      |        9519 |
+|    6336 |  3.99 | JACKIE      | Mike     |        9587 |
+|    6337 |  0.99 | JACKIE      | Jon      |       10155 |
+|    6338 |  2.99 | JACKIE      | Jon      |       12332 |
+|    6339 |  4.99 | JACKIE      | Mike     |       12502 |
+|    6340 |  0.99 | JACKIE      | Jon      |       13070 |
+|    6341 |  0.99 | JACKIE      | Mike     |       13469 |
+|    6342 |  3.99 | JACKIE      | Jon      |       14749 |
+|    6343 |  6.99 | JACKIE      | Mike     |       15034 |
+|    6344 |  2.99 | MARCIA      | Jon      |         262 |
+|    6345 |  2.99 | MARCIA      | Jon      |         344 |
+|    6346 |  2.99 | MARCIA      | Mike     |        1032 |
+|    6347 |  0.99 | MARCIA      | Mike     |        1262 |
+|    6348 |  5.99 | MARCIA      | Jon      |        1308 |
+|    6349 |  8.99 | MARCIA      | Jon      |        2139 |
+|    6350 |  6.99 | MARCIA      | Jon      |        2311 |
+|    6351 |  2.99 | MARCIA      | Mike     |        2630 |
+|    6352 |  3.99 | MARCIA      | Jon      |        2840 |
+|    6353 |  4.99 | MARCIA      | Mike     |        3353 |
+|    6354 |  2.99 | MARCIA      | Jon      |        3460 |
+|    6355 |  0.99 | MARCIA      | Mike     |        3645 |
+|    6356 |  4.99 | MARCIA      | Jon      |        3857 |
+|    6357 |  4.99 | MARCIA      | Jon      |        4749 |
+|    6358 |  0.99 | MARCIA      | Mike     |        4959 |
+|    6359 |  2.99 | MARCIA      | Mike     |        5404 |
+|    6360 |  3.99 | MARCIA      | Mike     |        5545 |
+|    6361 |  3.99 | MARCIA      | Jon      |        5938 |
+|    6362 |  0.99 | MARCIA      | Jon      |        6049 |
+|    6363 |  4.99 | MARCIA      | Jon      |        6281 |
+|    6364 |  2.99 | MARCIA      | Mike     |        6303 |
+|    6365 |  4.99 | MARCIA      | Jon      |        6996 |
+|    6366 |  4.99 | MARCIA      | Jon      |        7047 |
+|    6367 |  0.99 | MARCIA      | Jon      |        7253 |
+|    6368 |  5.99 | MARCIA      | Mike     |        7780 |
+|    6369 |  4.99 | MARCIA      | Mike     |        7792 |
+|    6370 |  2.99 | MARCIA      | Jon      |        7798 |
+|    6371 |  2.99 | MARCIA      | Mike     |        8657 |
+|    6372 |  5.99 | MARCIA      | Mike     |        9011 |
+|    6373 |  2.99 | MARCIA      | Mike     |        9934 |
+|    6374 |  4.99 | MARCIA      | Jon      |       10137 |
+|    6375 |  6.99 | MARCIA      | Jon      |       11139 |
+|    6376 |  3.99 | MARCIA      | Jon      |       11486 |
+|    6377 |  5.99 | MARCIA      | Jon      |       11507 |
+|    6378 |  4.99 | MARCIA      | Mike     |       11895 |
+|    6379 |  2.99 | MARCIA      | Mike     |       12975 |
+|    6380 |  2.99 | MARCIA      | Mike     |       13364 |
+|    6381 |  7.99 | MARCIA      | Mike     |       13443 |
+|    6382 |  4.99 | MARCIA      | Jon      |       14321 |
+|    6383 |  7.99 | MARCIA      | Mike     |       14364 |
+|    6384 |  4.99 | MARCIA      | Jon      |       14722 |
+|    6385 |  0.99 | MARCIA      | Mike     |       12988 |
+|    6386 |  0.99 | TANYA       | Jon      |         133 |
+|    6387 |  4.99 | TANYA       | Mike     |         182 |
+|    6388 |  0.99 | TANYA       | Mike     |        1500 |
+|    6389 |  0.99 | TANYA       | Jon      |        1518 |
+|    6390 |  4.99 | TANYA       | Mike     |        2156 |
+|    6391 |  2.99 | TANYA       | Mike     |        2492 |
+|    6392 |  2.99 | TANYA       | Jon      |        3069 |
+|    6393 |  4.99 | TANYA       | Mike     |        4844 |
+|    6394 |  4.99 | TANYA       | Jon      |        6053 |
+|    6395 |  2.99 | TANYA       | Mike     |        7193 |
+|    6396 |  3.99 | TANYA       | Jon      |        7330 |
+|    6397 |  4.99 | TANYA       | Mike     |        7812 |
+|    6398 |  8.99 | TANYA       | Jon      |        7951 |
+|    6399 |  2.99 | TANYA       | Jon      |        8102 |
+|    6400 |  2.99 | TANYA       | Jon      |        8748 |
+|    6401 |  6.99 | TANYA       | Jon      |        8799 |
+|    6402 |  3.99 | TANYA       | Mike     |        8835 |
+|    6403 |  5.99 | TANYA       | Mike     |        9276 |
+|    6404 |  4.99 | TANYA       | Mike     |        9661 |
+|    6405 |  1.99 | TANYA       | Jon      |        9715 |
+|    6406 |  0.99 | TANYA       | Jon      |       10056 |
+|    6407 |  2.99 | TANYA       | Jon      |       10058 |
+|    6408 |  4.99 | TANYA       | Jon      |       11125 |
+|    6409 | 11.99 | TANYA       | Jon      |       11479 |
+|    6410 |  5.99 | TANYA       | Jon      |       11772 |
+|    6411 |  0.99 | TANYA       | Mike     |       12469 |
+|    6412 |  6.99 | TANYA       | Jon      |       13914 |
+|    6413 |  6.99 | TANYA       | Jon      |       13922 |
+|    6414 |  6.99 | TANYA       | Jon      |       13969 |
+|    6415 |  3.99 | TANYA       | Jon      |       14453 |
+|    6416 |  8.99 | TANYA       | Jon      |       15139 |
+|    6417 |  0.99 | TANYA       | Mike     |       15337 |
+|    6418 |  1.99 | TANYA       | Jon      |       15931 |
+|    6419 |  4.99 | NELLIE      | Jon      |         315 |
+|    6420 |  2.99 | NELLIE      | Mike     |         842 |
+|    6421 |  2.99 | NELLIE      | Mike     |        1199 |
+|    6422 |  4.99 | NELLIE      | Mike     |        1660 |
+|    6423 |  2.99 | NELLIE      | Mike     |        3181 |
+|    6424 |  0.99 | NELLIE      | Mike     |        4143 |
+|    6425 |  5.99 | NELLIE      | Mike     |        5616 |
+|    6426 |  0.99 | NELLIE      | Jon      |        6403 |
+|    6427 |  4.99 | NELLIE      | Jon      |        7243 |
+|    6428 |  8.99 | NELLIE      | Mike     |        8310 |
+|    6429 |  6.99 | NELLIE      | Mike     |        8382 |
+|    6430 |  0.99 | NELLIE      | Mike     |        8465 |
+|    6431 |  4.99 | NELLIE      | Mike     |        9065 |
+|    6432 |  7.99 | NELLIE      | Jon      |        9841 |
+|    6433 |  5.99 | NELLIE      | Mike     |       10659 |
+|    6434 |  5.99 | NELLIE      | Jon      |       11543 |
+|    6435 |  2.99 | NELLIE      | Jon      |       11632 |
+|    6436 |  2.99 | NELLIE      | Mike     |       11897 |
+|    6437 |  4.99 | NELLIE      | Mike     |       14312 |
+|    6438 |  8.99 | NELLIE      | Mike     |       14343 |
+|    6439 |  0.99 | NELLIE      | Mike     |       15455 |
+|    6440 |  4.99 | MINNIE      | Jon      |           8 |
+|    6441 |  2.99 | MINNIE      | Mike     |         444 |
+|    6442 |  4.99 | MINNIE      | Mike     |         621 |
+|    6443 |  6.99 | MINNIE      | Mike     |         636 |
+|    6444 |  7.99 | MINNIE      | Mike     |        1022 |
+|    6445 |  5.99 | MINNIE      | Jon      |        1082 |
+|    6446 |  4.99 | MINNIE      | Mike     |        1160 |
+|    6447 |  4.99 | MINNIE      | Jon      |        1560 |
+|    6448 |  2.99 | MINNIE      | Jon      |        2215 |
+|    6449 |  4.99 | MINNIE      | Mike     |        2390 |
+|    6450 |  5.99 | MINNIE      | Mike     |        3383 |
+|    6451 |  0.99 | MINNIE      | Jon      |        3547 |
+|    6452 |  5.99 | MINNIE      | Mike     |        3552 |
+|    6453 |  7.99 | MINNIE      | Jon      |        4920 |
+|    6454 |  4.99 | MINNIE      | Jon      |        5651 |
+|    6455 |  0.99 | MINNIE      | Mike     |        5960 |
+|    6456 |  0.99 | MINNIE      | Mike     |        6573 |
+|    6457 |  8.99 | MINNIE      | Jon      |        7012 |
+|    6458 |  0.99 | MINNIE      | Mike     |        7426 |
+|    6459 |  2.99 | MINNIE      | Jon      |        7491 |
+|    6460 |  6.99 | MINNIE      | Mike     |        8457 |
+|    6461 |  0.99 | MINNIE      | Jon      |        9676 |
+|    6462 |  5.99 | MINNIE      | Mike     |        9863 |
+|    6463 |  0.99 | MINNIE      | Mike     |       10755 |
+|    6464 |  2.99 | MINNIE      | Jon      |       10923 |
+|    6465 |  2.99 | MINNIE      | Mike     |       11487 |
+|    6466 |  4.99 | MINNIE      | Jon      |       11900 |
+|    6467 |  0.99 | MINNIE      | Mike     |       11968 |
+|    6468 |  4.99 | MINNIE      | Mike     |       12340 |
+|    6469 |  1.99 | MINNIE      | Mike     |       12721 |
+|    6470 |  4.99 | MINNIE      | Mike     |       13175 |
+|    6471 |  4.99 | MINNIE      | Jon      |       13427 |
+|    6472 |  3.99 | MINNIE      | Jon      |       13999 |
+|    6473 |  1.99 | MINNIE      | Jon      |       14062 |
+|    6474 |  2.99 | MARLENE     | Mike     |         246 |
+|    6475 |  2.99 | MARLENE     | Mike     |         460 |
+|    6476 |  4.99 | MARLENE     | Mike     |         643 |
+|    6477 |  3.99 | MARLENE     | Jon      |        2196 |
+|    6478 |  4.99 | MARLENE     | Mike     |        2264 |
+|    6479 |  5.99 | MARLENE     | Jon      |        2872 |
+|    6480 |  4.99 | MARLENE     | Jon      |        4305 |
+|    6481 |  4.99 | MARLENE     | Jon      |        5262 |
+|    6482 |  0.99 | MARLENE     | Mike     |        5596 |
+|    6483 |  0.99 | MARLENE     | Mike     |        6272 |
+|    6484 |  0.99 | MARLENE     | Jon      |        6470 |
+|    6485 |  4.99 | MARLENE     | Mike     |        6956 |
+|    6486 |  4.99 | MARLENE     | Mike     |        7001 |
+|    6487 |  8.99 | MARLENE     | Mike     |        7467 |
+|    6488 |  4.99 | MARLENE     | Jon      |        7481 |
+|    6489 |  4.99 | MARLENE     | Mike     |        7870 |
+|    6490 |  3.99 | MARLENE     | Jon      |        8503 |
+|    6491 |  5.99 | MARLENE     | Jon      |        8905 |
+|    6492 |  7.99 | MARLENE     | Mike     |       10308 |
+|    6493 |  3.99 | MARLENE     | Mike     |       11745 |
+|    6494 |  6.99 | MARLENE     | Jon      |       12283 |
+|    6495 |  2.99 | MARLENE     | Jon      |       13030 |
+|    6496 |  4.99 | MARLENE     | Jon      |       13119 |
+|    6497 |  8.99 | MARLENE     | Mike     |       13663 |
+|    6498 |  2.99 | MARLENE     | Jon      |       14573 |
+|    6499 |  0.99 | MARLENE     | Jon      |       15641 |
+|    6500 |  7.99 | HEIDI       | Mike     |         627 |
+|    6501 |  3.99 | HEIDI       | Mike     |        1059 |
+|    6502 |  0.99 | HEIDI       | Jon      |        2428 |
+|    6503 |  0.99 | HEIDI       | Mike     |        2455 |
+|    6504 |  5.99 | HEIDI       | Jon      |        2478 |
+|    6505 |  2.99 | HEIDI       | Jon      |        2683 |
+|    6506 |  0.99 | HEIDI       | Jon      |        3258 |
+|    6507 |  0.99 | HEIDI       | Jon      |        3822 |
+|    6508 |  0.99 | HEIDI       | Mike     |        4731 |
+|    6509 |  2.99 | HEIDI       | Jon      |        5017 |
+|    6510 |  0.99 | HEIDI       | Mike     |        5211 |
+|    6511 |  4.99 | HEIDI       | Mike     |        5438 |
+|    6512 |  3.99 | HEIDI       | Jon      |        5525 |
+|    6513 |  4.99 | HEIDI       | Mike     |        5981 |
+|    6514 |  6.99 | HEIDI       | Jon      |        6090 |
+|    6515 |  2.99 | HEIDI       | Jon      |        6245 |
+|    6516 |  0.99 | HEIDI       | Mike     |        7320 |
+|    6517 |  2.99 | HEIDI       | Mike     |        7434 |
+|    6518 |  2.99 | HEIDI       | Mike     |        7860 |
+|    6519 |  6.99 | HEIDI       | Mike     |        9500 |
+|    6520 |  3.99 | HEIDI       | Mike     |        9528 |
+|    6521 |  5.99 | HEIDI       | Mike     |        9944 |
+|    6522 |  3.99 | HEIDI       | Jon      |       10447 |
+|    6523 |  2.99 | HEIDI       | Mike     |       10652 |
+|    6524 |  1.99 | HEIDI       | Mike     |       11423 |
+|    6525 |  4.99 | HEIDI       | Jon      |       12418 |
+|    6526 |  4.99 | HEIDI       | Mike     |       12956 |
+|    6527 |  2.99 | HEIDI       | Jon      |       13077 |
+|    6528 |  7.99 | HEIDI       | Jon      |       14269 |
+|    6529 |  2.99 | HEIDI       | Jon      |       14485 |
+|    6530 |  0.99 | HEIDI       | Mike     |       14936 |
+|    6531 |  2.99 | HEIDI       | Jon      |       15137 |
+|    6532 |  2.99 | HEIDI       | Mike     |       15429 |
+|    6533 |  4.99 | HEIDI       | Mike     |       15767 |
+|    6534 |  2.99 | GLENDA      | Mike     |         108 |
+|    6535 |  3.99 | GLENDA      | Jon      |         283 |
+|    6536 |  4.99 | GLENDA      | Jon      |         881 |
+|    6537 |  4.99 | GLENDA      | Jon      |        1304 |
+|    6538 |  4.99 | GLENDA      | Mike     |        1384 |
+|    6539 |  4.99 | GLENDA      | Mike     |        1483 |
+|    6540 |  4.99 | GLENDA      | Jon      |        1702 |
+|    6541 |  4.99 | GLENDA      | Mike     |        2691 |
+|    6542 |  4.99 | GLENDA      | Jon      |        2942 |
+|    6543 |  4.99 | GLENDA      | Mike     |        3471 |
+|    6544 |  0.99 | GLENDA      | Jon      |        3604 |
+|    6545 |  4.99 | GLENDA      | Mike     |        4426 |
+|    6546 |  1.99 | GLENDA      | Jon      |        4895 |
+|    6547 |  5.99 | GLENDA      | Jon      |        5666 |
+|    6548 |  3.99 | GLENDA      | Jon      |        7149 |
+|    6549 |  4.99 | GLENDA      | Mike     |        8491 |
+|    6550 |  3.99 | GLENDA      | Mike     |        9423 |
+|    6551 |  6.99 | GLENDA      | Mike     |        9730 |
+|    6552 |  0.99 | GLENDA      | Jon      |       10367 |
+|    6553 |  4.99 | GLENDA      | Jon      |       10382 |
+|    6554 |  9.99 | GLENDA      | Jon      |       10650 |
+|    6555 |  0.99 | GLENDA      | Jon      |       11020 |
+|    6556 |  4.99 | GLENDA      | Mike     |       11258 |
+|    6557 |  0.99 | GLENDA      | Jon      |       11607 |
+|    6558 |  4.99 | GLENDA      | Mike     |       11931 |
+|    6559 |  7.99 | GLENDA      | Jon      |       12724 |
+|    6560 |  4.99 | GLENDA      | Mike     |       12855 |
+|    6561 |  9.99 | GLENDA      | Mike     |       13271 |
+|    6562 |  0.99 | GLENDA      | Jon      |       13567 |
+|    6563 |  5.99 | GLENDA      | Jon      |       13646 |
+|    6564 |  0.99 | GLENDA      | Mike     |       14515 |
+|    6565 |  0.99 | GLENDA      | Mike     |       15002 |
+|    6566 |  4.99 | LYDIA       | Mike     |         188 |
+|    6567 |  5.99 | LYDIA       | Mike     |        1405 |
+|    6568 |  0.99 | LYDIA       | Mike     |        1452 |
+|    6569 |  5.99 | LYDIA       | Jon      |        2757 |
+|    6570 |  5.99 | LYDIA       | Jon      |        3854 |
+|    6571 |  4.99 | LYDIA       | Mike     |        3965 |
+|    6572 |  0.99 | LYDIA       | Mike     |        4831 |
+|    6573 |  0.99 | LYDIA       | Mike     |        5502 |
+|    6574 |  3.99 | LYDIA       | Jon      |        6038 |
+|    6575 |  2.99 | LYDIA       | Jon      |        6820 |
+|    6576 |  2.99 | LYDIA       | Jon      |        7022 |
+|    6577 |  0.99 | LYDIA       | Jon      |        7165 |
+|    6578 |  4.99 | LYDIA       | Mike     |        8834 |
+|    6579 |  2.99 | LYDIA       | Jon      |        9035 |
+|    6580 |  4.99 | LYDIA       | Jon      |        9514 |
+|    6581 |  2.99 | LYDIA       | Jon      |        9675 |
+|    6582 |  5.99 | LYDIA       | Jon      |        9988 |
+|    6583 |  2.99 | LYDIA       | Mike     |       12209 |
+|    6584 |  2.99 | LYDIA       | Mike     |       13291 |
+|    6585 |  2.99 | LYDIA       | Mike     |       14033 |
+|    6586 |  0.99 | LYDIA       | Mike     |       14108 |
+|    6587 |  3.99 | LYDIA       | Mike     |       14272 |
+|    6588 |  1.99 | LYDIA       | Jon      |       14581 |
+|    6589 |  2.99 | LYDIA       | Jon      |       14705 |
+|    6590 |  4.99 | VIOLA       | Jon      |         592 |
+|    6591 |  1.99 | VIOLA       | Mike     |         797 |
+|    6592 |  6.99 | VIOLA       | Jon      |        1189 |
+|    6593 |  5.99 | VIOLA       | Mike     |        1595 |
+|    6594 |  3.99 | VIOLA       | Jon      |        2955 |
+|    6595 |  4.99 | VIOLA       | Mike     |        4814 |
+|    6596 |  4.99 | VIOLA       | Jon      |        5387 |
+|    6597 |  0.99 | VIOLA       | Jon      |        5461 |
+|    6598 |  0.99 | VIOLA       | Jon      |        5692 |
+|    6599 |  4.99 | VIOLA       | Mike     |        5779 |
+|    6600 |  3.99 | VIOLA       | Mike     |        5803 |
+|    6601 |  4.99 | VIOLA       | Jon      |        6374 |
+|    6602 |  2.99 | VIOLA       | Jon      |        6608 |
+|    6603 |  2.99 | VIOLA       | Jon      |        6683 |
+|    6604 |  0.99 | VIOLA       | Jon      |        8454 |
+|    6605 |  5.99 | VIOLA       | Jon      |        8844 |
+|    6606 |  4.99 | VIOLA       | Mike     |       10001 |
+|    6607 |  4.99 | VIOLA       | Jon      |       10047 |
+|    6608 |  5.99 | VIOLA       | Mike     |       10152 |
+|    6609 |  6.99 | VIOLA       | Jon      |       10684 |
+|    6610 |  2.99 | VIOLA       | Jon      |       10969 |
+|    6611 |  0.99 | VIOLA       | Jon      |       11157 |
+|    6612 |  9.99 | VIOLA       | Mike     |       11267 |
+|    6613 |  9.99 | VIOLA       | Mike     |       11762 |
+|    6614 |  4.99 | VIOLA       | Mike     |       13630 |
+|    6615 |  0.99 | VIOLA       | Jon      |       13774 |
+|    6616 |  0.99 | VIOLA       | Mike     |       13928 |
+|    6617 |  0.99 | VIOLA       | Mike     |       14367 |
+|    6618 |  0.99 | VIOLA       | Jon      |       14657 |
+|    6619 |  1.99 | VIOLA       | Mike     |       14919 |
+|    6620 |  3.99 | VIOLA       | Mike     |       14975 |
+|    6621 |  4.99 | VIOLA       | Jon      |       12736 |
+|    6622 |  4.99 | COURTNEY    | Jon      |          79 |
+|    6623 |  0.99 | COURTNEY    | Mike     |         241 |
+|    6624 |  7.99 | COURTNEY    | Mike     |         519 |
+|    6625 |  2.99 | COURTNEY    | Mike     |         719 |
+|    6626 |  2.99 | COURTNEY    | Jon      |         725 |
+|    6627 |  8.99 | COURTNEY    | Jon      |         948 |
+|    6628 |  2.99 | COURTNEY    | Mike     |        1377 |
+|    6629 |  2.99 | COURTNEY    | Mike     |        2122 |
+|    6630 |  2.99 | COURTNEY    | Mike     |        3157 |
+|    6631 |  2.99 | COURTNEY    | Mike     |        3634 |
+|    6632 |  2.99 | COURTNEY    | Jon      |        5321 |
+|    6633 |  4.99 | COURTNEY    | Mike     |        5764 |
+|    6634 |  2.99 | COURTNEY    | Jon      |        6242 |
+|    6635 |  5.99 | COURTNEY    | Mike     |        6795 |
+|    6636 |  0.99 | COURTNEY    | Jon      |        6962 |
+|    6637 |  4.99 | COURTNEY    | Mike     |        7230 |
+|    6638 |  5.99 | COURTNEY    | Jon      |        7233 |
+|    6639 |  0.99 | COURTNEY    | Mike     |        7358 |
+|    6640 |  4.99 | COURTNEY    | Jon      |        7397 |
+|    6641 |  6.99 | COURTNEY    | Jon      |        8701 |
+|    6642 | 10.99 | COURTNEY    | Mike     |        8811 |
+|    6643 |  0.99 | COURTNEY    | Jon      |        9088 |
+|    6644 |  4.99 | COURTNEY    | Jon      |        9169 |
+|    6645 |  6.99 | COURTNEY    | Mike     |        9813 |
+|    6646 |  3.99 | COURTNEY    | Mike     |       10087 |
+|    6647 |  0.99 | COURTNEY    | Jon      |       11061 |
+|    6648 |  0.99 | COURTNEY    | Mike     |       11105 |
+|    6649 |  0.99 | COURTNEY    | Mike     |       11211 |
+|    6650 |  7.99 | COURTNEY    | Mike     |       12303 |
+|    6651 |  0.99 | COURTNEY    | Mike     |       13286 |
+|    6652 |  6.99 | COURTNEY    | Mike     |       15782 |
+|    6653 |  2.99 | COURTNEY    | Jon      |       12682 |
+|    6654 |  6.99 | MARIAN      | Mike     |         124 |
+|    6655 |  8.99 | MARIAN      | Jon      |         421 |
+|    6656 |  5.99 | MARIAN      | Jon      |         434 |
+|    6657 |  3.99 | MARIAN      | Mike     |         699 |
+|    6658 |  4.99 | MARIAN      | Mike     |        1051 |
+|    6659 |  1.99 | MARIAN      | Jon      |        1448 |
+|    6660 |  2.99 | MARIAN      | Mike     |        1968 |
+|    6661 |  1.99 | MARIAN      | Jon      |        2704 |
+|    6662 |  0.99 | MARIAN      | Mike     |        2725 |
+|    6663 |  4.99 | MARIAN      | Mike     |        3152 |
+|    6664 |  7.99 | MARIAN      | Mike     |        4092 |
+|    6665 |  4.99 | MARIAN      | Jon      |        4905 |
+|    6666 |  2.99 | MARIAN      | Jon      |        4994 |
+|    6667 |  0.99 | MARIAN      | Jon      |        5347 |
+|    6668 |  4.99 | MARIAN      | Mike     |        6688 |
+|    6669 |  5.99 | MARIAN      | Jon      |        9525 |
+|    6670 |  4.99 | MARIAN      | Jon      |       10208 |
+|    6671 |  2.99 | MARIAN      | Jon      |       10683 |
+|    6672 |  5.99 | MARIAN      | Jon      |       13418 |
+|    6673 |  6.99 | MARIAN      | Mike     |       13750 |
+|    6674 |  4.99 | MARIAN      | Mike     |       13987 |
+|    6675 |  6.99 | MARIAN      | Mike     |       14360 |
+|    6676 |  2.99 | MARIAN      | Mike     |       15746 |
+|    6677 |  4.99 | STELLA      | Mike     |         189 |
+|    6678 |  3.99 | STELLA      | Jon      |         448 |
+|    6679 |  6.99 | STELLA      | Mike     |         450 |
+|    6680 |  5.99 | STELLA      | Mike     |        2288 |
+|    6681 |  2.99 | STELLA      | Jon      |        3955 |
+|    6682 |  6.99 | STELLA      | Jon      |        4198 |
+|    6683 |  2.99 | STELLA      | Mike     |        4492 |
+|    6684 |  2.99 | STELLA      | Jon      |        4995 |
+|    6685 |  6.99 | STELLA      | Mike     |        5328 |
+|    6686 |  4.99 | STELLA      | Mike     |        5842 |
+|    6687 |  5.99 | STELLA      | Mike     |        7963 |
+|    6688 |  1.99 | STELLA      | Mike     |       10279 |
+|    6689 |  6.99 | STELLA      | Mike     |       10410 |
+|    6690 |  2.99 | STELLA      | Jon      |       11204 |
+|    6691 |  2.99 | STELLA      | Jon      |       11306 |
+|    6692 |  0.99 | STELLA      | Mike     |       11495 |
+|    6693 |  4.99 | STELLA      | Jon      |       12265 |
+|    6694 |  7.99 | STELLA      | Mike     |       12482 |
+|    6695 |  4.99 | STELLA      | Mike     |       12491 |
+|    6696 |  4.99 | STELLA      | Mike     |       12824 |
+|    6697 |  4.99 | STELLA      | Mike     |       14041 |
+|    6698 |  4.99 | STELLA      | Mike     |       15783 |
+|    6699 |  7.99 | CAROLINE    | Jon      |         330 |
+|    6700 |  4.99 | CAROLINE    | Mike     |         618 |
+|    6701 |  3.99 | CAROLINE    | Mike     |        2066 |
+|    6702 |  0.99 | CAROLINE    | Jon      |        2371 |
+|    6703 |  0.99 | CAROLINE    | Mike     |        3910 |
+|    6704 |  4.99 | CAROLINE    | Jon      |        4541 |
+|    6705 |  0.99 | CAROLINE    | Mike     |        4841 |
+|    6706 |  2.99 | CAROLINE    | Mike     |        5370 |
+|    6707 |  2.99 | CAROLINE    | Jon      |        6617 |
+|    6708 |  5.99 | CAROLINE    | Jon      |        7778 |
+|    6709 |  4.99 | CAROLINE    | Jon      |       10418 |
+|    6710 |  0.99 | CAROLINE    | Mike     |       12241 |
+|    6711 |  0.99 | CAROLINE    | Mike     |       13918 |
+|    6712 |  0.99 | CAROLINE    | Jon      |       14704 |
+|    6713 |  5.99 | CAROLINE    | Jon      |       14885 |
+|    6714 |  4.99 | DORA        | Jon      |         316 |
+|    6715 |  2.99 | DORA        | Jon      |         400 |
+|    6716 |  6.99 | DORA        | Mike     |         438 |
+|    6717 |  3.99 | DORA        | Mike     |         597 |
+|    6718 |  0.99 | DORA        | Mike     |        1204 |
+|    6719 |  5.99 | DORA        | Mike     |        1473 |
+|    6720 |  2.99 | DORA        | Jon      |        1753 |
+|    6721 |  1.99 | DORA        | Jon      |        2129 |
+|    6722 |  7.99 | DORA        | Jon      |        3175 |
+|    6723 |  9.99 | DORA        | Mike     |        4352 |
+|    6724 |  4.99 | DORA        | Mike     |        5011 |
+|    6725 |  4.99 | DORA        | Mike     |        5275 |
+|    6726 |  3.99 | DORA        | Jon      |        5639 |
+|    6727 |  7.99 | DORA        | Jon      |        6670 |
+|    6728 |  7.99 | DORA        | Mike     |        7544 |
+|    6729 |  2.99 | DORA        | Mike     |        7804 |
+|    6730 |  4.99 | DORA        | Jon      |        7881 |
+|    6731 |  1.99 | DORA        | Mike     |       11124 |
+|    6732 |  4.99 | DORA        | Mike     |       11159 |
+|    6733 |  0.99 | DORA        | Jon      |       11668 |
+|    6734 |  4.99 | DORA        | Jon      |       13981 |
+|    6735 |  0.99 | DORA        | Jon      |       14285 |
+|    6736 |  6.99 | DORA        | Mike     |       15160 |
+|    6737 |  5.99 | JO          | Mike     |          61 |
+|    6738 |  3.99 | JO          | Mike     |         176 |
+|    6739 |  4.99 | JO          | Mike     |         637 |
+|    6740 |  0.99 | JO          | Jon      |         687 |
+|    6741 |  2.99 | JO          | Mike     |        1146 |
+|    6742 |  4.99 | JO          | Mike     |        2432 |
+|    6743 |  4.99 | JO          | Mike     |        3635 |
+|    6744 |  3.99 | JO          | Mike     |        3951 |
+|    6745 |  2.99 | JO          | Mike     |        5479 |
+|    6746 |  0.99 | JO          | Mike     |        5540 |
+|    6747 |  2.99 | JO          | Mike     |        5998 |
+|    6748 |  2.99 | JO          | Mike     |        8579 |
+|    6749 |  0.99 | JO          | Jon      |        9099 |
+|    6750 |  4.99 | JO          | Jon      |       10604 |
+|    6751 |  0.99 | JO          | Mike     |       12361 |
+|    6752 |  0.99 | JO          | Mike     |       12810 |
+|    6753 |  4.99 | JO          | Jon      |       14565 |
+|    6754 |  5.99 | JO          | Mike     |       14587 |
+|    6755 |  4.99 | JO          | Jon      |       14814 |
+|    6756 |  6.99 | JO          | Jon      |       15247 |
+|    6757 |  2.99 | VICKIE      | Mike     |         264 |
+|    6758 |  1.99 | VICKIE      | Mike     |         309 |
+|    6759 |  2.99 | VICKIE      | Jon      |         393 |
+|    6760 |  3.99 | VICKIE      | Jon      |        1069 |
+|    6761 |  4.99 | VICKIE      | Mike     |        1091 |
+|    6762 |  2.99 | VICKIE      | Jon      |        1155 |
+|    6763 |  6.99 | VICKIE      | Mike     |        2238 |
+|    6764 |  7.99 | VICKIE      | Jon      |        3422 |
+|    6765 |  2.99 | VICKIE      | Mike     |        3464 |
+|    6766 |  4.99 | VICKIE      | Mike     |        3799 |
+|    6767 |  3.99 | VICKIE      | Jon      |        4026 |
+|    6768 |  2.99 | VICKIE      | Jon      |        4848 |
+|    6769 |  2.99 | VICKIE      | Jon      |        5012 |
+|    6770 |  2.99 | VICKIE      | Jon      |        5979 |
+|    6771 |  6.99 | VICKIE      | Jon      |        6413 |
+|    6772 |  8.99 | VICKIE      | Jon      |        7338 |
+|    6773 |  2.99 | VICKIE      | Jon      |        8443 |
+|    6774 |  0.99 | VICKIE      | Jon      |        8982 |
+|    6775 |  2.99 | VICKIE      | Mike     |        9196 |
+|    6776 |  0.99 | VICKIE      | Mike     |        9892 |
+|    6777 |  7.99 | VICKIE      | Mike     |       10575 |
+|    6778 |  0.99 | VICKIE      | Mike     |       11733 |
+|    6779 |  3.99 | VICKIE      | Jon      |       12047 |
+|    6780 |  4.99 | VICKIE      | Jon      |       12666 |
+|    6781 |  2.99 | VICKIE      | Jon      |       13121 |
+|    6782 |  2.99 | VICKIE      | Mike     |       13243 |
+|    6783 |  6.99 | VICKIE      | Jon      |       13260 |
+|    6784 |  0.99 | VICKIE      | Mike     |       14292 |
+|    6785 |  2.99 | VICKIE      | Jon      |       15647 |
+|    6786 |  4.99 | VICKIE      | Jon      |       15870 |
+|    6787 |  0.99 | VICKIE      | Mike     |       14107 |
+|    6788 |  4.99 | MATTIE      | Mike     |         707 |
+|    6789 |  0.99 | MATTIE      | Mike     |        1095 |
+|    6790 |  5.99 | MATTIE      | Mike     |        1395 |
+|    6791 |  4.99 | MATTIE      | Jon      |        2716 |
+|    6792 |  0.99 | MATTIE      | Mike     |        2968 |
+|    6793 |  0.99 | MATTIE      | Jon      |        4372 |
+|    6794 |  2.99 | MATTIE      | Jon      |        5554 |
+|    6795 |  0.99 | MATTIE      | Mike     |        6357 |
+|    6796 |  0.99 | MATTIE      | Jon      |        6369 |
+|    6797 |  4.99 | MATTIE      | Mike     |        7024 |
+|    6798 |  0.99 | MATTIE      | Jon      |        7121 |
+|    6799 |  0.99 | MATTIE      | Jon      |        7168 |
+|    6800 |  0.99 | MATTIE      | Mike     |        7670 |
+|    6801 |  5.99 | MATTIE      | Mike     |        8636 |
+|    6802 |  0.99 | MATTIE      | Mike     |        8899 |
+|    6803 |  0.99 | MATTIE      | Jon      |       10314 |
+|    6804 |  2.99 | MATTIE      | Jon      |       10834 |
+|    6805 |  0.99 | MATTIE      | Jon      |       11764 |
+|    6806 |  4.99 | MATTIE      | Mike     |       13385 |
+|    6807 |  5.99 | MATTIE      | Jon      |       13989 |
+|    6808 |  4.99 | MATTIE      | Mike     |       14774 |
+|    6809 |  4.99 | MATTIE      | Jon      |       13756 |
+|    6810 |  6.99 | TERRY       | Mike     |         566 |
+|    6811 |  0.99 | TERRY       | Mike     |         648 |
+|    6812 |  2.99 | TERRY       | Mike     |         986 |
+|    6813 |  1.99 | TERRY       | Jon      |        1378 |
+|    6814 |  6.99 | TERRY       | Jon      |        1606 |
+|    6815 |  5.99 | TERRY       | Jon      |        2081 |
+|    6816 |  4.99 | TERRY       | Mike     |        2142 |
+|    6817 |  4.99 | TERRY       | Mike     |        2454 |
+|    6818 |  4.99 | TERRY       | Jon      |        2636 |
+|    6819 |  7.99 | TERRY       | Mike     |        3658 |
+|    6820 |  2.99 | TERRY       | Mike     |        5505 |
+|    6821 |  4.99 | TERRY       | Mike     |        5602 |
+|    6822 |  2.99 | TERRY       | Jon      |        7689 |
+|    6823 |  0.99 | TERRY       | Jon      |        7851 |
+|    6824 |  2.99 | TERRY       | Jon      |        7887 |
+|    6825 |  2.99 | TERRY       | Jon      |        8752 |
+|    6826 |  0.99 | TERRY       | Jon      |        9606 |
+|    6827 |  6.99 | TERRY       | Jon      |        9618 |
+|    6828 |  4.99 | TERRY       | Jon      |       10404 |
+|    6829 |  2.99 | TERRY       | Mike     |       10660 |
+|    6830 |  6.99 | TERRY       | Jon      |       10881 |
+|    6831 |  0.99 | TERRY       | Mike     |       12572 |
+|    6832 |  5.99 | TERRY       | Jon      |       12827 |
+|    6833 |  5.99 | TERRY       | Mike     |       13126 |
+|    6834 |  3.99 | TERRY       | Jon      |       14086 |
+|    6835 |  4.99 | TERRY       | Jon      |       14283 |
+|    6836 |  7.99 | TERRY       | Mike     |       14640 |
+|    6837 |  4.99 | TERRY       | Jon      |       14655 |
+|    6838 |  2.99 | TERRY       | Jon      |       15221 |
+|    6839 |  2.99 | MAXINE      | Mike     |         183 |
+|    6840 |  5.99 | MAXINE      | Mike     |        1108 |
+|    6841 |  2.99 | MAXINE      | Mike     |        1285 |
+|    6842 |  0.99 | MAXINE      | Jon      |        1390 |
+|    6843 |  2.99 | MAXINE      | Mike     |        2082 |
+|    6844 |  2.99 | MAXINE      | Mike     |        2138 |
+|    6845 |  3.99 | MAXINE      | Jon      |        2687 |
+|    6846 |  4.99 | MAXINE      | Mike     |        3882 |
+|    6847 |  2.99 | MAXINE      | Jon      |        5042 |
+|    6848 |  3.99 | MAXINE      | Mike     |        5072 |
+|    6849 |  2.99 | MAXINE      | Jon      |        5080 |
+|    6850 |  0.99 | MAXINE      | Mike     |        5537 |
+|    6851 |  5.99 | MAXINE      | Mike     |        5550 |
+|    6852 |  7.99 | MAXINE      | Mike     |        5826 |
+|    6853 |  4.99 | MAXINE      | Jon      |        5930 |
+|    6854 |  0.99 | MAXINE      | Jon      |        7011 |
+|    6855 |  4.99 | MAXINE      | Mike     |        7413 |
+|    6856 |  7.99 | MAXINE      | Jon      |        8216 |
+|    6857 |  4.99 | MAXINE      | Jon      |        8581 |
+|    6858 |  1.99 | MAXINE      | Jon      |        9494 |
+|    6859 |  4.99 | MAXINE      | Mike     |       10522 |
+|    6860 |  0.99 | MAXINE      | Mike     |       11190 |
+|    6861 |  6.99 | MAXINE      | Mike     |       11665 |
+|    6862 |  0.99 | MAXINE      | Jon      |       12148 |
+|    6863 |  0.99 | MAXINE      | Mike     |       12206 |
+|    6864 |  2.99 | MAXINE      | Mike     |       12247 |
+|    6865 |  0.99 | MAXINE      | Mike     |       12874 |
+|    6866 |  4.99 | MAXINE      | Jon      |       13001 |
+|    6867 |  4.99 | MAXINE      | Mike     |       13045 |
+|    6868 |  2.99 | MAXINE      | Jon      |       13130 |
+|    6869 |  4.99 | MAXINE      | Jon      |       14497 |
+|    6870 |  0.99 | MAXINE      | Mike     |       15774 |
+|    6871 |  2.99 | IRMA        | Mike     |        1235 |
+|    6872 |  6.99 | IRMA        | Mike     |        1420 |
+|    6873 |  2.99 | IRMA        | Jon      |        1681 |
+|    6874 |  2.99 | IRMA        | Jon      |        3442 |
+|    6875 |  0.99 | IRMA        | Mike     |        4547 |
+|    6876 |  1.99 | IRMA        | Mike     |        5706 |
+|    6877 |  0.99 | IRMA        | Mike     |        5943 |
+|    6878 |  8.99 | IRMA        | Jon      |        7475 |
+|    6879 |  2.99 | IRMA        | Mike     |        7646 |
+|    6880 |  0.99 | IRMA        | Mike     |        8562 |
+|    6881 |  6.99 | IRMA        | Mike     |        9061 |
+|    6882 |  4.99 | IRMA        | Jon      |       11979 |
+|    6883 |  7.99 | IRMA        | Jon      |       12176 |
+|    6884 |  2.99 | IRMA        | Jon      |       13154 |
+|    6885 |  0.99 | IRMA        | Mike     |       13268 |
+|    6886 |  0.99 | IRMA        | Jon      |       13683 |
+|    6887 |  8.99 | IRMA        | Mike     |       13758 |
+|    6888 |  3.99 | IRMA        | Jon      |       14600 |
+|    6889 |  4.99 | MABEL       | Mike     |          51 |
+|    6890 |  0.99 | MABEL       | Mike     |         232 |
+|    6891 |  4.99 | MABEL       | Jon      |         738 |
+|    6892 |  2.99 | MABEL       | Mike     |         935 |
+|    6893 |  0.99 | MABEL       | Mike     |        1116 |
+|    6894 |  2.99 | MABEL       | Mike     |        1555 |
+|    6895 |  0.99 | MABEL       | Jon      |        1965 |
+|    6896 |  4.99 | MABEL       | Jon      |        1973 |
+|    6897 |  4.99 | MABEL       | Jon      |        2230 |
+|    6898 |  6.99 | MABEL       | Mike     |        2380 |
+|    6899 |  4.99 | MABEL       | Jon      |        2561 |
+|    6900 |  4.99 | MABEL       | Mike     |        2839 |
+|    6901 |  0.99 | MABEL       | Mike     |        4130 |
+|    6902 |  0.99 | MABEL       | Jon      |        4182 |
+|    6903 |  2.99 | MABEL       | Mike     |        5179 |
+|    6904 |  0.99 | MABEL       | Mike     |        6298 |
+|    6905 |  3.99 | MABEL       | Mike     |        7661 |
+|    6906 |  2.99 | MABEL       | Jon      |        9424 |
+|    6907 |  4.99 | MABEL       | Jon      |       10759 |
+|    6908 |  2.99 | MABEL       | Jon      |       11011 |
+|    6909 |  8.99 | MABEL       | Jon      |       11628 |
+|    6910 |  0.99 | MABEL       | Jon      |       13457 |
+|    6911 |  0.99 | MABEL       | Mike     |       13651 |
+|    6912 |  6.99 | MABEL       | Mike     |       14003 |
+|    6913 |  4.99 | MABEL       | Jon      |       14036 |
+|    6914 |  2.99 | MABEL       | Jon      |       14445 |
+|    6915 |  3.99 | MABEL       | Jon      |       14458 |
+|    6916 |  2.99 | MABEL       | Jon      |       15609 |
+|    6917 |  4.99 | MABEL       | Jon      |       15861 |
+|    6918 |  7.99 | MABEL       | Mike     |       15864 |
+|    6919 |  2.99 | MARSHA      | Jon      |         139 |
+|    6920 |  2.99 | MARSHA      | Jon      |         244 |
+|    6921 |  2.99 | MARSHA      | Jon      |         705 |
+|    6922 |  0.99 | MARSHA      | Mike     |        2557 |
+|    6923 |  4.99 | MARSHA      | Jon      |        3083 |
+|    6924 |  6.99 | MARSHA      | Jon      |        4462 |
+|    6925 |  4.99 | MARSHA      | Jon      |        4574 |
+|    6926 |  6.99 | MARSHA      | Mike     |        5495 |
+|    6927 |  4.99 | MARSHA      | Mike     |        5858 |
+|    6928 |  5.99 | MARSHA      | Mike     |        6422 |
+|    6929 |  5.99 | MARSHA      | Jon      |        6711 |
+|    6930 |  4.99 | MARSHA      | Jon      |        7007 |
+|    6931 |  2.99 | MARSHA      | Mike     |        7176 |
+|    6932 |  1.99 | MARSHA      | Mike     |        7496 |
+|    6933 |  2.99 | MARSHA      | Jon      |        7510 |
+|    6934 |  5.99 | MARSHA      | Jon      |        7518 |
+|    6935 |  3.99 | MARSHA      | Jon      |        8156 |
+|    6936 |  2.99 | MARSHA      | Jon      |        8252 |
+|    6937 |  4.99 | MARSHA      | Mike     |        8344 |
+|    6938 |  4.99 | MARSHA      | Mike     |        8640 |
+|    6939 |  6.99 | MARSHA      | Jon      |        8946 |
+|    6940 |  4.99 | MARSHA      | Mike     |        9800 |
+|    6941 |  4.99 | MARSHA      | Jon      |       10142 |
+|    6942 |  4.99 | MARSHA      | Mike     |       11230 |
+|    6943 |  0.99 | MARSHA      | Mike     |       11394 |
+|    6944 |  6.99 | MARSHA      | Jon      |       11545 |
+|    6945 |  1.99 | MARSHA      | Jon      |       11860 |
+|    6946 |  2.99 | MARSHA      | Jon      |       12841 |
+|    6947 |  5.99 | MARSHA      | Mike     |       12904 |
+|    6948 |  7.99 | MARSHA      | Jon      |       13203 |
+|    6949 |  0.99 | MARSHA      | Jon      |       13218 |
+|    6950 |  2.99 | MARSHA      | Mike     |       13389 |
+|    6951 |  5.99 | MARSHA      | Jon      |       13846 |
+|    6952 |  0.99 | MARSHA      | Jon      |       14115 |
+|    6953 |  0.99 | MARSHA      | Mike     |       15025 |
+|    6954 |  2.99 | MARSHA      | Mike     |       15967 |
+|    6955 |  0.99 | MARSHA      | Jon      |       15968 |
+|    6956 |  2.99 | MYRTLE      | Mike     |        1743 |
+|    6957 |  0.99 | MYRTLE      | Jon      |        2678 |
+|    6958 |  8.99 | MYRTLE      | Jon      |        2931 |
+|    6959 |  2.99 | MYRTLE      | Jon      |        4408 |
+|    6960 |  5.99 | MYRTLE      | Mike     |        4677 |
+|    6961 |  0.99 | MYRTLE      | Jon      |        4897 |
+|    6962 |  5.99 | MYRTLE      | Jon      |        5312 |
+|    6963 |  0.99 | MYRTLE      | Mike     |        5674 |
+|    6964 |  9.99 | MYRTLE      | Mike     |        5935 |
+|    6965 |  4.99 | MYRTLE      | Jon      |        6012 |
+|    6966 |  2.99 | MYRTLE      | Mike     |        7814 |
+|    6967 |  4.99 | MYRTLE      | Mike     |        8675 |
+|    6968 |  4.99 | MYRTLE      | Jon      |        9069 |
+|    6969 |  1.99 | MYRTLE      | Jon      |       10293 |
+|    6970 |  4.99 | MYRTLE      | Jon      |       10315 |
+|    6971 |  5.99 | MYRTLE      | Mike     |       10325 |
+|    6972 |  6.99 | MYRTLE      | Jon      |       10332 |
+|    6973 |  0.99 | MYRTLE      | Mike     |       10393 |
+|    6974 |  5.99 | MYRTLE      | Mike     |       12246 |
+|    6975 |  3.99 | MYRTLE      | Jon      |       12296 |
+|    6976 |  4.99 | MYRTLE      | Mike     |       13491 |
+|    6977 |  6.99 | MYRTLE      | Mike     |       13695 |
+|    6978 |  2.99 | MYRTLE      | Jon      |       13897 |
+|    6979 |  6.99 | MYRTLE      | Jon      |       14901 |
+|    6980 |  6.99 | LENA        | Jon      |         722 |
+|    6981 |  2.99 | LENA        | Jon      |         901 |
+|    6982 |  5.99 | LENA        | Mike     |        1147 |
+|    6983 |  7.99 | LENA        | Mike     |        1641 |
+|    6984 |  7.99 | LENA        | Jon      |        1723 |
+|    6985 |  2.99 | LENA        | Jon      |        1813 |
+|    6986 |  5.99 | LENA        | Jon      |        2375 |
+|    6987 |  5.99 | LENA        | Jon      |        4199 |
+|    6988 |  4.99 | LENA        | Jon      |        4489 |
+|    6989 |  0.99 | LENA        | Mike     |        6074 |
+|    6990 |  3.99 | LENA        | Jon      |        6539 |
+|    6991 |  2.99 | LENA        | Jon      |        7188 |
+|    6992 |  7.99 | LENA        | Jon      |        7774 |
+|    6993 |  4.99 | LENA        | Mike     |        7817 |
+|    6994 |  6.99 | LENA        | Jon      |        9205 |
+|    6995 |  6.99 | LENA        | Mike     |        9282 |
+|    6996 |  7.99 | LENA        | Mike     |        9444 |
+|    6997 |  3.99 | LENA        | Mike     |       10510 |
+|    6998 |  2.99 | LENA        | Mike     |       10781 |
+|    6999 |  3.99 | LENA        | Mike     |       11184 |
+|    7000 |  6.99 | LENA        | Jon      |       12680 |
+|    7001 |  4.99 | LENA        | Mike     |       13109 |
+|    7002 |  2.99 | LENA        | Jon      |       13112 |
+|    7003 |  4.99 | LENA        | Jon      |       13366 |
+|    7004 |  5.99 | LENA        | Mike     |       13598 |
+|    7005 |  4.99 | LENA        | Jon      |       13649 |
+|    7006 |  6.99 | LENA        | Jon      |       14067 |
+|    7007 |  4.99 | LENA        | Jon      |       14170 |
+|    7008 |  2.99 | LENA        | Jon      |       14966 |
+|    7009 | 10.99 | LENA        | Mike     |       15425 |
+|    7010 |  2.99 | LENA        | Mike     |       15473 |
+|    7012 |  2.99 | LENA        | Mike     |       15689 |
+|    7013 |  8.99 | CHRISTY     | Mike     |        1101 |
+|    7014 |  3.99 | CHRISTY     | Mike     |        1626 |
+|    7015 |  2.99 | CHRISTY     | Jon      |        2001 |
+|    7016 |  2.99 | CHRISTY     | Jon      |        2040 |
+|    7017 | 10.99 | CHRISTY     | Mike     |        2091 |
+|    7018 |  0.99 | CHRISTY     | Mike     |        2178 |
+|    7019 |  7.99 | CHRISTY     | Mike     |        2823 |
+|    7020 |  3.99 | CHRISTY     | Jon      |        2958 |
+|    7021 |  0.99 | CHRISTY     | Mike     |        3193 |
+|    7022 |  0.99 | CHRISTY     | Jon      |        4054 |
+|    7023 |  6.99 | CHRISTY     | Jon      |        4741 |
+|    7024 |  2.99 | CHRISTY     | Mike     |        4870 |
+|    7025 |  2.99 | CHRISTY     | Jon      |        6328 |
+|    7026 |  0.99 | CHRISTY     | Jon      |        7072 |
+|    7027 |  1.99 | CHRISTY     | Mike     |        7268 |
+|    7028 |  7.99 | CHRISTY     | Mike     |        7885 |
+|    7029 |  1.99 | CHRISTY     | Mike     |        8475 |
+|    7030 |  2.99 | CHRISTY     | Mike     |        8484 |
+|    7031 |  0.99 | CHRISTY     | Mike     |        8717 |
+|    7032 |  0.99 | CHRISTY     | Mike     |        8933 |
+|    7033 |  4.99 | CHRISTY     | Jon      |        9176 |
+|    7034 |  8.99 | CHRISTY     | Jon      |       10970 |
+|    7035 |  0.99 | CHRISTY     | Mike     |       12852 |
+|    7036 |  2.99 | CHRISTY     | Jon      |       13440 |
+|    7037 |  3.99 | CHRISTY     | Mike     |       13685 |
+|    7038 |  2.99 | CHRISTY     | Mike     |       13966 |
+|    7039 |  0.99 | CHRISTY     | Jon      |       13978 |
+|    7040 |  2.99 | CHRISTY     | Jon      |       14035 |
+|    7041 |  2.99 | CHRISTY     | Jon      |       14441 |
+|    7042 |  7.99 | CHRISTY     | Mike     |       14579 |
+|    7043 |  6.99 | CHRISTY     | Mike     |       14610 |
+|    7044 |  4.99 | DEANNA      | Mike     |          12 |
+|    7045 |  3.99 | DEANNA      | Jon      |         465 |
+|    7046 |  6.99 | DEANNA      | Jon      |         542 |
+|    7047 |  0.99 | DEANNA      | Mike     |         792 |
+|    7048 |  2.99 | DEANNA      | Mike     |        1760 |
+|    7049 |  5.99 | DEANNA      | Mike     |        1877 |
+|    7050 |  8.99 | DEANNA      | Jon      |        1988 |
+|    7051 |  3.99 | DEANNA      | Jon      |        2072 |
+|    7052 |  0.99 | DEANNA      | Jon      |        2392 |
+|    7053 |  0.99 | DEANNA      | Mike     |        3363 |
+|    7054 |  3.99 | DEANNA      | Mike     |        5122 |
+|    7055 |  5.99 | DEANNA      | Mike     |        5449 |
+|    7056 |  2.99 | DEANNA      | Jon      |        6515 |
+|    7057 |  0.99 | DEANNA      | Mike     |        6743 |
+|    7058 |  4.99 | DEANNA      | Jon      |        9552 |
+|    7059 |  4.99 | DEANNA      | Mike     |        9842 |
+|    7060 |  4.99 | DEANNA      | Mike     |        9869 |
+|    7061 |  1.99 | DEANNA      | Jon      |       10246 |
+|    7062 |  1.99 | DEANNA      | Mike     |       11834 |
+|    7063 |  2.99 | DEANNA      | Jon      |       11928 |
+|    7064 |  6.99 | DEANNA      | Mike     |       12327 |
+|    7065 |  4.99 | DEANNA      | Jon      |       13245 |
+|    7066 |  5.99 | DEANNA      | Jon      |       13506 |
+|    7067 |  2.99 | DEANNA      | Mike     |       13669 |
+|    7068 |  4.99 | DEANNA      | Mike     |       13849 |
+|    7069 |  4.99 | DEANNA      | Jon      |       15397 |
+|    7070 |  4.99 | PATSY       | Jon      |         984 |
+|    7071 |  2.99 | PATSY       | Mike     |        1563 |
+|    7072 |  6.99 | PATSY       | Mike     |        2771 |
+|    7073 |  8.99 | PATSY       | Jon      |        2850 |
+|    7074 |  1.99 | PATSY       | Mike     |        2915 |
+|    7075 |  1.99 | PATSY       | Mike     |        3521 |
+|    7076 |  3.99 | PATSY       | Mike     |        3699 |
+|    7077 |  0.99 | PATSY       | Mike     |        4501 |
+|    7078 |  0.99 | PATSY       | Jon      |        5503 |
+|    7079 |  0.99 | PATSY       | Mike     |        6291 |
+|    7080 |  7.99 | PATSY       | Jon      |        6547 |
+|    7081 |  3.99 | PATSY       | Mike     |        6724 |
+|    7082 |  7.99 | PATSY       | Jon      |        6762 |
+|    7083 |  6.99 | PATSY       | Mike     |        6805 |
+|    7084 |  4.99 | PATSY       | Mike     |        6986 |
+|    7085 |  6.99 | PATSY       | Mike     |        9105 |
+|    7086 |  0.99 | PATSY       | Jon      |       10421 |
+|    7087 |  0.99 | PATSY       | Jon      |       10770 |
+|    7088 |  2.99 | PATSY       | Jon      |       13466 |
+|    7089 |  5.99 | PATSY       | Mike     |       13808 |
+|    7090 |  4.99 | PATSY       | Mike     |       14180 |
+|    7091 |  3.99 | PATSY       | Jon      |       14465 |
+|    7092 |  6.99 | PATSY       | Jon      |       14834 |
+|    7093 |  3.99 | PATSY       | Jon      |       15270 |
+|    7094 |  0.99 | PATSY       | Mike     |       15456 |
+|    7095 |  4.99 | PATSY       | Mike     |       15640 |
+|    7096 |  4.99 | PATSY       | Jon      |       15771 |
+|    7097 |  3.99 | PATSY       | Mike     |       15918 |
+|    7098 |  4.99 | HILDA       | Mike     |          97 |
+|    7099 |  0.99 | HILDA       | Mike     |         266 |
+|    7100 |  8.99 | HILDA       | Jon      |        2126 |
+|    7101 |  1.99 | HILDA       | Jon      |        3257 |
+|    7102 |  4.99 | HILDA       | Mike     |        3578 |
+|    7103 |  2.99 | HILDA       | Jon      |        3773 |
+|    7104 |  0.99 | HILDA       | Jon      |        4637 |
+|    7105 |  2.99 | HILDA       | Jon      |        4682 |
+|    7106 |  2.99 | HILDA       | Jon      |        5125 |
+|    7107 |  1.99 | HILDA       | Jon      |        5254 |
+|    7108 |  4.99 | HILDA       | Jon      |        6376 |
+|    7109 |  2.99 | HILDA       | Mike     |        6483 |
+|    7110 |  1.99 | HILDA       | Mike     |        6808 |
+|    7111 |  4.99 | HILDA       | Jon      |        7291 |
+|    7112 |  4.99 | HILDA       | Mike     |        7425 |
+|    7113 |  4.99 | HILDA       | Mike     |        7706 |
+|    7114 |  1.99 | HILDA       | Jon      |        7833 |
+|    7115 |  6.99 | HILDA       | Mike     |       10476 |
+|    7116 |  2.99 | HILDA       | Mike     |       10775 |
+|    7117 |  2.99 | HILDA       | Mike     |       11339 |
+|    7118 |  0.99 | HILDA       | Mike     |       11822 |
+|    7119 |  9.99 | HILDA       | Jon      |       12057 |
+|    7120 |  5.99 | HILDA       | Jon      |       12432 |
+|    7121 |  6.99 | HILDA       | Jon      |       12919 |
+|    7122 |  3.99 | HILDA       | Mike     |       14335 |
+|    7123 |  6.99 | HILDA       | Jon      |       14448 |
+|    7124 |  4.99 | HILDA       | Mike     |       15322 |
+|    7125 |  7.99 | HILDA       | Jon      |       15922 |
+|    7126 |  0.99 | HILDA       | Mike     |       15293 |
+|    7127 |  3.99 | GWENDOLYN   | Jon      |        1165 |
+|    7128 |  4.99 | GWENDOLYN   | Mike     |        1206 |
+|    7129 |  0.99 | GWENDOLYN   | Mike     |        3028 |
+|    7130 |  3.99 | GWENDOLYN   | Mike     |        3403 |
+|    7131 |  6.99 | GWENDOLYN   | Mike     |        3618 |
+|    7132 |  4.99 | GWENDOLYN   | Mike     |        4328 |
+|    7133 |  0.99 | GWENDOLYN   | Mike     |        4539 |
+|    7134 |  8.99 | GWENDOLYN   | Mike     |        6340 |
+|    7135 |  0.99 | GWENDOLYN   | Jon      |        6391 |
+|    7136 |  2.99 | GWENDOLYN   | Mike     |        6395 |
+|    7137 |  0.99 | GWENDOLYN   | Mike     |        6543 |
+|    7138 |  8.99 | GWENDOLYN   | Mike     |        7006 |
+|    7139 |  2.99 | GWENDOLYN   | Jon      |        9380 |
+|    7140 |  0.99 | GWENDOLYN   | Jon      |        9515 |
+|    7141 |  5.99 | GWENDOLYN   | Mike     |        9861 |
+|    7142 |  5.99 | GWENDOLYN   | Mike     |        9932 |
+|    7143 |  2.99 | GWENDOLYN   | Jon      |       10792 |
+|    7144 |  3.99 | GWENDOLYN   | Mike     |       11527 |
+|    7145 |  0.99 | GWENDOLYN   | Jon      |       11533 |
+|    7146 |  2.99 | GWENDOLYN   | Mike     |       11539 |
+|    7147 |  4.99 | GWENDOLYN   | Mike     |       12518 |
+|    7148 |  2.99 | GWENDOLYN   | Jon      |       13590 |
+|    7149 |  5.99 | GWENDOLYN   | Mike     |       13664 |
+|    7150 |  4.99 | GWENDOLYN   | Mike     |       15595 |
+|    7151 |  2.99 | GWENDOLYN   | Jon      |       14243 |
+|    7152 |  0.99 | JENNIE      | Jon      |          74 |
+|    7153 |  7.99 | JENNIE      | Jon      |        2027 |
+|    7154 |  4.99 | JENNIE      | Jon      |        2562 |
+|    7155 |  2.99 | JENNIE      | Mike     |        2598 |
+|    7156 |  2.99 | JENNIE      | Mike     |        3823 |
+|    7157 |  0.99 | JENNIE      | Mike     |        4610 |
+|    7158 |  2.99 | JENNIE      | Mike     |        4797 |
+|    7159 |  7.99 | JENNIE      | Jon      |        5029 |
+|    7160 |  4.99 | JENNIE      | Mike     |        5417 |
+|    7161 |  9.99 | JENNIE      | Mike     |        5710 |
+|    7162 |  4.99 | JENNIE      | Mike     |        6068 |
+|    7163 |  4.99 | JENNIE      | Jon      |        6371 |
+|    7164 |  5.99 | JENNIE      | Jon      |        6553 |
+|    7165 |  6.99 | JENNIE      | Jon      |        6921 |
+|    7166 |  1.99 | JENNIE      | Jon      |        7414 |
+|    7167 |  2.99 | JENNIE      | Mike     |        7704 |
+|    7168 |  5.99 | JENNIE      | Mike     |        8278 |
+|    7169 |  2.99 | JENNIE      | Jon      |        8489 |
+|    7170 |  0.99 | JENNIE      | Jon      |        8665 |
+|    7171 |  2.99 | JENNIE      | Mike     |        9416 |
+|    7172 |  3.99 | JENNIE      | Jon      |       10592 |
+|    7173 |  3.99 | JENNIE      | Jon      |       11000 |
+|    7174 |  1.99 | JENNIE      | Mike     |       12207 |
+|    7175 |  4.99 | JENNIE      | Jon      |       12346 |
+|    7176 |  8.99 | JENNIE      | Jon      |       13700 |
+|    7177 |  4.99 | JENNIE      | Jon      |       14125 |
+|    7178 |  6.99 | JENNIE      | Mike     |       14547 |
+|    7179 |  6.99 | JENNIE      | Jon      |       14556 |
+|    7180 |  2.99 | JENNIE      | Mike     |       14943 |
+|    7181 |  1.99 | NORA        | Mike     |          86 |
+|    7182 |  2.99 | NORA        | Jon      |         651 |
+|    7183 |  5.99 | NORA        | Jon      |        1280 |
+|    7184 |  4.99 | NORA        | Jon      |        2065 |
+|    7185 |  4.99 | NORA        | Jon      |        3002 |
+|    7186 |  4.99 | NORA        | Mike     |        3059 |
+|    7187 |  0.99 | NORA        | Jon      |        3585 |
+|    7188 |  5.99 | NORA        | Jon      |        5362 |
+|    7189 |  4.99 | NORA        | Mike     |        5577 |
+|    7190 |  2.99 | NORA        | Mike     |        8492 |
+|    7191 |  5.99 | NORA        | Jon      |        9109 |
+|    7192 |  4.99 | NORA        | Jon      |       10747 |
+|    7193 |  5.99 | NORA        | Jon      |       10910 |
+|    7194 |  5.99 | NORA        | Jon      |       11233 |
+|    7195 |  4.99 | NORA        | Mike     |       11321 |
+|    7196 |  0.99 | NORA        | Jon      |       11626 |
+|    7197 |  0.99 | NORA        | Mike     |       11726 |
+|    7198 |  4.99 | NORA        | Mike     |       12255 |
+|    7199 |  0.99 | NORA        | Jon      |       12378 |
+|    7200 |  6.99 | NORA        | Mike     |       12405 |
+|    7201 |  4.99 | NORA        | Mike     |       12715 |
+|    7202 |  8.99 | NORA        | Mike     |       13468 |
+|    7203 |  6.99 | NORA        | Mike     |       13556 |
+|    7204 |  1.99 | NORA        | Mike     |       14080 |
+|    7205 |  2.99 | NORA        | Mike     |       14492 |
+|    7206 |  0.99 | NORA        | Mike     |       14877 |
+|    7207 |  2.99 | NORA        | Mike     |       15181 |
+|    7208 |  4.99 | NORA        | Mike     |       15346 |
+|    7209 |  6.99 | MARGIE      | Jon      |          91 |
+|    7210 |  4.99 | MARGIE      | Mike     |         436 |
+|    7211 |  4.99 | MARGIE      | Jon      |        1030 |
+|    7212 |  4.99 | MARGIE      | Jon      |        1257 |
+|    7213 |  4.99 | MARGIE      | Jon      |        1349 |
+|    7214 |  2.99 | MARGIE      | Jon      |        2265 |
+|    7215 |  7.99 | MARGIE      | Jon      |        2578 |
+|    7216 |  6.99 | MARGIE      | Mike     |        2582 |
+|    7217 |  2.99 | MARGIE      | Jon      |        2699 |
+|    7218 |  4.99 | MARGIE      | Jon      |        2754 |
+|    7219 |  1.99 | MARGIE      | Mike     |        2877 |
+|    7220 |  0.99 | MARGIE      | Jon      |        3090 |
+|    7221 |  2.99 | MARGIE      | Mike     |        3817 |
+|    7222 |  6.99 | MARGIE      | Mike     |        5340 |
+|    7223 |  0.99 | MARGIE      | Mike     |        6070 |
+|    7224 |  3.99 | MARGIE      | Mike     |        6706 |
+|    7225 |  4.99 | MARGIE      | Mike     |        8190 |
+|    7226 |  1.99 | MARGIE      | Mike     |        8572 |
+|    7227 |  3.99 | MARGIE      | Jon      |        9059 |
+|    7228 |  6.99 | MARGIE      | Mike     |        9308 |
+|    7229 |  4.99 | MARGIE      | Jon      |        9403 |
+|    7230 |  2.99 | MARGIE      | Jon      |        9807 |
+|    7231 |  4.99 | MARGIE      | Jon      |       10048 |
+|    7232 |  2.99 | MARGIE      | Mike     |       10343 |
+|    7233 |  0.99 | MARGIE      | Jon      |       11373 |
+|    7234 |  6.99 | MARGIE      | Mike     |       11690 |
+|    7235 |  4.99 | MARGIE      | Mike     |       12320 |
+|    7236 |  4.99 | MARGIE      | Mike     |       12979 |
+|    7237 |  9.99 | MARGIE      | Jon      |       13236 |
+|    7238 |  5.99 | MARGIE      | Mike     |       14131 |
+|    7239 |  3.99 | MARGIE      | Jon      |       15020 |
+|    7240 |  3.99 | MARGIE      | Mike     |       15208 |
+|    7241 |  0.99 | MARGIE      | Mike     |       15768 |
+|    7242 |  3.99 | MARGIE      | Mike     |       15903 |
+|    7243 |  7.98 | MARGIE      | Jon      |       12066 |
+|    7244 |  0.00 | MARGIE      | Jon      |       13713 |
+|    7245 |  2.99 | NINA        | Mike     |        1394 |
+|    7246 |  4.99 | NINA        | Jon      |        1450 |
+|    7247 |  3.99 | NINA        | Jon      |        1551 |
+|    7248 |  0.99 | NINA        | Mike     |        2133 |
+|    7249 |  4.99 | NINA        | Jon      |        2324 |
+|    7250 |  2.99 | NINA        | Jon      |        2858 |
+|    7251 |  3.99 | NINA        | Mike     |        3066 |
+|    7252 |  1.99 | NINA        | Mike     |        3361 |
+|    7253 |  4.99 | NINA        | Jon      |        3670 |
+|    7254 |  4.99 | NINA        | Jon      |        4626 |
+|    7255 |  7.99 | NINA        | Mike     |        5039 |
+|    7256 |  2.99 | NINA        | Jon      |        5671 |
+|    7257 |  2.99 | NINA        | Jon      |        5793 |
+|    7258 |  6.99 | NINA        | Jon      |        5888 |
+|    7259 |  3.99 | NINA        | Mike     |        6120 |
+|    7260 |  1.99 | NINA        | Jon      |        6489 |
+|    7261 |  2.99 | NINA        | Mike     |        8931 |
+|    7262 |  7.99 | NINA        | Jon      |        9436 |
+|    7263 |  3.99 | NINA        | Jon      |        9531 |
+|    7264 |  1.99 | NINA        | Mike     |       10040 |
+|    7265 |  7.99 | NINA        | Jon      |       11462 |
+|    7266 |  6.99 | NINA        | Jon      |       11828 |
+|    7267 |  2.99 | NINA        | Jon      |       12007 |
+|    7268 |  4.99 | NINA        | Jon      |       12694 |
+|    7269 |  5.99 | NINA        | Jon      |       13880 |
+|    7270 |  4.99 | NINA        | Jon      |       14249 |
+|    7271 |  4.99 | NINA        | Jon      |       14373 |
+|    7272 |  0.99 | NINA        | Mike     |       14874 |
+|    7273 |  2.99 | NINA        | Jon      |       15183 |
+|    7274 |  1.99 | CASSANDRA   | Jon      |           7 |
+|    7275 |  0.99 | CASSANDRA   | Mike     |          98 |
+|    7276 |  6.99 | CASSANDRA   | Jon      |         678 |
+|    7277 |  0.99 | CASSANDRA   | Jon      |         703 |
+|    7278 |  4.99 | CASSANDRA   | Mike     |         750 |
+|    7279 |  2.99 | CASSANDRA   | Jon      |        1099 |
+|    7280 |  3.99 | CASSANDRA   | Mike     |        1334 |
+|    7281 |  2.99 | CASSANDRA   | Jon      |        1909 |
+|    7282 |  6.99 | CASSANDRA   | Jon      |        2493 |
+|    7283 |  9.99 | CASSANDRA   | Mike     |        4125 |
+|    7284 |  0.99 | CASSANDRA   | Jon      |        4804 |
+|    7285 |  6.99 | CASSANDRA   | Jon      |        4880 |
+|    7286 |  2.99 | CASSANDRA   | Mike     |        6440 |
+|    7287 |  5.99 | CASSANDRA   | Mike     |        6626 |
+|    7288 |  4.99 | CASSANDRA   | Jon      |        6804 |
+|    7289 |  4.99 | CASSANDRA   | Mike     |        7032 |
+|    7290 |  6.99 | CASSANDRA   | Mike     |        7537 |
+|    7291 |  2.99 | CASSANDRA   | Mike     |        7972 |
+|    7292 |  2.99 | CASSANDRA   | Jon      |       10566 |
+|    7293 |  4.99 | CASSANDRA   | Mike     |       10908 |
+|    7294 |  4.99 | CASSANDRA   | Mike     |       11014 |
+|    7295 |  3.99 | CASSANDRA   | Mike     |       11915 |
+|    7296 |  4.99 | CASSANDRA   | Mike     |       12344 |
+|    7297 |  5.99 | CASSANDRA   | Jon      |       13142 |
+|    7298 |  2.99 | CASSANDRA   | Jon      |       13759 |
+|    7299 |  4.99 | CASSANDRA   | Mike     |       14266 |
+|    7300 |  6.99 | CASSANDRA   | Jon      |       14693 |
+|    7301 |  2.99 | CASSANDRA   | Jon      |       15788 |
+|    7302 |  3.98 | CASSANDRA   | Mike     |       13025 |
+|    7303 |  0.00 | CASSANDRA   | Jon      |       12610 |
+|    7304 |  1.99 | LEAH        | Mike     |         193 |
+|    7305 |  4.99 | LEAH        | Mike     |        1040 |
+|    7306 |  4.99 | LEAH        | Mike     |        1345 |
+|    7307 |  6.99 | LEAH        | Mike     |        1896 |
+|    7308 |  3.99 | LEAH        | Mike     |        2115 |
+|    7309 |  5.99 | LEAH        | Jon      |        3164 |
+|    7310 |  3.99 | LEAH        | Mike     |        3501 |
+|    7311 |  9.99 | LEAH        | Mike     |        3987 |
+|    7312 |  0.99 | LEAH        | Jon      |        5533 |
+|    7313 |  4.99 | LEAH        | Jon      |        6520 |
+|    7314 |  2.99 | LEAH        | Mike     |        8355 |
+|    7315 |  3.99 | LEAH        | Jon      |        8618 |
+|    7316 |  3.99 | LEAH        | Mike     |       10069 |
+|    7317 |  7.99 | LEAH        | Mike     |       10461 |
+|    7318 |  5.99 | LEAH        | Jon      |       10579 |
+|    7319 |  4.99 | LEAH        | Jon      |       10648 |
+|    7320 |  2.99 | LEAH        | Mike     |       11389 |
+|    7321 |  0.99 | LEAH        | Mike     |       11810 |
+|    7322 |  2.99 | LEAH        | Jon      |       11841 |
+|    7323 |  2.99 | LEAH        | Mike     |       11917 |
+|    7324 |  2.99 | LEAH        | Mike     |       12192 |
+|    7325 |  2.99 | LEAH        | Mike     |       12442 |
+|    7326 |  1.99 | LEAH        | Jon      |       13945 |
+|    7327 |  0.99 | LEAH        | Mike     |       14618 |
+|    7328 |  6.99 | LEAH        | Jon      |       15620 |
+|    7329 |  8.99 | PENNY       | Mike     |        1096 |
+|    7330 |  2.99 | PENNY       | Jon      |        1852 |
+|    7331 |  1.99 | PENNY       | Mike     |        3640 |
+|    7332 |  2.99 | PENNY       | Jon      |        4545 |
+|    7333 |  1.99 | PENNY       | Jon      |        5878 |
+|    7334 |  2.99 | PENNY       | Mike     |        5922 |
+|    7335 |  2.99 | PENNY       | Mike     |        6024 |
+|    7336 |  3.99 | PENNY       | Mike     |        7618 |
+|    7337 |  0.99 | PENNY       | Mike     |        8592 |
+|    7338 |  4.99 | PENNY       | Mike     |        9821 |
+|    7339 |  7.99 | PENNY       | Jon      |       10143 |
+|    7340 |  4.99 | PENNY       | Jon      |       10310 |
+|    7341 |  3.99 | PENNY       | Mike     |       10599 |
+|    7342 |  2.99 | PENNY       | Mike     |       11431 |
+|    7343 |  4.99 | PENNY       | Mike     |       12219 |
+|    7344 |  0.99 | PENNY       | Jon      |       14234 |
+|    7345 |  4.99 | PENNY       | Jon      |       14355 |
+|    7346 |  2.99 | PENNY       | Mike     |       15244 |
+|    7347 |  0.99 | KAY         | Mike     |          33 |
+|    7348 |  6.99 | KAY         | Mike     |         405 |
+|    7349 |  6.99 | KAY         | Mike     |        1041 |
+|    7350 |  0.99 | KAY         | Mike     |        1072 |
+|    7351 |  4.99 | KAY         | Jon      |        1604 |
+|    7352 |  5.99 | KAY         | Jon      |        2546 |
+|    7353 |  5.99 | KAY         | Mike     |        3323 |
+|    7354 |  3.99 | KAY         | Jon      |        5047 |
+|    7355 |  2.99 | KAY         | Jon      |        5158 |
+|    7356 |  7.99 | KAY         | Jon      |        7300 |
+|    7357 |  2.99 | KAY         | Jon      |        7658 |
+|    7358 |  7.99 | KAY         | Mike     |        8248 |
+|    7359 | 10.99 | KAY         | Jon      |        9787 |
+|    7360 |  2.99 | KAY         | Mike     |       10736 |
+|    7361 |  2.99 | KAY         | Jon      |       11003 |
+|    7362 |  8.99 | KAY         | Jon      |       11597 |
+|    7363 |  0.99 | KAY         | Mike     |       11881 |
+|    7364 |  6.99 | KAY         | Jon      |       12006 |
+|    7365 |  2.99 | KAY         | Jon      |       13274 |
+|    7366 |  2.99 | KAY         | Mike     |       13903 |
+|    7367 |  3.99 | PRISCILLA   | Jon      |         122 |
+|    7368 |  0.99 | PRISCILLA   | Jon      |         980 |
+|    7369 |  6.99 | PRISCILLA   | Jon      |        1391 |
+|    7370 |  6.99 | PRISCILLA   | Jon      |        1747 |
+|    7371 |  4.99 | PRISCILLA   | Jon      |        1765 |
+|    7372 |  1.99 | PRISCILLA   | Mike     |        2301 |
+|    7373 |  0.99 | PRISCILLA   | Mike     |        3202 |
+|    7374 |  2.99 | PRISCILLA   | Jon      |        3556 |
+|    7375 |  5.99 | PRISCILLA   | Mike     |        4937 |
+|    7376 |  7.99 | PRISCILLA   | Mike     |        5256 |
+|    7377 |  7.99 | PRISCILLA   | Jon      |        5435 |
+|    7378 |  2.99 | PRISCILLA   | Mike     |        5605 |
+|    7379 |  8.99 | PRISCILLA   | Mike     |        6592 |
+|    7380 |  1.99 | PRISCILLA   | Mike     |        6635 |
+|    7381 |  2.99 | PRISCILLA   | Jon      |        6696 |
+|    7382 |  5.99 | PRISCILLA   | Mike     |        6717 |
+|    7383 |  2.99 | PRISCILLA   | Mike     |        8449 |
+|    7384 |  4.99 | PRISCILLA   | Mike     |        9186 |
+|    7385 |  5.99 | PRISCILLA   | Jon      |        9285 |
+|    7386 |  0.99 | PRISCILLA   | Jon      |        9391 |
+|    7387 |  3.99 | PRISCILLA   | Jon      |        9693 |
+|    7388 |  0.99 | PRISCILLA   | Jon      |        9729 |
+|    7389 |  8.99 | PRISCILLA   | Mike     |       10272 |
+|    7390 |  3.99 | PRISCILLA   | Mike     |       10753 |
+|    7391 |  6.99 | PRISCILLA   | Mike     |       10768 |
+|    7392 |  4.99 | PRISCILLA   | Mike     |       11282 |
+|    7393 |  4.99 | PRISCILLA   | Jon      |       11509 |
+|    7394 |  0.99 | PRISCILLA   | Mike     |       12692 |
+|    7395 |  4.99 | PRISCILLA   | Jon      |       13738 |
+|    7396 |  5.99 | PRISCILLA   | Mike     |       13955 |
+|    7397 |  4.99 | PRISCILLA   | Jon      |       14092 |
+|    7398 |  2.99 | PRISCILLA   | Jon      |       14558 |
+|    7399 |  2.99 | PRISCILLA   | Jon      |       14911 |
+|    7400 |  2.99 | PRISCILLA   | Jon      |       15372 |
+|    7401 |  6.99 | PRISCILLA   | Mike     |       15760 |
+|    7402 |  2.99 | NAOMI       | Mike     |         147 |
+|    7403 |  4.99 | NAOMI       | Mike     |         208 |
+|    7404 |  2.99 | NAOMI       | Jon      |         301 |
+|    7405 |  5.99 | NAOMI       | Mike     |         394 |
+|    7406 |  2.99 | NAOMI       | Jon      |         474 |
+|    7407 |  4.99 | NAOMI       | Mike     |         892 |
+|    7408 |  0.99 | NAOMI       | Mike     |        2098 |
+|    7409 |  9.99 | NAOMI       | Jon      |        3291 |
+|    7410 |  5.99 | NAOMI       | Jon      |        3532 |
+|    7411 |  2.99 | NAOMI       | Mike     |        4147 |
+|    7412 |  2.99 | NAOMI       | Jon      |        4582 |
+|    7413 |  3.99 | NAOMI       | Jon      |        6389 |
+|    7414 |  0.99 | NAOMI       | Jon      |        8259 |
+|    7415 |  5.99 | NAOMI       | Jon      |        8406 |
+|    7416 |  7.99 | NAOMI       | Jon      |        8517 |
+|    7417 |  4.99 | NAOMI       | Mike     |        9331 |
+|    7418 |  4.99 | NAOMI       | Mike     |        9677 |
+|    7419 |  4.99 | NAOMI       | Jon      |       10059 |
+|    7420 |  1.99 | NAOMI       | Mike     |       10790 |
+|    7421 |  0.99 | NAOMI       | Jon      |       10855 |
+|    7422 |  3.99 | NAOMI       | Mike     |       11058 |
+|    7423 |  2.99 | NAOMI       | Jon      |       11363 |
+|    7424 |  3.99 | NAOMI       | Mike     |       12321 |
+|    7425 |  2.99 | NAOMI       | Mike     |       13103 |
+|    7426 |  8.99 | NAOMI       | Jon      |       13129 |
+|    7427 |  8.99 | NAOMI       | Mike     |       13549 |
+|    7428 |  0.99 | NAOMI       | Mike     |       14012 |
+|    7429 |  7.99 | NAOMI       | Mike     |       14066 |
+|    7430 |  7.99 | NAOMI       | Jon      |       14164 |
+|    7431 |  4.99 | NAOMI       | Mike     |       14388 |
+|    7432 |  2.99 | NAOMI       | Jon      |       15143 |
+|    7433 |  2.99 | NAOMI       | Mike     |       15260 |
+|    7434 |  2.99 | NAOMI       | Jon      |       15328 |
+|    7435 |  3.99 | NAOMI       | Jon      |       15819 |
+|    7436 |  0.99 | NAOMI       | Mike     |       13486 |
+|    7437 |  2.99 | CAROLE      | Jon      |         336 |
+|    7438 |  3.99 | CAROLE      | Jon      |        1797 |
+|    7439 |  0.99 | CAROLE      | Jon      |        2414 |
+|    7440 |  4.99 | CAROLE      | Mike     |        2646 |
+|    7441 |  2.99 | CAROLE      | Mike     |        3355 |
+|    7442 |  0.99 | CAROLE      | Jon      |        4396 |
+|    7443 |  0.99 | CAROLE      | Mike     |        4634 |
+|    7444 |  9.99 | CAROLE      | Jon      |        4912 |
+|    7445 |  5.99 | CAROLE      | Jon      |        6301 |
+|    7446 |  0.99 | CAROLE      | Jon      |        6856 |
+|    7447 |  2.99 | CAROLE      | Mike     |        7553 |
+|    7448 |  4.99 | CAROLE      | Jon      |        7596 |
+|    7449 |  2.99 | CAROLE      | Mike     |        8746 |
+|    7450 |  2.99 | CAROLE      | Jon      |        9258 |
+|    7451 |  6.99 | CAROLE      | Mike     |       10479 |
+|    7452 |  1.99 | CAROLE      | Jon      |       11309 |
+|    7453 |  4.99 | CAROLE      | Mike     |       11610 |
+|    7454 |  5.99 | CAROLE      | Jon      |       12589 |
+|    7455 |  1.99 | CAROLE      | Mike     |       12606 |
+|    7456 |  3.99 | CAROLE      | Mike     |       13037 |
+|    7457 |  2.99 | CAROLE      | Jon      |       13860 |
+|    7458 |  1.99 | CAROLE      | Jon      |       13865 |
+|    7459 |  0.99 | CAROLE      | Jon      |       13902 |
+|    7460 |  0.99 | CAROLE      | Jon      |       14063 |
+|    7461 |  5.99 | CAROLE      | Mike     |       14187 |
+|    7462 |  2.99 | CAROLE      | Mike     |       14296 |
+|    7463 |  5.99 | CAROLE      | Jon      |       14483 |
+|    7464 |  4.99 | CAROLE      | Jon      |       14727 |
+|    7465 |  2.99 | CAROLE      | Jon      |       15269 |
+|    7466 |  3.99 | CAROLE      | Jon      |       15496 |
+|    7467 |  3.99 | BRANDY      | Mike     |         736 |
+|    7468 | 10.99 | BRANDY      | Mike     |         860 |
+|    7469 |  0.99 | BRANDY      | Mike     |        1352 |
+|    7470 |  4.99 | BRANDY      | Jon      |        2763 |
+|    7471 |  6.99 | BRANDY      | Jon      |        3064 |
+|    7472 |  2.99 | BRANDY      | Jon      |        3714 |
+|    7473 |  0.99 | BRANDY      | Mike     |        4715 |
+|    7474 |  4.99 | BRANDY      | Jon      |        5186 |
+|    7475 |  4.99 | BRANDY      | Jon      |        5246 |
+|    7476 |  5.99 | BRANDY      | Jon      |        7282 |
+|    7477 |  2.99 | BRANDY      | Jon      |        7842 |
+|    7478 |  0.99 | BRANDY      | Mike     |        9070 |
+|    7479 |  1.99 | BRANDY      | Mike     |        9080 |
+|    7480 |  4.99 | BRANDY      | Mike     |        9102 |
+|    7481 |  8.99 | BRANDY      | Mike     |        9229 |
+|    7482 |  5.99 | BRANDY      | Jon      |       10149 |
+|    7483 |  0.99 | BRANDY      | Jon      |       10691 |
+|    7484 |  2.99 | BRANDY      | Mike     |       10763 |
+|    7485 |  2.99 | BRANDY      | Jon      |       11085 |
+|    7486 |  4.99 | BRANDY      | Mike     |       11636 |
+|    7487 |  3.99 | BRANDY      | Jon      |       11961 |
+|    7488 |  5.99 | BRANDY      | Jon      |       12178 |
+|    7489 |  4.99 | BRANDY      | Jon      |       12251 |
+|    7490 |  4.99 | BRANDY      | Mike     |       12650 |
+|    7491 |  4.99 | BRANDY      | Mike     |       14000 |
+|    7492 |  2.99 | BRANDY      | Jon      |       15718 |
+|    7493 |  3.99 | BRANDY      | Mike     |       15769 |
+|    7494 |  4.99 | BRANDY      | Jon      |       15923 |
+|    7495 |  6.99 | OLGA        | Jon      |         308 |
+|    7496 |  2.99 | OLGA        | Mike     |        1331 |
+|    7497 |  2.99 | OLGA        | Jon      |        1717 |
+|    7498 |  3.99 | OLGA        | Jon      |        2162 |
+|    7499 |  4.99 | OLGA        | Jon      |        2723 |
+|    7500 |  5.99 | OLGA        | Mike     |        3247 |
+|    7501 |  4.99 | OLGA        | Jon      |        3274 |
+|    7502 |  2.99 | OLGA        | Mike     |        3344 |
+|    7503 |  5.99 | OLGA        | Jon      |        3740 |
+|    7504 |  2.99 | OLGA        | Jon      |        3897 |
+|    7505 |  4.99 | OLGA        | Mike     |        4290 |
+|    7506 |  5.99 | OLGA        | Jon      |        4987 |
+|    7507 |  0.99 | OLGA        | Mike     |        5861 |
+|    7508 |  2.99 | OLGA        | Mike     |        5913 |
+|    7509 |  2.99 | OLGA        | Jon      |        6455 |
+|    7510 |  5.99 | OLGA        | Mike     |        6487 |
+|    7511 |  4.99 | OLGA        | Jon      |        7423 |
+|    7512 |  2.99 | OLGA        | Jon      |        8410 |
+|    7513 |  4.99 | OLGA        | Jon      |        9669 |
+|    7514 |  0.99 | OLGA        | Mike     |        9901 |
+|    7515 |  3.99 | OLGA        | Jon      |       11074 |
+|    7516 |  4.99 | OLGA        | Jon      |       11162 |
+|    7517 |  0.99 | OLGA        | Jon      |       11574 |
+|    7518 |  3.99 | OLGA        | Jon      |       12149 |
+|    7519 |  5.99 | OLGA        | Mike     |       12458 |
+|    7520 |  4.99 | OLGA        | Mike     |       13122 |
+|    7521 |  4.99 | OLGA        | Jon      |       13526 |
+|    7522 |  4.99 | OLGA        | Mike     |       13714 |
+|    7523 |  4.99 | OLGA        | Jon      |       14227 |
+|    7524 |  4.99 | OLGA        | Jon      |       14745 |
+|    7525 | 10.99 | OLGA        | Mike     |       15008 |
+|    7526 |  5.99 | OLGA        | Mike     |       15345 |
+|    7527 |  4.99 | BILLIE      | Mike     |        1092 |
+|    7528 |  0.99 | BILLIE      | Jon      |        1387 |
+|    7529 |  2.99 | BILLIE      | Mike     |        1978 |
+|    7530 |  4.99 | BILLIE      | Jon      |        2078 |
+|    7531 |  2.99 | BILLIE      | Mike     |        3453 |
+|    7532 |  2.99 | BILLIE      | Mike     |        3776 |
+|    7533 |  4.99 | BILLIE      | Mike     |        4430 |
+|    7534 |  8.99 | BILLIE      | Jon      |        4866 |
+|    7535 |  4.99 | BILLIE      | Jon      |        6869 |
+|    7536 |  0.99 | BILLIE      | Mike     |        7239 |
+|    7537 |  0.99 | BILLIE      | Jon      |        7834 |
+|    7538 |  5.99 | BILLIE      | Jon      |        8222 |
+|    7539 |  4.99 | BILLIE      | Mike     |        8953 |
+|    7540 |  2.99 | BILLIE      | Jon      |        9448 |
+|    7541 |  2.99 | BILLIE      | Mike     |       10649 |
+|    7542 |  2.99 | BILLIE      | Mike     |       10731 |
+|    7543 |  3.99 | BILLIE      | Jon      |       10849 |
+|    7544 |  5.99 | BILLIE      | Mike     |       11095 |
+|    7545 |  0.99 | BILLIE      | Jon      |       11531 |
+|    7546 |  0.99 | BILLIE      | Mike     |       12787 |
+|    7547 |  0.99 | BILLIE      | Mike     |       13896 |
+|    7548 |  0.99 | BILLIE      | Jon      |       13976 |
+|    7549 |  2.99 | BILLIE      | Mike     |       14268 |
+|    7550 |  0.99 | BILLIE      | Jon      |       14803 |
+|    7551 |  4.99 | BILLIE      | Mike     |       14986 |
+|    7552 |  4.99 | BILLIE      | Mike     |       16019 |
+|    7553 |  2.99 | DIANNE      | Mike     |         979 |
+|    7554 |  0.99 | DIANNE      | Jon      |        1019 |
+|    7555 |  2.99 | DIANNE      | Mike     |        1178 |
+|    7556 |  4.99 | DIANNE      | Mike     |        2147 |
+|    7557 |  0.99 | DIANNE      | Mike     |        3215 |
+|    7558 |  2.99 | DIANNE      | Mike     |        3374 |
+|    7559 |  4.99 | DIANNE      | Mike     |        3375 |
+|    7560 |  4.99 | DIANNE      | Mike     |        4476 |
+|    7561 |  7.99 | DIANNE      | Mike     |        4978 |
+|    7562 |  2.99 | DIANNE      | Jon      |        5248 |
+|    7563 |  9.99 | DIANNE      | Mike     |        5361 |
+|    7564 |  0.99 | DIANNE      | Mike     |        6176 |
+|    7565 |  2.99 | DIANNE      | Mike     |        7947 |
+|    7566 |  3.99 | DIANNE      | Jon      |        8559 |
+|    7567 |  5.99 | DIANNE      | Jon      |        9820 |
+|    7568 |  2.99 | DIANNE      | Jon      |       10177 |
+|    7569 |  6.99 | DIANNE      | Jon      |       11250 |
+|    7570 |  2.99 | DIANNE      | Mike     |       11515 |
+|    7571 |  4.99 | DIANNE      | Mike     |       11703 |
+|    7572 |  2.99 | DIANNE      | Jon      |       12935 |
+|    7573 |  4.99 | DIANNE      | Mike     |       12949 |
+|    7574 |  7.99 | DIANNE      | Mike     |       13105 |
+|    7575 |  2.99 | DIANNE      | Mike     |       13233 |
+|    7576 |  4.99 | DIANNE      | Jon      |       13588 |
+|    7577 |  2.99 | DIANNE      | Jon      |       14206 |
+|    7578 |  3.99 | DIANNE      | Mike     |       14714 |
+|    7579 |  5.99 | DIANNE      | Mike     |       14779 |
+|    7580 |  4.99 | DIANNE      | Mike     |       14789 |
+|    7581 |  6.99 | DIANNE      | Jon      |       15580 |
+|    7582 |  2.99 | DIANNE      | Mike     |       15606 |
+|    7583 |  4.99 | DIANNE      | Jon      |       13538 |
+|    7584 |  4.99 | TRACEY      | Mike     |        1014 |
+|    7585 |  3.99 | TRACEY      | Mike     |        2656 |
+|    7586 |  4.99 | TRACEY      | Jon      |        3009 |
+|    7587 |  0.99 | TRACEY      | Jon      |        3097 |
+|    7588 |  4.99 | TRACEY      | Mike     |        4616 |
+|    7589 |  0.99 | TRACEY      | Jon      |        6851 |
+|    7590 |  4.99 | TRACEY      | Mike     |        7070 |
+|    7591 |  0.99 | TRACEY      | Jon      |        7901 |
+|    7592 |  0.99 | TRACEY      | Jon      |        8319 |
+|    7593 |  0.99 | TRACEY      | Mike     |        8365 |
+|    7594 |  7.99 | TRACEY      | Mike     |        8565 |
+|    7595 |  6.99 | TRACEY      | Jon      |        8695 |
+|    7596 |  3.99 | TRACEY      | Jon      |        8744 |
+|    7597 |  0.99 | TRACEY      | Mike     |        8912 |
+|    7598 |  0.99 | TRACEY      | Jon      |        9103 |
+|    7599 |  9.99 | TRACEY      | Mike     |       10847 |
+|    7600 |  4.99 | TRACEY      | Mike     |       11366 |
+|    7601 |  2.99 | TRACEY      | Mike     |       11517 |
+|    7602 |  4.99 | TRACEY      | Mike     |       12053 |
+|    7603 |  5.99 | TRACEY      | Mike     |       12849 |
+|    7604 |  9.99 | TRACEY      | Jon      |       13231 |
+|    7605 |  4.99 | TRACEY      | Mike     |       13321 |
+|    7606 |  4.99 | TRACEY      | Mike     |       13667 |
+|    7607 |  2.99 | TRACEY      | Jon      |       15036 |
+|    7608 |  4.99 | TRACEY      | Mike     |       15312 |
+|    7609 |  5.99 | TRACEY      | Jon      |       15554 |
+|    7610 |  5.99 | TRACEY      | Jon      |       15950 |
+|    7611 |  2.99 | LEONA       | Jon      |         650 |
+|    7612 |  2.99 | LEONA       | Jon      |         754 |
+|    7613 |  5.99 | LEONA       | Jon      |        1485 |
+|    7614 |  5.99 | LEONA       | Mike     |        2254 |
+|    7615 |  0.99 | LEONA       | Mike     |        4607 |
+|    7616 |  6.99 | LEONA       | Jon      |        4864 |
+|    7617 |  5.99 | LEONA       | Jon      |        5410 |
+|    7618 |  0.99 | LEONA       | Jon      |        6825 |
+|    7619 |  2.99 | LEONA       | Jon      |        7034 |
+|    7620 |  3.99 | LEONA       | Mike     |        7525 |
+|    7621 |  0.99 | LEONA       | Jon      |        8131 |
+|    7622 |  4.99 | LEONA       | Jon      |        8180 |
+|    7623 |  2.99 | LEONA       | Mike     |       13641 |
+|    7624 |  1.99 | LEONA       | Mike     |       14196 |
+|    7625 |  1.99 | JENNY       | Jon      |          48 |
+|    7626 |  6.99 | JENNY       | Jon      |         282 |
+|    7627 |  0.99 | JENNY       | Jon      |         564 |
+|    7628 |  2.99 | JENNY       | Mike     |        2016 |
+|    7629 |  2.99 | JENNY       | Jon      |        2176 |
+|    7630 |  4.99 | JENNY       | Jon      |        3408 |
+|    7631 |  2.99 | JENNY       | Mike     |        3417 |
+|    7632 |  2.99 | JENNY       | Jon      |        3675 |
+|    7633 |  2.99 | JENNY       | Mike     |        3885 |
+|    7634 |  2.99 | JENNY       | Mike     |        4359 |
+|    7635 |  4.99 | JENNY       | Jon      |        4412 |
+|    7636 |  0.99 | JENNY       | Mike     |        5113 |
+|    7637 |  8.99 | JENNY       | Jon      |        5319 |
+|    7638 |  6.99 | JENNY       | Mike     |        5926 |
+|    7639 |  2.99 | JENNY       | Mike     |        7433 |
+|    7640 |  3.99 | JENNY       | Jon      |        7534 |
+|    7641 |  6.99 | JENNY       | Mike     |        8223 |
+|    7642 |  4.99 | JENNY       | Jon      |        8270 |
+|    7643 |  1.99 | JENNY       | Jon      |        8468 |
+|    7644 |  0.99 | JENNY       | Jon      |        8743 |
+|    7645 |  1.99 | JENNY       | Jon      |        8973 |
+|    7646 |  9.99 | JENNY       | Jon      |        9658 |
+|    7647 |  2.99 | JENNY       | Jon      |       11226 |
+|    7648 |  2.99 | JENNY       | Mike     |       13278 |
+|    7649 |  2.99 | JENNY       | Jon      |       13749 |
+|    7650 |  4.99 | JENNY       | Jon      |       15543 |
+|    7651 |  0.99 | JENNY       | Jon      |       15430 |
+|    7652 |  0.99 | FELICIA     | Mike     |        1749 |
+|    7653 |  2.99 | FELICIA     | Jon      |        1796 |
+|    7654 |  2.99 | FELICIA     | Jon      |        2333 |
+|    7655 |  2.99 | FELICIA     | Mike     |        2685 |
+|    7656 |  7.99 | FELICIA     | Jon      |        2849 |
+|    7657 |  4.99 | FELICIA     | Mike     |        3534 |
+|    7658 |  6.99 | FELICIA     | Mike     |        3568 |
+|    7659 |  4.99 | FELICIA     | Jon      |        3590 |
+|    7660 |  0.99 | FELICIA     | Jon      |        3672 |
+|    7661 |  2.99 | FELICIA     | Jon      |        4683 |
+|    7662 |  1.99 | FELICIA     | Jon      |        4876 |
+|    7663 |  2.99 | FELICIA     | Jon      |        5989 |
+|    7664 |  0.99 | FELICIA     | Mike     |        6075 |
+|    7665 |  1.99 | FELICIA     | Mike     |        6300 |
+|    7666 |  0.99 | FELICIA     | Jon      |        6313 |
+|    7667 |  4.99 | FELICIA     | Mike     |        6827 |
+|    7668 |  0.99 | FELICIA     | Mike     |        7504 |
+|    7669 |  0.99 | FELICIA     | Mike     |        7816 |
+|    7670 |  4.99 | FELICIA     | Jon      |        9353 |
+|    7671 |  2.99 | FELICIA     | Jon      |        9478 |
+|    7672 |  2.99 | FELICIA     | Jon      |        9572 |
+|    7673 |  2.99 | FELICIA     | Jon      |        9918 |
+|    7674 |  0.99 | FELICIA     | Mike     |       11637 |
+|    7675 |  2.99 | FELICIA     | Jon      |       11846 |
+|    7676 |  0.99 | FELICIA     | Jon      |       11966 |
+|    7677 |  6.99 | FELICIA     | Mike     |       12290 |
+|    7678 |  2.99 | FELICIA     | Mike     |       13229 |
+|    7679 |  2.99 | FELICIA     | Mike     |       15837 |
+|    7680 |  0.99 | SONIA       | Jon      |         423 |
+|    7681 |  0.99 | SONIA       | Jon      |         791 |
+|    7682 |  6.99 | SONIA       | Mike     |        1145 |
+|    7683 |  0.99 | SONIA       | Mike     |        1171 |
+|    7684 |  6.99 | SONIA       | Jon      |        2813 |
+|    7685 |  0.99 | SONIA       | Jon      |        3296 |
+|    7686 |  0.99 | SONIA       | Mike     |        3572 |
+|    7687 |  2.99 | SONIA       | Jon      |        4081 |
+|    7688 |  7.99 | SONIA       | Mike     |        4759 |
+|    7689 |  7.99 | SONIA       | Jon      |        4931 |
+|    7690 |  6.99 | SONIA       | Mike     |        5161 |
+|    7691 |  5.99 | SONIA       | Mike     |        6276 |
+|    7692 |  2.99 | SONIA       | Jon      |        6982 |
+|    7693 |  6.99 | SONIA       | Mike     |        7164 |
+|    7694 |  4.99 | SONIA       | Mike     |        7463 |
+|    7695 |  8.99 | SONIA       | Jon      |        7716 |
+|    7696 |  2.99 | SONIA       | Mike     |        8888 |
+|    7697 |  0.99 | SONIA       | Mike     |        9790 |
+|    7698 |  7.99 | SONIA       | Mike     |       10396 |
+|    7699 |  4.99 | SONIA       | Mike     |       10535 |
+|    7700 |  3.99 | SONIA       | Jon      |       12162 |
+|    7701 |  5.99 | SONIA       | Mike     |       14007 |
+|    7702 |  4.99 | SONIA       | Mike     |       14648 |
+|    7703 |  4.99 | SONIA       | Jon      |       14746 |
+|    7704 |  4.99 | SONIA       | Mike     |       14921 |
+|    7705 |  3.99 | SONIA       | Jon      |       15135 |
+|    7706 |  5.98 | SONIA       | Mike     |       12064 |
+|    7707 |  0.00 | SONIA       | Jon      |       12959 |
+|    7708 |  7.99 | MIRIAM      | Jon      |        1161 |
+|    7709 |  3.99 | MIRIAM      | Jon      |        1302 |
+|    7710 |  5.99 | MIRIAM      | Mike     |        2249 |
+|    7711 |  6.99 | MIRIAM      | Jon      |        4007 |
+|    7712 |  2.99 | MIRIAM      | Jon      |        5112 |
+|    7713 |  9.99 | MIRIAM      | Mike     |        5683 |
+|    7714 |  0.99 | MIRIAM      | Mike     |        6010 |
+|    7715 |  3.99 | MIRIAM      | Jon      |        6083 |
+|    7716 |  4.99 | MIRIAM      | Mike     |        6094 |
+|    7717 |  4.99 | MIRIAM      | Jon      |        6333 |
+|    7718 |  0.99 | MIRIAM      | Jon      |        6644 |
+|    7719 |  6.99 | MIRIAM      | Mike     |        7211 |
+|    7720 |  9.99 | MIRIAM      | Mike     |        7452 |
+|    7721 |  9.99 | MIRIAM      | Mike     |        7745 |
+|    7722 |  4.99 | MIRIAM      | Mike     |        8154 |
+|    7723 |  0.99 | MIRIAM      | Jon      |        8466 |
+|    7724 |  5.99 | MIRIAM      | Mike     |       10493 |
+|    7725 |  2.99 | MIRIAM      | Jon      |       10628 |
+|    7726 |  4.99 | MIRIAM      | Mike     |       10641 |
+|    7727 |  8.99 | MIRIAM      | Mike     |       12027 |
+|    7728 |  0.99 | MIRIAM      | Mike     |       12444 |
+|    7729 |  0.99 | MIRIAM      | Mike     |       12449 |
+|    7730 |  9.99 | MIRIAM      | Jon      |       12687 |
+|    7731 |  7.99 | MIRIAM      | Jon      |       13102 |
+|    7732 |  0.99 | MIRIAM      | Jon      |       15251 |
+|    7733 |  4.99 | MIRIAM      | Mike     |       15489 |
+|    7734 |  6.99 | VELMA       | Jon      |          81 |
+|    7735 |  8.99 | VELMA       | Mike     |        1690 |
+|    7736 |  4.99 | VELMA       | Mike     |        2195 |
+|    7737 |  4.99 | VELMA       | Jon      |        3592 |
+|    7738 |  3.99 | VELMA       | Jon      |        3692 |
+|    7739 |  6.99 | VELMA       | Jon      |        4242 |
+|    7740 |  9.99 | VELMA       | Jon      |        4461 |
+|    7741 |  4.99 | VELMA       | Mike     |        4707 |
+|    7742 |  2.99 | VELMA       | Mike     |        4894 |
+|    7743 |  4.99 | VELMA       | Mike     |        5796 |
+|    7744 |  2.99 | VELMA       | Jon      |        6611 |
+|    7745 |  2.99 | VELMA       | Mike     |        7254 |
+|    7746 |  2.99 | VELMA       | Mike     |        7299 |
+|    7747 |  0.99 | VELMA       | Mike     |        7368 |
+|    7748 |  2.99 | VELMA       | Mike     |        7422 |
+|    7749 |  6.99 | VELMA       | Mike     |        7719 |
+|    7750 |  0.99 | VELMA       | Jon      |        8399 |
+|    7751 |  6.99 | VELMA       | Jon      |        9280 |
+|    7752 |  3.99 | VELMA       | Mike     |        9809 |
+|    7753 |  5.99 | VELMA       | Jon      |       10105 |
+|    7754 |  0.99 | VELMA       | Jon      |       11670 |
+|    7755 |  0.99 | VELMA       | Jon      |       12595 |
+|    7756 |  0.99 | VELMA       | Mike     |       12656 |
+|    7757 |  5.99 | VELMA       | Jon      |       13635 |
+|    7758 |  4.99 | VELMA       | Mike     |       13975 |
+|    7759 |  0.99 | VELMA       | Mike     |       14905 |
+|    7760 |  4.99 | VELMA       | Jon      |       15629 |
+|    7761 |  0.99 | BECKY       | Jon      |         498 |
+|    7762 |  2.99 | BECKY       | Mike     |         655 |
+|    7763 |  2.99 | BECKY       | Jon      |         964 |
+|    7764 |  7.99 | BECKY       | Mike     |        1247 |
+|    7765 |  2.99 | BECKY       | Jon      |        1642 |
+|    7766 |  9.99 | BECKY       | Jon      |        2286 |
+|    7767 |  6.99 | BECKY       | Jon      |        2612 |
+|    7768 |  4.99 | BECKY       | Jon      |        4877 |
+|    7769 |  1.99 | BECKY       | Jon      |        5346 |
+|    7770 |  3.99 | BECKY       | Mike     |        5593 |
+|    7771 |  0.99 | BECKY       | Jon      |        5761 |
+|    7772 |  3.99 | BECKY       | Jon      |        6379 |
+|    7773 |  2.99 | BECKY       | Mike     |        6397 |
+|    7774 |  2.99 | BECKY       | Jon      |        7402 |
+|    7775 |  2.99 | BECKY       | Jon      |        7777 |
+|    7776 |  6.99 | BECKY       | Jon      |        8994 |
+|    7777 |  1.99 | BECKY       | Jon      |        9716 |
+|    7778 |  6.99 | BECKY       | Mike     |       10027 |
+|    7779 |  2.99 | BECKY       | Jon      |       10574 |
+|    7780 |  4.99 | BECKY       | Jon      |       10807 |
+|    7781 |  4.99 | BECKY       | Jon      |       11106 |
+|    7782 |  4.99 | BECKY       | Mike     |       11716 |
+|    7783 |  2.99 | BECKY       | Jon      |       12861 |
+|    7784 |  6.99 | BECKY       | Jon      |       14715 |
+|    7785 |  1.99 | BECKY       | Jon      |       15076 |
+|    7786 |  4.99 | BECKY       | Mike     |       15084 |
+|    7787 |  0.99 | BECKY       | Jon      |       15127 |
+|    7788 |  2.99 | BECKY       | Mike     |       15614 |
+|    7789 |  0.99 | BECKY       | Jon      |       14204 |
+|    7790 |  3.99 | BOBBIE      | Jon      |          93 |
+|    7791 |  6.99 | BOBBIE      | Jon      |         427 |
+|    7792 |  4.99 | BOBBIE      | Mike     |         503 |
+|    7793 |  5.99 | BOBBIE      | Jon      |         565 |
+|    7794 |  5.99 | BOBBIE      | Mike     |        1466 |
+|    7795 |  3.99 | BOBBIE      | Mike     |        3958 |
+|    7796 |  2.99 | BOBBIE      | Mike     |        4692 |
+|    7797 |  0.99 | BOBBIE      | Jon      |        4758 |
+|    7798 |  2.99 | BOBBIE      | Mike     |        6399 |
+|    7799 |  3.99 | BOBBIE      | Jon      |        6518 |
+|    7800 |  0.99 | BOBBIE      | Jon      |        7744 |
+|    7801 |  2.99 | BOBBIE      | Jon      |        7855 |
+|    7802 |  2.99 | BOBBIE      | Jon      |        9429 |
+|    7803 |  0.99 | BOBBIE      | Mike     |        9732 |
+|    7804 |  9.99 | BOBBIE      | Mike     |       10927 |
+|    7805 |  2.99 | BOBBIE      | Jon      |       11952 |
+|    7806 |  1.99 | BOBBIE      | Mike     |       12134 |
+|    7807 |  2.99 | BOBBIE      | Mike     |       13219 |
+|    7808 |  0.99 | BOBBIE      | Mike     |       13227 |
+|    7809 |  2.99 | BOBBIE      | Jon      |       13363 |
+|    7810 |  0.99 | BOBBIE      | Jon      |       14113 |
+|    7811 |  0.99 | BOBBIE      | Jon      |       14756 |
+|    7812 |  2.99 | BOBBIE      | Jon      |       15058 |
+|    7813 |  2.99 | BOBBIE      | Mike     |       15119 |
+|    7814 |  4.99 | VIOLET      | Jon      |        1880 |
+|    7815 |  0.99 | VIOLET      | Jon      |        2316 |
+|    7816 |  6.99 | VIOLET      | Mike     |        2387 |
+|    7817 | 10.99 | VIOLET      | Mike     |        2784 |
+|    7818 |  6.99 | VIOLET      | Jon      |        2948 |
+|    7819 |  6.99 | VIOLET      | Jon      |        3123 |
+|    7820 |  2.99 | VIOLET      | Mike     |        3588 |
+|    7821 |  0.99 | VIOLET      | Jon      |        4622 |
+|    7822 |  4.99 | VIOLET      | Mike     |        5089 |
+|    7823 |  8.99 | VIOLET      | Jon      |        5342 |
+|    7824 |  4.99 | VIOLET      | Jon      |        5584 |
+|    7825 |  0.99 | VIOLET      | Jon      |        5724 |
+|    7826 |  3.99 | VIOLET      | Jon      |        6007 |
+|    7827 |  7.99 | VIOLET      | Jon      |        6536 |
+|    7828 |  4.99 | VIOLET      | Mike     |        7151 |
+|    7829 |  4.99 | VIOLET      | Mike     |        7162 |
+|    7830 |  0.99 | VIOLET      | Jon      |        7325 |
+|    7831 |  2.99 | VIOLET      | Mike     |        9498 |
+|    7832 |  7.99 | VIOLET      | Jon      |       10297 |
+|    7833 |  1.99 | VIOLET      | Mike     |       12158 |
+|    7834 |  0.99 | VIOLET      | Mike     |       12170 |
+|    7835 |  7.99 | VIOLET      | Jon      |       12558 |
+|    7836 |  0.99 | VIOLET      | Jon      |       13165 |
+|    7837 |  0.99 | VIOLET      | Jon      |       13211 |
+|    7838 |  9.99 | VIOLET      | Jon      |       13256 |
+|    7839 |  5.99 | VIOLET      | Jon      |       13336 |
+|    7840 |  6.99 | VIOLET      | Jon      |       13891 |
+|    7841 |  0.99 | VIOLET      | Mike     |       14087 |
+|    7842 |  4.99 | VIOLET      | Jon      |       14729 |
+|    7843 |  4.99 | VIOLET      | Jon      |       14917 |
+|    7844 |  2.99 | KRISTINA    | Mike     |         160 |
+|    7845 |  6.99 | KRISTINA    | Mike     |        1220 |
+|    7846 |  8.99 | KRISTINA    | Jon      |        1336 |
+|    7847 |  4.99 | KRISTINA    | Jon      |        1496 |
+|    7848 |  0.99 | KRISTINA    | Jon      |        1532 |
+|    7849 |  3.99 | KRISTINA    | Mike     |        3013 |
+|    7850 |  4.99 | KRISTINA    | Jon      |        4039 |
+|    7851 |  0.99 | KRISTINA    | Mike     |        4073 |
+|    7852 |  0.99 | KRISTINA    | Jon      |        4416 |
+|    7853 |  2.99 | KRISTINA    | Mike     |        5105 |
+|    7854 |  5.99 | KRISTINA    | Jon      |        5214 |
+|    7855 |  2.99 | KRISTINA    | Jon      |        5827 |
+|    7856 |  4.99 | KRISTINA    | Jon      |        6816 |
+|    7857 |  4.99 | KRISTINA    | Mike     |        6952 |
+|    7858 |  2.99 | KRISTINA    | Jon      |        7265 |
+|    7859 |  1.99 | KRISTINA    | Mike     |        7650 |
+|    7860 |  4.99 | KRISTINA    | Mike     |        8639 |
+|    7861 |  7.99 | KRISTINA    | Mike     |        9000 |
+|    7862 |  0.99 | KRISTINA    | Mike     |        9413 |
+|    7863 |  3.99 | KRISTINA    | Jon      |       10096 |
+|    7864 |  1.99 | KRISTINA    | Mike     |       10194 |
+|    7865 |  2.99 | KRISTINA    | Mike     |       10901 |
+|    7866 |  6.99 | KRISTINA    | Mike     |       11596 |
+|    7867 |  3.99 | KRISTINA    | Jon      |       12193 |
+|    7868 |  4.99 | KRISTINA    | Jon      |       12778 |
+|    7869 |  1.99 | KRISTINA    | Jon      |       13190 |
+|    7870 |  2.99 | KRISTINA    | Mike     |       13367 |
+|    7871 |  2.99 | KRISTINA    | Jon      |       13687 |
+|    7872 |  4.99 | TONI        | Mike     |          54 |
+|    7873 |  4.99 | TONI        | Jon      |         747 |
+|    7874 |  2.99 | TONI        | Mike     |        1012 |
+|    7875 |  2.99 | TONI        | Mike     |        1191 |
+|    7876 |  2.99 | TONI        | Mike     |        2300 |
+|    7877 |  2.99 | TONI        | Jon      |        3042 |
+|    7878 |  4.99 | TONI        | Jon      |        3512 |
+|    7879 |  3.99 | TONI        | Jon      |        4862 |
+|    7880 |  2.99 | TONI        | Jon      |        5754 |
+|    7881 |  4.99 | TONI        | Jon      |        6516 |
+|    7882 |  2.99 | TONI        | Mike     |        6796 |
+|    7883 |  5.99 | TONI        | Mike     |        7561 |
+|    7884 |  0.99 | TONI        | Jon      |        7564 |
+|    7885 |  0.99 | TONI        | Mike     |        8690 |
+|    7886 |  4.99 | TONI        | Jon      |        8697 |
+|    7887 |  5.99 | TONI        | Mike     |        9165 |
+|    7888 |  5.99 | TONI        | Jon      |        9201 |
+|    7889 |  7.99 | TONI        | Jon      |        9919 |
+|    7890 |  4.99 | TONI        | Mike     |       10463 |
+|    7891 |  0.99 | TONI        | Jon      |       11145 |
+|    7892 |  5.99 | TONI        | Mike     |       13665 |
+|    7893 |  4.99 | TONI        | Jon      |       14241 |
+|    7894 |  3.99 | TONI        | Jon      |       15663 |
+|    7895 |  0.99 | MISTY       | Mike     |         324 |
+|    7896 |  3.99 | MISTY       | Mike     |        1901 |
+|    7897 |  3.99 | MISTY       | Jon      |        2258 |
+|    7898 |  3.99 | MISTY       | Mike     |        2838 |
+|    7899 |  2.99 | MISTY       | Jon      |        3328 |
+|    7900 |  0.99 | MISTY       | Jon      |        3557 |
+|    7901 |  4.99 | MISTY       | Mike     |        4200 |
+|    7902 |  4.99 | MISTY       | Jon      |        5095 |
+|    7903 |  0.99 | MISTY       | Jon      |        5257 |
+|    7904 |  4.99 | MISTY       | Mike     |        5940 |
+|    7905 |  8.99 | MISTY       | Mike     |        6270 |
+|    7906 |  6.99 | MISTY       | Mike     |        6900 |
+|    7907 |  5.99 | MISTY       | Jon      |        7199 |
+|    7908 |  2.99 | MISTY       | Mike     |        7216 |
+|    7909 |  2.99 | MISTY       | Mike     |        7545 |
+|    7910 |  4.99 | MISTY       | Mike     |        7766 |
+|    7911 |  2.99 | MISTY       | Mike     |        8047 |
+|    7912 |  4.99 | MISTY       | Jon      |        8842 |
+|    7913 |  8.99 | MISTY       | Mike     |        8990 |
+|    7914 |  5.99 | MISTY       | Mike     |        9792 |
+|    7915 |  1.99 | MISTY       | Jon      |        9819 |
+|    7916 |  4.99 | MISTY       | Mike     |       11193 |
+|    7917 | 10.99 | MISTY       | Mike     |       12739 |
+|    7918 |  2.99 | MISTY       | Mike     |       13715 |
+|    7919 |  0.99 | MISTY       | Mike     |       14499 |
+|    7920 |  4.99 | MISTY       | Jon      |       14845 |
+|    7921 |  2.99 | MISTY       | Mike     |       15117 |
+|    7922 |  0.99 | MAE         | Jon      |         445 |
+|    7923 |  4.99 | MAE         | Mike     |         924 |
+|    7924 |  8.99 | MAE         | Jon      |        1034 |
+|    7925 |  9.99 | MAE         | Mike     |        1589 |
+|    7926 |  5.99 | MAE         | Mike     |        1829 |
+|    7927 |  4.99 | MAE         | Jon      |        1860 |
+|    7928 |  4.99 | MAE         | Mike     |        2386 |
+|    7929 |  2.99 | MAE         | Jon      |        3025 |
+|    7930 |  1.99 | MAE         | Mike     |        3290 |
+|    7931 |  4.99 | MAE         | Jon      |        3452 |
+|    7932 |  3.99 | MAE         | Mike     |        3906 |
+|    7933 |  0.99 | MAE         | Jon      |        4343 |
+|    7934 |  4.99 | MAE         | Jon      |        4542 |
+|    7935 |  6.99 | MAE         | Jon      |        4944 |
+|    7936 |  3.99 | MAE         | Jon      |        5765 |
+|    7937 |  9.99 | MAE         | Mike     |        6432 |
+|    7938 |  4.99 | MAE         | Jon      |        7607 |
+|    7939 |  4.99 | MAE         | Mike     |        8589 |
+|    7940 |  2.99 | MAE         | Mike     |        8745 |
+|    7941 |  2.99 | MAE         | Jon      |        9123 |
+|    7942 |  1.99 | MAE         | Jon      |       11131 |
+|    7943 |  2.99 | MAE         | Mike     |       11576 |
+|    7944 |  6.99 | MAE         | Jon      |       13013 |
+|    7945 |  2.99 | MAE         | Mike     |       13029 |
+|    7946 |  5.99 | MAE         | Jon      |       13504 |
+|    7947 |  4.99 | MAE         | Mike     |       13817 |
+|    7948 |  6.99 | MAE         | Mike     |       14248 |
+|    7949 |  4.99 | MAE         | Mike     |       15258 |
+|    7950 |  8.99 | MAE         | Mike     |       15402 |
+|    7951 |  7.99 | MAE         | Mike     |       15508 |
+|    7952 |  5.99 | MAE         | Jon      |       15675 |
+|    7953 |  1.99 | SHELLY      | Mike     |         595 |
+|    7954 |  2.99 | SHELLY      | Mike     |        2900 |
+|    7955 |  2.99 | SHELLY      | Jon      |        3330 |
+|    7956 |  4.99 | SHELLY      | Mike     |        3681 |
+|    7957 |  4.99 | SHELLY      | Jon      |        4019 |
+|    7958 |  7.99 | SHELLY      | Mike     |        4786 |
+|    7959 |  5.99 | SHELLY      | Jon      |        6185 |
+|    7960 |  6.99 | SHELLY      | Jon      |        7415 |
+|    7961 |  4.99 | SHELLY      | Mike     |        7765 |
+|    7962 |  4.99 | SHELLY      | Jon      |        8843 |
+|    7963 |  2.99 | SHELLY      | Jon      |        9194 |
+|    7964 |  2.99 | SHELLY      | Mike     |        9522 |
+|    7965 |  0.99 | SHELLY      | Jon      |        9607 |
+|    7966 |  0.99 | SHELLY      | Jon      |       10186 |
+|    7967 |  4.99 | SHELLY      | Jon      |       10220 |
+|    7968 |  6.99 | SHELLY      | Mike     |       10551 |
+|    7969 |  2.99 | SHELLY      | Jon      |       10600 |
+|    7970 |  4.99 | SHELLY      | Jon      |       10642 |
+|    7971 |  2.99 | SHELLY      | Jon      |       11071 |
+|    7972 |  2.99 | SHELLY      | Mike     |       11390 |
+|    7973 |  4.99 | SHELLY      | Jon      |       11875 |
+|    7974 |  2.99 | SHELLY      | Jon      |       11981 |
+|    7975 |  5.99 | SHELLY      | Mike     |       12278 |
+|    7976 |  2.99 | SHELLY      | Mike     |       14474 |
+|    7977 |  7.99 | SHELLY      | Jon      |       14630 |
+|    7978 |  5.99 | SHELLY      | Mike     |       15839 |
+|    7979 |  3.99 | DAISY       | Jon      |         371 |
+|    7980 |  5.99 | DAISY       | Mike     |        1184 |
+|    7981 |  2.99 | DAISY       | Mike     |        1328 |
+|    7982 |  2.99 | DAISY       | Jon      |        1935 |
+|    7983 |  2.99 | DAISY       | Mike     |        2054 |
+|    7984 |  1.99 | DAISY       | Mike     |        2431 |
+|    7985 |  1.99 | DAISY       | Mike     |        2638 |
+|    7986 |  2.99 | DAISY       | Mike     |        2999 |
+|    7987 |  1.99 | DAISY       | Mike     |        3198 |
+|    7988 |  8.99 | DAISY       | Jon      |        3394 |
+|    7989 |  1.99 | DAISY       | Jon      |        3496 |
+|    7990 |  9.99 | DAISY       | Mike     |        3876 |
+|    7991 |  1.99 | DAISY       | Mike     |        4164 |
+|    7992 |  1.99 | DAISY       | Mike     |        4432 |
+|    7993 |  2.99 | DAISY       | Mike     |        5019 |
+|    7994 |  4.99 | DAISY       | Jon      |        5053 |
+|    7995 |  2.99 | DAISY       | Jon      |        5283 |
+|    7996 |  4.99 | DAISY       | Jon      |        5994 |
+|    7997 |  2.99 | DAISY       | Mike     |        6252 |
+|    7998 |  3.99 | DAISY       | Jon      |        6331 |
+|    7999 |  0.99 | DAISY       | Jon      |        8087 |
+|    8000 |  7.99 | DAISY       | Mike     |        8108 |
+|    8001 |  9.99 | DAISY       | Mike     |        8840 |
+|    8002 |  2.99 | DAISY       | Jon      |        8932 |
+|    8003 |  7.99 | DAISY       | Mike     |        9425 |
+|    8004 |  8.99 | DAISY       | Jon      |        9692 |
+|    8005 |  4.99 | DAISY       | Jon      |        9793 |
+|    8006 |  4.99 | DAISY       | Jon      |       10160 |
+|    8007 |  0.99 | DAISY       | Jon      |       10222 |
+|    8008 |  3.99 | DAISY       | Mike     |       10349 |
+|    8009 |  4.99 | DAISY       | Jon      |       11083 |
+|    8010 |  5.99 | DAISY       | Jon      |       11913 |
+|    8011 |  4.99 | DAISY       | Jon      |       12041 |
+|    8012 |  0.99 | DAISY       | Mike     |       12383 |
+|    8013 |  0.99 | DAISY       | Mike     |       14264 |
+|    8014 |  6.99 | DAISY       | Mike     |       14387 |
+|    8015 |  6.99 | DAISY       | Mike     |       14514 |
+|    8016 |  0.99 | DAISY       | Jon      |       15735 |
+|    8017 |  4.99 | RAMONA      | Jon      |         162 |
+|    8018 |  5.99 | RAMONA      | Mike     |         511 |
+|    8019 |  4.99 | RAMONA      | Mike     |         869 |
+|    8020 |  2.99 | RAMONA      | Jon      |         956 |
+|    8021 |  4.99 | RAMONA      | Jon      |        1659 |
+|    8022 |  0.99 | RAMONA      | Mike     |        3034 |
+|    8023 |  0.99 | RAMONA      | Jon      |        3119 |
+|    8024 |  7.99 | RAMONA      | Jon      |        3486 |
+|    8025 |  2.99 | RAMONA      | Mike     |        3810 |
+|    8026 |  4.99 | RAMONA      | Mike     |        4480 |
+|    8027 |  0.99 | RAMONA      | Jon      |        5090 |
+|    8028 |  4.99 | RAMONA      | Mike     |        5589 |
+|    8029 |  4.99 | RAMONA      | Jon      |        6016 |
+|    8030 |  5.99 | RAMONA      | Mike     |        6398 |
+|    8031 |  6.99 | RAMONA      | Mike     |        6967 |
+|    8032 |  4.99 | RAMONA      | Jon      |        7568 |
+|    8033 |  0.99 | RAMONA      | Jon      |        8171 |
+|    8034 |  5.99 | RAMONA      | Mike     |        9249 |
+|    8035 |  2.99 | RAMONA      | Mike     |        9304 |
+|    8036 |  4.99 | RAMONA      | Jon      |       11571 |
+|    8037 |  4.99 | RAMONA      | Jon      |       11825 |
+|    8038 |  3.99 | RAMONA      | Jon      |       12689 |
+|    8039 |  2.99 | RAMONA      | Jon      |       13471 |
+|    8040 |  2.99 | RAMONA      | Mike     |       13702 |
+|    8041 |  4.99 | RAMONA      | Mike     |       13819 |
+|    8042 |  1.99 | RAMONA      | Mike     |       13991 |
+|    8043 |  7.99 | RAMONA      | Jon      |       14571 |
+|    8044 |  2.99 | RAMONA      | Jon      |       15023 |
+|    8045 |  7.99 | RAMONA      | Jon      |       15866 |
+|    8046 |  2.99 | RAMONA      | Mike     |       12009 |
+|    8047 |  0.99 | SHERRI      | Jon      |         143 |
+|    8048 |  3.99 | SHERRI      | Mike     |         954 |
+|    8049 |  3.99 | SHERRI      | Mike     |        1409 |
+|    8050 |  2.99 | SHERRI      | Mike     |        2067 |
+|    8051 |  8.99 | SHERRI      | Mike     |        2202 |
+|    8052 |  2.99 | SHERRI      | Mike     |        2260 |
+|    8053 |  4.99 | SHERRI      | Jon      |        2339 |
+|    8054 |  0.99 | SHERRI      | Mike     |        3582 |
+|    8055 |  2.99 | SHERRI      | Jon      |        4621 |
+|    8056 |  5.99 | SHERRI      | Mike     |        4929 |
+|    8057 |  8.99 | SHERRI      | Mike     |        5743 |
+|    8058 |  2.99 | SHERRI      | Jon      |        6036 |
+|    8059 |  6.99 | SHERRI      | Mike     |        6064 |
+|    8060 |  4.99 | SHERRI      | Mike     |        6156 |
+|    8061 |  2.99 | SHERRI      | Mike     |        6984 |
+|    8062 |  0.99 | SHERRI      | Jon      |        7867 |
+|    8063 |  0.99 | SHERRI      | Mike     |        7933 |
+|    8064 |  2.99 | SHERRI      | Jon      |        9014 |
+|    8065 |  5.99 | SHERRI      | Jon      |        9674 |
+|    8066 |  0.99 | SHERRI      | Mike     |       10153 |
+|    8067 |  4.99 | SHERRI      | Jon      |       10264 |
+|    8068 |  0.99 | SHERRI      | Jon      |       11269 |
+|    8069 |  0.99 | SHERRI      | Jon      |       11413 |
+|    8070 |  4.99 | SHERRI      | Jon      |       11585 |
+|    8071 |  2.99 | SHERRI      | Mike     |       11780 |
+|    8072 |  0.99 | SHERRI      | Mike     |       11784 |
+|    8073 | 10.99 | SHERRI      | Mike     |       12472 |
+|    8074 |  2.99 | SHERRI      | Mike     |       13330 |
+|    8075 |  4.99 | SHERRI      | Jon      |       13721 |
+|    8076 |  1.99 | SHERRI      | Mike     |       13888 |
+|    8077 |  5.99 | SHERRI      | Mike     |       14403 |
+|    8078 |  2.99 | SHERRI      | Jon      |       15582 |
+|    8079 |  4.99 | SHERRI      | Mike     |       15711 |
+|    8080 |  3.99 | ERIKA       | Mike     |         383 |
+|    8081 |  4.99 | ERIKA       | Jon      |        1454 |
+|    8082 |  3.99 | ERIKA       | Jon      |        2385 |
+|    8083 |  4.99 | ERIKA       | Jon      |        3095 |
+|    8084 |  4.99 | ERIKA       | Jon      |        3400 |
+|    8085 |  0.99 | ERIKA       | Jon      |        3479 |
+|    8086 |  2.99 | ERIKA       | Mike     |        3728 |
+|    8087 |  2.99 | ERIKA       | Jon      |        4291 |
+|    8088 |  3.99 | ERIKA       | Mike     |        4936 |
+|    8089 |  2.99 | ERIKA       | Jon      |        5166 |
+|    8090 |  2.99 | ERIKA       | Mike     |        5247 |
+|    8091 |  0.99 | ERIKA       | Jon      |        6802 |
+|    8092 |  0.99 | ERIKA       | Jon      |        7802 |
+|    8093 |  7.99 | ERIKA       | Mike     |        7869 |
+|    8094 |  5.99 | ERIKA       | Jon      |        8737 |
+|    8095 |  6.99 | ERIKA       | Jon      |       10248 |
+|    8096 |  0.99 | ERIKA       | Mike     |       11070 |
+|    8097 |  6.99 | ERIKA       | Jon      |       11288 |
+|    8098 |  0.99 | ERIKA       | Jon      |       12076 |
+|    8099 |  8.99 | ERIKA       | Mike     |       12765 |
+|    8100 |  0.99 | ERIKA       | Mike     |       13172 |
+|    8101 |  4.99 | ERIKA       | Mike     |       13244 |
+|    8102 |  0.99 | ERIKA       | Jon      |       14473 |
+|    8103 |  3.99 | ERIKA       | Mike     |       15245 |
+|    8104 |  4.99 | ERIKA       | Jon      |       15262 |
+|    8105 |  4.99 | ERIKA       | Mike     |       15643 |
+|    8106 |  5.99 | JAMES       | Mike     |         332 |
+|    8107 |  8.99 | JAMES       | Jon      |         606 |
+|    8108 |  8.99 | JAMES       | Mike     |        1650 |
+|    8109 |  4.99 | JAMES       | Jon      |        2664 |
+|    8110 |  2.99 | JAMES       | Mike     |        2774 |
+|    8111 |  4.99 | JAMES       | Jon      |        2791 |
+|    8112 |  0.99 | JAMES       | Mike     |        3074 |
+|    8113 |  2.99 | JAMES       | Jon      |        3223 |
+|    8114 |  5.99 | JAMES       | Mike     |        3288 |
+|    8115 |  0.99 | JAMES       | Jon      |        3497 |
+|    8116 |  5.99 | JAMES       | Jon      |        4153 |
+|    8117 |  2.99 | JAMES       | Mike     |        4350 |
+|    8118 |  1.99 | JAMES       | Jon      |        5033 |
+|    8119 |  2.99 | JAMES       | Mike     |        5642 |
+|    8120 |  0.99 | JAMES       | Jon      |        6732 |
+|    8121 |  7.99 | JAMES       | Mike     |        6853 |
+|    8122 |  4.99 | JAMES       | Mike     |        7264 |
+|    8123 |  2.99 | JAMES       | Mike     |        7746 |
+|    8124 |  9.99 | JAMES       | Jon      |        7862 |
+|    8125 |  2.99 | JAMES       | Mike     |        9520 |
+|    8126 |  0.99 | JAMES       | Mike     |       10201 |
+|    8127 |  2.99 | JAMES       | Jon      |       10440 |
+|    8128 |  6.99 | JAMES       | Mike     |       11629 |
+|    8129 |  5.99 | JAMES       | Mike     |       11746 |
+|    8130 |  0.99 | JAMES       | Mike     |       11998 |
+|    8131 |  4.99 | JAMES       | Mike     |       13069 |
+|    8132 |  0.99 | JAMES       | Jon      |       14208 |
+|    8133 |  3.99 | JAMES       | Mike     |       14548 |
+|    8134 |  4.99 | JAMES       | Jon      |       14889 |
+|    8135 |  6.99 | JAMES       | Jon      |       14898 |
+|    8136 |  0.99 | JOHN        | Jon      |         457 |
+|    8137 |  3.99 | JOHN        | Mike     |         780 |
+|    8138 |  4.99 | JOHN        | Mike     |        1111 |
+|    8139 |  0.99 | JOHN        | Jon      |        1381 |
+|    8140 |  2.99 | JOHN        | Mike     |        3177 |
+|    8141 |  0.99 | JOHN        | Mike     |        3775 |
+|    8142 |  0.99 | JOHN        | Mike     |        4030 |
+|    8143 |  2.99 | JOHN        | Jon      |        5562 |
+|    8144 | 10.99 | JOHN        | Mike     |        5705 |
+|    8145 |  4.99 | JOHN        | Jon      |        6111 |
+|    8146 |  5.99 | JOHN        | Mike     |        6822 |
+|    8147 |  4.99 | JOHN        | Mike     |        6998 |
+|    8148 |  4.99 | JOHN        | Mike     |        7815 |
+|    8149 |  6.99 | JOHN        | Mike     |        8117 |
+|    8150 |  6.99 | JOHN        | Mike     |        8210 |
+|    8151 |  3.99 | JOHN        | Mike     |        8283 |
+|    8152 |  0.99 | JOHN        | Mike     |        9078 |
+|    8153 |  2.99 | JOHN        | Jon      |        9127 |
+|    8154 |  0.99 | JOHN        | Jon      |        9791 |
+|    8155 |  4.99 | JOHN        | Mike     |       10977 |
+|    8156 |  2.99 | JOHN        | Jon      |       12484 |
+|    8157 |  5.99 | JOHN        | Jon      |       12644 |
+|    8158 |  3.99 | JOHN        | Jon      |       13257 |
+|    8159 |  0.99 | JOHN        | Mike     |       13296 |
+|    8160 |  6.99 | JOHN        | Jon      |       13499 |
+|    8161 |  5.99 | JOHN        | Mike     |       13717 |
+|    8162 |  7.99 | JOHN        | Mike     |       14674 |
+|    8163 |  9.99 | JOHN        | Mike     |       14709 |
+|    8164 |  2.99 | JOHN        | Jon      |       15051 |
+|    8165 |  5.99 | JOHN        | Jon      |       15811 |
+|    8166 |  4.99 | JOHN        | Mike     |       15695 |
+|    8167 |  4.99 | ROBERT      | Jon      |          27 |
+|    8168 |  5.99 | ROBERT      | Jon      |         227 |
+|    8169 |  0.99 | ROBERT      | Mike     |         955 |
+|    8170 |  0.99 | ROBERT      | Mike     |        1853 |
+|    8171 |  4.99 | ROBERT      | Mike     |        2611 |
+|    8172 |  2.99 | ROBERT      | Jon      |        2925 |
+|    8173 |  4.99 | ROBERT      | Jon      |        4316 |
+|    8174 |  3.99 | ROBERT      | Jon      |        4834 |
+|    8175 |  6.99 | ROBERT      | Mike     |        5119 |
+|    8176 |  4.99 | ROBERT      | Jon      |        5511 |
+|    8177 |  2.99 | ROBERT      | Jon      |        5730 |
+|    8178 |  2.99 | ROBERT      | Jon      |        5807 |
+|    8179 |  6.99 | ROBERT      | Jon      |        6833 |
+|    8180 |  4.99 | ROBERT      | Jon      |        7318 |
+|    8181 |  4.99 | ROBERT      | Jon      |        7818 |
+|    8182 |  4.99 | ROBERT      | Jon      |        9435 |
+|    8183 |  0.99 | ROBERT      | Mike     |       10883 |
+|    8184 |  5.99 | ROBERT      | Jon      |       13183 |
+|    8185 |  2.99 | ROBERT      | Jon      |       13633 |
+|    8186 | 10.99 | ROBERT      | Mike     |       15201 |
+|    8187 |  1.99 | ROBERT      | Mike     |       15268 |
+|    8188 |  4.99 | MICHAEL     | Jon      |          38 |
+|    8189 |  5.99 | MICHAEL     | Jon      |          92 |
+|    8190 |  2.99 | MICHAEL     | Mike     |        1231 |
+|    8191 |  4.99 | MICHAEL     | Jon      |        4676 |
+|    8192 |  0.99 | MICHAEL     | Jon      |        5498 |
+|    8193 |  2.99 | MICHAEL     | Jon      |        5682 |
+|    8194 |  0.99 | MICHAEL     | Jon      |        5709 |
+|    8195 |  4.99 | MICHAEL     | Jon      |        5821 |
+|    8196 |  7.99 | MICHAEL     | Jon      |        6623 |
+|    8197 |  0.99 | MICHAEL     | Mike     |        7183 |
+|    8198 |  6.99 | MICHAEL     | Mike     |        7411 |
+|    8199 |  6.99 | MICHAEL     | Mike     |        8363 |
+|    8200 |  0.99 | MICHAEL     | Jon      |        8646 |
+|    8201 |  2.99 | MICHAEL     | Mike     |        8795 |
+|    8202 |  7.99 | MICHAEL     | Mike     |        9146 |
+|    8203 |  2.99 | MICHAEL     | Jon      |        9358 |
+|    8204 |  8.99 | MICHAEL     | Mike     |        9374 |
+|    8205 |  5.99 | MICHAEL     | Jon      |        9581 |
+|    8206 |  0.99 | MICHAEL     | Jon      |       10329 |
+|    8207 |  7.99 | MICHAEL     | Mike     |       12126 |
+|    8208 |  4.99 | MICHAEL     | Jon      |       12516 |
+|    8209 |  2.99 | MICHAEL     | Mike     |       12903 |
+|    8210 |  2.99 | MICHAEL     | Mike     |       13916 |
+|    8211 |  4.99 | MICHAEL     | Mike     |       14120 |
+|    8212 |  3.99 | MICHAEL     | Jon      |       14247 |
+|    8213 |  2.99 | MICHAEL     | Jon      |       15578 |
+|    8214 |  5.99 | MICHAEL     | Mike     |       15622 |
+|    8215 |  0.99 | MICHAEL     | Jon      |       15734 |
+|    8216 |  6.99 | MICHAEL     | Jon      |       15987 |
+|    8217 |  0.99 | WILLIAM     | Mike     |         265 |
+|    8218 |  2.99 | WILLIAM     | Mike     |         871 |
+|    8219 |  4.99 | WILLIAM     | Jon      |        1050 |
+|    8220 |  4.99 | WILLIAM     | Jon      |        1970 |
+|    8221 |  8.99 | WILLIAM     | Mike     |        2223 |
+|    8222 |  3.99 | WILLIAM     | Mike     |        3077 |
+|    8223 |  2.99 | WILLIAM     | Mike     |        3107 |
+|    8224 |  4.99 | WILLIAM     | Mike     |        5140 |
+|    8225 |  4.99 | WILLIAM     | Mike     |        6205 |
+|    8226 |  4.99 | WILLIAM     | Jon      |        6219 |
+|    8227 |  4.99 | WILLIAM     | Mike     |        6464 |
+|    8228 |  4.99 | WILLIAM     | Mike     |        7023 |
+|    8229 |  2.99 | WILLIAM     | Jon      |        7502 |
+|    8230 |  0.99 | WILLIAM     | Mike     |        8409 |
+|    8231 |  6.99 | WILLIAM     | Jon      |        8734 |
+|    8232 |  0.99 | WILLIAM     | Jon      |        8764 |
+|    8233 |  2.99 | WILLIAM     | Jon      |       10209 |
+|    8234 |  4.99 | WILLIAM     | Mike     |       11253 |
+|    8235 |  2.99 | WILLIAM     | Jon      |       11673 |
+|    8236 |  2.99 | WILLIAM     | Jon      |       11993 |
+|    8237 |  0.99 | WILLIAM     | Jon      |       12117 |
+|    8238 |  0.99 | WILLIAM     | Mike     |       12365 |
+|    8239 |  2.99 | WILLIAM     | Jon      |       12473 |
+|    8240 |  5.99 | WILLIAM     | Mike     |       14750 |
+|    8241 |  4.99 | WILLIAM     | Jon      |       14795 |
+|    8242 |  3.99 | WILLIAM     | Mike     |       15511 |
+|    8243 | 10.99 | DAVID       | Mike     |         135 |
+|    8244 |  0.99 | DAVID       | Mike     |         415 |
+|    8245 |  2.99 | DAVID       | Jon      |         937 |
+|    8246 |  6.99 | DAVID       | Mike     |        1414 |
+|    8247 |  4.99 | DAVID       | Jon      |        1525 |
+|    8248 |  3.99 | DAVID       | Mike     |        2039 |
+|    8249 |  4.99 | DAVID       | Jon      |        2902 |
+|    8250 |  6.99 | DAVID       | Mike     |        4466 |
+|    8251 |  8.99 | DAVID       | Jon      |        4812 |
+|    8252 |  2.99 | DAVID       | Mike     |        5411 |
+|    8253 |  4.99 | DAVID       | Mike     |        5712 |
+|    8254 |  3.99 | DAVID       | Jon      |        5749 |
+|    8255 |  0.99 | DAVID       | Jon      |        5795 |
+|    8256 |  0.99 | DAVID       | Jon      |        6107 |
+|    8257 |  4.99 | DAVID       | Mike     |        6737 |
+|    8258 |  4.99 | DAVID       | Jon      |        7551 |
+|    8259 |  4.99 | DAVID       | Jon      |        8055 |
+|    8260 |  0.99 | DAVID       | Mike     |        9930 |
+|    8261 |  6.99 | DAVID       | Mike     |        9992 |
+|    8262 |  0.99 | DAVID       | Mike     |       10631 |
+|    8263 |  4.99 | DAVID       | Jon      |       11983 |
+|    8264 |  5.99 | DAVID       | Mike     |       12540 |
+|    8265 |  3.99 | DAVID       | Jon      |       13911 |
+|    8266 |  0.99 | DAVID       | Mike     |       14023 |
+|    8267 |  4.99 | DAVID       | Mike     |       14899 |
+|    8268 |  4.99 | DAVID       | Mike     |       14945 |
+|    8269 |  2.99 | RICHARD     | Jon      |          69 |
+|    8270 |  4.99 | RICHARD     | Mike     |        1574 |
+|    8271 |  0.99 | RICHARD     | Jon      |        1884 |
+|    8272 | 11.99 | RICHARD     | Mike     |        2166 |
+|    8273 |  0.99 | RICHARD     | Mike     |        3387 |
+|    8274 |  4.99 | RICHARD     | Jon      |        4260 |
+|    8275 |  2.99 | RICHARD     | Mike     |        4638 |
+|    8276 |  0.99 | RICHARD     | Jon      |        5041 |
+|    8277 |  2.99 | RICHARD     | Mike     |        5052 |
+|    8278 |  4.99 | RICHARD     | Jon      |        5582 |
+|    8279 |  8.99 | RICHARD     | Mike     |        5745 |
+|    8280 |  7.99 | RICHARD     | Mike     |        6134 |
+|    8281 |  0.99 | RICHARD     | Jon      |        6619 |
+|    8282 |  4.99 | RICHARD     | Jon      |        8865 |
+|    8283 |  4.99 | RICHARD     | Jon      |        9119 |
+|    8284 |  4.99 | RICHARD     | Jon      |       10426 |
+|    8285 |  4.99 | RICHARD     | Jon      |       10929 |
+|    8286 |  2.99 | RICHARD     | Mike     |       10981 |
+|    8287 |  5.99 | RICHARD     | Jon      |       11035 |
+|    8288 |  3.99 | RICHARD     | Jon      |       11809 |
+|    8289 |  3.99 | RICHARD     | Jon      |       12592 |
+|    8290 |  0.99 | RICHARD     | Jon      |       12846 |
+|    8291 |  4.99 | RICHARD     | Mike     |       13782 |
+|    8292 |  2.99 | RICHARD     | Jon      |       15417 |
+|    8293 |  6.99 | RICHARD     | Mike     |       15612 |
+|    8294 |  3.99 | CHARLES     | Jon      |         375 |
+|    8295 |  6.99 | CHARLES     | Jon      |         672 |
+|    8296 |  0.99 | CHARLES     | Jon      |        1172 |
+|    8297 |  6.99 | CHARLES     | Jon      |        2836 |
+|    8298 |  6.99 | CHARLES     | Mike     |        3814 |
+|    8299 |  5.99 | CHARLES     | Jon      |        4484 |
+|    8300 |  1.99 | CHARLES     | Jon      |        4596 |
+|    8301 |  2.99 | CHARLES     | Jon      |        5581 |
+|    8302 |  2.99 | CHARLES     | Jon      |        6868 |
+|    8303 |  4.99 | CHARLES     | Mike     |        6953 |
+|    8304 |  6.99 | CHARLES     | Mike     |        7225 |
+|    8305 |  4.99 | CHARLES     | Mike     |        7232 |
+|    8306 |  2.99 | CHARLES     | Jon      |        7701 |
+|    8307 |  0.99 | CHARLES     | Jon      |        8620 |
+|    8308 |  0.99 | CHARLES     | Mike     |        8702 |
+|    8309 |  4.99 | CHARLES     | Jon      |        9242 |
+|    8310 |  4.99 | CHARLES     | Jon      |        9395 |
+|    8311 |  0.99 | CHARLES     | Mike     |        9774 |
+|    8312 |  6.99 | CHARLES     | Mike     |       10202 |
+|    8313 |  5.99 | CHARLES     | Jon      |       10893 |
+|    8314 |  4.99 | CHARLES     | Jon      |       11142 |
+|    8315 |  0.99 | CHARLES     | Mike     |       11440 |
+|    8316 |  6.99 | CHARLES     | Jon      |       11674 |
+|    8317 |  0.99 | CHARLES     | Jon      |       11776 |
+|    8318 |  7.99 | CHARLES     | Mike     |       12225 |
+|    8319 |  2.99 | CHARLES     | Mike     |       12989 |
+|    8320 |  4.99 | CHARLES     | Mike     |       13686 |
+|    8321 |  5.99 | CHARLES     | Jon      |       13725 |
+|    8322 |  0.99 | CHARLES     | Mike     |       13873 |
+|    8323 |  4.99 | CHARLES     | Mike     |       13996 |
+|    8324 |  2.99 | CHARLES     | Mike     |       15457 |
+|    8325 |  7.99 | CHARLES     | Jon      |       15868 |
+|    8326 |  4.99 | JOSEPH      | Jon      |         413 |
+|    8327 |  4.99 | JOSEPH      | Mike     |         535 |
+|    8328 |  1.99 | JOSEPH      | Mike     |         614 |
+|    8329 |  6.99 | JOSEPH      | Mike     |         970 |
+|    8330 |  2.99 | JOSEPH      | Jon      |        2152 |
+|    8331 |  0.99 | JOSEPH      | Mike     |        2167 |
+|    8332 |  4.99 | JOSEPH      | Mike     |        2787 |
+|    8333 |  2.99 | JOSEPH      | Mike     |        2881 |
+|    8334 |  5.99 | JOSEPH      | Jon      |        3057 |
+|    8335 |  4.99 | JOSEPH      | Mike     |        3209 |
+|    8336 |  6.99 | JOSEPH      | Mike     |        3962 |
+|    8337 |  4.99 | JOSEPH      | Mike     |        3985 |
+|    8338 |  2.99 | JOSEPH      | Mike     |        4522 |
+|    8339 |  4.99 | JOSEPH      | Mike     |        4868 |
+|    8340 |  3.99 | JOSEPH      | Mike     |        5871 |
+|    8341 |  6.99 | JOSEPH      | Jon      |        6125 |
+|    8342 |  0.99 | JOSEPH      | Mike     |        6256 |
+|    8343 | 10.99 | JOSEPH      | Mike     |        6991 |
+|    8344 |  2.99 | JOSEPH      | Mike     |        7536 |
+|    8345 |  3.99 | JOSEPH      | Mike     |        7760 |
+|    8346 |  0.99 | JOSEPH      | Mike     |        7929 |
+|    8347 |  6.99 | JOSEPH      | Mike     |        8647 |
+|    8348 |  4.99 | JOSEPH      | Mike     |       10135 |
+|    8349 |  0.99 | JOSEPH      | Mike     |       10374 |
+|    8350 |  2.99 | JOSEPH      | Mike     |       10745 |
+|    8351 |  7.99 | JOSEPH      | Mike     |       11491 |
+|    8352 |  4.99 | JOSEPH      | Jon      |       12391 |
+|    8353 |  6.99 | JOSEPH      | Jon      |       13365 |
+|    8354 |  0.99 | JOSEPH      | Mike     |       14231 |
+|    8355 |  4.99 | JOSEPH      | Jon      |       15515 |
+|    8356 |  3.99 | THOMAS      | Jon      |         589 |
+|    8357 |  0.99 | THOMAS      | Mike     |        2037 |
+|    8358 |  0.99 | THOMAS      | Mike     |        2094 |
+|    8359 |  4.99 | THOMAS      | Jon      |        2168 |
+|    8360 |  7.99 | THOMAS      | Mike     |        2346 |
+|    8361 |  4.99 | THOMAS      | Jon      |        2448 |
+|    8362 |  3.99 | THOMAS      | Mike     |        4002 |
+|    8363 |  8.99 | THOMAS      | Mike     |        4285 |
+|    8364 |  2.99 | THOMAS      | Mike     |        5946 |
+|    8365 |  0.99 | THOMAS      | Jon      |        8869 |
+|    8366 |  2.99 | THOMAS      | Mike     |        9479 |
+|    8367 |  7.99 | THOMAS      | Mike     |        9746 |
+|    8368 |  2.99 | THOMAS      | Mike     |       10571 |
+|    8369 |  0.99 | THOMAS      | Jon      |       10797 |
+|    8370 |  4.99 | THOMAS      | Mike     |       10819 |
+|    8371 |  2.99 | THOMAS      | Mike     |       11765 |
+|    8372 |  4.99 | THOMAS      | Mike     |       11972 |
+|    8373 |  3.99 | THOMAS      | Jon      |       12567 |
+|    8374 |  6.99 | THOMAS      | Mike     |       12590 |
+|    8375 |  6.99 | THOMAS      | Jon      |       12838 |
+|    8376 |  2.99 | THOMAS      | Mike     |       13843 |
+|    8377 |  2.99 | THOMAS      | Jon      |       14946 |
+|    8378 |  4.99 | THOMAS      | Mike     |       15243 |
+|    8379 |  4.99 | THOMAS      | Jon      |       15493 |
+|    8380 |  2.99 | THOMAS      | Jon      |       15820 |
+|    8381 |  6.99 | CHRISTOPHER | Jon      |         218 |
+|    8382 |  0.99 | CHRISTOPHER | Jon      |         723 |
+|    8383 |  4.99 | CHRISTOPHER | Mike     |        1837 |
+|    8384 |  9.99 | CHRISTOPHER | Jon      |        2560 |
+|    8385 |  3.99 | CHRISTOPHER | Jon      |        2644 |
+|    8386 |  6.99 | CHRISTOPHER | Jon      |        2688 |
+|    8387 |  4.99 | CHRISTOPHER | Jon      |        3837 |
+|    8388 |  7.99 | CHRISTOPHER | Jon      |        3896 |
+|    8389 |  4.99 | CHRISTOPHER | Jon      |        4172 |
+|    8390 |  4.99 | CHRISTOPHER | Mike     |        4540 |
+|    8391 |  8.99 | CHRISTOPHER | Jon      |        5305 |
+|    8392 |  4.99 | CHRISTOPHER | Mike     |        5980 |
+|    8393 |  4.99 | CHRISTOPHER | Jon      |        6480 |
+|    8394 |  5.99 | CHRISTOPHER | Jon      |        7214 |
+|    8395 |  4.99 | CHRISTOPHER | Jon      |        7722 |
+|    8396 |  5.99 | CHRISTOPHER | Mike     |        7846 |
+|    8397 |  4.99 | CHRISTOPHER | Mike     |        8341 |
+|    8398 |  2.99 | CHRISTOPHER | Mike     |        8501 |
+|    8399 |  2.99 | CHRISTOPHER | Mike     |        8681 |
+|    8400 |  2.99 | CHRISTOPHER | Mike     |        8917 |
+|    8401 |  2.99 | CHRISTOPHER | Jon      |        9945 |
+|    8402 |  0.99 | CHRISTOPHER | Mike     |        9949 |
+|    8403 |  2.99 | CHRISTOPHER | Mike     |       10458 |
+|    8404 |  0.99 | CHRISTOPHER | Mike     |       10728 |
+|    8405 |  2.99 | CHRISTOPHER | Mike     |       10818 |
+|    8406 |  6.99 | CHRISTOPHER | Jon      |       11964 |
+|    8407 |  5.99 | CHRISTOPHER | Jon      |       13021 |
+|    8408 |  0.99 | CHRISTOPHER | Jon      |       13502 |
+|    8409 |  4.99 | CHRISTOPHER | Jon      |       13909 |
+|    8410 |  5.99 | CHRISTOPHER | Jon      |       14846 |
+|    8411 |  4.99 | CHRISTOPHER | Jon      |       15422 |
+|    8412 |  0.99 | DANIEL      | Jon      |         104 |
+|    8413 |  4.99 | DANIEL      | Jon      |        1162 |
+|    8414 |  2.99 | DANIEL      | Jon      |        1333 |
+|    8415 |  3.99 | DANIEL      | Jon      |        1918 |
+|    8416 |  6.99 | DANIEL      | Jon      |        2088 |
+|    8417 |  5.99 | DANIEL      | Mike     |        2480 |
+|    8418 |  2.99 | DANIEL      | Mike     |        2618 |
+|    8419 | 10.99 | DANIEL      | Jon      |        3830 |
+|    8420 |  0.99 | DANIEL      | Mike     |        4072 |
+|    8421 |  5.99 | DANIEL      | Mike     |        5621 |
+|    8422 |  0.99 | DANIEL      | Jon      |        5836 |
+|    8423 |  5.99 | DANIEL      | Mike     |        7648 |
+|    8424 |  5.99 | DANIEL      | Jon      |        8637 |
+|    8425 |  7.99 | DANIEL      | Mike     |        8981 |
+|    8426 |  2.99 | DANIEL      | Mike     |        9536 |
+|    8427 |  2.99 | DANIEL      | Jon      |       11137 |
+|    8428 |  4.99 | DANIEL      | Jon      |       12500 |
+|    8429 |  7.99 | DANIEL      | Jon      |       12710 |
+|    8430 |  4.99 | DANIEL      | Mike     |       12929 |
+|    8431 |  5.99 | DANIEL      | Mike     |       14972 |
+|    8432 |  5.99 | PAUL        | Jon      |         274 |
+|    8433 |  6.99 | PAUL        | Jon      |         544 |
+|    8434 |  2.99 | PAUL        | Mike     |         952 |
+|    8435 |  3.99 | PAUL        | Jon      |         990 |
+|    8436 |  6.99 | PAUL        | Jon      |        1128 |
+|    8437 |  4.99 | PAUL        | Mike     |        1622 |
+|    8438 |  0.99 | PAUL        | Jon      |        1955 |
+|    8439 |  6.99 | PAUL        | Jon      |        2967 |
+|    8440 |  3.99 | PAUL        | Jon      |        4836 |
+|    8441 |  5.99 | PAUL        | Jon      |        5224 |
+|    8442 |  4.99 | PAUL        | Jon      |        6419 |
+|    8443 |  6.99 | PAUL        | Jon      |        8167 |
+|    8444 |  2.99 | PAUL        | Mike     |        8473 |
+|    8445 |  6.99 | PAUL        | Mike     |        9503 |
+|    8446 |  8.99 | PAUL        | Jon      |        9882 |
+|    8447 |  4.99 | PAUL        | Mike     |       10134 |
+|    8448 |  4.99 | PAUL        | Jon      |       10448 |
+|    8449 |  2.99 | PAUL        | Mike     |       12997 |
+|    8450 |  0.99 | PAUL        | Jon      |       13310 |
+|    8451 |  1.99 | PAUL        | Jon      |       13423 |
+|    8452 |  4.99 | PAUL        | Jon      |       14517 |
+|    8453 |  9.99 | PAUL        | Jon      |       15826 |
+|    8454 |  8.99 | PAUL        | Mike     |       16020 |
+|    8455 |  4.99 | MARK        | Jon      |         229 |
+|    8456 |  0.99 | MARK        | Mike     |         530 |
+|    8457 |  4.99 | MARK        | Jon      |        1049 |
+|    8458 |  6.99 | MARK        | Jon      |        1079 |
+|    8459 |  0.99 | MARK        | Jon      |        1419 |
+|    8460 |  3.99 | MARK        | Jon      |        3457 |
+|    8461 |  2.99 | MARK        | Mike     |        3766 |
+|    8462 |  1.99 | MARK        | Mike     |        3792 |
+|    8463 |  3.99 | MARK        | Mike     |        4647 |
+|    8464 |  5.99 | MARK        | Mike     |        5031 |
+|    8465 |  2.99 | MARK        | Jon      |        6751 |
+|    8466 |  2.99 | MARK        | Mike     |        6866 |
+|    8467 |  4.99 | MARK        | Mike     |        8137 |
+|    8468 |  6.99 | MARK        | Mike     |        8412 |
+|    8469 |  4.99 | MARK        | Mike     |        8721 |
+|    8470 |  6.99 | MARK        | Mike     |        9016 |
+|    8471 |  3.99 | MARK        | Mike     |        9154 |
+|    8472 |  2.99 | MARK        | Jon      |       10858 |
+|    8473 |  0.99 | MARK        | Jon      |       11248 |
+|    8474 |  5.99 | MARK        | Jon      |       11879 |
+|    8475 |  2.99 | MARK        | Mike     |       12186 |
+|    8476 |  0.99 | MARK        | Mike     |       12945 |
+|    8477 |  2.99 | MARK        | Jon      |       14362 |
+|    8478 |  3.99 | MARK        | Mike     |       14504 |
+|    8479 |  4.99 | MARK        | Mike     |       15100 |
+|    8480 |  6.99 | MARK        | Mike     |       15882 |
+|    8481 |  4.99 | DONALD      | Jon      |         669 |
+|    8482 |  2.99 | DONALD      | Jon      |         712 |
+|    8483 |  0.99 | DONALD      | Jon      |         781 |
+|    8484 |  0.99 | DONALD      | Jon      |         843 |
+|    8485 |  2.99 | DONALD      | Jon      |        1312 |
+|    8486 |  7.99 | DONALD      | Mike     |        2617 |
+|    8487 |  4.99 | DONALD      | Jon      |        2711 |
+|    8488 |  2.99 | DONALD      | Jon      |        4552 |
+|    8489 |  5.99 | DONALD      | Mike     |        5255 |
+|    8490 |  2.99 | DONALD      | Mike     |        6384 |
+|    8491 |  0.99 | DONALD      | Jon      |        7294 |
+|    8492 |  4.99 | DONALD      | Jon      |        8381 |
+|    8493 |  3.99 | DONALD      | Mike     |        8970 |
+|    8494 |  2.99 | DONALD      | Jon      |        9836 |
+|    8495 |  5.99 | DONALD      | Jon      |       10237 |
+|    8496 |  7.99 | DONALD      | Jon      |       10933 |
+|    8497 |  2.99 | DONALD      | Jon      |       11854 |
+|    8498 |  2.99 | DONALD      | Jon      |       12011 |
+|    8499 |  2.99 | DONALD      | Jon      |       14250 |
+|    8500 |  4.99 | DONALD      | Mike     |       14325 |
+|    8501 |  2.99 | DONALD      | Jon      |       15081 |
+|    8502 |  0.99 | DONALD      | Mike     |       15340 |
+|    8503 |  6.99 | DONALD      | Jon      |       15569 |
+|    8504 |  5.99 | GEORGE      | Mike     |          80 |
+|    8505 |  4.99 | GEORGE      | Mike     |         440 |
+|    8506 |  3.99 | GEORGE      | Mike     |        1598 |
+|    8507 |  2.99 | GEORGE      | Mike     |        1624 |
+|    8508 |  0.99 | GEORGE      | Mike     |        3517 |
+|    8509 |  2.99 | GEORGE      | Mike     |        3656 |
+|    8510 |  0.99 | GEORGE      | Mike     |        3808 |
+|    8511 |  0.99 | GEORGE      | Jon      |        4386 |
+|    8512 |  4.99 | GEORGE      | Jon      |        5241 |
+|    8513 |  0.99 | GEORGE      | Jon      |        5856 |
+|    8514 |  5.99 | GEORGE      | Mike     |        6192 |
+|    8515 |  2.99 | GEORGE      | Mike     |        6666 |
+|    8516 |  3.99 | GEORGE      | Mike     |        6763 |
+|    8517 |  4.99 | GEORGE      | Jon      |        7004 |
+|    8518 |  2.99 | GEORGE      | Mike     |        7276 |
+|    8519 |  6.99 | GEORGE      | Jon      |        8022 |
+|    8520 |  3.99 | GEORGE      | Mike     |        8073 |
+|    8521 |  0.99 | GEORGE      | Jon      |        8105 |
+|    8522 |  6.99 | GEORGE      | Jon      |        8328 |
+|    8523 |  4.99 | GEORGE      | Jon      |        8644 |
+|    8524 |  3.99 | GEORGE      | Jon      |        9191 |
+|    8525 |  6.99 | GEORGE      | Jon      |        9318 |
+|    8526 |  3.99 | GEORGE      | Jon      |       11908 |
+|    8527 |  0.99 | GEORGE      | Mike     |       12434 |
+|    8528 |  3.99 | GEORGE      | Jon      |       13120 |
+|    8529 |  2.99 | GEORGE      | Mike     |       13265 |
+|    8530 |  3.99 | GEORGE      | Jon      |       13553 |
+|    8531 |  4.99 | GEORGE      | Jon      |       14145 |
+|    8532 |  4.99 | GEORGE      | Mike     |       14409 |
+|    8533 |  4.99 | GEORGE      | Jon      |       14682 |
+|    8534 |  4.99 | GEORGE      | Jon      |       14815 |
+|    8535 |  5.99 | GEORGE      | Jon      |       14873 |
+|    8536 |  3.99 | GEORGE      | Jon      |       16021 |
+|    8537 |  8.99 | KENNETH     | Mike     |         537 |
+|    8538 |  4.99 | KENNETH     | Mike     |         551 |
+|    8539 |  2.99 | KENNETH     | Mike     |        1701 |
+|    8540 |  2.99 | KENNETH     | Mike     |        4021 |
+|    8541 |  4.99 | KENNETH     | Mike     |        4992 |
+|    8542 |  6.99 | KENNETH     | Jon      |        5126 |
+|    8543 |  4.99 | KENNETH     | Mike     |        6661 |
+|    8544 |  4.99 | KENNETH     | Mike     |        6894 |
+|    8545 |  5.99 | KENNETH     | Mike     |        8416 |
+|    8546 |  6.99 | KENNETH     | Jon      |        8677 |
+|    8547 |  9.99 | KENNETH     | Jon      |        9735 |
+|    8548 |  0.99 | KENNETH     | Jon      |       11254 |
+|    8549 |  2.99 | KENNETH     | Jon      |       12155 |
+|    8550 |  2.99 | KENNETH     | Mike     |       14106 |
+|    8551 |  2.99 | KENNETH     | Jon      |       14162 |
+|    8552 |  6.99 | KENNETH     | Mike     |       15504 |
+|    8553 |  2.99 | KENNETH     | Jon      |       14426 |
+|    8554 |  4.99 | STEVEN      | Mike     |          16 |
+|    8555 |  8.99 | STEVEN      | Mike     |         644 |
+|    8556 |  1.99 | STEVEN      | Mike     |        1065 |
+|    8557 |  4.99 | STEVEN      | Mike     |        1317 |
+|    8558 |  4.99 | STEVEN      | Jon      |        1350 |
+|    8559 |  4.99 | STEVEN      | Mike     |        2032 |
+|    8560 |  4.99 | STEVEN      | Jon      |        2338 |
+|    8561 |  1.99 | STEVEN      | Jon      |        2491 |
+|    8562 |  4.99 | STEVEN      | Mike     |        2820 |
+|    8563 |  8.99 | STEVEN      | Jon      |        3373 |
+|    8564 |  2.99 | STEVEN      | Mike     |        4379 |
+|    8565 |  3.99 | STEVEN      | Jon      |        5102 |
+|    8566 |  7.99 | STEVEN      | Jon      |        5544 |
+|    8567 |  5.99 | STEVEN      | Mike     |        5618 |
+|    8568 |  4.99 | STEVEN      | Jon      |        6988 |
+|    8569 |  2.99 | STEVEN      | Jon      |        7339 |
+|    8570 |  2.99 | STEVEN      | Jon      |        7586 |
+|    8571 |  4.99 | STEVEN      | Mike     |        7592 |
+|    8572 |  1.99 | STEVEN      | Mike     |        7945 |
+|    8573 |  4.99 | STEVEN      | Mike     |        8564 |
+|    8574 |  4.99 | STEVEN      | Mike     |        9508 |
+|    8575 |  6.99 | STEVEN      | Jon      |        9903 |
+|    8576 |  7.99 | STEVEN      | Mike     |       10438 |
+|    8577 |  0.99 | STEVEN      | Mike     |       12028 |
+|    8578 |  0.99 | STEVEN      | Jon      |       12191 |
+|    8579 |  2.99 | STEVEN      | Jon      |       12823 |
+|    8580 |  5.99 | STEVEN      | Jon      |       13277 |
+|    8581 |  2.99 | STEVEN      | Mike     |       14226 |
+|    8582 |  2.99 | STEVEN      | Jon      |       15840 |
+|    8583 |  6.99 | EDWARD      | Mike     |         107 |
+|    8584 |  6.99 | EDWARD      | Jon      |        2287 |
+|    8585 |  2.99 | EDWARD      | Jon      |        3029 |
+|    8586 |  0.99 | EDWARD      | Mike     |        3251 |
+|    8587 |  0.99 | EDWARD      | Mike     |        4138 |
+|    8588 |  8.99 | EDWARD      | Mike     |        4177 |
+|    8589 |  0.99 | EDWARD      | Jon      |        4700 |
+|    8590 |  0.99 | EDWARD      | Mike     |        5548 |
+|    8591 |  7.99 | EDWARD      | Jon      |        5942 |
+|    8592 |  2.99 | EDWARD      | Mike     |        7309 |
+|    8593 |  2.99 | EDWARD      | Jon      |        8062 |
+|    8594 |  2.99 | EDWARD      | Mike     |        8327 |
+|    8595 |  4.99 | EDWARD      | Mike     |        8458 |
+|    8596 |  2.99 | EDWARD      | Mike     |        9110 |
+|    8597 |  4.99 | EDWARD      | Jon      |        9513 |
+|    8598 |  8.99 | EDWARD      | Mike     |        9770 |
+|    8599 |  2.99 | EDWARD      | Mike     |       10364 |
+|    8600 |  2.99 | EDWARD      | Jon      |       12111 |
+|    8601 |  7.99 | EDWARD      | Jon      |       12138 |
+|    8602 |  2.99 | EDWARD      | Jon      |       12301 |
+|    8603 |  4.99 | EDWARD      | Mike     |       13388 |
+|    8604 |  5.99 | EDWARD      | Mike     |       14032 |
+|    8605 |  0.99 | EDWARD      | Jon      |       14385 |
+|    8606 |  2.99 | EDWARD      | Jon      |       14669 |
+|    8607 |  4.99 | EDWARD      | Mike     |       14791 |
+|    8608 |  2.99 | EDWARD      | Mike     |       15204 |
+|    8609 |  4.99 | EDWARD      | Mike     |       15280 |
+|    8610 |  0.99 | EDWARD      | Mike     |       12574 |
+|    8611 |  9.99 | BRIAN       | Mike     |         224 |
+|    8612 |  2.99 | BRIAN       | Mike     |        2634 |
+|    8613 |  2.99 | BRIAN       | Mike     |        2643 |
+|    8614 |  0.99 | BRIAN       | Jon      |        3337 |
+|    8615 |  7.99 | BRIAN       | Jon      |        3376 |
+|    8616 |  4.99 | BRIAN       | Mike     |        3732 |
+|    8617 |  2.99 | BRIAN       | Jon      |        3974 |
+|    8618 |  8.99 | BRIAN       | Mike     |        4356 |
+|    8619 |  0.99 | BRIAN       | Mike     |        7649 |
+|    8620 |  0.99 | BRIAN       | Jon      |        7853 |
+|    8621 |  5.99 | BRIAN       | Jon      |       10023 |
+|    8622 |  2.99 | BRIAN       | Mike     |       14276 |
+|    8623 |  9.99 | RONALD      | Mike     |          15 |
+|    8624 |  3.99 | RONALD      | Mike     |         149 |
+|    8625 |  2.99 | RONALD      | Mike     |         439 |
+|    8626 |  2.99 | RONALD      | Mike     |        1632 |
+|    8627 |  4.99 | RONALD      | Mike     |        1892 |
+|    8628 |  3.99 | RONALD      | Jon      |        2021 |
+|    8629 |  4.99 | RONALD      | Jon      |        2703 |
+|    8630 |  0.99 | RONALD      | Jon      |        2884 |
+|    8631 |  3.99 | RONALD      | Jon      |        3256 |
+|    8632 |  3.99 | RONALD      | Jon      |        4119 |
+|    8633 |  2.99 | RONALD      | Jon      |        4295 |
+|    8634 |  4.99 | RONALD      | Mike     |        4630 |
+|    8635 |  8.99 | RONALD      | Mike     |        5791 |
+|    8636 |  2.99 | RONALD      | Mike     |        5882 |
+|    8637 |  2.99 | RONALD      | Jon      |        6132 |
+|    8638 |  4.99 | RONALD      | Mike     |        6195 |
+|    8639 |  4.99 | RONALD      | Mike     |        6255 |
+|    8640 |  6.99 | RONALD      | Mike     |        6485 |
+|    8641 |  2.99 | RONALD      | Jon      |        7953 |
+|    8642 |  4.99 | RONALD      | Jon      |        9017 |
+|    8643 |  0.99 | RONALD      | Jon      |        9044 |
+|    8644 |  0.99 | RONALD      | Mike     |       11575 |
+|    8645 |  0.99 | RONALD      | Jon      |       11598 |
+|    8646 |  6.99 | RONALD      | Mike     |       11955 |
+|    8647 |  2.99 | RONALD      | Jon      |       11994 |
+|    8648 |  4.99 | RONALD      | Mike     |       12018 |
+|    8649 |  8.99 | RONALD      | Jon      |       12424 |
+|    8650 |  3.99 | RONALD      | Mike     |       13548 |
+|    8651 |  4.99 | RONALD      | Jon      |       14828 |
+|    8652 |  5.99 | RONALD      | Jon      |       15396 |
+|    8653 |  4.99 | ANTHONY     | Jon      |        1258 |
+|    8654 |  3.99 | ANTHONY     | Jon      |        1484 |
+|    8655 |  1.99 | ANTHONY     | Jon      |        1567 |
+|    8656 |  4.99 | ANTHONY     | Mike     |        2216 |
+|    8657 |  7.99 | ANTHONY     | Jon      |        2883 |
+|    8658 |  0.99 | ANTHONY     | Jon      |        3519 |
+|    8659 |  4.99 | ANTHONY     | Jon      |        3756 |
+|    8660 |  2.99 | ANTHONY     | Jon      |        4173 |
+|    8661 |  4.99 | ANTHONY     | Jon      |        7057 |
+|    8662 |  3.99 | ANTHONY     | Jon      |        7064 |
+|    8663 |  4.99 | ANTHONY     | Jon      |        7930 |
+|    8664 |  4.99 | ANTHONY     | Jon      |        8144 |
+|    8665 |  4.99 | ANTHONY     | Jon      |        8235 |
+|    8666 |  0.99 | ANTHONY     | Mike     |        8238 |
+|    8667 |  4.99 | ANTHONY     | Jon      |        8794 |
+|    8668 |  0.99 | ANTHONY     | Mike     |        9509 |
+|    8669 |  0.99 | ANTHONY     | Mike     |       11208 |
+|    8670 |  2.99 | ANTHONY     | Jon      |       11560 |
+|    8671 |  0.99 | ANTHONY     | Jon      |       14171 |
+|    8672 |  2.99 | ANTHONY     | Mike     |       15302 |
+|    8673 |  4.99 | KEVIN       | Jon      |         200 |
+|    8674 |  5.99 | KEVIN       | Mike     |         620 |
+|    8675 |  4.99 | KEVIN       | Jon      |         818 |
+|    8676 |  5.99 | KEVIN       | Jon      |        1750 |
+|    8677 |  0.99 | KEVIN       | Mike     |        3410 |
+|    8678 |  5.99 | KEVIN       | Jon      |        3901 |
+|    8679 |  4.99 | KEVIN       | Mike     |        3920 |
+|    8680 |  4.99 | KEVIN       | Jon      |        4281 |
+|    8681 |  5.99 | KEVIN       | Mike     |        4318 |
+|    8682 |  2.99 | KEVIN       | Jon      |        5202 |
+|    8683 |  8.99 | KEVIN       | Jon      |        5867 |
+|    8684 |  2.99 | KEVIN       | Jon      |        6190 |
+|    8685 |  5.99 | KEVIN       | Mike     |        6859 |
+|    8686 |  6.99 | KEVIN       | Jon      |        8685 |
+|    8687 |  0.99 | KEVIN       | Mike     |        9981 |
+|    8688 |  2.99 | KEVIN       | Mike     |       11722 |
+|    8689 |  6.99 | KEVIN       | Mike     |       12033 |
+|    8690 |  7.99 | KEVIN       | Jon      |       12034 |
+|    8691 |  4.99 | KEVIN       | Mike     |       12398 |
+|    8692 |  6.99 | KEVIN       | Jon      |       13623 |
+|    8693 |  6.99 | KEVIN       | Mike     |       15673 |
+|    8694 |  5.99 | KEVIN       | Jon      |       15888 |
+|    8695 |  0.99 | JASON       | Jon      |         166 |
+|    8696 |  4.99 | JASON       | Mike     |         269 |
+|    8697 |  2.99 | JASON       | Mike     |        1386 |
+|    8698 |  8.99 | JASON       | Mike     |        1588 |
+|    8699 |  4.99 | JASON       | Jon      |        2481 |
+|    8700 |  0.99 | JASON       | Mike     |        2554 |
+|    8701 |  7.99 | JASON       | Mike     |        2983 |
+|    8702 |  5.99 | JASON       | Jon      |        3054 |
+|    8703 |  8.99 | JASON       | Jon      |        3413 |
+|    8704 |  0.99 | JASON       | Mike     |        3478 |
+|    8705 |  1.99 | JASON       | Jon      |        3627 |
+|    8706 |  4.99 | JASON       | Mike     |        3646 |
+|    8707 |  2.99 | JASON       | Jon      |        6033 |
+|    8708 |  3.99 | JASON       | Mike     |        6511 |
+|    8709 |  0.99 | JASON       | Jon      |        6673 |
+|    8710 |  4.99 | JASON       | Jon      |        6709 |
+|    8711 |  4.99 | JASON       | Mike     |        7091 |
+|    8712 |  4.99 | JASON       | Jon      |        8142 |
+|    8713 |  7.99 | JASON       | Mike     |        9104 |
+|    8714 |  4.99 | JASON       | Mike     |        9115 |
+|    8715 |  1.99 | JASON       | Mike     |        9252 |
+|    8716 |  4.99 | JASON       | Jon      |       11120 |
+|    8717 |  0.99 | JASON       | Jon      |       11456 |
+|    8718 |  4.99 | JASON       | Jon      |       13180 |
+|    8719 |  9.99 | JASON       | Mike     |       13650 |
+|    8720 |  4.99 | JASON       | Jon      |       14042 |
+|    8721 |  0.99 | JASON       | Mike     |       15450 |
+|    8722 |  8.99 | JASON       | Jon      |       15703 |
+|    8723 |  4.99 | MATTHEW     | Mike     |          58 |
+|    8724 |  2.99 | MATTHEW     | Jon      |         729 |
+|    8725 |  5.99 | MATTHEW     | Mike     |         878 |
+|    8726 |  0.99 | MATTHEW     | Jon      |        1167 |
+|    8727 |  2.99 | MATTHEW     | Jon      |        1786 |
+|    8728 |  4.99 | MATTHEW     | Mike     |        2933 |
+|    8729 |  6.99 | MATTHEW     | Jon      |        3704 |
+|    8730 |  1.99 | MATTHEW     | Jon      |        4572 |
+|    8731 |  4.99 | MATTHEW     | Jon      |        5669 |
+|    8732 |  1.99 | MATTHEW     | Jon      |        5906 |
+|    8733 |  3.99 | MATTHEW     | Mike     |        6840 |
+|    8734 |  7.99 | MATTHEW     | Jon      |        7146 |
+|    8735 |  2.99 | MATTHEW     | Jon      |        7275 |
+|    8736 |  5.99 | MATTHEW     | Jon      |        7695 |
+|    8737 |  1.99 | MATTHEW     | Mike     |        7847 |
+|    8738 |  4.99 | MATTHEW     | Jon      |        7937 |
+|    8739 |  0.99 | MATTHEW     | Jon      |        8474 |
+|    8740 |  0.99 | MATTHEW     | Mike     |        8790 |
+|    8741 |  2.99 | MATTHEW     | Mike     |        9363 |
+|    8742 |  4.99 | MATTHEW     | Jon      |       10002 |
+|    8743 |  4.99 | MATTHEW     | Mike     |       10028 |
+|    8744 |  0.99 | MATTHEW     | Mike     |       10298 |
+|    8745 |  3.99 | MATTHEW     | Mike     |       10994 |
+|    8746 |  0.99 | MATTHEW     | Jon      |       11548 |
+|    8747 |  4.99 | MATTHEW     | Mike     |       12120 |
+|    8748 |  2.99 | MATTHEW     | Mike     |       12169 |
+|    8749 |  5.99 | MATTHEW     | Mike     |       13140 |
+|    8750 |  2.99 | MATTHEW     | Mike     |       14224 |
+|    8751 |  3.99 | MATTHEW     | Mike     |       14957 |
+|    8752 |  4.99 | MATTHEW     | Mike     |       15387 |
+|    8753 |  0.99 | MATTHEW     | Mike     |       15728 |
+|    8754 |  3.99 | GARY        | Jon      |         563 |
+|    8755 |  0.99 | GARY        | Mike     |        1740 |
+|    8756 |  2.99 | GARY        | Jon      |        2590 |
+|    8757 |  4.99 | GARY        | Mike     |        3947 |
+|    8758 |  0.99 | GARY        | Mike     |        4197 |
+|    8759 |  4.99 | GARY        | Jon      |        4368 |
+|    8760 |  2.99 | GARY        | Jon      |        5702 |
+|    8761 |  0.99 | GARY        | Mike     |        5778 |
+|    8762 |  2.99 | GARY        | Mike     |        6034 |
+|    8763 |  4.99 | GARY        | Jon      |        6299 |
+|    8764 |  3.99 | GARY        | Jon      |        7240 |
+|    8765 |  7.99 | GARY        | Mike     |        7263 |
+|    8766 |  6.99 | GARY        | Jon      |        7960 |
+|    8767 |  3.99 | GARY        | Mike     |        8698 |
+|    8768 |  4.99 | GARY        | Mike     |        9651 |
+|    8769 |  2.99 | GARY        | Jon      |       10212 |
+|    8770 |  2.99 | GARY        | Mike     |       11617 |
+|    8771 |  6.99 | GARY        | Mike     |       11771 |
+|    8772 |  2.99 | GARY        | Jon      |       12543 |
+|    8773 |  0.99 | GARY        | Jon      |       13356 |
+|    8774 |  2.99 | GARY        | Mike     |       13386 |
+|    8775 |  8.99 | GARY        | Mike     |       14262 |
+|    8776 |  7.99 | GARY        | Jon      |       14479 |
+|    8777 |  4.99 | GARY        | Mike     |       15263 |
+|    8778 |  2.99 | GARY        | Jon      |       13965 |
+|    8779 |  5.99 | TIMOTHY     | Mike     |         131 |
+|    8780 |  4.99 | TIMOTHY     | Jon      |        2502 |
+|    8781 |  4.99 | TIMOTHY     | Jon      |        2507 |
+|    8782 |  2.99 | TIMOTHY     | Jon      |        2808 |
+|    8783 |  5.99 | TIMOTHY     | Mike     |        5470 |
+|    8784 |  2.99 | TIMOTHY     | Jon      |        5740 |
+|    8785 |  4.99 | TIMOTHY     | Mike     |        5775 |
+|    8786 |  4.99 | TIMOTHY     | Jon      |        6135 |
+|    8787 |  0.99 | TIMOTHY     | Jon      |        6622 |
+|    8788 |  9.99 | TIMOTHY     | Jon      |        7223 |
+|    8789 |  2.99 | TIMOTHY     | Jon      |        7687 |
+|    8790 |  0.99 | TIMOTHY     | Jon      |        8539 |
+|    8791 |  2.99 | TIMOTHY     | Jon      |       10030 |
+|    8792 |  4.99 | TIMOTHY     | Mike     |       10070 |
+|    8793 |  4.99 | TIMOTHY     | Jon      |       10326 |
+|    8794 |  0.99 | TIMOTHY     | Mike     |       10412 |
+|    8795 |  4.99 | TIMOTHY     | Jon      |       12097 |
+|    8796 |  3.99 | TIMOTHY     | Mike     |       12779 |
+|    8797 |  4.99 | TIMOTHY     | Jon      |       13054 |
+|    8798 |  3.99 | TIMOTHY     | Jon      |       14452 |
+|    8799 |  5.99 | TIMOTHY     | Mike     |       14672 |
+|    8800 |  0.99 | TIMOTHY     | Jon      |       15009 |
+|    8801 |  6.99 | JOSE        | Mike     |         875 |
+|    8802 |  4.99 | JOSE        | Jon      |         981 |
+|    8803 |  3.99 | JOSE        | Jon      |        1149 |
+|    8804 |  4.99 | JOSE        | Mike     |        1311 |
+|    8805 |  0.99 | JOSE        | Jon      |        2086 |
+|    8806 |  4.99 | JOSE        | Jon      |        2317 |
+|    8807 |  4.99 | JOSE        | Mike     |        3441 |
+|    8808 |  0.99 | JOSE        | Jon      |        3886 |
+|    8809 |  7.99 | JOSE        | Mike     |        4160 |
+|    8810 |  5.99 | JOSE        | Mike     |        5147 |
+|    8811 |  2.99 | JOSE        | Mike     |        7117 |
+|    8812 |  2.99 | JOSE        | Jon      |        7725 |
+|    8813 |  4.99 | JOSE        | Jon      |        7931 |
+|    8814 |  5.99 | JOSE        | Mike     |        8467 |
+|    8815 |  4.99 | JOSE        | Mike     |        8604 |
+|    8816 |  2.99 | JOSE        | Jon      |        8739 |
+|    8817 |  0.99 | JOSE        | Jon      |        9855 |
+|    8818 |  0.99 | JOSE        | Mike     |       10108 |
+|    8819 |  4.99 | JOSE        | Jon      |       10173 |
+|    8820 |  0.99 | JOSE        | Jon      |       10720 |
+|    8821 |  4.99 | JOSE        | Jon      |       10976 |
+|    8822 |  0.99 | JOSE        | Jon      |       11010 |
+|    8823 |  2.99 | JOSE        | Jon      |       11428 |
+|    8824 |  4.99 | JOSE        | Jon      |       11485 |
+|    8825 |  2.99 | JOSE        | Jon      |       12829 |
+|    8826 |  6.99 | LARRY       | Mike     |         653 |
+|    8827 |  4.99 | LARRY       | Mike     |        1294 |
+|    8828 |  3.99 | LARRY       | Jon      |        1577 |
+|    8829 |  6.99 | LARRY       | Jon      |        1929 |
+|    8830 |  4.99 | LARRY       | Mike     |        2273 |
+|    8831 |  5.99 | LARRY       | Jon      |        2304 |
+|    8832 |  3.99 | LARRY       | Jon      |        2637 |
+|    8833 |  4.99 | LARRY       | Mike     |        4445 |
+|    8834 |  0.99 | LARRY       | Mike     |        4521 |
+|    8835 |  2.99 | LARRY       | Mike     |        6618 |
+|    8836 |  1.99 | LARRY       | Jon      |        7458 |
+|    8837 |  1.99 | LARRY       | Jon      |        7808 |
+|    8838 |  0.99 | LARRY       | Mike     |       10371 |
+|    8839 |  4.99 | LARRY       | Mike     |       11372 |
+|    8840 |  6.99 | LARRY       | Jon      |       11929 |
+|    8841 |  0.99 | LARRY       | Mike     |       12016 |
+|    8842 |  2.99 | LARRY       | Jon      |       13158 |
+|    8843 |  4.99 | LARRY       | Mike     |       13360 |
+|    8844 |  0.99 | LARRY       | Mike     |       13448 |
+|    8845 |  4.99 | LARRY       | Mike     |       14847 |
+|    8846 |  3.99 | LARRY       | Jon      |       15365 |
+|    8847 |  2.99 | LARRY       | Mike     |       15386 |
+|    8848 |  5.99 | LARRY       | Mike     |       15828 |
+|    8849 |  9.99 | LARRY       | Mike     |       15916 |
+|    8850 |  7.99 | LARRY       | Jon      |       15969 |
+|    8851 |  2.99 | LARRY       | Mike     |       15297 |
+|    8852 |  2.99 | JEFFREY     | Jon      |         862 |
+|    8853 |  2.99 | JEFFREY     | Jon      |        1670 |
+|    8854 |  6.99 | JEFFREY     | Jon      |        1980 |
+|    8855 |  5.99 | JEFFREY     | Jon      |        2243 |
+|    8856 |  4.99 | JEFFREY     | Mike     |        3024 |
+|    8857 |  0.99 | JEFFREY     | Mike     |        3239 |
+|    8858 |  4.99 | JEFFREY     | Mike     |        5450 |
+|    8859 |  1.99 | JEFFREY     | Mike     |        8017 |
+|    8860 |  6.99 | JEFFREY     | Mike     |        8577 |
+|    8861 |  4.99 | JEFFREY     | Jon      |        8780 |
+|    8862 |  2.99 | JEFFREY     | Jon      |        9557 |
+|    8863 |  2.99 | JEFFREY     | Mike     |        9835 |
+|    8864 |  2.99 | JEFFREY     | Mike     |       11174 |
+|    8865 |  4.99 | JEFFREY     | Mike     |       12175 |
+|    8866 |  0.99 | JEFFREY     | Jon      |       12825 |
+|    8867 |  2.99 | JEFFREY     | Mike     |       13609 |
+|    8868 |  7.99 | JEFFREY     | Jon      |       13681 |
+|    8869 |  3.99 | JEFFREY     | Mike     |       13907 |
+|    8870 |  3.99 | JEFFREY     | Jon      |       14307 |
+|    8871 |  3.99 | JEFFREY     | Mike     |       14755 |
+|    8872 |  2.99 | JEFFREY     | Jon      |       14939 |
+|    8873 |  4.99 | JEFFREY     | Mike     |       15179 |
+|    8874 |  0.99 | JEFFREY     | Mike     |       15863 |
+|    8875 |  2.99 | FRANK       | Mike     |        1183 |
+|    8876 |  5.99 | FRANK       | Mike     |        2010 |
+|    8877 |  0.99 | FRANK       | Jon      |        2024 |
+|    8878 |  0.99 | FRANK       | Mike     |        2151 |
+|    8879 |  2.99 | FRANK       | Mike     |        2303 |
+|    8880 |  2.99 | FRANK       | Jon      |        2702 |
+|    8881 |  5.99 | FRANK       | Mike     |        3052 |
+|    8882 |  0.99 | FRANK       | Jon      |        3053 |
+|    8883 |  4.99 | FRANK       | Jon      |        3268 |
+|    8884 |  2.99 | FRANK       | Jon      |        3976 |
+|    8885 |  4.99 | FRANK       | Jon      |        4076 |
+|    8886 |  4.99 | FRANK       | Mike     |        4415 |
+|    8887 |  1.99 | FRANK       | Mike     |        4465 |
+|    8888 |  2.99 | FRANK       | Jon      |        4674 |
+|    8889 |  4.99 | FRANK       | Mike     |        7980 |
+|    8890 |  7.99 | FRANK       | Jon      |        8172 |
+|    8891 |  6.99 | FRANK       | Mike     |        8460 |
+|    8892 |  0.99 | FRANK       | Jon      |        8941 |
+|    8893 |  4.99 | FRANK       | Jon      |        9024 |
+|    8894 |  0.99 | FRANK       | Jon      |        9219 |
+|    8895 |  0.99 | FRANK       | Mike     |        9381 |
+|    8896 |  6.99 | FRANK       | Mike     |        9827 |
+|    8897 |  7.99 | FRANK       | Mike     |       10473 |
+|    8898 |  0.99 | FRANK       | Jon      |       10490 |
+|    8899 |  2.99 | FRANK       | Mike     |       11130 |
+|    8900 |  3.99 | FRANK       | Jon      |       11169 |
+|    8901 |  0.99 | FRANK       | Jon      |       11697 |
+|    8902 |  6.99 | FRANK       | Mike     |       12659 |
+|    8903 |  8.99 | FRANK       | Mike     |       13627 |
+|    8904 |  4.99 | FRANK       | Mike     |       14900 |
+|    8905 |  4.99 | FRANK       | Jon      |       15011 |
+|    8906 |  2.99 | FRANK       | Mike     |       15308 |
+|    8907 |  3.99 | SCOTT       | Mike     |         704 |
+|    8908 |  7.99 | SCOTT       | Jon      |         967 |
+|    8909 |  6.99 | SCOTT       | Mike     |        1219 |
+|    8910 |  5.99 | SCOTT       | Jon      |        1511 |
+|    8911 |  0.99 | SCOTT       | Jon      |        2885 |
+|    8912 |  4.99 | SCOTT       | Mike     |        2936 |
+|    8913 |  2.99 | SCOTT       | Jon      |        3061 |
+|    8914 |  4.99 | SCOTT       | Jon      |        3603 |
+|    8915 |  2.99 | SCOTT       | Jon      |        3659 |
+|    8916 |  2.99 | SCOTT       | Jon      |        3760 |
+|    8917 |  1.99 | SCOTT       | Mike     |        4124 |
+|    8918 |  2.99 | SCOTT       | Jon      |        5149 |
+|    8919 |  5.99 | SCOTT       | Mike     |        5750 |
+|    8920 |  0.99 | SCOTT       | Mike     |        6656 |
+|    8921 |  2.99 | SCOTT       | Jon      |        6678 |
+|    8922 |  2.99 | SCOTT       | Mike     |        6719 |
+|    8923 |  2.99 | SCOTT       | Jon      |        7894 |
+|    8924 |  4.99 | SCOTT       | Mike     |        8680 |
+|    8925 |  4.99 | SCOTT       | Jon      |       10100 |
+|    8926 |  3.99 | SCOTT       | Jon      |       11259 |
+|    8927 |  2.99 | SCOTT       | Mike     |       12062 |
+|    8928 |  2.99 | SCOTT       | Mike     |       12394 |
+|    8929 |  4.99 | SCOTT       | Mike     |       12740 |
+|    8930 |  0.99 | SCOTT       | Mike     |       12867 |
+|    8931 |  2.99 | SCOTT       | Jon      |       11709 |
+|    8932 |  0.99 | ERIC        | Jon      |          87 |
+|    8933 |  2.99 | ERIC        | Mike     |         996 |
+|    8934 |  2.99 | ERIC        | Mike     |        1415 |
+|    8935 |  6.99 | ERIC        | Jon      |        2528 |
+|    8936 |  2.99 | ERIC        | Mike     |        2587 |
+|    8937 |  4.99 | ERIC        | Mike     |        3505 |
+|    8938 |  4.99 | ERIC        | Mike     |        3613 |
+|    8939 |  8.99 | ERIC        | Jon      |        3871 |
+|    8940 |  4.99 | ERIC        | Mike     |        4051 |
+|    8941 |  5.99 | ERIC        | Jon      |        4063 |
+|    8942 | 10.99 | ERIC        | Mike     |        4326 |
+|    8943 |  2.99 | ERIC        | Mike     |        5152 |
+|    8944 |  1.99 | ERIC        | Mike     |        5885 |
+|    8945 |  5.99 | ERIC        | Mike     |        5947 |
+|    8946 |  0.99 | ERIC        | Mike     |        8231 |
+|    8947 |  4.99 | ERIC        | Jon      |        8995 |
+|    8948 |  5.99 | ERIC        | Mike     |        9401 |
+|    8949 |  6.99 | ERIC        | Jon      |       10188 |
+|    8950 |  5.99 | ERIC        | Mike     |       11052 |
+|    8951 |  2.99 | ERIC        | Mike     |       11362 |
+|    8952 |  4.99 | ERIC        | Jon      |       12533 |
+|    8953 |  0.99 | ERIC        | Mike     |       13795 |
+|    8954 |  7.99 | ERIC        | Mike     |       14256 |
+|    8955 |  1.99 | ERIC        | Mike     |       14628 |
+|    8956 |  2.99 | ERIC        | Mike     |       15339 |
+|    8957 |  3.99 | ERIC        | Jon      |       15447 |
+|    8958 |  2.99 | ERIC        | Mike     |       15521 |
+|    8959 |  3.99 | STEPHEN     | Jon      |         600 |
+|    8960 |  6.99 | STEPHEN     | Mike     |        1000 |
+|    8961 |  6.99 | STEPHEN     | Mike     |        4100 |
+|    8962 |  6.99 | STEPHEN     | Mike     |        4302 |
+|    8963 |  2.99 | STEPHEN     | Jon      |        5116 |
+|    8964 |  1.99 | STEPHEN     | Mike     |        5277 |
+|    8965 |  2.99 | STEPHEN     | Jon      |        5381 |
+|    8966 |  0.99 | STEPHEN     | Jon      |        5388 |
+|    8967 |  0.99 | STEPHEN     | Mike     |        5440 |
+|    8968 |  7.99 | STEPHEN     | Jon      |        7049 |
+|    8969 |  2.99 | STEPHEN     | Jon      |        7418 |
+|    8970 |  8.99 | STEPHEN     | Jon      |        7577 |
+|    8971 |  4.99 | STEPHEN     | Jon      |        7578 |
+|    8972 |  8.99 | STEPHEN     | Jon      |        7934 |
+|    8973 |  6.99 | STEPHEN     | Jon      |        8173 |
+|    8974 |  1.99 | STEPHEN     | Mike     |        9324 |
+|    8975 |  5.99 | STEPHEN     | Mike     |        9388 |
+|    8976 |  0.99 | STEPHEN     | Mike     |        9921 |
+|    8977 |  4.99 | STEPHEN     | Mike     |       10026 |
+|    8978 |  0.99 | STEPHEN     | Mike     |       10307 |
+|    8979 |  0.99 | STEPHEN     | Jon      |       10439 |
+|    8980 |  5.99 | STEPHEN     | Mike     |       11229 |
+|    8981 |  2.99 | STEPHEN     | Jon      |       11564 |
+|    8982 |  4.99 | STEPHEN     | Jon      |       12318 |
+|    8983 |  2.99 | STEPHEN     | Jon      |       13673 |
+|    8984 |  4.99 | STEPHEN     | Jon      |       14783 |
+|    8985 |  0.99 | STEPHEN     | Jon      |       15194 |
+|    8986 |  3.99 | STEPHEN     | Mike     |       15210 |
+|    8987 |  4.99 | ANDREW      | Mike     |           4 |
+|    8988 |  2.99 | ANDREW      | Mike     |        1667 |
+|    8989 |  6.99 | ANDREW      | Mike     |        2149 |
+|    8990 |  1.99 | ANDREW      | Mike     |        2929 |
+|    8991 |  2.99 | ANDREW      | Mike     |        3110 |
+|    8992 |  0.99 | ANDREW      | Jon      |        5032 |
+|    8993 |  1.99 | ANDREW      | Mike     |        5645 |
+|    8994 |  4.99 | ANDREW      | Jon      |        5892 |
+|    8995 |  0.99 | ANDREW      | Jon      |        6275 |
+|    8996 |  4.99 | ANDREW      | Jon      |        6931 |
+|    8997 |  0.99 | ANDREW      | Jon      |        6958 |
+|    8998 |  6.99 | ANDREW      | Jon      |        7076 |
+|    8999 |  0.99 | ANDREW      | Jon      |        7246 |
+|    9000 |  4.99 | ANDREW      | Mike     |        8719 |
+|    9001 |  4.99 | ANDREW      | Jon      |        9148 |
+|    9002 | 10.99 | ANDREW      | Jon      |        9338 |
+|    9003 |  4.99 | ANDREW      | Jon      |       10035 |
+|    9004 |  2.99 | ANDREW      | Mike     |       10062 |
+|    9005 |  4.99 | ANDREW      | Jon      |       10844 |
+|    9006 |  6.99 | ANDREW      | Mike     |       12427 |
+|    9007 |  0.99 | ANDREW      | Jon      |       12661 |
+|    9008 |  3.99 | ANDREW      | Mike     |       13579 |
+|    9009 |  4.99 | ANDREW      | Jon      |       13710 |
+|    9010 |  4.99 | ANDREW      | Mike     |       14057 |
+|    9011 |  2.99 | ANDREW      | Mike     |       14740 |
+|    9012 |  2.99 | ANDREW      | Jon      |       15253 |
+|    9013 |  4.99 | ANDREW      | Mike     |       15313 |
+|    9014 |  6.99 | RAYMOND     | Mike     |          13 |
+|    9015 |  8.99 | RAYMOND     | Mike     |         431 |
+|    9016 |  4.99 | RAYMOND     | Jon      |        1187 |
+|    9017 |  4.99 | RAYMOND     | Mike     |        1298 |
+|    9018 |  0.99 | RAYMOND     | Jon      |        2476 |
+|    9019 |  4.99 | RAYMOND     | Mike     |        3662 |
+|    9020 |  6.99 | RAYMOND     | Mike     |        4603 |
+|    9021 |  4.99 | RAYMOND     | Jon      |        5014 |
+|    9022 |  0.99 | RAYMOND     | Jon      |        5434 |
+|    9023 |  5.99 | RAYMOND     | Jon      |        5818 |
+|    9024 |  4.99 | RAYMOND     | Mike     |        5845 |
+|    9025 |  5.99 | RAYMOND     | Jon      |        6641 |
+|    9026 |  4.99 | RAYMOND     | Jon      |        6749 |
+|    9027 |  2.99 | RAYMOND     | Mike     |        6987 |
+|    9028 |  7.99 | RAYMOND     | Mike     |        8977 |
+|    9029 |  2.99 | RAYMOND     | Mike     |        9633 |
+|    9030 |  3.99 | RAYMOND     | Mike     |       10207 |
+|    9031 |  4.99 | RAYMOND     | Mike     |       10408 |
+|    9032 |  2.99 | RAYMOND     | Mike     |       10492 |
+|    9033 |  1.99 | RAYMOND     | Mike     |       10879 |
+|    9034 |  7.99 | RAYMOND     | Jon      |       10997 |
+|    9035 |  4.99 | RAYMOND     | Jon      |       12677 |
+|    9036 |  4.99 | RAYMOND     | Jon      |       13325 |
+|    9037 |  2.99 | RAYMOND     | Mike     |       13876 |
+|    9038 |  0.99 | RAYMOND     | Mike     |       14645 |
+|    9039 |  7.99 | RAYMOND     | Mike     |       14984 |
+|    9040 |  0.99 | RAYMOND     | Jon      |       15548 |
+|    9041 |  4.99 | RAYMOND     | Jon      |       15656 |
+|    9042 |  3.99 | RAYMOND     | Mike     |       15669 |
+|    9043 |  0.99 | RAYMOND     | Mike     |       14219 |
+|    9044 |  4.99 | GREGORY     | Mike     |        3329 |
+|    9045 |  0.99 | GREGORY     | Mike     |        3607 |
+|    9046 |  0.99 | GREGORY     | Jon      |        4016 |
+|    9047 |  2.99 | GREGORY     | Jon      |        4032 |
+|    9048 |  4.99 | GREGORY     | Mike     |        4279 |
+|    9049 |  8.99 | GREGORY     | Mike     |        4387 |
+|    9050 |  4.99 | GREGORY     | Mike     |        5024 |
+|    9051 |  0.99 | GREGORY     | Mike     |        5252 |
+|    9052 |  2.99 | GREGORY     | Jon      |        5728 |
+|    9053 |  7.99 | GREGORY     | Mike     |        6624 |
+|    9054 |  0.99 | GREGORY     | Mike     |        6906 |
+|    9055 |  3.99 | GREGORY     | Jon      |        8634 |
+|    9056 |  2.99 | GREGORY     | Mike     |        8855 |
+|    9057 |  5.99 | GREGORY     | Mike     |        9125 |
+|    9058 |  4.99 | GREGORY     | Jon      |        9361 |
+|    9059 |  0.99 | GREGORY     | Mike     |        9428 |
+|    9060 |  4.99 | GREGORY     | Jon      |       10606 |
+|    9061 |  0.99 | GREGORY     | Jon      |       13267 |
+|    9062 |  1.99 | GREGORY     | Mike     |       13622 |
+|    9063 |  2.99 | GREGORY     | Mike     |       14014 |
+|    9064 |  4.99 | GREGORY     | Jon      |       15005 |
+|    9065 |  0.99 | GREGORY     | Jon      |       15101 |
+|    9066 |  0.99 | GREGORY     | Jon      |       11541 |
+|    9067 |  2.99 | JOSHUA      | Mike     |        1478 |
+|    9068 |  2.99 | JOSHUA      | Jon      |        2212 |
+|    9069 |  2.99 | JOSHUA      | Jon      |        2475 |
+|    9070 |  2.99 | JOSHUA      | Mike     |        2575 |
+|    9071 |  4.99 | JOSHUA      | Jon      |        2719 |
+|    9072 |  2.99 | JOSHUA      | Mike     |        2954 |
+|    9073 |  4.99 | JOSHUA      | Jon      |        3204 |
+|    9074 |  0.99 | JOSHUA      | Jon      |        3349 |
+|    9075 |  5.99 | JOSHUA      | Jon      |        4323 |
+|    9076 |  2.99 | JOSHUA      | Mike     |        4595 |
+|    9077 |  2.99 | JOSHUA      | Jon      |        5649 |
+|    9078 |  0.99 | JOSHUA      | Jon      |        5667 |
+|    9079 |  4.99 | JOSHUA      | Jon      |        6263 |
+|    9080 |  6.99 | JOSHUA      | Jon      |        6382 |
+|    9081 |  4.99 | JOSHUA      | Jon      |        8275 |
+|    9082 |  6.99 | JOSHUA      | Mike     |        8407 |
+|    9083 |  4.99 | JOSHUA      | Jon      |        8607 |
+|    9084 |  8.99 | JOSHUA      | Jon      |        8951 |
+|    9085 |  0.99 | JOSHUA      | Jon      |        9306 |
+|    9086 |  0.99 | JOSHUA      | Mike     |       10055 |
+|    9087 |  2.99 | JOSHUA      | Jon      |       11743 |
+|    9088 |  8.99 | JOSHUA      | Mike     |       12323 |
+|    9089 |  0.99 | JOSHUA      | Jon      |       12794 |
+|    9090 |  3.99 | JOSHUA      | Jon      |       12926 |
+|    9091 |  0.99 | JOSHUA      | Jon      |       13066 |
+|    9092 |  4.99 | JOSHUA      | Jon      |       13689 |
+|    9093 |  2.99 | JOSHUA      | Mike     |       14295 |
+|    9094 | 10.99 | JOSHUA      | Mike     |       15073 |
+|    9095 |  2.99 | JOSHUA      | Jon      |       15848 |
+|    9096 |  0.99 | JOSHUA      | Mike     |       13022 |
+|    9097 |  6.99 | JERRY       | Mike     |         374 |
+|    9098 |  4.99 | JERRY       | Mike     |         572 |
+|    9099 |  8.99 | JERRY       | Mike     |         839 |
+|    9100 |  4.99 | JERRY       | Jon      |        1969 |
+|    9101 |  5.99 | JERRY       | Mike     |        2014 |
+|    9102 |  5.99 | JERRY       | Mike     |        3626 |
+|    9103 |  6.99 | JERRY       | Mike     |        4091 |
+|    9104 |  4.99 | JERRY       | Jon      |        4093 |
+|    9105 |  4.99 | JERRY       | Jon      |        4855 |
+|    9106 |  2.99 | JERRY       | Mike     |        5050 |
+|    9107 |  0.99 | JERRY       | Mike     |        6212 |
+|    9108 |  7.99 | JERRY       | Jon      |        6305 |
+|    9109 |  2.99 | JERRY       | Mike     |        6620 |
+|    9110 |  4.99 | JERRY       | Mike     |        7410 |
+|    9111 |  4.99 | JERRY       | Mike     |        8516 |
+|    9112 |  8.99 | JERRY       | Jon      |        8919 |
+|    9113 |  5.99 | JERRY       | Jon      |        9051 |
+|    9114 |  0.99 | JERRY       | Mike     |       10664 |
+|    9115 |  0.99 | JERRY       | Jon      |       10765 |
+|    9116 |  2.99 | JERRY       | Jon      |       11252 |
+|    9117 |  3.99 | JERRY       | Mike     |       11734 |
+|    9118 |  6.99 | JERRY       | Mike     |       12369 |
+|    9119 |  6.99 | JERRY       | Jon      |       13305 |
+|    9120 |  4.99 | JERRY       | Mike     |       13678 |
+|    9121 |  3.99 | JERRY       | Jon      |       13892 |
+|    9122 |  5.99 | JERRY       | Jon      |       14118 |
+|    9123 |  4.99 | JERRY       | Jon      |       15241 |
+|    9124 |  4.99 | JERRY       | Mike     |       15292 |
+|    9125 |  0.99 | JERRY       | Jon      |       11847 |
+|    9126 |  0.99 | DENNIS      | Mike     |         675 |
+|    9127 |  4.99 | DENNIS      | Jon      |        1510 |
+|    9128 |  5.99 | DENNIS      | Mike     |        1807 |
+|    9129 |  4.99 | DENNIS      | Jon      |        1952 |
+|    9130 |  6.99 | DENNIS      | Mike     |        2148 |
+|    9131 |  0.99 | DENNIS      | Mike     |        2179 |
+|    9132 |  4.99 | DENNIS      | Mike     |        2495 |
+|    9133 |  5.99 | DENNIS      | Mike     |        3458 |
+|    9134 |  0.99 | DENNIS      | Mike     |        3516 |
+|    9135 |  2.99 | DENNIS      | Jon      |        3772 |
+|    9136 |  5.99 | DENNIS      | Jon      |        4104 |
+|    9137 |  4.99 | DENNIS      | Jon      |        4779 |
+|    9138 |  4.99 | DENNIS      | Mike     |        5309 |
+|    9139 |  2.99 | DENNIS      | Mike     |        6236 |
+|    9140 |  4.99 | DENNIS      | Mike     |        6360 |
+|    9141 |  3.99 | DENNIS      | Jon      |        7584 |
+|    9142 |  0.99 | DENNIS      | Mike     |        8766 |
+|    9143 |  7.99 | DENNIS      | Mike     |        9485 |
+|    9144 |  2.99 | DENNIS      | Jon      |       10791 |
+|    9145 |  0.99 | DENNIS      | Mike     |       10897 |
+|    9146 |  4.99 | DENNIS      | Jon      |       11064 |
+|    9147 |  4.99 | DENNIS      | Jon      |       11671 |
+|    9148 |  5.99 | DENNIS      | Jon      |       11719 |
+|    9149 |  2.99 | DENNIS      | Mike     |       12167 |
+|    9150 |  3.99 | DENNIS      | Mike     |       13284 |
+|    9151 |  2.99 | DENNIS      | Mike     |       14619 |
+|    9152 |  0.99 | DENNIS      | Jon      |       15105 |
+|    9153 |  6.99 | DENNIS      | Jon      |       15173 |
+|    9154 |  5.99 | WALTER      | Mike     |         876 |
+|    9155 |  3.99 | WALTER      | Jon      |        1432 |
+|    9156 |  4.99 | WALTER      | Mike     |        1536 |
+|    9157 |  4.99 | WALTER      | Jon      |        1629 |
+|    9158 |  6.99 | WALTER      | Mike     |        3146 |
+|    9159 |  4.99 | WALTER      | Mike     |        3335 |
+|    9160 |  2.99 | WALTER      | Jon      |        3536 |
+|    9161 |  4.99 | WALTER      | Mike     |        4243 |
+|    9162 |  0.99 | WALTER      | Mike     |        4467 |
+|    9163 |  3.99 | WALTER      | Jon      |        4967 |
+|    9164 |  3.99 | WALTER      | Mike     |        5720 |
+|    9165 |  6.99 | WALTER      | Mike     |        6072 |
+|    9166 |  0.99 | WALTER      | Mike     |        6425 |
+|    9167 |  7.99 | WALTER      | Jon      |        6682 |
+|    9168 |  2.99 | WALTER      | Jon      |        7244 |
+|    9169 |  4.99 | WALTER      | Jon      |        7973 |
+|    9170 |  0.99 | WALTER      | Mike     |        8968 |
+|    9171 |  5.99 | WALTER      | Jon      |        9208 |
+|    9172 |  4.99 | WALTER      | Mike     |        9663 |
+|    9173 |  3.99 | WALTER      | Jon      |       10338 |
+|    9174 |  4.99 | WALTER      | Jon      |       11171 |
+|    9175 |  2.99 | WALTER      | Mike     |       11550 |
+|    9176 |  3.99 | WALTER      | Jon      |       11582 |
+|    9177 |  5.99 | WALTER      | Jon      |       11699 |
+|    9178 |  0.99 | WALTER      | Mike     |       12631 |
+|    9179 |  3.99 | WALTER      | Mike     |       13199 |
+|    9180 |  5.99 | WALTER      | Mike     |       13575 |
+|    9181 |  0.99 | WALTER      | Mike     |       13985 |
+|    9182 |  4.99 | WALTER      | Mike     |       14636 |
+|    9183 |  3.99 | WALTER      | Jon      |       14758 |
+|    9184 |  4.99 | PATRICK     | Jon      |        1205 |
+|    9185 |  3.99 | PATRICK     | Mike     |        1697 |
+|    9186 |  5.99 | PATRICK     | Mike     |        2177 |
+|    9187 |  4.99 | PATRICK     | Jon      |        2183 |
+|    9188 |  5.99 | PATRICK     | Jon      |        2607 |
+|    9189 |  5.99 | PATRICK     | Mike     |        2653 |
+|    9190 |  0.99 | PATRICK     | Mike     |        3264 |
+|    9191 |  2.99 | PATRICK     | Mike     |        3455 |
+|    9192 |  2.99 | PATRICK     | Jon      |        4475 |
+|    9193 |  0.99 | PATRICK     | Mike     |        4742 |
+|    9194 |  4.99 | PATRICK     | Jon      |        6381 |
+|    9195 |  2.99 | PATRICK     | Jon      |        7617 |
+|    9196 |  4.99 | PATRICK     | Jon      |        8274 |
+|    9197 |  0.99 | PATRICK     | Mike     |        8541 |
+|    9198 |  4.99 | PATRICK     | Jon      |        8551 |
+|    9199 |  4.99 | PATRICK     | Mike     |        8606 |
+|    9200 |  2.99 | PATRICK     | Mike     |        9834 |
+|    9201 |  2.99 | PATRICK     | Mike     |       10292 |
+|    9202 |  8.99 | PATRICK     | Mike     |       10667 |
+|    9203 |  3.99 | PATRICK     | Jon      |       10674 |
+|    9204 |  0.99 | PATRICK     | Mike     |       10809 |
+|    9205 |  0.99 | PATRICK     | Mike     |       10995 |
+|    9206 |  4.99 | PATRICK     | Jon      |       12598 |
+|    9207 |  1.99 | PATRICK     | Jon      |       12908 |
+|    9208 |  2.99 | PATRICK     | Jon      |       12940 |
+|    9209 |  2.99 | PATRICK     | Mike     |       13425 |
+|    9210 |  4.99 | PATRICK     | Mike     |       14457 |
+|    9211 |  0.99 | PATRICK     | Jon      |       14718 |
+|    9212 |  2.99 | PATRICK     | Mike     |       14895 |
+|    9213 |  2.99 | PATRICK     | Jon      |       15306 |
+|    9214 |  9.99 | PATRICK     | Mike     |       15378 |
+|    9215 |  2.99 | PETER       | Mike     |        1318 |
+|    9216 |  7.99 | PETER       | Jon      |        1520 |
+|    9217 |  1.99 | PETER       | Mike     |        1778 |
+|    9218 |  7.99 | PETER       | Mike     |        1849 |
+|    9219 |  2.99 | PETER       | Jon      |        2829 |
+|    9220 |  7.99 | PETER       | Jon      |        3130 |
+|    9221 |  5.99 | PETER       | Mike     |        3382 |
+|    9222 |  4.99 | PETER       | Jon      |        3938 |
+|    9223 |  2.99 | PETER       | Mike     |        4624 |
+|    9224 |  4.99 | PETER       | Jon      |        5487 |
+|    9225 |  0.99 | PETER       | Jon      |        5931 |
+|    9226 |  2.99 | PETER       | Jon      |        7473 |
+|    9227 |  2.99 | PETER       | Mike     |        8661 |
+|    9228 |  9.99 | PETER       | Mike     |        8728 |
+|    9229 |  0.99 | PETER       | Jon      |       10605 |
+|    9230 |  6.99 | PETER       | Mike     |       11305 |
+|    9231 |  2.99 | PETER       | Mike     |       11723 |
+|    9232 |  0.99 | PETER       | Jon      |       13059 |
+|    9233 |  8.99 | PETER       | Jon      |       13074 |
+|    9234 |  4.99 | PETER       | Jon      |       13806 |
+|    9235 |  4.99 | PETER       | Jon      |       14344 |
+|    9236 |  0.99 | PETER       | Jon      |       15030 |
+|    9237 |  6.99 | PETER       | Jon      |       15938 |
+|    9238 |  5.99 | HAROLD      | Jon      |        2190 |
+|    9239 |  5.99 | HAROLD      | Mike     |        2914 |
+|    9240 |  2.99 | HAROLD      | Mike     |        3081 |
+|    9241 |  0.99 | HAROLD      | Mike     |        5617 |
+|    9242 |  4.99 | HAROLD      | Jon      |        6060 |
+|    9243 |  8.99 | HAROLD      | Jon      |        6429 |
+|    9244 |  2.99 | HAROLD      | Mike     |        6736 |
+|    9245 |  7.99 | HAROLD      | Jon      |        6787 |
+|    9246 |  0.99 | HAROLD      | Jon      |        6997 |
+|    9247 |  2.99 | HAROLD      | Jon      |        7280 |
+|    9248 |  2.99 | HAROLD      | Mike     |        9164 |
+|    9249 |  0.99 | HAROLD      | Mike     |        9526 |
+|    9250 |  5.99 | HAROLD      | Jon      |        9948 |
+|    9251 |  0.99 | HAROLD      | Mike     |        9955 |
+|    9252 |  4.99 | HAROLD      | Jon      |        9956 |
+|    9253 |  4.99 | HAROLD      | Mike     |       10242 |
+|    9254 |  2.99 | HAROLD      | Jon      |       11178 |
+|    9255 |  0.99 | HAROLD      | Jon      |       11446 |
+|    9256 |  0.99 | HAROLD      | Mike     |       11568 |
+|    9257 |  6.99 | HAROLD      | Mike     |       12139 |
+|    9258 |  4.99 | HAROLD      | Mike     |       12404 |
+|    9259 |  2.99 | HAROLD      | Mike     |       12522 |
+|    9260 |  4.99 | HAROLD      | Jon      |       12816 |
+|    9261 |  4.99 | HAROLD      | Jon      |       13368 |
+|    9262 |  4.99 | HAROLD      | Jon      |       13637 |
+|    9263 |  2.99 | HAROLD      | Mike     |       13755 |
+|    9264 |  4.99 | HAROLD      | Jon      |       13827 |
+|    9265 |  2.99 | HAROLD      | Jon      |       14096 |
+|    9266 |  0.99 | HAROLD      | Jon      |       14299 |
+|    9267 |  8.99 | HAROLD      | Jon      |       14683 |
+|    9268 |  4.99 | HAROLD      | Mike     |       15484 |
+|    9269 |  3.99 | HAROLD      | Mike     |       15895 |
+|    9270 |  3.99 | DOUGLAS     | Jon      |         102 |
+|    9271 |  3.99 | DOUGLAS     | Mike     |         455 |
+|    9272 |  4.99 | DOUGLAS     | Jon      |        1547 |
+|    9273 |  6.99 | DOUGLAS     | Mike     |        1564 |
+|    9274 |  0.99 | DOUGLAS     | Jon      |        1879 |
+|    9275 |  0.99 | DOUGLAS     | Jon      |        1922 |
+|    9276 |  6.99 | DOUGLAS     | Jon      |        2461 |
+|    9277 |  8.99 | DOUGLAS     | Mike     |        2980 |
+|    9278 |  0.99 | DOUGLAS     | Mike     |        3407 |
+|    9279 |  5.99 | DOUGLAS     | Mike     |        3978 |
+|    9280 |  7.99 | DOUGLAS     | Mike     |        4472 |
+|    9281 |  4.99 | DOUGLAS     | Jon      |        5097 |
+|    9282 |  3.99 | DOUGLAS     | Mike     |        5337 |
+|    9283 |  6.99 | DOUGLAS     | Mike     |        7069 |
+|    9284 |  5.99 | DOUGLAS     | Jon      |        8012 |
+|    9285 |  9.99 | DOUGLAS     | Jon      |        8088 |
+|    9286 |  5.99 | DOUGLAS     | Jon      |        9458 |
+|    9287 |  2.99 | DOUGLAS     | Jon      |        9739 |
+|    9288 |  0.99 | DOUGLAS     | Mike     |       10822 |
+|    9289 |  0.99 | DOUGLAS     | Mike     |       11212 |
+|    9290 |  2.99 | DOUGLAS     | Jon      |       11570 |
+|    9291 |  4.99 | DOUGLAS     | Jon      |       13279 |
+|    9292 |  3.99 | DOUGLAS     | Jon      |       13522 |
+|    9293 |  0.99 | DOUGLAS     | Jon      |       13866 |
+|    9294 |  5.99 | DOUGLAS     | Jon      |       15973 |
+|    9295 |  2.99 | HENRY       | Jon      |         157 |
+|    9296 |  5.99 | HENRY       | Jon      |         813 |
+|    9297 |  3.99 | HENRY       | Mike     |        1341 |
+|    9298 |  4.99 | HENRY       | Jon      |        1475 |
+|    9299 |  0.99 | HENRY       | Mike     |        1731 |
+|    9300 |  5.99 | HENRY       | Jon      |        4028 |
+|    9301 |  3.99 | HENRY       | Jon      |        4347 |
+|    9302 |  5.99 | HENRY       | Jon      |        6363 |
+|    9303 |  4.99 | HENRY       | Jon      |        7480 |
+|    9304 |  2.99 | HENRY       | Jon      |        8561 |
+|    9305 |  4.99 | HENRY       | Jon      |        9788 |
+|    9306 |  5.99 | HENRY       | Jon      |       11116 |
+|    9307 |  5.99 | HENRY       | Jon      |       12183 |
+|    9308 |  4.99 | HENRY       | Jon      |       13014 |
+|    9309 |  3.99 | HENRY       | Mike     |       13033 |
+|    9310 |  0.99 | HENRY       | Mike     |       14621 |
+|    9311 |  0.99 | HENRY       | Jon      |       14624 |
+|    9312 |  2.99 | HENRY       | Mike     |       15215 |
+|    9313 |  0.99 | CARL        | Mike     |         206 |
+|    9314 |  0.99 | CARL        | Mike     |         363 |
+|    9315 |  0.99 | CARL        | Jon      |        1210 |
+|    9316 |  4.99 | CARL        | Mike     |        1457 |
+|    9317 |  0.99 | CARL        | Jon      |        1550 |
+|    9318 |  4.99 | CARL        | Jon      |        2766 |
+|    9319 |  2.99 | CARL        | Jon      |        4422 |
+|    9320 |  2.99 | CARL        | Mike     |        4425 |
+|    9321 |  4.99 | CARL        | Jon      |        4450 |
+|    9322 |  3.99 | CARL        | Jon      |        5508 |
+|    9323 |  7.99 | CARL        | Mike     |        6307 |
+|    9324 |  6.99 | CARL        | Mike     |        7092 |
+|    9325 |  2.99 | CARL        | Jon      |        8129 |
+|    9326 |  8.99 | CARL        | Jon      |        8694 |
+|    9327 |  4.99 | CARL        | Mike     |        9163 |
+|    9328 |  2.99 | CARL        | Jon      |        9207 |
+|    9329 |  8.99 | CARL        | Jon      |       10215 |
+|    9330 |  4.99 | CARL        | Jon      |       10982 |
+|    9331 |  2.99 | CARL        | Mike     |       11865 |
+|    9332 |  4.99 | CARL        | Mike     |       12485 |
+|    9333 |  4.99 | CARL        | Jon      |       12805 |
+|    9334 | 10.99 | CARL        | Mike     |       14702 |
+|    9335 |  4.99 | CARL        | Mike     |       15551 |
+|    9336 |  4.99 | ARTHUR      | Mike     |          65 |
+|    9337 |  4.99 | ARTHUR      | Mike     |         810 |
+|    9338 |  5.99 | ARTHUR      | Mike     |        1994 |
+|    9339 |  2.99 | ARTHUR      | Jon      |        3372 |
+|    9340 |  2.99 | ARTHUR      | Mike     |        3421 |
+|    9341 |  4.99 | ARTHUR      | Jon      |        4420 |
+|    9342 |  8.99 | ARTHUR      | Mike     |        4958 |
+|    9343 |  4.99 | ARTHUR      | Mike     |        5428 |
+|    9344 |  4.99 | ARTHUR      | Jon      |        5557 |
+|    9345 |  4.99 | ARTHUR      | Jon      |        6136 |
+|    9346 |  2.99 | ARTHUR      | Jon      |        6323 |
+|    9347 |  8.99 | ARTHUR      | Jon      |        6881 |
+|    9348 |  6.99 | ARTHUR      | Jon      |        7943 |
+|    9349 |  5.99 | ARTHUR      | Jon      |        8272 |
+|    9350 |  6.99 | ARTHUR      | Mike     |        8505 |
+|    9351 |  0.99 | ARTHUR      | Jon      |        8543 |
+|    9352 |  8.99 | ARTHUR      | Jon      |        8732 |
+|    9353 |  4.99 | ARTHUR      | Jon      |        9566 |
+|    9354 |  4.99 | ARTHUR      | Mike     |        9848 |
+|    9355 |  2.99 | ARTHUR      | Mike     |        9927 |
+|    9356 |  5.99 | ARTHUR      | Mike     |       10304 |
+|    9357 |  3.99 | ARTHUR      | Jon      |       10389 |
+|    9358 |  0.99 | ARTHUR      | Jon      |       10521 |
+|    9359 |  4.99 | ARTHUR      | Jon      |       11062 |
+|    9360 |  4.99 | ARTHUR      | Mike     |       11375 |
+|    9361 |  2.99 | ARTHUR      | Jon      |       11470 |
+|    9362 |  5.99 | ARTHUR      | Mike     |       14890 |
+|    9363 |  2.99 | ARTHUR      | Jon      |       15459 |
+|    9364 |  0.99 | ARTHUR      | Mike     |       15535 |
+|    9365 |  8.99 | ARTHUR      | Mike     |       15661 |
+|    9366 |  5.99 | ARTHUR      | Jon      |       15825 |
+|    9367 |  0.99 | ARTHUR      | Mike     |       15827 |
+|    9368 |  8.99 | RYAN        | Jon      |        1711 |
+|    9369 |  0.99 | RYAN        | Jon      |        2274 |
+|    9370 |  4.99 | RYAN        | Mike     |        3026 |
+|    9371 |  8.99 | RYAN        | Mike     |        3092 |
+|    9372 |  7.99 | RYAN        | Mike     |        3326 |
+|    9373 |  0.99 | RYAN        | Jon      |        3605 |
+|    9374 |  4.99 | RYAN        | Jon      |        3666 |
+|    9375 |  5.99 | RYAN        | Mike     |        4232 |
+|    9376 |  6.99 | RYAN        | Mike     |        4523 |
+|    9377 |  0.99 | RYAN        | Jon      |        5471 |
+|    9378 |  2.99 | RYAN        | Mike     |        5819 |
+|    9379 |  1.99 | RYAN        | Jon      |        6121 |
+|    9380 |  0.99 | RYAN        | Mike     |        7811 |
+|    9381 |  4.99 | RYAN        | Jon      |        8148 |
+|    9382 |  4.99 | RYAN        | Jon      |        8153 |
+|    9383 |  4.99 | RYAN        | Jon      |        8176 |
+|    9384 |  4.99 | RYAN        | Jon      |        8378 |
+|    9385 |  2.99 | RYAN        | Jon      |        8771 |
+|    9386 |  4.99 | RYAN        | Mike     |        9013 |
+|    9387 |  4.99 | RYAN        | Mike     |        9582 |
+|    9388 |  3.99 | RYAN        | Mike     |        9856 |
+|    9389 |  2.99 | RYAN        | Mike     |        9876 |
+|    9390 |  8.99 | RYAN        | Jon      |       11738 |
+|    9391 |  2.99 | RYAN        | Mike     |       12195 |
+|    9392 | 10.99 | RYAN        | Jon      |       12399 |
+|    9393 |  5.99 | RYAN        | Jon      |       13314 |
+|    9394 |  4.99 | RYAN        | Jon      |       14894 |
+|    9395 |  2.99 | RYAN        | Jon      |       14958 |
+|    9396 |  2.99 | RYAN        | Jon      |       15426 |
+|    9397 |  4.99 | RYAN        | Jon      |       15555 |
+|    9398 |  0.99 | ROGER       | Jon      |         153 |
+|    9399 |  0.99 | ROGER       | Jon      |         821 |
+|    9400 |  2.99 | ROGER       | Mike     |        1654 |
+|    9401 |  8.99 | ROGER       | Mike     |        2041 |
+|    9402 |  0.99 | ROGER       | Jon      |        2499 |
+|    9403 |  4.99 | ROGER       | Jon      |        3494 |
+|    9404 |  4.99 | ROGER       | Jon      |        3610 |
+|    9405 |  9.99 | ROGER       | Jon      |        4556 |
+|    9406 |  0.99 | ROGER       | Jon      |        4633 |
+|    9407 |  0.99 | ROGER       | Mike     |        4699 |
+|    9408 |  8.99 | ROGER       | Mike     |        4807 |
+|    9409 |  4.99 | ROGER       | Mike     |        5345 |
+|    9410 |  0.99 | ROGER       | Jon      |        5965 |
+|    9411 |  2.99 | ROGER       | Jon      |        6776 |
+|    9412 |  2.99 | ROGER       | Jon      |        7380 |
+|    9413 |  6.99 | ROGER       | Mike     |        7482 |
+|    9414 |  4.99 | ROGER       | Jon      |        7825 |
+|    9415 |  2.99 | ROGER       | Mike     |        8500 |
+|    9416 |  4.99 | ROGER       | Mike     |        8569 |
+|    9417 |  4.99 | ROGER       | Jon      |        8682 |
+|    9418 |  2.99 | ROGER       | Jon      |        9482 |
+|    9419 |  2.99 | ROGER       | Mike     |       10769 |
+|    9420 |  2.99 | ROGER       | Jon      |       10972 |
+|    9421 |  2.99 | ROGER       | Mike     |       11262 |
+|    9422 |  7.99 | ROGER       | Mike     |       11429 |
+|    9423 |  2.99 | ROGER       | Jon      |       12564 |
+|    9424 |  5.99 | ROGER       | Jon      |       12884 |
+|    9425 |  4.99 | ROGER       | Jon      |       12937 |
+|    9426 |  2.99 | ROGER       | Jon      |       13238 |
+|    9427 |  5.99 | ROGER       | Jon      |       13602 |
+|    9428 |  0.99 | ROGER       | Jon      |       13684 |
+|    9429 |  1.99 | ROGER       | Mike     |       13962 |
+|    9430 |  3.99 | ROGER       | Jon      |       14079 |
+|    9431 |  7.99 | ROGER       | Jon      |       14937 |
+|    9432 |  0.99 | ROGER       | Jon      |       15817 |
+|    9433 |  4.99 | ROGER       | Mike     |       15944 |
+|    9434 |  4.99 | JOE         | Mike     |         890 |
+|    9435 |  2.99 | JOE         | Mike     |        1197 |
+|    9436 |  0.99 | JOE         | Mike     |        1523 |
+|    9437 |  6.99 | JOE         | Jon      |        2987 |
+|    9438 |  8.99 | JOE         | Mike     |        3067 |
+|    9439 |  3.99 | JOE         | Jon      |        3488 |
+|    9440 |  2.99 | JOE         | Mike     |        4190 |
+|    9441 |  5.99 | JOE         | Jon      |        4494 |
+|    9442 |  0.99 | JOE         | Mike     |        4881 |
+|    9443 |  4.99 | JOE         | Mike     |        5433 |
+|    9444 |  4.99 | JOE         | Mike     |        7002 |
+|    9445 |  4.99 | JOE         | Mike     |        7046 |
+|    9446 |  2.99 | JOE         | Jon      |        7702 |
+|    9447 |  4.99 | JOE         | Jon      |        8297 |
+|    9448 |  1.99 | JOE         | Mike     |        9262 |
+|    9449 |  5.99 | JOE         | Mike     |        9670 |
+|    9450 |  0.99 | JOE         | Mike     |        9731 |
+|    9451 |  4.99 | JOE         | Mike     |       10987 |
+|    9452 |  4.99 | JOE         | Jon      |       11192 |
+|    9453 |  8.99 | JOE         | Jon      |       11492 |
+|    9454 |  3.99 | JOE         | Mike     |       11905 |
+|    9455 |  4.99 | JOE         | Mike     |       13258 |
+|    9456 |  4.99 | JOE         | Jon      |       13636 |
+|    9457 |  6.99 | JOE         | Jon      |       14200 |
+|    9458 |  6.99 | JOE         | Jon      |       14721 |
+|    9459 |  4.99 | JOE         | Jon      |       14908 |
+|    9460 |  6.99 | JOE         | Mike     |       15833 |
+|    9461 |  5.99 | JOE         | Mike     |       15955 |
+|    9462 |  2.99 | JOE         | Mike     |       14915 |
+|    9463 |  4.99 | JUAN        | Mike     |          24 |
+|    9464 |  4.99 | JUAN        | Mike     |         802 |
+|    9465 |  3.99 | JUAN        | Jon      |        2011 |
+|    9466 |  0.99 | JUAN        | Mike     |        2619 |
+|    9467 |  2.99 | JUAN        | Mike     |        3079 |
+|    9468 |  0.99 | JUAN        | Jon      |        3206 |
+|    9469 |  0.99 | JUAN        | Mike     |        3529 |
+|    9470 |  5.99 | JUAN        | Mike     |        3893 |
+|    9471 |  2.99 | JUAN        | Mike     |        4767 |
+|    9472 |  0.99 | JUAN        | Mike     |        5240 |
+|    9473 |  2.99 | JUAN        | Mike     |        5303 |
+|    9474 |  1.99 | JUAN        | Mike     |        5786 |
+|    9475 |  3.99 | JUAN        | Jon      |        6408 |
+|    9476 |  4.99 | JUAN        | Jon      |        7416 |
+|    9477 |  0.99 | JUAN        | Jon      |       11504 |
+|    9478 |  6.99 | JUAN        | Jon      |       11595 |
+|    9479 |  6.99 | JUAN        | Jon      |       11692 |
+|    9480 |  0.99 | JUAN        | Mike     |       11800 |
+|    9481 |  6.99 | JUAN        | Jon      |       12252 |
+|    9482 |  2.99 | JUAN        | Jon      |       12445 |
+|    9483 |  0.99 | JUAN        | Jon      |       13086 |
+|    9484 |  1.99 | JUAN        | Jon      |       15789 |
+|    9485 |  0.99 | JUAN        | Mike     |       15807 |
+|    9486 |  1.99 | JACK        | Mike     |        1137 |
+|    9487 |  5.99 | JACK        | Jon      |        1792 |
+|    9488 |  0.99 | JACK        | Mike     |        1869 |
+|    9489 |  2.99 | JACK        | Mike     |        2759 |
+|    9490 |  2.99 | JACK        | Mike     |        3836 |
+|    9491 |  0.99 | JACK        | Mike     |        4544 |
+|    9492 |  1.99 | JACK        | Mike     |        4756 |
+|    9493 |  5.99 | JACK        | Jon      |        4761 |
+|    9494 |  0.99 | JACK        | Mike     |        5280 |
+|    9495 |  3.99 | JACK        | Mike     |        5912 |
+|    9496 |  3.99 | JACK        | Jon      |        6180 |
+|    9497 |  4.99 | JACK        | Mike     |        6664 |
+|    9498 |  5.99 | JACK        | Jon      |        6777 |
+|    9499 |  4.99 | JACK        | Jon      |        7630 |
+|    9500 |  4.99 | JACK        | Jon      |        8512 |
+|    9501 |  7.99 | JACK        | Mike     |        9707 |
+|    9502 |  0.99 | JACK        | Jon      |       10119 |
+|    9503 |  2.99 | JACK        | Jon      |       10501 |
+|    9504 |  0.99 | JACK        | Jon      |       11127 |
+|    9505 |  6.99 | JACK        | Mike     |       14368 |
+|    9506 |  4.99 | JACK        | Jon      |       15142 |
+|    9507 |  4.99 | JACK        | Mike     |       15664 |
+|    9508 |  2.99 | JACK        | Jon      |       15712 |
+|    9509 |  2.99 | JACK        | Mike     |       15762 |
+|    9510 |  2.99 | ALBERT      | Mike     |         784 |
+|    9511 |  0.99 | ALBERT      | Mike     |        1498 |
+|    9512 |  4.99 | ALBERT      | Mike     |        1649 |
+|    9513 |  4.99 | ALBERT      | Mike     |        1678 |
+|    9514 |  4.99 | ALBERT      | Mike     |        1780 |
+|    9515 |  4.99 | ALBERT      | Jon      |        3331 |
+|    9516 |  4.99 | ALBERT      | Jon      |        4116 |
+|    9517 |  5.99 | ALBERT      | Jon      |        6329 |
+|    9518 |  2.99 | ALBERT      | Mike     |        7033 |
+|    9519 |  7.99 | ALBERT      | Mike     |        7419 |
+|    9520 |  6.99 | ALBERT      | Jon      |        7512 |
+|    9521 |  4.99 | ALBERT      | Mike     |        7579 |
+|    9522 |  5.99 | ALBERT      | Mike     |        7845 |
+|    9523 |  2.99 | ALBERT      | Mike     |        7886 |
+|    9524 |  0.99 | ALBERT      | Mike     |        9463 |
+|    9525 |  5.99 | ALBERT      | Mike     |       11793 |
+|    9526 |  6.99 | ALBERT      | Mike     |       11823 |
+|    9527 |  0.99 | ALBERT      | Jon      |       11986 |
+|    9528 |  5.99 | ALBERT      | Jon      |       12234 |
+|    9529 |  2.99 | ALBERT      | Mike     |       12751 |
+|    9530 |  4.99 | ALBERT      | Mike     |       14130 |
+|    9531 |  0.99 | ALBERT      | Jon      |       14852 |
+|    9532 |  2.99 | ALBERT      | Jon      |       13578 |
+|    9533 |  6.99 | JONATHAN    | Jon      |        1103 |
+|    9534 |  2.99 | JONATHAN    | Jon      |        1359 |
+|    9535 |  7.99 | JONATHAN    | Jon      |        1928 |
+|    9536 |  6.99 | JONATHAN    | Jon      |        3233 |
+|    9537 |  5.99 | JONATHAN    | Jon      |        4380 |
+|    9538 |  1.99 | JONATHAN    | Jon      |        6559 |
+|    9539 |  3.99 | JONATHAN    | Mike     |        6610 |
+|    9540 |  3.99 | JONATHAN    | Jon      |        7993 |
+|    9541 |  2.99 | JONATHAN    | Jon      |       10071 |
+|    9542 |  0.99 | JONATHAN    | Mike     |       11186 |
+|    9543 |  4.99 | JONATHAN    | Jon      |       11414 |
+|    9544 |  4.99 | JONATHAN    | Jon      |       11698 |
+|    9545 |  5.99 | JONATHAN    | Mike     |       12928 |
+|    9546 |  0.99 | JONATHAN    | Jon      |       13604 |
+|    9547 |  4.99 | JONATHAN    | Mike     |       14396 |
+|    9548 |  1.99 | JONATHAN    | Mike     |       15564 |
+|    9549 |  0.99 | JONATHAN    | Jon      |       15650 |
+|    9550 |  2.99 | JONATHAN    | Jon      |       15676 |
+|    9551 |  0.99 | JUSTIN      | Mike     |         140 |
+|    9552 |  1.99 | JUSTIN      | Jon      |         158 |
+|    9553 |  0.99 | JUSTIN      | Jon      |         402 |
+|    9554 |  0.99 | JUSTIN      | Mike     |        1491 |
+|    9555 |  4.99 | JUSTIN      | Mike     |        2275 |
+|    9556 |  6.99 | JUSTIN      | Mike     |        2769 |
+|    9557 |  2.99 | JUSTIN      | Mike     |        3139 |
+|    9558 |  2.99 | JUSTIN      | Jon      |        3821 |
+|    9559 |  0.99 | JUSTIN      | Jon      |        4034 |
+|    9560 |  5.99 | JUSTIN      | Mike     |        4449 |
+|    9561 |  2.99 | JUSTIN      | Jon      |        4745 |
+|    9562 |  4.99 | JUSTIN      | Mike     |        5354 |
+|    9563 |  4.99 | JUSTIN      | Jon      |        5556 |
+|    9564 |  3.99 | JUSTIN      | Mike     |        5873 |
+|    9565 |  0.99 | JUSTIN      | Mike     |        6054 |
+|    9566 |  4.99 | JUSTIN      | Mike     |        6838 |
+|    9567 |  0.99 | JUSTIN      | Mike     |        6926 |
+|    9568 |  5.99 | JUSTIN      | Mike     |        6939 |
+|    9569 |  0.99 | JUSTIN      | Jon      |        7148 |
+|    9570 |  2.99 | JUSTIN      | Jon      |        7235 |
+|    9571 |  0.99 | JUSTIN      | Jon      |        7241 |
+|    9572 |  4.99 | JUSTIN      | Jon      |        8321 |
+|    9573 |  8.99 | JUSTIN      | Jon      |        8477 |
+|    9574 |  4.99 | JUSTIN      | Mike     |        8609 |
+|    9575 |  0.99 | JUSTIN      | Jon      |        8921 |
+|    9576 |  2.99 | JUSTIN      | Mike     |        9130 |
+|    9577 |  6.99 | JUSTIN      | Mike     |       10420 |
+|    9578 |  6.99 | JUSTIN      | Jon      |       12243 |
+|    9579 |  3.99 | JUSTIN      | Mike     |       12544 |
+|    9580 |  4.99 | JUSTIN      | Mike     |       12998 |
+|    9581 |  2.99 | JUSTIN      | Jon      |       14212 |
+|    9582 |  0.99 | JUSTIN      | Jon      |       14245 |
+|    9583 |  5.99 | JUSTIN      | Mike     |       14840 |
+|    9584 |  0.99 | JUSTIN      | Jon      |       15956 |
+|    9585 |  7.98 | JUSTIN      | Mike     |       12759 |
+|    9586 |  0.00 | JUSTIN      | Mike     |       11782 |
+|    9587 |  3.99 | TERRY       | Mike     |        1110 |
+|    9588 |  0.99 | TERRY       | Jon      |        1488 |
+|    9589 |  2.99 | TERRY       | Mike     |        1612 |
+|    9590 |  5.99 | TERRY       | Mike     |        3567 |
+|    9591 |  6.99 | TERRY       | Mike     |        3730 |
+|    9592 |  4.99 | TERRY       | Mike     |        5210 |
+|    9593 |  5.99 | TERRY       | Mike     |        5564 |
+|    9594 |  0.99 | TERRY       | Mike     |        6127 |
+|    9595 |  6.99 | TERRY       | Jon      |        6262 |
+|    9596 |  2.99 | TERRY       | Mike     |        6437 |
+|    9597 |  4.99 | TERRY       | Jon      |        6669 |
+|    9598 |  4.99 | TERRY       | Jon      |        7108 |
+|    9599 |  5.99 | TERRY       | Jon      |        7477 |
+|    9600 |  1.99 | TERRY       | Jon      |        8418 |
+|    9601 |  0.99 | TERRY       | Mike     |       10498 |
+|    9602 |  0.99 | TERRY       | Jon      |       11471 |
+|    9603 |  1.99 | TERRY       | Jon      |       13821 |
+|    9604 |  3.99 | TERRY       | Mike     |       15367 |
+|    9605 |  2.99 | TERRY       | Jon      |       15531 |
+|    9606 |  0.99 | TERRY       | Mike     |       14760 |
+|    9607 |  4.99 | GERALD      | Jon      |        1088 |
+|    9608 |  0.99 | GERALD      | Mike     |        1410 |
+|    9609 |  2.99 | GERALD      | Mike     |        2405 |
+|    9610 |  4.99 | GERALD      | Mike     |        2433 |
+|    9611 |  6.99 | GERALD      | Jon      |        3829 |
+|    9612 |  4.99 | GERALD      | Jon      |        4599 |
+|    9613 |  0.99 | GERALD      | Mike     |        5513 |
+|    9614 |  4.99 | GERALD      | Mike     |        6593 |
+|    9615 |  0.99 | GERALD      | Mike     |        6648 |
+|    9616 |  2.99 | GERALD      | Mike     |        7079 |
+|    9617 |  1.99 | GERALD      | Mike     |        7758 |
+|    9618 |  0.99 | GERALD      | Mike     |        7902 |
+|    9619 |  3.99 | GERALD      | Mike     |        8198 |
+|    9620 |  5.99 | GERALD      | Mike     |        8975 |
+|    9621 |  4.99 | GERALD      | Jon      |        9037 |
+|    9622 |  3.99 | GERALD      | Jon      |        9523 |
+|    9623 |  6.99 | GERALD      | Jon      |        9883 |
+|    9624 |  3.99 | GERALD      | Mike     |       10427 |
+|    9625 |  4.99 | GERALD      | Mike     |       10854 |
+|    9626 |  3.99 | GERALD      | Mike     |       11535 |
+|    9627 |  2.99 | GERALD      | Jon      |       11579 |
+|    9628 |  4.99 | GERALD      | Jon      |       12037 |
+|    9629 |  2.99 | GERALD      | Jon      |       12876 |
+|    9630 |  0.99 | GERALD      | Mike     |       12913 |
+|    9631 |  4.99 | GERALD      | Jon      |       13107 |
+|    9632 |  5.99 | GERALD      | Jon      |       13442 |
+|    9633 |  6.99 | GERALD      | Jon      |       13703 |
+|    9634 |  4.99 | GERALD      | Mike     |       15705 |
+|    9635 |  5.99 | GERALD      | Jon      |       15754 |
+|    9636 |  2.99 | GERALD      | Mike     |       15757 |
+|    9637 |  2.99 | KEITH       | Mike     |         144 |
+|    9638 |  4.99 | KEITH       | Mike     |         824 |
+|    9639 |  0.99 | KEITH       | Jon      |         945 |
+|    9640 |  5.99 | KEITH       | Jon      |        1246 |
+|    9641 |  1.99 | KEITH       | Mike     |        1788 |
+|    9642 |  1.99 | KEITH       | Jon      |        1971 |
+|    9643 |  6.99 | KEITH       | Jon      |        2153 |
+|    9644 |  3.99 | KEITH       | Mike     |        3865 |
+|    9645 |  0.99 | KEITH       | Mike     |        4478 |
+|    9646 |  0.99 | KEITH       | Mike     |        5896 |
+|    9647 |  8.99 | KEITH       | Mike     |        6288 |
+|    9648 |  4.99 | KEITH       | Jon      |        6367 |
+|    9649 |  2.99 | KEITH       | Jon      |        6405 |
+|    9650 |  0.99 | KEITH       | Mike     |        6839 |
+|    9651 |  2.99 | KEITH       | Mike     |        7353 |
+|    9652 |  5.99 | KEITH       | Mike     |        7366 |
+|    9653 |  2.99 | KEITH       | Jon      |        8041 |
+|    9654 |  2.99 | KEITH       | Mike     |        8124 |
+|    9655 |  3.99 | KEITH       | Jon      |        9233 |
+|    9656 |  2.99 | KEITH       | Jon      |       10391 |
+|    9657 |  2.99 | KEITH       | Mike     |       10502 |
+|    9658 |  6.99 | KEITH       | Mike     |       10503 |
+|    9659 |  0.99 | KEITH       | Jon      |       10764 |
+|    9660 |  2.99 | KEITH       | Jon      |       11065 |
+|    9661 |  0.99 | KEITH       | Mike     |       14926 |
+|    9662 |  2.99 | KEITH       | Jon      |       15869 |
+|    9663 |  4.99 | SAMUEL      | Jon      |         858 |
+|    9664 |  2.99 | SAMUEL      | Mike     |        1455 |
+|    9665 |  0.99 | SAMUEL      | Jon      |        1908 |
+|    9666 |  5.99 | SAMUEL      | Mike     |        2114 |
+|    9667 |  2.99 | SAMUEL      | Mike     |        2721 |
+|    9668 |  2.99 | SAMUEL      | Mike     |        2749 |
+|    9669 |  2.99 | SAMUEL      | Mike     |        3245 |
+|    9670 |  2.99 | SAMUEL      | Mike     |        3753 |
+|    9671 |  2.99 | SAMUEL      | Mike     |        3809 |
+|    9672 |  5.99 | SAMUEL      | Jon      |        5023 |
+|    9673 |  2.99 | SAMUEL      | Mike     |        6362 |
+|    9674 |  2.99 | SAMUEL      | Mike     |        8621 |
+|    9675 |  0.99 | SAMUEL      | Jon      |        9062 |
+|    9676 |  0.99 | SAMUEL      | Mike     |        9568 |
+|    9677 |  2.99 | SAMUEL      | Mike     |       10193 |
+|    9678 |  4.99 | SAMUEL      | Mike     |       10482 |
+|    9679 |  5.99 | SAMUEL      | Jon      |       11149 |
+|    9680 |  4.99 | SAMUEL      | Jon      |       11653 |
+|    9681 |  6.99 | SAMUEL      | Mike     |       12452 |
+|    9682 |  2.99 | SAMUEL      | Mike     |       13197 |
+|    9683 |  7.99 | SAMUEL      | Mike     |       14004 |
+|    9684 |  8.99 | WILLIE      | Mike     |         284 |
+|    9685 |  2.99 | WILLIE      | Jon      |         392 |
+|    9686 |  3.99 | WILLIE      | Mike     |         528 |
+|    9687 |  4.99 | WILLIE      | Jon      |        1329 |
+|    9688 |  1.99 | WILLIE      | Jon      |        1770 |
+|    9689 |  0.99 | WILLIE      | Mike     |        2401 |
+|    9690 |  4.99 | WILLIE      | Mike     |        2736 |
+|    9691 |  7.99 | WILLIE      | Jon      |        4830 |
+|    9692 |  9.99 | WILLIE      | Jon      |        6424 |
+|    9693 |  2.99 | WILLIE      | Mike     |        6542 |
+|    9694 |  0.99 | WILLIE      | Jon      |        6741 |
+|    9695 |  0.99 | WILLIE      | Jon      |        7098 |
+|    9696 |  0.99 | WILLIE      | Mike     |        7115 |
+|    9697 |  4.99 | WILLIE      | Mike     |        8174 |
+|    9698 |  4.99 | WILLIE      | Mike     |        9898 |
+|    9699 |  5.99 | WILLIE      | Jon      |       10174 |
+|    9700 |  4.99 | WILLIE      | Mike     |       11032 |
+|    9701 |  1.99 | WILLIE      | Mike     |       12611 |
+|    9702 |  2.99 | WILLIE      | Jon      |       13297 |
+|    9703 |  1.99 | WILLIE      | Mike     |       14258 |
+|    9704 |  5.99 | WILLIE      | Jon      |       14598 |
+|    9705 |  2.99 | WILLIE      | Mike     |       15104 |
+|    9706 |  4.99 | WILLIE      | Mike     |       15148 |
+|    9707 |  1.99 | WILLIE      | Mike     |       15453 |
+|    9708 |  4.99 | WILLIE      | Jon      |       15655 |
+|    9709 |  0.99 | RALPH       | Mike     |         633 |
+|    9710 |  4.99 | RALPH       | Jon      |         777 |
+|    9711 |  0.99 | RALPH       | Jon      |        1492 |
+|    9712 |  6.99 | RALPH       | Jon      |        2402 |
+|    9713 |  3.99 | RALPH       | Jon      |        2541 |
+|    9714 |  6.99 | RALPH       | Jon      |        2780 |
+|    9715 |  4.99 | RALPH       | Mike     |        4056 |
+|    9716 |  7.99 | RALPH       | Mike     |        4487 |
+|    9717 |  2.99 | RALPH       | Jon      |        5456 |
+|    9718 |  1.99 | RALPH       | Mike     |        5834 |
+|    9719 |  3.99 | RALPH       | Mike     |        5995 |
+|    9720 |  0.99 | RALPH       | Mike     |        6442 |
+|    9721 |  5.99 | RALPH       | Jon      |        6770 |
+|    9722 |  2.99 | RALPH       | Mike     |        7251 |
+|    9723 |  9.99 | RALPH       | Jon      |        7588 |
+|    9724 |  4.99 | RALPH       | Mike     |        7654 |
+|    9725 |  3.99 | RALPH       | Jon      |        7908 |
+|    9726 |  2.99 | RALPH       | Mike     |        8220 |
+|    9727 |  2.99 | RALPH       | Jon      |        8361 |
+|    9728 |  4.99 | RALPH       | Mike     |        9283 |
+|    9729 |  0.99 | RALPH       | Jon      |        9352 |
+|    9730 |  2.99 | RALPH       | Mike     |        9623 |
+|    9731 |  3.99 | RALPH       | Jon      |        9659 |
+|    9732 |  2.99 | RALPH       | Jon      |       10857 |
+|    9733 |  6.99 | RALPH       | Jon      |       11264 |
+|    9734 |  4.99 | RALPH       | Jon      |       11553 |
+|    9735 |  5.99 | RALPH       | Jon      |       12088 |
+|    9736 |  5.99 | RALPH       | Mike     |       12773 |
+|    9737 |  0.99 | RALPH       | Jon      |       12795 |
+|    9738 |  6.99 | RALPH       | Mike     |       12839 |
+|    9739 |  4.99 | RALPH       | Mike     |       12990 |
+|    9740 |  7.99 | RALPH       | Jon      |       13894 |
+|    9741 |  4.99 | RALPH       | Mike     |       14700 |
+|    9742 |  2.99 | RALPH       | Mike     |       15310 |
+|    9743 |  5.99 | LAWRENCE    | Mike     |         368 |
+|    9744 |  4.99 | LAWRENCE    | Jon      |        1120 |
+|    9745 |  4.99 | LAWRENCE    | Jon      |        2353 |
+|    9746 |  1.99 | LAWRENCE    | Jon      |        2558 |
+|    9747 |  2.99 | LAWRENCE    | Mike     |        2851 |
+|    9748 |  2.99 | LAWRENCE    | Jon      |        3303 |
+|    9749 |  2.99 | LAWRENCE    | Jon      |        5154 |
+|    9750 |  0.99 | LAWRENCE    | Mike     |        6152 |
+|    9751 |  4.99 | LAWRENCE    | Jon      |        6829 |
+|    9752 |  0.99 | LAWRENCE    | Jon      |        6911 |
+|    9753 |  1.99 | LAWRENCE    | Mike     |        6914 |
+|    9754 |  2.99 | LAWRENCE    | Mike     |        7538 |
+|    9755 |  2.99 | LAWRENCE    | Jon      |        7712 |
+|    9756 |  4.99 | LAWRENCE    | Jon      |        8189 |
+|    9757 |  1.99 | LAWRENCE    | Mike     |       10145 |
+|    9758 |  4.99 | LAWRENCE    | Mike     |       10151 |
+|    9759 |  0.99 | LAWRENCE    | Mike     |       10414 |
+|    9760 |  0.99 | LAWRENCE    | Jon      |       10975 |
+|    9761 |  5.99 | LAWRENCE    | Jon      |       11031 |
+|    9762 |  5.99 | LAWRENCE    | Jon      |       11243 |
+|    9763 |  2.99 | LAWRENCE    | Mike     |       11327 |
+|    9764 |  3.99 | LAWRENCE    | Mike     |       11991 |
+|    9765 |  5.99 | LAWRENCE    | Jon      |       12626 |
+|    9766 |  2.99 | LAWRENCE    | Jon      |       12690 |
+|    9767 |  0.99 | LAWRENCE    | Mike     |       13135 |
+|    9768 |  0.99 | LAWRENCE    | Jon      |       14031 |
+|    9769 |  0.99 | LAWRENCE    | Mike     |       14422 |
+|    9770 |  6.99 | LAWRENCE    | Mike     |       15759 |
+|    9771 |  2.99 | LAWRENCE    | Jon      |       15935 |
+|    9772 |  3.98 | LAWRENCE    | Mike     |       13298 |
+|    9773 |  0.00 | LAWRENCE    | Mike     |       14769 |
+|    9774 |  4.99 | NICHOLAS    | Jon      |        1035 |
+|    9775 |  2.99 | NICHOLAS    | Mike     |        1429 |
+|    9776 |  2.99 | NICHOLAS    | Mike     |        1529 |
+|    9777 |  2.99 | NICHOLAS    | Mike     |        1615 |
+|    9778 |  2.99 | NICHOLAS    | Jon      |        3197 |
+|    9779 |  2.99 | NICHOLAS    | Jon      |        3393 |
+|    9780 |  8.99 | NICHOLAS    | Jon      |        4646 |
+|    9781 |  4.99 | NICHOLAS    | Mike     |        5227 |
+|    9782 |  1.99 | NICHOLAS    | Jon      |        5563 |
+|    9783 |  5.99 | NICHOLAS    | Jon      |        5690 |
+|    9784 |  4.99 | NICHOLAS    | Mike     |        6204 |
+|    9785 |  4.99 | NICHOLAS    | Jon      |        6576 |
+|    9786 |  4.99 | NICHOLAS    | Mike     |        6981 |
+|    9787 |  1.99 | NICHOLAS    | Mike     |        7172 |
+|    9788 |  2.99 | NICHOLAS    | Mike     |        7485 |
+|    9789 |  2.99 | NICHOLAS    | Mike     |        8081 |
+|    9790 |  2.99 | NICHOLAS    | Jon      |        8325 |
+|    9791 |  4.99 | NICHOLAS    | Jon      |        8364 |
+|    9792 |  0.99 | NICHOLAS    | Mike     |        8662 |
+|    9793 |  2.99 | NICHOLAS    | Mike     |        8714 |
+|    9794 |  4.99 | NICHOLAS    | Mike     |        9784 |
+|    9795 |  3.99 | NICHOLAS    | Jon      |       10546 |
+|    9796 |  4.99 | NICHOLAS    | Jon      |       12244 |
+|    9797 |  6.99 | NICHOLAS    | Mike     |       12854 |
+|    9798 |  6.99 | NICHOLAS    | Mike     |       13603 |
+|    9799 |  6.99 | NICHOLAS    | Jon      |       14051 |
+|    9800 |  2.99 | NICHOLAS    | Jon      |       14129 |
+|    9801 |  4.99 | NICHOLAS    | Jon      |       14336 |
+|    9802 |  5.99 | NICHOLAS    | Mike     |       14752 |
+|    9803 | 11.99 | NICHOLAS    | Mike     |       14759 |
+|    9804 |  4.99 | NICHOLAS    | Mike     |       14808 |
+|    9805 |  2.99 | NICHOLAS    | Mike     |       14950 |
+|    9806 |  3.99 | ROY         | Mike     |         733 |
+|    9807 |  4.99 | ROY         | Jon      |        1426 |
+|    9808 |  4.99 | ROY         | Jon      |        1569 |
+|    9809 |  4.99 | ROY         | Mike     |        1847 |
+|    9810 |  4.99 | ROY         | Mike     |        2540 |
+|    9811 |  2.99 | ROY         | Jon      |        3281 |
+|    9812 |  3.99 | ROY         | Mike     |        3726 |
+|    9813 |  3.99 | ROY         | Jon      |        5687 |
+|    9814 |  6.99 | ROY         | Mike     |        5758 |
+|    9815 |  4.99 | ROY         | Jon      |        6140 |
+|    9816 |  4.99 | ROY         | Jon      |        6705 |
+|    9817 |  2.99 | ROY         | Jon      |        6821 |
+|    9818 |  4.99 | ROY         | Jon      |        6878 |
+|    9819 |  2.99 | ROY         | Mike     |        7256 |
+|    9820 |  4.99 | ROY         | Jon      |        7708 |
+|    9821 |  2.99 | ROY         | Jon      |        8121 |
+|    9822 |  3.99 | ROY         | Jon      |        8522 |
+|    9823 |  2.99 | ROY         | Jon      |        8804 |
+|    9824 |  4.99 | ROY         | Jon      |        8841 |
+|    9825 |  4.99 | ROY         | Mike     |        9968 |
+|    9826 |  8.99 | ROY         | Mike     |        9977 |
+|    9827 |  6.99 | ROY         | Mike     |       10339 |
+|    9828 |  5.99 | ROY         | Jon      |       12189 |
+|    9829 |  4.99 | ROY         | Jon      |       12760 |
+|    9830 |  9.99 | ROY         | Mike     |       13706 |
+|    9831 |  2.99 | ROY         | Mike     |       14694 |
+|    9832 |  5.99 | ROY         | Mike     |       14983 |
+|    9833 |  4.99 | ROY         | Jon      |       15279 |
+|    9834 |  4.99 | ROY         | Mike     |       15335 |
+|    9835 |  5.99 | BENJAMIN    | Mike     |         462 |
+|    9836 |  2.99 | BENJAMIN    | Mike     |        1722 |
+|    9837 |  2.99 | BENJAMIN    | Jon      |        2442 |
+|    9838 |  4.99 | BENJAMIN    | Jon      |        2606 |
+|    9839 |  4.99 | BENJAMIN    | Jon      |        2857 |
+|    9840 |  3.99 | BENJAMIN    | Jon      |        2962 |
+|    9841 |  4.99 | BENJAMIN    | Mike     |        3678 |
+|    9842 |  4.99 | BENJAMIN    | Jon      |        3961 |
+|    9843 |  0.99 | BENJAMIN    | Mike     |        4047 |
+|    9844 |  4.99 | BENJAMIN    | Jon      |        4689 |
+|    9845 | 10.99 | BENJAMIN    | Mike     |        5872 |
+|    9846 |  2.99 | BENJAMIN    | Mike     |        7272 |
+|    9847 |  4.99 | BENJAMIN    | Jon      |        9266 |
+|    9848 |  0.99 | BENJAMIN    | Mike     |       10092 |
+|    9849 |  5.99 | BENJAMIN    | Jon      |       10290 |
+|    9850 |  4.99 | BENJAMIN    | Jon      |       11932 |
+|    9851 |  4.99 | BENJAMIN    | Mike     |       12557 |
+|    9852 |  1.99 | BENJAMIN    | Mike     |       12761 |
+|    9853 |  3.99 | BENJAMIN    | Jon      |       12912 |
+|    9854 |  4.99 | BENJAMIN    | Mike     |       13698 |
+|    9855 |  0.99 | BENJAMIN    | Jon      |       13936 |
+|    9856 |  4.99 | BENJAMIN    | Jon      |       14293 |
+|    9857 |  0.99 | BENJAMIN    | Mike     |       15242 |
+|    9858 |  5.99 | BRUCE       | Jon      |         120 |
+|    9859 |  4.99 | BRUCE       | Mike     |         231 |
+|    9860 |  1.99 | BRUCE       | Mike     |        1303 |
+|    9861 |  6.99 | BRUCE       | Mike     |        1578 |
+|    9862 |  4.99 | BRUCE       | Mike     |        1983 |
+|    9863 |  2.99 | BRUCE       | Mike     |        2525 |
+|    9864 |  0.99 | BRUCE       | Jon      |        3156 |
+|    9865 |  1.99 | BRUCE       | Mike     |        4583 |
+|    9866 |  4.99 | BRUCE       | Mike     |        6604 |
+|    9867 |  7.99 | BRUCE       | Mike     |        7488 |
+|    9868 |  4.99 | BRUCE       | Jon      |        7634 |
+|    9869 |  4.99 | BRUCE       | Mike     |        8168 |
+|    9870 |  4.99 | BRUCE       | Jon      |        8782 |
+|    9871 |  3.99 | BRUCE       | Mike     |        8856 |
+|    9872 |  2.99 | BRUCE       | Mike     |        9122 |
+|    9873 |  4.99 | BRUCE       | Jon      |        9184 |
+|    9874 |  2.99 | BRUCE       | Jon      |        9540 |
+|    9875 |  2.99 | BRUCE       | Jon      |       10717 |
+|    9876 |  2.99 | BRUCE       | Jon      |       12322 |
+|    9877 |  4.99 | BRUCE       | Jon      |       12375 |
+|    9878 |  8.99 | BRUCE       | Mike     |       12804 |
+|    9879 |  2.99 | BRUCE       | Mike     |       13619 |
+|    9880 |  6.99 | BRUCE       | Jon      |       14463 |
+|    9881 |  6.99 | BRANDON     | Jon      |         911 |
+|    9882 |  1.99 | BRANDON     | Jon      |        1401 |
+|    9883 |  0.99 | BRANDON     | Jon      |        2214 |
+|    9884 |  4.99 | BRANDON     | Jon      |        3632 |
+|    9885 |  2.99 | BRANDON     | Mike     |        3834 |
+|    9886 |  2.99 | BRANDON     | Jon      |        4276 |
+|    9887 |  5.99 | BRANDON     | Mike     |        4569 |
+|    9888 |  0.99 | BRANDON     | Jon      |        5364 |
+|    9889 |  6.99 | BRANDON     | Mike     |        6112 |
+|    9890 |  4.99 | BRANDON     | Mike     |        6366 |
+|    9891 |  6.99 | BRANDON     | Jon      |        6533 |
+|    9892 |  5.99 | BRANDON     | Jon      |        6738 |
+|    9893 |  0.99 | BRANDON     | Mike     |        6842 |
+|    9894 |  4.99 | BRANDON     | Jon      |        6971 |
+|    9895 |  1.99 | BRANDON     | Mike     |        7344 |
+|    9896 |  2.99 | BRANDON     | Mike     |        7562 |
+|    9897 |  4.99 | BRANDON     | Jon      |        7602 |
+|    9898 |  6.99 | BRANDON     | Mike     |        7805 |
+|    9899 |  4.99 | BRANDON     | Jon      |        8169 |
+|    9900 |  1.99 | BRANDON     | Jon      |        8260 |
+|    9901 |  2.99 | BRANDON     | Jon      |        8928 |
+|    9902 |  6.99 | BRANDON     | Mike     |        9316 |
+|    9903 |  2.99 | BRANDON     | Mike     |       10198 |
+|    9904 |  4.99 | BRANDON     | Mike     |       10384 |
+|    9905 |  2.99 | BRANDON     | Jon      |       11337 |
+|    9906 |  5.99 | BRANDON     | Jon      |       11340 |
+|    9907 |  2.99 | BRANDON     | Jon      |       12413 |
+|    9908 |  4.99 | BRANDON     | Mike     |       12608 |
+|    9909 |  0.99 | BRANDON     | Jon      |       13563 |
+|    9910 |  2.99 | BRANDON     | Mike     |       13857 |
+|    9911 |  4.99 | BRANDON     | Mike     |       14147 |
+|    9912 |  4.99 | BRANDON     | Mike     |       14290 |
+|    9913 |  2.99 | BRANDON     | Mike     |       14390 |
+|    9914 |  2.99 | BRANDON     | Mike     |       14717 |
+|    9915 |  6.99 | BRANDON     | Mike     |       14906 |
+|    9916 |  2.99 | BRANDON     | Mike     |       15514 |
+|    9917 |  4.99 | BRANDON     | Mike     |       13421 |
+|    9918 |  0.99 | ADAM        | Mike     |         939 |
+|    9919 |  2.99 | ADAM        | Mike     |        1089 |
+|    9920 |  0.99 | ADAM        | Mike     |        3078 |
+|    9921 |  8.99 | ADAM        | Mike     |        4251 |
+|    9922 |  4.99 | ADAM        | Jon      |        5490 |
+|    9923 |  4.99 | ADAM        | Jon      |        5538 |
+|    9924 |  2.99 | ADAM        | Jon      |        5839 |
+|    9925 |  2.99 | ADAM        | Jon      |        6228 |
+|    9926 |  0.99 | ADAM        | Mike     |        6716 |
+|    9927 |  5.99 | ADAM        | Jon      |        6835 |
+|    9928 |  0.99 | ADAM        | Jon      |        8490 |
+|    9929 |  3.99 | ADAM        | Mike     |        9030 |
+|    9930 |  4.99 | ADAM        | Mike     |        9430 |
+|    9931 |  4.99 | ADAM        | Mike     |        9912 |
+|    9932 |  4.99 | ADAM        | Jon      |       10344 |
+|    9933 |  4.99 | ADAM        | Mike     |       12152 |
+|    9934 |  0.99 | ADAM        | Jon      |       12362 |
+|    9935 |  8.99 | ADAM        | Jon      |       12373 |
+|    9936 |  6.99 | ADAM        | Jon      |       12911 |
+|    9937 |  4.99 | ADAM        | Jon      |       13235 |
+|    9938 |  6.99 | ADAM        | Mike     |       14413 |
+|    9939 | 10.99 | ADAM        | Mike     |       14481 |
+|    9940 |  5.99 | HARRY       | Mike     |          64 |
+|    9941 |  5.99 | HARRY       | Mike     |         125 |
+|    9942 |  2.99 | HARRY       | Mike     |         836 |
+|    9943 |  2.99 | HARRY       | Mike     |         949 |
+|    9944 |  0.99 | HARRY       | Mike     |        1186 |
+|    9945 |  9.99 | HARRY       | Mike     |        1513 |
+|    9946 |  4.99 | HARRY       | Mike     |        2531 |
+|    9947 |  4.99 | HARRY       | Mike     |        2694 |
+|    9948 |  4.99 | HARRY       | Mike     |        2744 |
+|    9949 |  4.99 | HARRY       | Jon      |        3275 |
+|    9950 |  4.99 | HARRY       | Jon      |        3608 |
+|    9951 |  0.99 | HARRY       | Jon      |        4066 |
+|    9952 |  0.99 | HARRY       | Mike     |        4584 |
+|    9953 |  8.99 | HARRY       | Jon      |        4913 |
+|    9954 |  4.99 | HARRY       | Mike     |        6124 |
+|    9955 |  5.99 | HARRY       | Mike     |        6154 |
+|    9956 |  2.99 | HARRY       | Mike     |        6681 |
+|    9957 |  4.99 | HARRY       | Jon      |        7571 |
+|    9958 |  0.99 | HARRY       | Mike     |        8045 |
+|    9959 |  2.99 | HARRY       | Jon      |        8226 |
+|    9960 |  5.99 | HARRY       | Mike     |        9400 |
+|    9961 |  6.99 | HARRY       | Mike     |        9833 |
+|    9962 |  8.99 | HARRY       | Jon      |       10730 |
+|    9963 |  1.99 | HARRY       | Jon      |       10848 |
+|    9964 |  0.99 | HARRY       | Mike     |       11844 |
+|    9965 |  2.99 | HARRY       | Jon      |       12319 |
+|    9966 |  4.99 | HARRY       | Mike     |       12796 |
+|    9967 |  8.99 | HARRY       | Jon      |       13189 |
+|    9968 |  2.99 | HARRY       | Jon      |       13280 |
+|    9969 |  0.99 | HARRY       | Jon      |       13378 |
+|    9970 |  7.99 | HARRY       | Jon      |       13781 |
+|    9971 |  1.99 | HARRY       | Jon      |       13963 |
+|    9972 |  7.99 | HARRY       | Mike     |       14393 |
+|    9973 |  2.99 | HARRY       | Mike     |       15353 |
+|    9974 |  2.99 | HARRY       | Mike     |       15437 |
+|    9975 |  4.99 | FRED        | Mike     |          31 |
+|    9976 |  4.99 | FRED        | Mike     |         294 |
+|    9977 |  0.99 | FRED        | Jon      |         854 |
+|    9978 |  7.99 | FRED        | Jon      |         913 |
+|    9979 |  0.99 | FRED        | Mike     |        1224 |
+|    9980 |  6.99 | FRED        | Mike     |        3490 |
+|    9981 |  2.99 | FRED        | Jon      |        3903 |
+|    9982 |  4.99 | FRED        | Jon      |        4859 |
+|    9983 |  1.99 | FRED        | Mike     |        5043 |
+|    9984 |  7.99 | FRED        | Jon      |        5496 |
+|    9985 |  2.99 | FRED        | Jon      |        5561 |
+|    9986 |  2.99 | FRED        | Mike     |        8236 |
+|    9987 |  2.99 | FRED        | Jon      |        8826 |
+|    9988 |  4.99 | FRED        | Jon      |        9032 |
+|    9989 |  0.99 | FRED        | Mike     |        9089 |
+|    9990 |  0.99 | FRED        | Jon      |        9543 |
+|    9991 |  4.99 | FRED        | Mike     |        9973 |
+|    9992 |  0.99 | FRED        | Mike     |       10299 |
+|    9993 |  3.99 | FRED        | Jon      |       10359 |
+|    9994 |  2.99 | FRED        | Jon      |       10713 |
+|    9995 |  4.99 | FRED        | Mike     |       11084 |
+|    9996 |  1.99 | FRED        | Jon      |       11388 |
+|    9997 |  0.99 | FRED        | Mike     |       12521 |
+|    9998 |  5.99 | FRED        | Jon      |       14684 |
+|    9999 |  0.99 | FRED        | Mike     |       13898 |
+|   10000 |  6.99 | WAYNE       | Jon      |        1190 |
+|   10001 |  7.99 | WAYNE       | Jon      |        4400 |
+|   10002 |  0.99 | WAYNE       | Jon      |        6714 |
+|   10003 |  0.99 | WAYNE       | Mike     |        6968 |
+|   10004 |  7.99 | WAYNE       | Jon      |        7152 |
+|   10005 |  6.99 | WAYNE       | Mike     |        7226 |
+|   10006 |  0.99 | WAYNE       | Jon      |        7797 |
+|   10007 |  0.99 | WAYNE       | Jon      |        8258 |
+|   10008 |  0.99 | WAYNE       | Jon      |       10095 |
+|   10009 |  4.99 | WAYNE       | Mike     |       10336 |
+|   10010 |  1.99 | WAYNE       | Mike     |       11540 |
+|   10011 |  0.99 | WAYNE       | Jon      |       11925 |
+|   10012 |  4.99 | WAYNE       | Mike     |       12339 |
+|   10013 |  0.99 | WAYNE       | Mike     |       13039 |
+|   10014 |  3.99 | WAYNE       | Mike     |       14602 |
+|   10015 |  2.99 | WAYNE       | Jon      |       14786 |
+|   10016 |  3.99 | WAYNE       | Jon      |       15368 |
+|   10017 |  4.99 | WAYNE       | Mike     |       15626 |
+|   10018 |  5.99 | WAYNE       | Mike     |       15982 |
+|   10019 |  3.99 | BILLY       | Mike     |          26 |
+|   10020 |  6.99 | BILLY       | Jon      |         286 |
+|   10021 |  4.99 | BILLY       | Jon      |         381 |
+|   10022 |  5.99 | BILLY       | Mike     |         384 |
+|   10023 |  0.99 | BILLY       | Mike     |         825 |
+|   10024 |  2.99 | BILLY       | Mike     |         829 |
+|   10025 |  2.99 | BILLY       | Jon      |        1212 |
+|   10026 |  1.99 | BILLY       | Mike     |        1218 |
+|   10027 |  6.99 | BILLY       | Mike     |        1573 |
+|   10028 |  5.99 | BILLY       | Jon      |        1675 |
+|   10029 |  0.99 | BILLY       | Jon      |        2837 |
+|   10030 |  3.99 | BILLY       | Mike     |        3176 |
+|   10031 |  0.99 | BILLY       | Jon      |        3396 |
+|   10032 |  8.99 | BILLY       | Jon      |        4115 |
+|   10033 |  1.99 | BILLY       | Mike     |        4612 |
+|   10034 |  4.99 | BILLY       | Mike     |        5171 |
+|   10035 |  0.99 | BILLY       | Jon      |        5614 |
+|   10036 |  2.99 | BILLY       | Mike     |        6000 |
+|   10037 |  1.99 | BILLY       | Mike     |        6460 |
+|   10038 |  0.99 | BILLY       | Mike     |        6922 |
+|   10039 |  3.99 | BILLY       | Mike     |        7408 |
+|   10040 |  4.99 | BILLY       | Mike     |        8138 |
+|   10041 |  4.99 | BILLY       | Mike     |        9008 |
+|   10042 |  8.99 | BILLY       | Mike     |        9117 |
+|   10043 |  0.99 | BILLY       | Mike     |        9635 |
+|   10044 | 10.99 | BILLY       | Mike     |       11086 |
+|   10045 |  9.99 | BILLY       | Jon      |       12397 |
+|   10046 |  7.99 | BILLY       | Jon      |       12584 |
+|   10047 |  2.99 | BILLY       | Mike     |       13028 |
+|   10048 |  3.99 | BILLY       | Jon      |       13143 |
+|   10049 |  4.99 | BILLY       | Mike     |       13191 |
+|   10050 |  4.99 | BILLY       | Jon      |       13953 |
+|   10051 |  2.99 | BILLY       | Mike     |       14384 |
+|   10052 |  0.99 | BILLY       | Mike     |       15786 |
+|   10053 |  2.99 | BILLY       | Mike     |       15824 |
+|   10054 |  2.99 | STEVE       | Mike     |         617 |
+|   10055 |  2.99 | STEVE       | Mike     |         638 |
+|   10056 |  2.99 | STEVE       | Mike     |        2315 |
+|   10057 |  4.99 | STEVE       | Mike     |        2959 |
+|   10058 |  3.99 | STEVE       | Mike     |        3283 |
+|   10059 |  4.99 | STEVE       | Mike     |        5229 |
+|   10060 |  2.99 | STEVE       | Mike     |        5314 |
+|   10061 |  2.99 | STEVE       | Mike     |        5352 |
+|   10062 |  6.99 | STEVE       | Mike     |        5501 |
+|   10063 |  7.99 | STEVE       | Jon      |        5914 |
+|   10064 |  4.99 | STEVE       | Jon      |        6692 |
+|   10065 |  4.99 | STEVE       | Mike     |        7190 |
+|   10066 |  5.99 | STEVE       | Jon      |        7234 |
+|   10067 |  4.99 | STEVE       | Jon      |        7735 |
+|   10068 |  7.99 | STEVE       | Jon      |        8009 |
+|   10069 |  2.99 | STEVE       | Mike     |        8059 |
+|   10070 |  0.99 | STEVE       | Mike     |        8358 |
+|   10071 |  0.99 | STEVE       | Mike     |        8724 |
+|   10072 |  2.99 | STEVE       | Mike     |        8755 |
+|   10073 |  8.99 | STEVE       | Jon      |        8837 |
+|   10074 |  5.99 | STEVE       | Mike     |        9128 |
+|   10075 | 10.99 | STEVE       | Jon      |       11134 |
+|   10076 |  3.99 | STEVE       | Jon      |       11438 |
+|   10077 |  4.99 | STEVE       | Jon      |       11555 |
+|   10078 |  0.99 | STEVE       | Mike     |       12224 |
+|   10079 |  3.99 | STEVE       | Mike     |       12714 |
+|   10080 |  4.99 | STEVE       | Jon      |       13402 |
+|   10081 |  8.99 | STEVE       | Jon      |       13871 |
+|   10082 |  9.99 | STEVE       | Jon      |       14037 |
+|   10083 |  4.99 | STEVE       | Mike     |       14211 |
+|   10084 |  2.99 | STEVE       | Mike     |       14331 |
+|   10085 |  1.99 | STEVE       | Mike     |       14770 |
+|   10086 |  0.99 | STEVE       | Jon      |       15041 |
+|   10087 |  2.99 | STEVE       | Mike     |       15563 |
+|   10088 |  4.99 | LOUIS       | Jon      |         257 |
+|   10089 |  6.99 | LOUIS       | Mike     |        1472 |
+|   10090 |  2.99 | LOUIS       | Mike     |        3161 |
+|   10091 |  2.99 | LOUIS       | Jon      |        3609 |
+|   10092 |  4.99 | LOUIS       | Jon      |        3667 |
+|   10093 |  7.99 | LOUIS       | Mike     |        4325 |
+|   10094 |  5.99 | LOUIS       | Mike     |        5120 |
+|   10095 |  3.99 | LOUIS       | Mike     |        6202 |
+|   10096 |  0.99 | LOUIS       | Jon      |        6311 |
+|   10097 |  4.99 | LOUIS       | Mike     |        6944 |
+|   10098 |  0.99 | LOUIS       | Mike     |        7094 |
+|   10099 |  3.99 | LOUIS       | Jon      |        7206 |
+|   10100 |  0.99 | LOUIS       | Mike     |        7615 |
+|   10101 |  3.99 | LOUIS       | Mike     |        8611 |
+|   10102 |  8.99 | LOUIS       | Jon      |        9327 |
+|   10103 |  4.99 | LOUIS       | Mike     |        9397 |
+|   10104 |  0.99 | LOUIS       | Jon      |        9480 |
+|   10105 |  4.99 | LOUIS       | Mike     |        9966 |
+|   10106 |  6.99 | LOUIS       | Mike     |       10010 |
+|   10107 |  4.99 | LOUIS       | Mike     |       10221 |
+|   10108 |  5.99 | LOUIS       | Mike     |       10758 |
+|   10109 |  7.99 | LOUIS       | Jon      |       11066 |
+|   10110 |  7.99 | LOUIS       | Jon      |       11512 |
+|   10111 |  3.99 | LOUIS       | Jon      |       11663 |
+|   10112 |  3.99 | LOUIS       | Jon      |       11976 |
+|   10113 |  5.99 | LOUIS       | Mike     |       12142 |
+|   10114 |  5.99 | LOUIS       | Jon      |       12536 |
+|   10115 |  7.99 | LOUIS       | Mike     |       12748 |
+|   10116 |  0.99 | LOUIS       | Jon      |       12780 |
+|   10117 |  2.99 | LOUIS       | Jon      |       13299 |
+|   10118 |  3.99 | LOUIS       | Mike     |       13329 |
+|   10119 |  2.99 | LOUIS       | Jon      |       13467 |
+|   10120 |  6.99 | LOUIS       | Jon      |       15014 |
+|   10121 |  3.99 | LOUIS       | Mike     |       15068 |
+|   10122 |  0.99 | LOUIS       | Mike     |       11739 |
+|   10123 |  0.99 | JEREMY      | Mike     |         521 |
+|   10124 |  2.99 | JEREMY      | Jon      |         910 |
+|   10125 |  0.99 | JEREMY      | Jon      |         919 |
+|   10126 |  1.99 | JEREMY      | Mike     |        1548 |
+|   10127 |  1.99 | JEREMY      | Jon      |        2046 |
+|   10128 |  4.99 | JEREMY      | Jon      |        2487 |
+|   10129 |  2.99 | JEREMY      | Jon      |        2641 |
+|   10130 |  1.99 | JEREMY      | Mike     |        3797 |
+|   10131 |  4.99 | JEREMY      | Mike     |        5463 |
+|   10132 |  6.99 | JEREMY      | Mike     |        5570 |
+|   10133 |  3.99 | JEREMY      | Jon      |        5591 |
+|   10134 |  2.99 | JEREMY      | Jon      |        5945 |
+|   10135 |  0.99 | JEREMY      | Jon      |        6315 |
+|   10136 |  0.99 | JEREMY      | Jon      |        7837 |
+|   10137 |  7.99 | JEREMY      | Jon      |        8586 |
+|   10138 |  0.99 | JEREMY      | Jon      |        9113 |
+|   10139 |  6.99 | JEREMY      | Mike     |        9866 |
+|   10140 |  2.99 | JEREMY      | Mike     |       10695 |
+|   10141 |  0.99 | JEREMY      | Mike     |       11619 |
+|   10142 |  2.99 | JEREMY      | Jon      |       12696 |
+|   10143 |  2.99 | JEREMY      | Mike     |       13337 |
+|   10144 |  4.99 | JEREMY      | Jon      |       13734 |
+|   10145 |  8.99 | JEREMY      | Jon      |       14524 |
+|   10146 |  5.99 | JEREMY      | Jon      |       15053 |
+|   10147 |  2.99 | JEREMY      | Mike     |       15200 |
+|   10148 |  4.99 | JEREMY      | Jon      |       15202 |
+|   10149 |  6.99 | JEREMY      | Jon      |       15366 |
+|   10150 |  2.99 | JEREMY      | Jon      |       15966 |
+|   10151 |  8.99 | AARON       | Jon      |         307 |
+|   10152 |  4.99 | AARON       | Mike     |         412 |
+|   10153 |  4.99 | AARON       | Jon      |         749 |
+|   10154 |  2.99 | AARON       | Mike     |         873 |
+|   10155 |  2.99 | AARON       | Jon      |        1404 |
+|   10156 |  5.99 | AARON       | Mike     |        1499 |
+|   10157 |  4.99 | AARON       | Mike     |        2236 |
+|   10158 |  6.99 | AARON       | Mike     |        3981 |
+|   10159 |  4.99 | AARON       | Jon      |        4335 |
+|   10160 |  2.99 | AARON       | Jon      |        5474 |
+|   10161 |  4.99 | AARON       | Mike     |        7856 |
+|   10162 |  2.99 | AARON       | Jon      |        8900 |
+|   10163 |  0.99 | AARON       | Mike     |       10274 |
+|   10164 |  1.99 | AARON       | Jon      |       10589 |
+|   10165 |  0.99 | AARON       | Mike     |       10640 |
+|   10166 |  4.99 | AARON       | Mike     |       10672 |
+|   10167 |  5.99 | AARON       | Mike     |       10859 |
+|   10168 |  6.99 | AARON       | Mike     |       10961 |
+|   10169 |  5.99 | AARON       | Jon      |       11008 |
+|   10170 |  9.99 | AARON       | Jon      |       12122 |
+|   10171 |  0.99 | AARON       | Jon      |       12663 |
+|   10172 |  4.99 | AARON       | Mike     |       13836 |
+|   10173 |  2.99 | AARON       | Mike     |       15004 |
+|   10174 |  4.99 | AARON       | Mike     |       15505 |
+|   10175 |  0.99 | RANDY       | Mike     |         554 |
+|   10176 |  0.99 | RANDY       | Jon      |        1208 |
+|   10177 |  0.99 | RANDY       | Mike     |        2779 |
+|   10178 |  2.99 | RANDY       | Jon      |        3719 |
+|   10179 |  0.99 | RANDY       | Mike     |        4163 |
+|   10180 |  8.99 | RANDY       | Jon      |        4166 |
+|   10181 |  3.99 | RANDY       | Mike     |        4320 |
+|   10182 |  5.99 | RANDY       | Mike     |        4554 |
+|   10183 |  4.99 | RANDY       | Mike     |        4869 |
+|   10184 |  4.99 | RANDY       | Mike     |        5675 |
+|   10185 |  6.99 | RANDY       | Mike     |        6524 |
+|   10186 |  8.99 | RANDY       | Mike     |        6545 |
+|   10187 |  2.99 | RANDY       | Jon      |        6807 |
+|   10188 |  2.99 | RANDY       | Mike     |        8269 |
+|   10189 |  5.99 | RANDY       | Mike     |        8420 |
+|   10190 |  4.99 | RANDY       | Mike     |        9773 |
+|   10191 |  2.99 | RANDY       | Mike     |        9828 |
+|   10192 |  0.99 | RANDY       | Mike     |        9872 |
+|   10193 |  3.99 | RANDY       | Jon      |       10413 |
+|   10194 |  3.99 | RANDY       | Mike     |       10810 |
+|   10195 |  4.99 | RANDY       | Mike     |       11144 |
+|   10196 |  4.99 | RANDY       | Jon      |       11792 |
+|   10197 |  4.99 | RANDY       | Mike     |       11851 |
+|   10198 |  0.99 | RANDY       | Mike     |       13009 |
+|   10199 |  0.99 | RANDY       | Mike     |       13141 |
+|   10200 |  4.99 | RANDY       | Jon      |       13761 |
+|   10201 |  4.99 | RANDY       | Mike     |       15107 |
+|   10202 |  2.99 | RANDY       | Mike     |       15382 |
+|   10203 |  3.99 | HOWARD      | Jon      |        2556 |
+|   10204 |  1.99 | HOWARD      | Mike     |        3080 |
+|   10205 |  0.99 | HOWARD      | Jon      |        3086 |
+|   10206 |  2.99 | HOWARD      | Jon      |        3136 |
+|   10207 |  4.99 | HOWARD      | Jon      |        3443 |
+|   10208 |  2.99 | HOWARD      | Mike     |        3858 |
+|   10209 |  0.99 | HOWARD      | Jon      |        4053 |
+|   10210 |  0.99 | HOWARD      | Mike     |        4077 |
+|   10211 |  0.99 | HOWARD      | Mike     |        4225 |
+|   10212 |  7.99 | HOWARD      | Jon      |        6893 |
+|   10213 |  1.99 | HOWARD      | Mike     |        7697 |
+|   10214 | 10.99 | HOWARD      | Jon      |        8018 |
+|   10215 |  4.99 | HOWARD      | Jon      |        8916 |
+|   10216 |  3.99 | HOWARD      | Jon      |        9461 |
+|   10217 |  0.99 | HOWARD      | Mike     |        9564 |
+|   10218 |  4.99 | HOWARD      | Mike     |       10013 |
+|   10219 |  8.99 | HOWARD      | Mike     |       10183 |
+|   10220 |  3.99 | HOWARD      | Mike     |       10738 |
+|   10221 |  2.99 | HOWARD      | Mike     |       10943 |
+|   10222 |  1.99 | HOWARD      | Mike     |       12390 |
+|   10223 |  4.99 | HOWARD      | Mike     |       12549 |
+|   10224 |  2.99 | HOWARD      | Mike     |       13249 |
+|   10225 |  0.99 | HOWARD      | Mike     |       13275 |
+|   10226 |  0.99 | HOWARD      | Jon      |       15088 |
+|   10227 |  0.99 | HOWARD      | Mike     |       15995 |
+|   10228 |  7.99 | HOWARD      | Mike     |       15999 |
+|   10229 |  0.99 | EUGENE      | Mike     |         347 |
+|   10230 |  4.99 | EUGENE      | Jon      |        1623 |
+|   10231 |  5.99 | EUGENE      | Mike     |        1662 |
+|   10232 |  7.99 | EUGENE      | Jon      |        2134 |
+|   10233 |  4.99 | EUGENE      | Jon      |        2713 |
+|   10234 |  4.99 | EUGENE      | Mike     |        3759 |
+|   10235 |  0.99 | EUGENE      | Jon      |        4755 |
+|   10236 |  1.99 | EUGENE      | Mike     |        5578 |
+|   10237 |  1.99 | EUGENE      | Jon      |        6233 |
+|   10238 |  0.99 | EUGENE      | Mike     |        7888 |
+|   10239 |  2.99 | EUGENE      | Jon      |        8740 |
+|   10240 |  3.99 | EUGENE      | Jon      |        9668 |
+|   10241 |  2.99 | EUGENE      | Mike     |        9868 |
+|   10242 |  4.99 | EUGENE      | Mike     |       10917 |
+|   10243 |  4.99 | EUGENE      | Mike     |       11111 |
+|   10244 |  2.99 | EUGENE      | Mike     |       12596 |
+|   10245 |  4.99 | EUGENE      | Mike     |       12828 |
+|   10246 |  4.99 | EUGENE      | Jon      |       14502 |
+|   10247 |  2.99 | EUGENE      | Mike     |       14971 |
+|   10248 |  4.99 | CARLOS      | Jon      |         209 |
+|   10249 |  4.99 | CARLOS      | Mike     |         863 |
+|   10250 |  8.99 | CARLOS      | Mike     |        1383 |
+|   10251 |  5.99 | CARLOS      | Mike     |        2313 |
+|   10252 |  2.99 | CARLOS      | Mike     |        2926 |
+|   10253 |  4.99 | CARLOS      | Mike     |        3788 |
+|   10254 |  2.99 | CARLOS      | Jon      |        4740 |
+|   10255 |  4.99 | CARLOS      | Mike     |        5402 |
+|   10256 |  7.99 | CARLOS      | Mike     |        6235 |
+|   10257 |  4.99 | CARLOS      | Jon      |        7041 |
+|   10258 |  4.99 | CARLOS      | Mike     |       10041 |
+|   10259 |  3.99 | CARLOS      | Jon      |       11457 |
+|   10260 |  4.99 | CARLOS      | Mike     |       12503 |
+|   10261 |  0.99 | CARLOS      | Mike     |       13334 |
+|   10262 |  7.99 | CARLOS      | Jon      |       13397 |
+|   10263 |  0.99 | CARLOS      | Mike     |       13485 |
+|   10264 |  5.99 | CARLOS      | Mike     |       14011 |
+|   10265 |  2.99 | CARLOS      | Jon      |       14152 |
+|   10266 |  0.99 | CARLOS      | Mike     |       14470 |
+|   10267 |  4.99 | CARLOS      | Mike     |       14886 |
+|   10268 |  4.99 | CARLOS      | Jon      |       15399 |
+|   10269 |  4.99 | CARLOS      | Mike     |       15446 |
+|   10270 |  3.99 | CARLOS      | Jon      |       15930 |
+|   10271 |  3.99 | RUSSELL     | Mike     |         847 |
+|   10272 |  3.99 | RUSSELL     | Mike     |        1868 |
+|   10273 |  2.99 | RUSSELL     | Mike     |        1984 |
+|   10274 |  3.99 | RUSSELL     | Mike     |        2018 |
+|   10275 |  2.99 | RUSSELL     | Mike     |        2440 |
+|   10276 |  4.99 | RUSSELL     | Mike     |        2464 |
+|   10277 |  1.99 | RUSSELL     | Jon      |        2998 |
+|   10278 |  1.99 | RUSSELL     | Jon      |        3099 |
+|   10279 |  4.99 | RUSSELL     | Mike     |        3260 |
+|   10280 |  2.99 | RUSSELL     | Mike     |        3637 |
+|   10281 |  4.99 | RUSSELL     | Mike     |        3688 |
+|   10282 |  2.99 | RUSSELL     | Mike     |        4675 |
+|   10283 |  4.99 | RUSSELL     | Jon      |        4706 |
+|   10284 |  0.99 | RUSSELL     | Jon      |        5339 |
+|   10285 |  8.99 | RUSSELL     | Jon      |        7021 |
+|   10286 |  2.99 | RUSSELL     | Jon      |        7167 |
+|   10287 |  0.99 | RUSSELL     | Jon      |        7435 |
+|   10288 |  2.99 | RUSSELL     | Jon      |        7443 |
+|   10289 |  2.99 | RUSSELL     | Mike     |        7773 |
+|   10290 |  3.99 | RUSSELL     | Mike     |        7974 |
+|   10291 |  0.99 | RUSSELL     | Mike     |        9056 |
+|   10292 |  6.99 | RUSSELL     | Mike     |        9261 |
+|   10293 | 10.99 | RUSSELL     | Mike     |        9710 |
+|   10294 |  1.99 | RUSSELL     | Jon      |       10450 |
+|   10295 |  3.99 | RUSSELL     | Mike     |       10983 |
+|   10296 |  0.99 | RUSSELL     | Mike     |       11936 |
+|   10297 |  0.99 | RUSSELL     | Jon      |       11945 |
+|   10298 |  3.99 | RUSSELL     | Mike     |       12636 |
+|   10299 |  6.99 | RUSSELL     | Mike     |       12996 |
+|   10300 |  6.99 | RUSSELL     | Mike     |       14529 |
+|   10301 |  1.99 | RUSSELL     | Mike     |       14935 |
+|   10302 |  5.99 | RUSSELL     | Jon      |       15175 |
+|   10303 |  2.99 | RUSSELL     | Mike     |       15361 |
+|   10304 |  2.99 | RUSSELL     | Jon      |       15636 |
+|   10305 |  2.99 | RUSSELL     | Mike     |       15697 |
+|   10306 |  2.99 | RUSSELL     | Jon      |       15748 |
+|   10307 |  0.99 | BOBBY       | Jon      |         169 |
+|   10308 |  2.99 | BOBBY       | Jon      |         406 |
+|   10309 |  2.99 | BOBBY       | Mike     |         835 |
+|   10310 |  3.99 | BOBBY       | Mike     |        1402 |
+|   10311 |  1.99 | BOBBY       | Mike     |        1878 |
+|   10312 |  2.99 | BOBBY       | Jon      |        2410 |
+|   10313 |  4.99 | BOBBY       | Mike     |        2418 |
+|   10314 |  2.99 | BOBBY       | Jon      |        3425 |
+|   10315 |  0.99 | BOBBY       | Jon      |        3812 |
+|   10316 |  2.99 | BOBBY       | Jon      |        3970 |
+|   10317 |  0.99 | BOBBY       | Mike     |        4735 |
+|   10318 |  0.99 | BOBBY       | Jon      |        5689 |
+|   10319 |  2.99 | BOBBY       | Jon      |        6116 |
+|   10320 |  4.99 | BOBBY       | Jon      |        6451 |
+|   10321 |  2.99 | BOBBY       | Jon      |        6778 |
+|   10322 |  2.99 | BOBBY       | Mike     |        7375 |
+|   10323 |  2.99 | BOBBY       | Mike     |        7645 |
+|   10324 |  0.99 | BOBBY       | Jon      |        8688 |
+|   10325 |  0.99 | BOBBY       | Jon      |        9144 |
+|   10326 |  4.99 | BOBBY       | Jon      |        9173 |
+|   10327 |  2.99 | BOBBY       | Mike     |        9822 |
+|   10328 |  4.99 | BOBBY       | Jon      |       10033 |
+|   10329 |  0.99 | BOBBY       | Mike     |       10608 |
+|   10330 |  0.99 | BOBBY       | Jon      |       10705 |
+|   10331 |  2.99 | BOBBY       | Mike     |       11519 |
+|   10332 |  2.99 | BOBBY       | Jon      |       12135 |
+|   10333 |  4.99 | BOBBY       | Jon      |       12237 |
+|   10334 |  2.99 | BOBBY       | Jon      |       12632 |
+|   10335 |  8.99 | BOBBY       | Jon      |       13202 |
+|   10336 |  0.99 | BOBBY       | Jon      |       13430 |
+|   10337 |  0.99 | BOBBY       | Mike     |       13614 |
+|   10338 |  2.99 | BOBBY       | Jon      |       13995 |
+|   10339 |  4.99 | BOBBY       | Mike     |       14198 |
+|   10340 |  4.99 | BOBBY       | Jon      |       15299 |
+|   10341 |  4.99 | BOBBY       | Mike     |       15747 |
+|   10342 |  2.99 | VICTOR      | Jon      |         356 |
+|   10343 |  2.99 | VICTOR      | Mike     |         522 |
+|   10344 |  0.99 | VICTOR      | Mike     |        2389 |
+|   10345 |  4.99 | VICTOR      | Mike     |        2468 |
+|   10346 |  1.99 | VICTOR      | Mike     |        2489 |
+|   10347 |  2.99 | VICTOR      | Mike     |        2514 |
+|   10348 |  4.99 | VICTOR      | Jon      |        3125 |
+|   10349 |  3.99 | VICTOR      | Jon      |        3480 |
+|   10350 |  4.99 | VICTOR      | Jon      |        4351 |
+|   10351 |  4.99 | VICTOR      | Mike     |        5004 |
+|   10352 |  0.99 | VICTOR      | Mike     |        5816 |
+|   10353 |  0.99 | VICTOR      | Jon      |        7625 |
+|   10354 |  0.99 | VICTOR      | Jon      |        8777 |
+|   10355 |  9.99 | VICTOR      | Mike     |        8871 |
+|   10356 |  4.99 | VICTOR      | Mike     |        8993 |
+|   10357 |  6.99 | VICTOR      | Mike     |        9067 |
+|   10358 |  0.99 | VICTOR      | Jon      |        9555 |
+|   10359 |  3.99 | VICTOR      | Jon      |       10327 |
+|   10360 |  0.99 | VICTOR      | Jon      |       12229 |
+|   10361 |  0.99 | VICTOR      | Jon      |       12529 |
+|   10362 |  4.99 | VICTOR      | Mike     |       14009 |
+|   10363 |  4.99 | VICTOR      | Jon      |       14300 |
+|   10364 |  5.99 | VICTOR      | Jon      |       14354 |
+|   10365 |  7.99 | VICTOR      | Jon      |       15939 |
+|   10366 |  0.99 | MARTIN      | Jon      |          63 |
+|   10367 |  8.99 | MARTIN      | Mike     |         766 |
+|   10368 |  7.99 | MARTIN      | Mike     |        1831 |
+|   10369 |  2.99 | MARTIN      | Jon      |        2228 |
+|   10370 |  2.99 | MARTIN      | Mike     |        2252 |
+|   10371 |  2.99 | MARTIN      | Jon      |        2318 |
+|   10372 |  7.99 | MARTIN      | Mike     |        2609 |
+|   10373 |  2.99 | MARTIN      | Mike     |        3091 |
+|   10374 |  5.99 | MARTIN      | Jon      |        4747 |
+|   10375 |  4.99 | MARTIN      | Jon      |        6091 |
+|   10376 |  0.99 | MARTIN      | Jon      |        6244 |
+|   10377 |  4.99 | MARTIN      | Mike     |        6775 |
+|   10378 |  3.99 | MARTIN      | Mike     |        7367 |
+|   10379 |  2.99 | MARTIN      | Jon      |        8367 |
+|   10380 |  0.99 | MARTIN      | Mike     |        8635 |
+|   10381 |  0.99 | MARTIN      | Mike     |        9653 |
+|   10382 |  0.99 | MARTIN      | Mike     |        9678 |
+|   10383 |  4.99 | MARTIN      | Jon      |       10515 |
+|   10384 |  4.99 | MARTIN      | Mike     |       10971 |
+|   10385 |  0.99 | MARTIN      | Jon      |       10993 |
+|   10386 |  0.99 | MARTIN      | Jon      |       11122 |
+|   10387 |  2.99 | MARTIN      | Mike     |       11592 |
+|   10388 |  4.99 | MARTIN      | Mike     |       12735 |
+|   10389 |  4.99 | MARTIN      | Jon      |       14039 |
+|   10390 |  4.99 | MARTIN      | Jon      |       14678 |
+|   10391 |  1.99 | MARTIN      | Mike     |       15416 |
+|   10392 |  6.99 | MARTIN      | Mike     |       15881 |
+|   10393 |  4.99 | ERNEST      | Jon      |         103 |
+|   10394 |  2.99 | ERNEST      | Jon      |         279 |
+|   10395 |  0.99 | ERNEST      | Mike     |         898 |
+|   10396 |  2.99 | ERNEST      | Jon      |        1013 |
+|   10397 |  0.99 | ERNEST      | Mike     |        1961 |
+|   10398 |  0.99 | ERNEST      | Jon      |        2020 |
+|   10399 |  7.99 | ERNEST      | Mike     |        2378 |
+|   10400 |  5.99 | ERNEST      | Jon      |        2510 |
+|   10401 |  3.99 | ERNEST      | Jon      |        2935 |
+|   10402 |  9.99 | ERNEST      | Mike     |        3088 |
+|   10403 |  4.99 | ERNEST      | Jon      |        3101 |
+|   10404 |  0.99 | ERNEST      | Jon      |        4424 |
+|   10405 |  0.99 | ERNEST      | Jon      |        5250 |
+|   10406 |  4.99 | ERNEST      | Mike     |        5608 |
+|   10407 |  4.99 | ERNEST      | Jon      |        5797 |
+|   10408 |  2.99 | ERNEST      | Jon      |        5966 |
+|   10409 |  0.99 | ERNEST      | Jon      |        6387 |
+|   10410 |  0.99 | ERNEST      | Jon      |        7799 |
+|   10411 |  1.99 | ERNEST      | Mike     |        8445 |
+|   10412 |  5.99 | ERNEST      | Jon      |       11773 |
+|   10413 |  2.99 | ERNEST      | Jon      |       13521 |
+|   10414 |  2.99 | ERNEST      | Jon      |       14416 |
+|   10415 |  0.99 | ERNEST      | Mike     |       14841 |
+|   10416 |  5.99 | ERNEST      | Mike     |       14963 |
+|   10417 |  4.99 | ERNEST      | Jon      |       15321 |
+|   10418 |  2.99 | PHILLIP     | Mike     |         917 |
+|   10419 |  4.99 | PHILLIP     | Jon      |        1038 |
+|   10420 |  2.99 | PHILLIP     | Mike     |        1746 |
+|   10421 |  0.99 | PHILLIP     | Mike     |        1937 |
+|   10422 |  0.99 | PHILLIP     | Mike     |        3105 |
+|   10423 |  8.99 | PHILLIP     | Jon      |        3878 |
+|   10424 |  0.99 | PHILLIP     | Jon      |        3953 |
+|   10425 |  6.99 | PHILLIP     | Mike     |        4714 |
+|   10426 |  2.99 | PHILLIP     | Mike     |        5783 |
+|   10427 |  4.99 | PHILLIP     | Mike     |        6445 |
+|   10428 |  4.99 | PHILLIP     | Jon      |        6933 |
+|   10429 |  0.99 | PHILLIP     | Jon      |        7776 |
+|   10430 |  2.99 | PHILLIP     | Mike     |        8346 |
+|   10431 |  2.99 | PHILLIP     | Mike     |        8518 |
+|   10432 |  2.99 | PHILLIP     | Mike     |        9570 |
+|   10433 |  4.99 | PHILLIP     | Mike     |        9704 |
+|   10434 |  0.99 | PHILLIP     | Mike     |       10557 |
+|   10435 |  3.99 | PHILLIP     | Mike     |       10636 |
+|   10436 |  4.99 | PHILLIP     | Mike     |       10655 |
+|   10437 |  2.99 | PHILLIP     | Mike     |       11021 |
+|   10438 |  2.99 | PHILLIP     | Mike     |       11559 |
+|   10439 |  2.99 | PHILLIP     | Jon      |       12310 |
+|   10440 |  8.99 | PHILLIP     | Jon      |       12686 |
+|   10441 |  7.99 | PHILLIP     | Jon      |       13062 |
+|   10442 |  0.99 | PHILLIP     | Mike     |       13117 |
+|   10443 |  6.99 | PHILLIP     | Mike     |       15488 |
+|   10444 |  7.99 | TODD        | Mike     |         583 |
+|   10445 |  3.99 | TODD        | Jon      |        1585 |
+|   10446 |  2.99 | TODD        | Mike     |        1608 |
+|   10447 |  5.99 | TODD        | Jon      |        1819 |
+|   10448 |  0.99 | TODD        | Mike     |        2732 |
+|   10449 |  2.99 | TODD        | Mike     |        3351 |
+|   10450 |  6.99 | TODD        | Jon      |        3783 |
+|   10451 |  8.99 | TODD        | Mike     |        4189 |
+|   10452 |  0.99 | TODD        | Mike     |        5524 |
+|   10453 |  2.99 | TODD        | Mike     |        5953 |
+|   10454 |  4.99 | TODD        | Mike     |        6037 |
+|   10455 |  2.99 | TODD        | Mike     |        6222 |
+|   10456 |  2.99 | TODD        | Jon      |        6261 |
+|   10457 |  3.99 | TODD        | Mike     |        6324 |
+|   10458 |  4.99 | TODD        | Jon      |        6715 |
+|   10459 |  4.99 | TODD        | Jon      |        8340 |
+|   10460 |  2.99 | TODD        | Mike     |        8751 |
+|   10461 |  0.99 | TODD        | Jon      |        9602 |
+|   10462 |  5.99 | TODD        | Mike     |        9686 |
+|   10463 |  4.99 | TODD        | Mike     |       10572 |
+|   10464 |  3.99 | TODD        | Jon      |       10618 |
+|   10465 |  2.99 | TODD        | Mike     |       10715 |
+|   10466 |  2.99 | TODD        | Jon      |       11128 |
+|   10467 |  4.99 | TODD        | Jon      |       11695 |
+|   10468 |  2.99 | TODD        | Jon      |       12961 |
+|   10469 |  3.99 | TODD        | Mike     |       13716 |
+|   10470 |  2.99 | TODD        | Mike     |       13764 |
+|   10471 |  6.99 | TODD        | Jon      |       13869 |
+|   10472 |  0.99 | TODD        | Mike     |       15949 |
+|   10473 |  4.99 | JESSE       | Jon      |         302 |
+|   10474 |  7.99 | JESSE       | Mike     |         697 |
+|   10475 |  4.99 | JESSE       | Mike     |         841 |
+|   10476 |  3.99 | JESSE       | Mike     |        1127 |
+|   10477 |  0.99 | JESSE       | Mike     |        1464 |
+|   10478 |  0.99 | JESSE       | Jon      |        1465 |
+|   10479 |  0.99 | JESSE       | Mike     |        2068 |
+|   10480 |  0.99 | JESSE       | Jon      |        2100 |
+|   10481 |  5.99 | JESSE       | Jon      |        2981 |
+|   10482 |  4.99 | JESSE       | Jon      |        3378 |
+|   10483 |  4.99 | JESSE       | Jon      |        6216 |
+|   10484 |  6.99 | JESSE       | Jon      |        6456 |
+|   10485 |  5.99 | JESSE       | Mike     |        6517 |
+|   10486 |  0.99 | JESSE       | Mike     |        7497 |
+|   10487 |  2.99 | JESSE       | Mike     |        8090 |
+|   10488 |  0.99 | JESSE       | Mike     |       10564 |
+|   10489 |  4.99 | JESSE       | Mike     |       10838 |
+|   10490 |  2.99 | JESSE       | Jon      |       11682 |
+|   10491 |  4.99 | JESSE       | Jon      |       12153 |
+|   10492 |  6.99 | JESSE       | Mike     |       12936 |
+|   10493 |  2.99 | JESSE       | Jon      |       13034 |
+|   10494 |  5.99 | JESSE       | Mike     |       13082 |
+|   10495 |  0.99 | JESSE       | Jon      |       13645 |
+|   10496 |  4.99 | JESSE       | Jon      |       13772 |
+|   10497 |  5.99 | JESSE       | Jon      |       14279 |
+|   10498 |  0.99 | JESSE       | Jon      |       14979 |
+|   10499 |  4.99 | CRAIG       | Jon      |          21 |
+|   10500 |  4.99 | CRAIG       | Jon      |         411 |
+|   10501 |  6.99 | CRAIG       | Jon      |        1276 |
+|   10502 |  0.99 | CRAIG       | Mike     |        2145 |
+|   10503 |  5.99 | CRAIG       | Mike     |        2537 |
+|   10504 |  4.99 | CRAIG       | Mike     |        2692 |
+|   10505 |  7.99 | CRAIG       | Jon      |        3159 |
+|   10506 |  5.99 | CRAIG       | Jon      |        4947 |
+|   10507 |  2.99 | CRAIG       | Jon      |        5899 |
+|   10508 |  2.99 | CRAIG       | Jon      |        6321 |
+|   10509 |  2.99 | CRAIG       | Mike     |        6452 |
+|   10510 |  5.99 | CRAIG       | Jon      |        7985 |
+|   10511 |  3.99 | CRAIG       | Jon      |        8456 |
+|   10512 |  0.99 | CRAIG       | Jon      |        9213 |
+|   10513 |  2.99 | CRAIG       | Jon      |        9368 |
+|   10514 |  2.99 | CRAIG       | Jon      |        9840 |
+|   10515 |  0.99 | CRAIG       | Jon      |        9940 |
+|   10516 |  2.99 | CRAIG       | Jon      |       10044 |
+|   10517 |  0.99 | CRAIG       | Jon      |       11604 |
+|   10518 |  0.99 | CRAIG       | Jon      |       12044 |
+|   10519 |  2.99 | CRAIG       | Mike     |       12068 |
+|   10520 |  6.99 | CRAIG       | Jon      |       12267 |
+|   10521 |  4.99 | CRAIG       | Jon      |       12497 |
+|   10522 |  2.99 | CRAIG       | Jon      |       12646 |
+|   10523 |  2.99 | CRAIG       | Mike     |       12749 |
+|   10524 |  4.99 | CRAIG       | Mike     |       12977 |
+|   10525 | 10.99 | CRAIG       | Mike     |       14273 |
+|   10526 |  5.99 | CRAIG       | Jon      |       14853 |
+|   10527 |  5.99 | CRAIG       | Jon      |       15660 |
+|   10528 |  0.99 | CRAIG       | Mike     |       12891 |
+|   10529 |  4.99 | ALAN        | Mike     |         998 |
+|   10530 |  4.99 | ALAN        | Mike     |        1763 |
+|   10531 |  4.99 | ALAN        | Mike     |        1946 |
+|   10532 |  3.99 | ALAN        | Mike     |        2552 |
+|   10533 |  0.99 | ALAN        | Jon      |        3527 |
+|   10534 |  6.99 | ALAN        | Mike     |        4443 |
+|   10535 |  0.99 | ALAN        | Mike     |        5249 |
+|   10536 |  3.99 | ALAN        | Jon      |        5626 |
+|   10537 |  2.99 | ALAN        | Jon      |        6104 |
+|   10538 |  3.99 | ALAN        | Mike     |        6600 |
+|   10539 |  4.99 | ALAN        | Mike     |        7029 |
+|   10540 |  8.99 | ALAN        | Mike     |        7896 |
+|   10541 |  4.99 | ALAN        | Jon      |        7977 |
+|   10542 |  6.99 | ALAN        | Mike     |        8338 |
+|   10543 |  4.99 | ALAN        | Mike     |        8887 |
+|   10544 |  4.99 | ALAN        | Mike     |       10217 |
+|   10545 |  2.99 | ALAN        | Mike     |       10949 |
+|   10546 |  4.99 | ALAN        | Jon      |       11348 |
+|   10547 |  2.99 | ALAN        | Jon      |       11441 |
+|   10548 |  3.99 | ALAN        | Jon      |       11944 |
+|   10549 |  4.99 | ALAN        | Jon      |       12069 |
+|   10550 |  7.99 | ALAN        | Jon      |       14493 |
+|   10551 |  2.99 | ALAN        | Mike     |       14578 |
+|   10552 |  2.99 | ALAN        | Mike     |       14777 |
+|   10553 |  5.99 | ALAN        | Mike     |       15462 |
+|   10554 |  9.99 | ALAN        | Jon      |       16011 |
+|   10555 |  4.99 | SHAWN       | Mike     |         254 |
+|   10556 |  4.99 | SHAWN       | Jon      |         912 |
+|   10557 |  5.99 | SHAWN       | Jon      |        1539 |
+|   10558 |  2.99 | SHAWN       | Jon      |        1730 |
+|   10559 |  2.99 | SHAWN       | Jon      |        1893 |
+|   10560 |  7.99 | SHAWN       | Mike     |        2330 |
+|   10561 |  5.99 | SHAWN       | Mike     |        3147 |
+|   10562 |  2.99 | SHAWN       | Mike     |        3999 |
+|   10563 |  4.99 | SHAWN       | Mike     |        4022 |
+|   10564 |  3.99 | SHAWN       | Jon      |        4191 |
+|   10565 |  2.99 | SHAWN       | Jon      |        4310 |
+|   10566 |  5.99 | SHAWN       | Mike     |        4968 |
+|   10567 |  4.99 | SHAWN       | Mike     |        6215 |
+|   10568 |  0.99 | SHAWN       | Mike     |        6430 |
+|   10569 |  3.99 | SHAWN       | Jon      |        7515 |
+|   10570 |  5.99 | SHAWN       | Mike     |        7595 |
+|   10571 |  0.99 | SHAWN       | Mike     |        8493 |
+|   10572 |  5.99 | SHAWN       | Mike     |        9251 |
+|   10573 |  2.99 | SHAWN       | Jon      |        9314 |
+|   10574 |  4.99 | SHAWN       | Mike     |        9825 |
+|   10575 |  4.99 | SHAWN       | Mike     |       10061 |
+|   10576 |  5.99 | SHAWN       | Mike     |       12105 |
+|   10577 |  2.99 | SHAWN       | Jon      |       12803 |
+|   10578 |  3.99 | SHAWN       | Mike     |       13413 |
+|   10579 |  4.99 | SHAWN       | Mike     |       13473 |
+|   10580 |  0.99 | SHAWN       | Mike     |       13501 |
+|   10581 |  3.99 | SHAWN       | Jon      |       13546 |
+|   10582 |  3.99 | SHAWN       | Jon      |       13591 |
+|   10583 |  7.99 | SHAWN       | Jon      |       13618 |
+|   10584 |  5.99 | SHAWN       | Jon      |       13893 |
+|   10585 |  4.99 | SHAWN       | Jon      |       15222 |
+|   10586 |  8.99 | SHAWN       | Jon      |       15303 |
+|   10587 |  4.99 | SHAWN       | Jon      |       15376 |
+|   10588 |  4.99 | CLARENCE    | Jon      |          73 |
+|   10589 |  2.99 | CLARENCE    | Mike     |         210 |
+|   10590 |  5.99 | CLARENCE    | Mike     |         317 |
+|   10591 |  2.99 | CLARENCE    | Jon      |         870 |
+|   10592 |  7.99 | CLARENCE    | Mike     |         891 |
+|   10593 |  0.99 | CLARENCE    | Jon      |        1232 |
+|   10594 |  0.99 | CLARENCE    | Jon      |        1931 |
+|   10595 |  2.99 | CLARENCE    | Mike     |        2045 |
+|   10596 |  2.99 | CLARENCE    | Mike     |        2690 |
+|   10597 |  2.99 | CLARENCE    | Jon      |        3163 |
+|   10598 |  5.99 | CLARENCE    | Mike     |        4188 |
+|   10599 |  0.99 | CLARENCE    | Mike     |        4716 |
+|   10600 |  0.99 | CLARENCE    | Jon      |        4753 |
+|   10601 |  7.99 | CLARENCE    | Jon      |        5583 |
+|   10602 |  4.99 | CLARENCE    | Mike     |        5599 |
+|   10603 |  3.99 | CLARENCE    | Mike     |        6302 |
+|   10604 |  2.99 | CLARENCE    | Mike     |        6463 |
+|   10605 |  0.99 | CLARENCE    | Jon      |        8016 |
+|   10606 |  0.99 | CLARENCE    | Mike     |        8908 |
+|   10607 |  6.99 | CLARENCE    | Jon      |        8913 |
+|   10608 |  0.99 | CLARENCE    | Mike     |        9225 |
+|   10609 |  7.99 | CLARENCE    | Mike     |       10210 |
+|   10610 |  2.99 | CLARENCE    | Jon      |       10406 |
+|   10611 |  4.99 | CLARENCE    | Mike     |       11151 |
+|   10612 |  2.99 | CLARENCE    | Jon      |       11434 |
+|   10613 |  4.99 | CLARENCE    | Mike     |       11602 |
+|   10614 |  0.99 | CLARENCE    | Mike     |       12090 |
+|   10615 |  1.99 | CLARENCE    | Mike     |       12100 |
+|   10616 |  2.99 | CLARENCE    | Mike     |       13980 |
+|   10617 |  0.99 | CLARENCE    | Mike     |       14381 |
+|   10618 |  6.99 | SEAN        | Jon      |        1530 |
+|   10619 |  2.99 | SEAN        | Jon      |        1764 |
+|   10620 |  2.99 | SEAN        | Jon      |        2289 |
+|   10621 |  4.99 | SEAN        | Jon      |        2890 |
+|   10622 |  2.99 | SEAN        | Mike     |        3566 |
+|   10623 |  0.99 | SEAN        | Jon      |        6061 |
+|   10624 |  2.99 | SEAN        | Jon      |        6406 |
+|   10625 |  2.99 | SEAN        | Mike     |        7692 |
+|   10626 |  1.99 | SEAN        | Mike     |        7981 |
+|   10627 |  0.99 | SEAN        | Mike     |        8254 |
+|   10628 |  9.99 | SEAN        | Jon      |        8612 |
+|   10629 |  0.99 | SEAN        | Jon      |       10085 |
+|   10630 |  4.99 | SEAN        | Mike     |       10435 |
+|   10631 |  0.99 | SEAN        | Mike     |       11459 |
+|   10632 |  2.99 | SEAN        | Mike     |       11686 |
+|   10633 |  6.99 | SEAN        | Jon      |       12102 |
+|   10634 |  6.99 | SEAN        | Mike     |       12368 |
+|   10635 |  0.99 | SEAN        | Jon      |       12561 |
+|   10636 |  4.99 | SEAN        | Mike     |       13629 |
+|   10637 |  7.99 | SEAN        | Jon      |       14081 |
+|   10638 |  5.99 | SEAN        | Mike     |       14223 |
+|   10639 |  0.99 | SEAN        | Jon      |       14369 |
+|   10640 |  5.99 | SEAN        | Jon      |       14438 |
+|   10641 |  4.99 | PHILIP      | Mike     |         599 |
+|   10642 |  0.99 | PHILIP      | Jon      |         886 |
+|   10643 |  6.99 | PHILIP      | Mike     |        1611 |
+|   10644 |  1.99 | PHILIP      | Jon      |        1915 |
+|   10645 |  2.99 | PHILIP      | Jon      |        2219 |
+|   10646 |  4.99 | PHILIP      | Mike     |        2319 |
+|   10647 |  2.99 | PHILIP      | Jon      |        3001 |
+|   10648 |  2.99 | PHILIP      | Jon      |        4275 |
+|   10649 |  8.99 | PHILIP      | Jon      |        4546 |
+|   10650 |  5.99 | PHILIP      | Jon      |        4632 |
+|   10651 |  7.99 | PHILIP      | Jon      |        4791 |
+|   10652 |  4.99 | PHILIP      | Mike     |        5099 |
+|   10653 |  2.99 | PHILIP      | Mike     |        6221 |
+|   10654 |  0.99 | PHILIP      | Jon      |        6513 |
+|   10655 |  8.99 | PHILIP      | Mike     |        6930 |
+|   10656 |  0.99 | PHILIP      | Jon      |        7486 |
+|   10657 |  4.99 | PHILIP      | Jon      |        8004 |
+|   10658 |  0.99 | PHILIP      | Jon      |        8448 |
+|   10659 |  7.99 | PHILIP      | Jon      |        9763 |
+|   10660 |  1.99 | PHILIP      | Mike     |       10158 |
+|   10661 |  2.99 | PHILIP      | Jon      |       12059 |
+|   10662 |  1.99 | PHILIP      | Mike     |       12113 |
+|   10663 |  4.99 | PHILIP      | Mike     |       12563 |
+|   10664 |  0.99 | PHILIP      | Mike     |       12676 |
+|   10665 |  4.99 | PHILIP      | Mike     |       13184 |
+|   10666 |  4.99 | PHILIP      | Jon      |       13357 |
+|   10667 |  1.99 | PHILIP      | Jon      |       13788 |
+|   10668 |  2.99 | PHILIP      | Mike     |       15132 |
+|   10669 |  3.99 | PHILIP      | Jon      |       15284 |
+|   10670 |  0.99 | PHILIP      | Jon      |       15527 |
+|   10671 |  3.99 | PHILIP      | Jon      |       16049 |
+|   10672 |  3.99 | CHRIS       | Mike     |         213 |
+|   10673 |  2.99 | CHRIS       | Mike     |         977 |
+|   10674 |  4.99 | CHRIS       | Jon      |        1324 |
+|   10675 |  0.99 | CHRIS       | Jon      |        3543 |
+|   10676 |  6.99 | CHRIS       | Mike     |        3873 |
+|   10677 |  2.99 | CHRIS       | Jon      |        4009 |
+|   10678 |  6.99 | CHRIS       | Mike     |        4307 |
+|   10679 |  4.99 | CHRIS       | Jon      |        5183 |
+|   10680 |  4.99 | CHRIS       | Mike     |        5535 |
+|   10681 |  4.99 | CHRIS       | Jon      |        6059 |
+|   10682 |  3.99 | CHRIS       | Jon      |        7445 |
+|   10683 |  0.99 | CHRIS       | Mike     |        9147 |
+|   10684 |  0.99 | CHRIS       | Jon      |        9864 |
+|   10685 |  4.99 | CHRIS       | Mike     |       10319 |
+|   10686 |  0.99 | CHRIS       | Mike     |       10603 |
+|   10687 |  0.99 | CHRIS       | Mike     |       10718 |
+|   10688 |  4.99 | CHRIS       | Mike     |       12080 |
+|   10689 |  4.99 | CHRIS       | Mike     |       12389 |
+|   10690 |  9.99 | CHRIS       | Jon      |       12510 |
+|   10691 |  0.99 | CHRIS       | Jon      |       13047 |
+|   10692 |  0.99 | CHRIS       | Mike     |       14605 |
+|   10693 |  4.99 | CHRIS       | Jon      |       13178 |
+|   10694 |  0.99 | JOHNNY      | Mike     |        1270 |
+|   10695 |  0.99 | JOHNNY      | Mike     |        1562 |
+|   10696 |  0.99 | JOHNNY      | Jon      |        1603 |
+|   10697 |  4.99 | JOHNNY      | Mike     |        3030 |
+|   10698 |  0.99 | JOHNNY      | Mike     |        3310 |
+|   10699 |  6.99 | JOHNNY      | Mike     |        3389 |
+|   10700 |  0.99 | JOHNNY      | Jon      |        3684 |
+|   10701 |  5.99 | JOHNNY      | Mike     |        4185 |
+|   10702 |  4.99 | JOHNNY      | Mike     |        4393 |
+|   10703 |  0.99 | JOHNNY      | Mike     |        5087 |
+|   10704 |  0.99 | JOHNNY      | Jon      |        5136 |
+|   10705 |  2.99 | JOHNNY      | Mike     |        7740 |
+|   10706 |  7.99 | JOHNNY      | Jon      |        7986 |
+|   10707 |  0.99 | JOHNNY      | Mike     |       11889 |
+|   10708 |  5.99 | JOHNNY      | Mike     |       14471 |
+|   10709 |  0.99 | JOHNNY      | Jon      |       14720 |
+|   10710 |  2.99 | JOHNNY      | Mike     |       15698 |
+|   10711 |  0.99 | JOHNNY      | Mike     |       15856 |
+|   10712 |  4.99 | JOHNNY      | Mike     |       15970 |
+|   10713 |  5.99 | EARL        | Jon      |         641 |
+|   10714 |  1.99 | EARL        | Jon      |        1370 |
+|   10715 |  4.99 | EARL        | Jon      |        1385 |
+|   10716 |  6.99 | EARL        | Jon      |        1408 |
+|   10717 |  6.99 | EARL        | Jon      |        3909 |
+|   10718 |  1.99 | EARL        | Mike     |        5059 |
+|   10719 |  2.99 | EARL        | Jon      |        6335 |
+|   10720 |  4.99 | EARL        | Jon      |        6764 |
+|   10721 |  2.99 | EARL        | Jon      |        6771 |
+|   10722 |  0.99 | EARL        | Jon      |        7142 |
+|   10723 |  2.99 | EARL        | Jon      |        7313 |
+|   10724 |  2.99 | EARL        | Jon      |        8371 |
+|   10725 |  2.99 | EARL        | Jon      |        8807 |
+|   10726 |  5.99 | EARL        | Mike     |        9344 |
+|   10727 |  2.99 | EARL        | Jon      |       10120 |
+|   10728 |  0.99 | EARL        | Jon      |       10124 |
+|   10729 |  6.99 | EARL        | Jon      |       10195 |
+|   10730 |  0.99 | EARL        | Jon      |       10610 |
+|   10731 |  5.99 | EARL        | Jon      |       12393 |
+|   10732 |  4.99 | EARL        | Mike     |       12895 |
+|   10733 |  4.99 | EARL        | Jon      |       13355 |
+|   10734 |  3.99 | EARL        | Mike     |       14078 |
+|   10735 |  4.99 | EARL        | Mike     |       14169 |
+|   10736 |  2.99 | EARL        | Mike     |       14508 |
+|   10737 |  5.99 | EARL        | Jon      |       14778 |
+|   10738 |  1.99 | EARL        | Mike     |       14792 |
+|   10739 |  7.99 | EARL        | Jon      |       15198 |
+|   10740 |  0.99 | JIMMY       | Jon      |        1002 |
+|   10741 |  5.99 | JIMMY       | Mike     |        1769 |
+|   10742 |  1.99 | JIMMY       | Jon      |        3027 |
+|   10743 |  5.99 | JIMMY       | Mike     |        3489 |
+|   10744 |  0.99 | JIMMY       | Mike     |        4036 |
+|   10745 |  4.99 | JIMMY       | Jon      |        5103 |
+|   10746 |  4.99 | JIMMY       | Jon      |        5598 |
+|   10747 |  4.99 | JIMMY       | Jon      |        5763 |
+|   10748 |  2.99 | JIMMY       | Jon      |        6014 |
+|   10749 |  2.99 | JIMMY       | Jon      |        6266 |
+|   10750 |  4.99 | JIMMY       | Mike     |        6471 |
+|   10751 |  2.99 | JIMMY       | Jon      |        7356 |
+|   10752 |  4.99 | JIMMY       | Jon      |        7892 |
+|   10753 |  6.99 | JIMMY       | Mike     |        8103 |
+|   10754 |  0.99 | JIMMY       | Mike     |        9495 |
+|   10755 |  1.99 | JIMMY       | Jon      |        9608 |
+|   10756 |  0.99 | JIMMY       | Mike     |       10534 |
+|   10757 |  4.99 | JIMMY       | Jon      |       10598 |
+|   10758 |  1.99 | JIMMY       | Mike     |       10785 |
+|   10759 |  4.99 | JIMMY       | Jon      |       11511 |
+|   10760 |  2.99 | JIMMY       | Jon      |       12223 |
+|   10761 |  0.99 | JIMMY       | Mike     |       12276 |
+|   10762 |  1.99 | JIMMY       | Jon      |       12329 |
+|   10763 |  0.99 | JIMMY       | Jon      |       12700 |
+|   10764 |  2.99 | JIMMY       | Jon      |       12726 |
+|   10765 |  4.99 | JIMMY       | Mike     |       12772 |
+|   10766 |  3.99 | JIMMY       | Jon      |       14100 |
+|   10767 |  6.99 | JIMMY       | Mike     |       14790 |
+|   10768 |  6.99 | JIMMY       | Mike     |       15083 |
+|   10769 |  4.99 | ANTONIO     | Mike     |         486 |
+|   10770 |  2.99 | ANTONIO     | Jon      |        1228 |
+|   10771 |  6.99 | ANTONIO     | Mike     |        2087 |
+|   10772 |  9.99 | ANTONIO     | Jon      |        3141 |
+|   10773 |  5.99 | ANTONIO     | Jon      |        5234 |
+|   10774 |  3.99 | ANTONIO     | Jon      |        8119 |
+|   10775 |  4.99 | ANTONIO     | Jon      |        8204 |
+|   10776 |  7.99 | ANTONIO     | Mike     |        8428 |
+|   10777 |  2.99 | ANTONIO     | Mike     |        9042 |
+|   10778 |  5.99 | ANTONIO     | Jon      |        9281 |
+|   10779 |  1.99 | ANTONIO     | Mike     |        9771 |
+|   10780 |  2.99 | ANTONIO     | Mike     |       10230 |
+|   10781 |  4.99 | ANTONIO     | Jon      |       11132 |
+|   10782 |  2.99 | ANTONIO     | Jon      |       12528 |
+|   10783 |  4.99 | ANTONIO     | Jon      |       13643 |
+|   10784 |  3.99 | ANTONIO     | Mike     |       15189 |
+|   10785 |  5.99 | DANNY       | Jon      |          10 |
+|   10786 |  6.99 | DANNY       | Jon      |         694 |
+|   10787 |  4.99 | DANNY       | Jon      |         883 |
+|   10788 |  2.99 | DANNY       | Jon      |        2961 |
+|   10789 |  5.99 | DANNY       | Mike     |        3036 |
+|   10790 |  0.99 | DANNY       | Jon      |        4957 |
+|   10791 |  4.99 | DANNY       | Jon      |        4981 |
+|   10792 |  0.99 | DANNY       | Mike     |        5507 |
+|   10793 |  2.99 | DANNY       | Jon      |        6006 |
+|   10794 |  6.99 | DANNY       | Jon      |        6229 |
+|   10795 |  4.99 | DANNY       | Jon      |        6674 |
+|   10796 |  5.99 | DANNY       | Jon      |        8461 |
+|   10797 |  2.99 | DANNY       | Jon      |        9728 |
+|   10798 |  2.99 | DANNY       | Jon      |       10654 |
+|   10799 |  5.99 | DANNY       | Jon      |       10960 |
+|   10800 |  4.99 | DANNY       | Mike     |       11329 |
+|   10801 |  3.99 | DANNY       | Mike     |       11953 |
+|   10802 |  4.99 | DANNY       | Mike     |       13253 |
+|   10803 |  4.99 | DANNY       | Jon      |       13293 |
+|   10804 |  0.99 | DANNY       | Mike     |       15300 |
+|   10805 |  4.99 | DANNY       | Mike     |       15468 |
+|   10806 |  3.99 | BRYAN       | Mike     |          95 |
+|   10807 |  6.99 | BRYAN       | Jon      |         171 |
+|   10808 |  1.99 | BRYAN       | Jon      |         516 |
+|   10809 |  5.99 | BRYAN       | Jon      |         894 |
+|   10810 |  0.99 | BRYAN       | Jon      |        1364 |
+|   10811 |  3.99 | BRYAN       | Mike     |        1917 |
+|   10812 |  6.99 | BRYAN       | Jon      |        1923 |
+|   10813 |  6.99 | BRYAN       | Mike     |        4573 |
+|   10814 |  2.99 | BRYAN       | Mike     |        4645 |
+|   10815 |  6.99 | BRYAN       | Jon      |        5212 |
+|   10816 |  5.99 | BRYAN       | Jon      |        5222 |
+|   10817 |  5.99 | BRYAN       | Jon      |        6790 |
+|   10818 |  2.99 | BRYAN       | Jon      |        6994 |
+|   10819 |  2.99 | BRYAN       | Jon      |        7296 |
+|   10820 |  5.99 | BRYAN       | Mike     |        7682 |
+|   10821 |  5.99 | BRYAN       | Jon      |        9177 |
+|   10822 |  4.99 | BRYAN       | Jon      |        9756 |
+|   10823 |  2.99 | BRYAN       | Mike     |       10187 |
+|   10824 |  2.99 | BRYAN       | Jon      |       10484 |
+|   10825 |  0.99 | BRYAN       | Mike     |       10711 |
+|   10826 |  6.99 | BRYAN       | Jon      |       11510 |
+|   10827 |  2.99 | BRYAN       | Jon      |       11530 |
+|   10828 |  5.99 | BRYAN       | Mike     |       11600 |
+|   10829 |  2.99 | BRYAN       | Mike     |       12514 |
+|   10830 |  2.99 | BRYAN       | Jon      |       13449 |
+|   10831 |  2.99 | BRYAN       | Mike     |       14775 |
+|   10832 |  4.99 | BRYAN       | Jon      |       15533 |
+|   10833 |  4.99 | BRYAN       | Jon      |       15988 |
+|   10834 |  4.99 | TONY        | Jon      |         167 |
+|   10835 |  4.99 | TONY        | Jon      |         446 |
+|   10836 |  1.99 | TONY        | Jon      |         811 |
+|   10837 |  0.99 | TONY        | Mike     |        4059 |
+|   10838 |  7.99 | TONY        | Jon      |        4292 |
+|   10839 |  0.99 | TONY        | Jon      |        5923 |
+|   10841 |  4.99 | TONY        | Jon      |        7651 |
+|   10842 |  2.99 | TONY        | Mike     |        8450 |
+|   10843 |  2.99 | TONY        | Jon      |        8669 |
+|   10844 |  8.99 | TONY        | Mike     |        8722 |
+|   10845 |  4.99 | TONY        | Jon      |        9701 |
+|   10846 |  0.99 | TONY        | Jon      |       10171 |
+|   10847 |  2.99 | TONY        | Mike     |       11820 |
+|   10848 |  4.99 | TONY        | Mike     |       12475 |
+|   10849 |  4.99 | TONY        | Jon      |       12479 |
+|   10850 |  2.99 | TONY        | Mike     |       12906 |
+|   10851 |  4.99 | TONY        | Mike     |       13024 |
+|   10852 |  0.99 | TONY        | Mike     |       14359 |
+|   10853 |  1.99 | TONY        | Jon      |       14433 |
+|   10854 |  0.99 | TONY        | Mike     |       15831 |
+|   10855 |  0.99 | TONY        | Mike     |       15927 |
+|   10856 |  1.99 | LUIS        | Jon      |         801 |
+|   10857 |  4.99 | LUIS        | Jon      |        1194 |
+|   10858 |  4.99 | LUIS        | Jon      |        2490 |
+|   10859 |  2.99 | LUIS        | Jon      |        2913 |
+|   10860 |  6.99 | LUIS        | Jon      |        3564 |
+|   10861 |  3.99 | LUIS        | Jon      |        3612 |
+|   10862 |  5.99 | LUIS        | Jon      |        3755 |
+|   10863 |  2.99 | LUIS        | Mike     |        4399 |
+|   10864 |  3.99 | LUIS        | Jon      |        4604 |
+|   10865 |  4.99 | LUIS        | Jon      |        5329 |
+|   10866 |  2.99 | LUIS        | Jon      |        6183 |
+|   10867 |  3.99 | LUIS        | Mike     |        6283 |
+|   10868 |  0.99 | LUIS        | Mike     |        7633 |
+|   10869 |  7.99 | LUIS        | Jon      |        8521 |
+|   10870 |  6.99 | LUIS        | Mike     |        9657 |
+|   10871 |  0.99 | LUIS        | Jon      |        9779 |
+|   10872 |  0.99 | LUIS        | Jon      |       11045 |
+|   10873 |  4.99 | LUIS        | Jon      |       11549 |
+|   10874 |  0.99 | LUIS        | Jon      |       11920 |
+|   10875 |  4.99 | LUIS        | Mike     |       15428 |
+|   10876 |  2.99 | MIKE        | Mike     |         442 |
+|   10877 |  0.99 | MIKE        | Mike     |         517 |
+|   10878 |  4.99 | MIKE        | Jon      |        1221 |
+|   10879 |  8.99 | MIKE        | Mike     |        1249 |
+|   10880 |  3.99 | MIKE        | Jon      |        2488 |
+|   10881 |  4.99 | MIKE        | Mike     |        2927 |
+|   10882 |  6.99 | MIKE        | Jon      |        3049 |
+|   10883 |  5.99 | MIKE        | Mike     |        3356 |
+|   10884 |  6.99 | MIKE        | Mike     |        3644 |
+|   10885 |  3.99 | MIKE        | Jon      |        3737 |
+|   10886 |  4.99 | MIKE        | Jon      |        4096 |
+|   10887 |  4.99 | MIKE        | Mike     |        5982 |
+|   10888 |  2.99 | MIKE        | Jon      |        6322 |
+|   10889 |  4.99 | MIKE        | Mike     |        6342 |
+|   10890 |  4.99 | MIKE        | Mike     |        7103 |
+|   10891 |  5.99 | MIKE        | Jon      |        8013 |
+|   10892 |  2.99 | MIKE        | Mike     |        9058 |
+|   10893 |  7.99 | MIKE        | Jon      |        9486 |
+|   10894 |  4.99 | MIKE        | Jon      |        9794 |
+|   10895 |  5.99 | MIKE        | Jon      |       10109 |
+|   10896 |  2.99 | MIKE        | Mike     |       10443 |
+|   10897 |  6.99 | MIKE        | Mike     |       10547 |
+|   10898 |  2.99 | MIKE        | Jon      |       10789 |
+|   10899 |  7.99 | MIKE        | Mike     |       11038 |
+|   10900 |  9.99 | MIKE        | Jon      |       11391 |
+|   10901 |  2.99 | MIKE        | Jon      |       11427 |
+|   10902 |  0.99 | MIKE        | Jon      |       11460 |
+|   10903 |  0.99 | MIKE        | Jon      |       11558 |
+|   10904 |  5.99 | MIKE        | Jon      |       12005 |
+|   10905 |  2.99 | MIKE        | Mike     |       12132 |
+|   10906 |  5.99 | MIKE        | Mike     |       12793 |
+|   10907 |  2.99 | MIKE        | Mike     |       14519 |
+|   10908 |  0.99 | MIKE        | Mike     |       14662 |
+|   10909 |  4.99 | MIKE        | Jon      |       14725 |
+|   10910 |  4.99 | MIKE        | Mike     |       15410 |
+|   10911 |  5.99 | STANLEY     | Jon      |        1081 |
+|   10912 |  2.99 | STANLEY     | Jon      |        1506 |
+|   10913 |  4.99 | STANLEY     | Jon      |        1840 |
+|   10914 |  4.99 | STANLEY     | Mike     |        2715 |
+|   10915 |  2.99 | STANLEY     | Mike     |        2951 |
+|   10916 |  2.99 | STANLEY     | Mike     |        3927 |
+|   10917 |  2.99 | STANLEY     | Mike     |        4495 |
+|   10918 |  8.99 | STANLEY     | Jon      |        4615 |
+|   10919 |  4.99 | STANLEY     | Mike     |        4653 |
+|   10920 |  4.99 | STANLEY     | Mike     |        4963 |
+|   10921 |  3.99 | STANLEY     | Mike     |        5632 |
+|   10922 |  1.99 | STANLEY     | Mike     |        6114 |
+|   10923 |  0.99 | STANLEY     | Jon      |        6779 |
+|   10924 |  4.99 | STANLEY     | Mike     |        6964 |
+|   10925 |  5.99 | STANLEY     | Mike     |        8058 |
+|   10926 |  3.99 | STANLEY     | Mike     |        8455 |
+|   10927 |  4.99 | STANLEY     | Mike     |        9206 |
+|   10928 |  4.99 | STANLEY     | Mike     |        9472 |
+|   10929 |  2.99 | STANLEY     | Jon      |        9824 |
+|   10930 |  2.99 | STANLEY     | Mike     |       10651 |
+|   10931 |  5.99 | STANLEY     | Mike     |       12325 |
+|   10932 |  8.99 | STANLEY     | Mike     |       12554 |
+|   10933 |  5.99 | STANLEY     | Jon      |       13412 |
+|   10934 |  4.99 | STANLEY     | Mike     |       13422 |
+|   10935 |  0.99 | STANLEY     | Mike     |       14691 |
+|   10936 |  5.99 | STANLEY     | Jon      |       14835 |
+|   10937 |  4.99 | STANLEY     | Jon      |       14838 |
+|   10938 |  4.99 | STANLEY     | Jon      |       14912 |
+|   10939 |  0.99 | STANLEY     | Jon      |       15087 |
+|   10940 | 10.99 | STANLEY     | Jon      |       15290 |
+|   10941 |  2.99 | LEONARD     | Mike     |         121 |
+|   10942 |  4.99 | LEONARD     | Jon      |         770 |
+|   10943 |  4.99 | LEONARD     | Jon      |        1315 |
+|   10944 |  0.99 | LEONARD     | Mike     |        1888 |
+|   10945 |  5.99 | LEONARD     | Jon      |        1953 |
+|   10946 |  3.99 | LEONARD     | Jon      |        2654 |
+|   10947 |  4.99 | LEONARD     | Mike     |        3240 |
+|   10948 |  5.99 | LEONARD     | Mike     |        3253 |
+|   10949 |  0.99 | LEONARD     | Jon      |        4223 |
+|   10950 |  0.99 | LEONARD     | Jon      |        4401 |
+|   10951 |  7.99 | LEONARD     | Jon      |        5040 |
+|   10952 |  0.99 | LEONARD     | Mike     |        5231 |
+|   10953 |  1.99 | LEONARD     | Jon      |        5512 |
+|   10954 |  2.99 | LEONARD     | Mike     |        6110 |
+|   10955 |  2.99 | LEONARD     | Mike     |        7455 |
+|   10956 |  0.99 | LEONARD     | Mike     |        7759 |
+|   10957 |  2.99 | LEONARD     | Jon      |        8482 |
+|   10958 |  5.99 | LEONARD     | Mike     |        8955 |
+|   10959 |  0.99 | LEONARD     | Mike     |        9569 |
+|   10960 |  4.99 | LEONARD     | Mike     |       10472 |
+|   10961 |  4.99 | LEONARD     | Jon      |       10823 |
+|   10962 |  7.99 | LEONARD     | Mike     |       11345 |
+|   10963 |  0.99 | LEONARD     | Mike     |       12050 |
+|   10964 |  5.99 | LEONARD     | Jon      |       12425 |
+|   10965 |  1.99 | LEONARD     | Mike     |       13304 |
+|   10966 |  0.99 | LEONARD     | Mike     |       13398 |
+|   10967 |  4.99 | LEONARD     | Mike     |       14274 |
+|   10968 |  0.99 | LEONARD     | Jon      |       14537 |
+|   10969 |  1.99 | LEONARD     | Mike     |       15072 |
+|   10970 |  2.99 | LEONARD     | Jon      |       15383 |
+|   10971 |  4.99 | LEONARD     | Mike     |       15932 |
+|   10972 |  0.99 | LEONARD     | Mike     |       12792 |
+|   10973 |  0.99 | NATHAN      | Mike     |         855 |
+|   10974 |  4.99 | NATHAN      | Mike     |        2113 |
+|   10975 |  3.99 | NATHAN      | Jon      |        2150 |
+|   10976 |  2.99 | NATHAN      | Mike     |        2241 |
+|   10977 |  0.99 | NATHAN      | Jon      |        2325 |
+|   10978 |  0.99 | NATHAN      | Jon      |        2585 |
+|   10979 |  7.99 | NATHAN      | Mike     |        3186 |
+|   10980 |  4.99 | NATHAN      | Mike     |        3306 |
+|   10981 |  4.99 | NATHAN      | Jon      |        4264 |
+|   10982 |  4.99 | NATHAN      | Jon      |        5098 |
+|   10983 |  0.99 | NATHAN      | Jon      |        5263 |
+|   10984 |  0.99 | NATHAN      | Mike     |        5766 |
+|   10985 |  2.99 | NATHAN      | Jon      |        6439 |
+|   10986 |  5.99 | NATHAN      | Jon      |        7109 |
+|   10987 |  4.99 | NATHAN      | Mike     |        7171 |
+|   10988 |  4.99 | NATHAN      | Mike     |        7259 |
+|   10989 |  7.99 | NATHAN      | Jon      |        7604 |
+|   10990 |  4.99 | NATHAN      | Jon      |        8080 |
+|   10991 |  2.99 | NATHAN      | Jon      |        8295 |
+|   10992 |  0.99 | NATHAN      | Jon      |        8630 |
+|   10993 |  0.99 | NATHAN      | Mike     |        8903 |
+|   10994 |  1.99 | NATHAN      | Jon      |        8962 |
+|   10995 |  0.99 | NATHAN      | Jon      |        9224 |
+|   10996 |  4.99 | NATHAN      | Mike     |        9291 |
+|   10997 |  2.99 | NATHAN      | Jon      |        9487 |
+|   10998 |  8.99 | NATHAN      | Mike     |        9660 |
+|   10999 |  1.99 | NATHAN      | Mike     |       10632 |
+|   11000 |  4.99 | NATHAN      | Mike     |       11603 |
+|   11001 |  5.99 | NATHAN      | Jon      |       12505 |
+|   11002 |  6.99 | NATHAN      | Jon      |       14205 |
+|   11003 |  2.99 | NATHAN      | Jon      |       14421 |
+|   11004 |  2.99 | NATHAN      | Jon      |       14601 |
+|   11005 |  7.99 | DALE        | Mike     |         619 |
+|   11006 |  2.99 | DALE        | Mike     |        1698 |
+|   11007 |  0.99 | DALE        | Jon      |        2597 |
+|   11008 |  0.99 | DALE        | Mike     |        4296 |
+|   11009 |  4.99 | DALE        | Mike     |        5070 |
+|   11010 |  9.99 | DALE        | Jon      |        5590 |
+|   11011 |  0.99 | DALE        | Mike     |        6727 |
+|   11012 |  5.99 | DALE        | Mike     |        7363 |
+|   11013 |  4.99 | DALE        | Jon      |        7643 |
+|   11014 |  2.99 | DALE        | Mike     |        8078 |
+|   11015 |  4.99 | DALE        | Mike     |        8109 |
+|   11016 |  9.99 | DALE        | Mike     |        8197 |
+|   11017 |  0.99 | DALE        | Jon      |        8571 |
+|   11018 |  2.99 | DALE        | Mike     |        8802 |
+|   11019 |  4.99 | DALE        | Jon      |       10774 |
+|   11020 |  8.99 | DALE        | Mike     |       11214 |
+|   11021 |  2.99 | DALE        | Mike     |       11222 |
+|   11022 |  5.99 | DALE        | Jon      |       11382 |
+|   11023 |  4.99 | DALE        | Jon      |       11518 |
+|   11024 |  0.99 | DALE        | Mike     |       11677 |
+|   11025 |  0.99 | DALE        | Jon      |       12566 |
+|   11026 |  2.99 | DALE        | Jon      |       12931 |
+|   11027 |  0.99 | DALE        | Mike     |       13800 |
+|   11028 |  6.99 | DALE        | Jon      |       13856 |
+|   11029 |  6.99 | DALE        | Jon      |       14401 |
+|   11030 |  0.99 | DALE        | Jon      |       15320 |
+|   11031 |  1.99 | DALE        | Jon      |       15334 |
+|   11032 |  3.99 | MANUEL      | Jon      |           3 |
+|   11033 |  5.99 | MANUEL      | Jon      |          59 |
+|   11034 |  2.99 | MANUEL      | Mike     |         526 |
+|   11035 |  4.99 | MANUEL      | Jon      |        2479 |
+|   11036 |  2.99 | MANUEL      | Mike     |        2564 |
+|   11037 |  2.99 | MANUEL      | Jon      |        2728 |
+|   11038 |  3.99 | MANUEL      | Jon      |        4330 |
+|   11039 |  0.99 | MANUEL      | Jon      |        5073 |
+|   11040 |  0.99 | MANUEL      | Mike     |        6062 |
+|   11041 |  4.99 | MANUEL      | Jon      |        6203 |
+|   11042 |  2.99 | MANUEL      | Jon      |        6826 |
+|   11043 |  4.99 | MANUEL      | Mike     |        7053 |
+|   11044 |  4.99 | MANUEL      | Jon      |        7996 |
+|   11045 |  4.99 | MANUEL      | Jon      |        8251 |
+|   11046 |  3.99 | MANUEL      | Jon      |        8469 |
+|   11047 |  6.99 | MANUEL      | Jon      |        8902 |
+|   11048 |  0.99 | MANUEL      | Mike     |        9052 |
+|   11049 |  4.99 | MANUEL      | Jon      |        9757 |
+|   11050 |  2.99 | MANUEL      | Jon      |       11115 |
+|   11051 |  2.99 | MANUEL      | Mike     |       12140 |
+|   11052 |  4.99 | MANUEL      | Mike     |       12338 |
+|   11053 |  2.99 | MANUEL      | Mike     |       12498 |
+|   11054 |  0.99 | MANUEL      | Jon      |       12900 |
+|   11055 |  7.99 | MANUEL      | Mike     |       13508 |
+|   11056 |  3.99 | MANUEL      | Jon      |       13744 |
+|   11057 |  2.99 | MANUEL      | Mike     |       13944 |
+|   11058 |  4.99 | MANUEL      | Jon      |       14733 |
+|   11059 |  2.99 | MANUEL      | Mike     |       15628 |
+|   11060 |  1.99 | MANUEL      | Jon      |       15716 |
+|   11061 |  6.99 | MANUEL      | Mike     |       15765 |
+|   11062 |  6.99 | RODNEY      | Mike     |         310 |
+|   11063 |  5.99 | RODNEY      | Jon      |        1226 |
+|   11064 |  8.99 | RODNEY      | Jon      |        2310 |
+|   11065 |  5.99 | RODNEY      | Mike     |        3866 |
+|   11066 |  4.99 | RODNEY      | Jon      |        4550 |
+|   11067 |  3.99 | RODNEY      | Mike     |        5175 |
+|   11068 |  5.99 | RODNEY      | Jon      |        5306 |
+|   11069 |  0.99 | RODNEY      | Mike     |        5422 |
+|   11070 |  2.99 | RODNEY      | Mike     |        5848 |
+|   11071 |  7.99 | RODNEY      | Mike     |        5955 |
+|   11072 |  4.99 | RODNEY      | Jon      |        6026 |
+|   11073 |  2.99 | RODNEY      | Mike     |        6596 |
+|   11074 |  2.99 | RODNEY      | Jon      |        7673 |
+|   11075 |  0.99 | RODNEY      | Jon      |        7940 |
+|   11076 |  4.99 | RODNEY      | Mike     |        8037 |
+|   11077 |  5.99 | RODNEY      | Jon      |        8265 |
+|   11078 |  1.99 | RODNEY      | Mike     |        8726 |
+|   11079 |  0.99 | RODNEY      | Jon      |        9267 |
+|   11080 |  0.99 | RODNEY      | Jon      |       12830 |
+|   11081 |  8.99 | RODNEY      | Mike     |       13392 |
+|   11082 |  6.99 | RODNEY      | Jon      |       13632 |
+|   11083 |  1.99 | RODNEY      | Mike     |       14103 |
+|   11084 |  4.99 | RODNEY      | Mike     |       14697 |
+|   11085 |  2.99 | CURTIS      | Mike     |        1514 |
+|   11086 |  2.99 | CURTIS      | Mike     |        2073 |
+|   11087 |  4.99 | CURTIS      | Mike     |        2255 |
+|   11088 |  5.99 | CURTIS      | Jon      |        2400 |
+|   11089 |  0.99 | CURTIS      | Jon      |        2971 |
+|   11090 |  4.99 | CURTIS      | Mike     |        3249 |
+|   11091 |  0.99 | CURTIS      | Jon      |        4062 |
+|   11092 |  0.99 | CURTIS      | Mike     |        4267 |
+|   11093 |  3.99 | CURTIS      | Mike     |        5150 |
+|   11094 |  4.99 | CURTIS      | Mike     |        5192 |
+|   11095 |  5.99 | CURTIS      | Jon      |        5330 |
+|   11096 |  2.99 | CURTIS      | Mike     |        5336 |
+|   11097 |  4.99 | CURTIS      | Mike     |        6148 |
+|   11098 |  5.99 | CURTIS      | Jon      |        6218 |
+|   11099 |  4.99 | CURTIS      | Jon      |        7350 |
+|   11100 |  5.99 | CURTIS      | Jon      |        7407 |
+|   11101 |  4.99 | CURTIS      | Mike     |        7523 |
+|   11102 |  3.99 | CURTIS      | Jon      |        8625 |
+|   11103 |  0.99 | CURTIS      | Mike     |        8882 |
+|   11104 |  2.99 | CURTIS      | Mike     |        9263 |
+|   11105 |  4.99 | CURTIS      | Mike     |       10402 |
+|   11106 |  2.99 | CURTIS      | Mike     |       10837 |
+|   11107 |  0.99 | CURTIS      | Mike     |       11107 |
+|   11108 | 10.99 | CURTIS      | Mike     |       11187 |
+|   11109 |  6.99 | CURTIS      | Mike     |       11472 |
+|   11110 |  6.99 | CURTIS      | Mike     |       11694 |
+|   11111 |  8.99 | CURTIS      | Jon      |       12955 |
+|   11112 |  4.99 | CURTIS      | Mike     |       13460 |
+|   11113 |  2.99 | CURTIS      | Jon      |       13748 |
+|   11114 |  6.99 | CURTIS      | Jon      |       13948 |
+|   11115 |  3.99 | CURTIS      | Mike     |       14237 |
+|   11116 |  4.99 | CURTIS      | Jon      |       14298 |
+|   11117 |  4.99 | CURTIS      | Mike     |       14319 |
+|   11118 |  2.99 | CURTIS      | Jon      |       14819 |
+|   11119 |  2.99 | CURTIS      | Mike     |       15211 |
+|   11120 |  3.99 | CURTIS      | Jon      |       15392 |
+|   11121 |  4.99 | CURTIS      | Mike     |       15518 |
+|   11122 |  2.99 | CURTIS      | Mike     |       12665 |
+|   11123 |  4.99 | NORMAN      | Jon      |         686 |
+|   11124 |  1.99 | NORMAN      | Jon      |         972 |
+|   11125 |  0.99 | NORMAN      | Mike     |        1985 |
+|   11126 |  2.99 | NORMAN      | Jon      |        1997 |
+|   11127 |  0.99 | NORMAN      | Jon      |        2712 |
+|   11128 |  2.99 | NORMAN      | Mike     |        3928 |
+|   11129 |  0.99 | NORMAN      | Jon      |        4146 |
+|   11130 |  2.99 | NORMAN      | Mike     |        4246 |
+|   11131 |  5.99 | NORMAN      | Jon      |        5357 |
+|   11132 |  2.99 | NORMAN      | Mike     |        5800 |
+|   11133 |  1.99 | NORMAN      | Mike     |        7102 |
+|   11134 |  0.99 | NORMAN      | Jon      |        7395 |
+|   11135 |  2.99 | NORMAN      | Mike     |        7513 |
+|   11136 |  2.99 | NORMAN      | Mike     |        7813 |
+|   11137 |  0.99 | NORMAN      | Mike     |        8023 |
+|   11138 |  5.99 | NORMAN      | Jon      |        8613 |
+|   11139 |  0.99 | NORMAN      | Jon      |        9622 |
+|   11140 |  2.99 | NORMAN      | Jon      |       11294 |
+|   11141 |  5.99 | NORMAN      | Mike     |       11997 |
+|   11142 |  0.99 | NORMAN      | Jon      |       13634 |
+|   11143 |  7.99 | NORMAN      | Jon      |       13656 |
+|   11144 |  2.99 | NORMAN      | Jon      |       14480 |
+|   11145 |  5.99 | NORMAN      | Mike     |       14772 |
+|   11146 |  2.99 | NORMAN      | Jon      |       14996 |
+|   11147 |  0.99 | NORMAN      | Mike     |       15936 |
+|   11148 |  4.99 | NORMAN      | Jon      |       13246 |
+|   11149 |  0.99 | ALLEN       | Jon      |         191 |
+|   11150 |  4.99 | ALLEN       | Mike     |         333 |
+|   11151 |  0.99 | ALLEN       | Mike     |         717 |
+|   11152 |  3.99 | ALLEN       | Jon      |        1043 |
+|   11153 |  2.99 | ALLEN       | Mike     |        3292 |
+|   11154 |  0.99 | ALLEN       | Jon      |        3888 |
+|   11155 |  0.99 | ALLEN       | Jon      |        4074 |
+|   11156 |  0.99 | ALLEN       | Mike     |        8036 |
+|   11157 |  8.99 | ALLEN       | Jon      |        8330 |
+|   11158 |  8.99 | ALLEN       | Mike     |        8411 |
+|   11159 |  0.99 | ALLEN       | Mike     |        8674 |
+|   11160 |  4.99 | ALLEN       | Mike     |        9881 |
+|   11161 |  2.99 | ALLEN       | Jon      |       10381 |
+|   11162 |  5.99 | ALLEN       | Mike     |       10467 |
+|   11163 |  4.99 | ALLEN       | Jon      |       11027 |
+|   11164 |  3.99 | ALLEN       | Mike     |       14068 |
+|   11165 |  6.99 | ALLEN       | Mike     |       14535 |
+|   11166 |  4.99 | ALLEN       | Jon      |       15354 |
+|   11167 |  4.99 | ALLEN       | Jon      |       15732 |
+|   11168 |  8.99 | ALLEN       | Mike     |       15781 |
+|   11169 |  0.99 | ALLEN       | Mike     |       15314 |
+|   11170 |  4.99 | MARVIN      | Mike     |          40 |
+|   11171 |  4.99 | MARVIN      | Mike     |         999 |
+|   11172 |  5.99 | MARVIN      | Jon      |        2130 |
+|   11173 |  4.99 | MARVIN      | Jon      |        2545 |
+|   11174 |  4.99 | MARVIN      | Mike     |        3762 |
+|   11175 |  0.99 | MARVIN      | Jon      |        4491 |
+|   11176 |  7.99 | MARVIN      | Mike     |        5897 |
+|   11177 |  4.99 | MARVIN      | Jon      |        7100 |
+|   11178 |  0.99 | MARVIN      | Mike     |        7635 |
+|   11179 |  0.99 | MARVIN      | Jon      |        7731 |
+|   11180 |  2.99 | MARVIN      | Mike     |       10909 |
+|   11181 |  2.99 | MARVIN      | Jon      |       11304 |
+|   11182 |  0.99 | MARVIN      | Mike     |       11468 |
+|   11183 |  0.99 | MARVIN      | Mike     |       11532 |
+|   11184 |  2.99 | MARVIN      | Jon      |       12552 |
+|   11185 |  3.99 | MARVIN      | Mike     |       13010 |
+|   11186 |  2.99 | MARVIN      | Mike     |       13318 |
+|   11187 |  4.99 | MARVIN      | Jon      |       13824 |
+|   11188 |  4.99 | MARVIN      | Jon      |       13887 |
+|   11189 |  2.99 | MARVIN      | Mike     |       14773 |
+|   11190 |  2.99 | MARVIN      | Mike     |       15678 |
+|   11191 |  4.99 | VINCENT     | Mike     |          85 |
+|   11192 |  3.99 | VINCENT     | Mike     |         261 |
+|   11193 |  4.99 | VINCENT     | Mike     |        2246 |
+|   11194 |  9.99 | VINCENT     | Mike     |        2559 |
+|   11195 |  5.99 | VINCENT     | Mike     |        3318 |
+|   11196 | 10.99 | VINCENT     | Mike     |        3957 |
+|   11197 |  3.99 | VINCENT     | Mike     |        4437 |
+|   11198 |  7.99 | VINCENT     | Jon      |        6462 |
+|   11199 |  0.99 | VINCENT     | Jon      |        6728 |
+|   11200 |  0.99 | VINCENT     | Jon      |        6845 |
+|   11201 |  0.99 | VINCENT     | Mike     |        7009 |
+|   11202 |  2.99 | VINCENT     | Mike     |        7779 |
+|   11203 |  2.99 | VINCENT     | Mike     |        9650 |
+|   11204 |  2.99 | VINCENT     | Jon      |        9991 |
+|   11205 |  5.99 | VINCENT     | Jon      |       10107 |
+|   11206 |  0.99 | VINCENT     | Mike     |       11706 |
+|   11207 |  4.99 | VINCENT     | Jon      |       12930 |
+|   11208 |  0.99 | VINCENT     | Mike     |       13042 |
+|   11209 |  2.99 | VINCENT     | Mike     |       13242 |
+|   11210 |  7.99 | VINCENT     | Mike     |       13308 |
+|   11211 |  0.99 | VINCENT     | Mike     |       13404 |
+|   11212 |  2.99 | VINCENT     | Jon      |       13494 |
+|   11213 |  4.99 | VINCENT     | Jon      |       13657 |
+|   11214 |  6.99 | VINCENT     | Mike     |       15140 |
+|   11215 |  0.99 | VINCENT     | Jon      |       15481 |
+|   11216 |  4.99 | GLENN       | Jon      |         665 |
+|   11217 |  4.99 | GLENN       | Jon      |        1867 |
+|   11218 |  2.99 | GLENN       | Mike     |        3211 |
+|   11219 |  8.99 | GLENN       | Jon      |        4926 |
+|   11220 |  0.99 | GLENN       | Jon      |        5665 |
+|   11221 |  0.99 | GLENN       | Jon      |        5733 |
+|   11222 |  5.99 | GLENN       | Jon      |        6491 |
+|   11223 |  3.99 | GLENN       | Mike     |        6505 |
+|   11224 |  4.99 | GLENN       | Mike     |        7379 |
+|   11225 |  0.99 | GLENN       | Jon      |        7624 |
+|   11226 |  4.99 | GLENN       | Mike     |        7748 |
+|   11227 |  2.99 | GLENN       | Jon      |        8317 |
+|   11228 |  2.99 | GLENN       | Jon      |        9586 |
+|   11229 |  2.99 | GLENN       | Mike     |        9852 |
+|   11230 |  5.99 | GLENN       | Mike     |       10263 |
+|   11231 |  2.99 | GLENN       | Mike     |       10553 |
+|   11232 |  1.99 | GLENN       | Jon      |       11310 |
+|   11233 |  5.99 | GLENN       | Jon      |       12128 |
+|   11234 |  2.99 | GLENN       | Jon      |       12588 |
+|   11235 |  8.99 | GLENN       | Jon      |       13729 |
+|   11236 |  4.99 | GLENN       | Mike     |       14992 |
+|   11237 |  4.99 | GLENN       | Jon      |       15121 |
+|   11238 |  0.99 | GLENN       | Mike     |       15959 |
+|   11239 |  0.99 | JEFFERY     | Jon      |         253 |
+|   11240 |  3.99 | JEFFERY     | Jon      |         724 |
+|   11241 |  2.99 | JEFFERY     | Jon      |        1031 |
+|   11242 |  2.99 | JEFFERY     | Jon      |        1158 |
+|   11243 |  4.99 | JEFFERY     | Mike     |        1343 |
+|   11244 |  0.99 | JEFFERY     | Jon      |        1553 |
+|   11245 |  2.99 | JEFFERY     | Jon      |        1596 |
+|   11246 |  0.99 | JEFFERY     | Jon      |        1771 |
+|   11247 |  3.99 | JEFFERY     | Mike     |        3833 |
+|   11248 |  2.99 | JEFFERY     | Mike     |        3868 |
+|   11249 |  2.99 | JEFFERY     | Mike     |        6097 |
+|   11250 |  7.99 | JEFFERY     | Mike     |        6879 |
+|   11251 |  0.99 | JEFFERY     | Mike     |        7889 |
+|   11252 |  2.99 | JEFFERY     | Mike     |        7917 |
+|   11253 |  5.99 | JEFFERY     | Jon      |        8349 |
+|   11254 |  2.99 | JEFFERY     | Jon      |        8588 |
+|   11255 |  2.99 | JEFFERY     | Jon      |        8648 |
+|   11256 |  2.99 | JEFFERY     | Jon      |        9383 |
+|   11257 |  3.99 | JEFFERY     | Mike     |       10254 |
+|   11258 |  2.99 | JEFFERY     | Mike     |       10354 |
+|   11259 |  6.99 | JEFFERY     | Mike     |       10742 |
+|   11260 |  6.99 | JEFFERY     | Mike     |       10937 |
+|   11261 |  5.99 | JEFFERY     | Jon      |       11047 |
+|   11262 |  6.99 | JEFFERY     | Mike     |       11557 |
+|   11263 |  8.99 | JEFFERY     | Mike     |       12722 |
+|   11264 |  4.99 | JEFFERY     | Mike     |       12932 |
+|   11265 |  4.99 | JEFFERY     | Mike     |       14239 |
+|   11266 |  1.99 | JEFFERY     | Mike     |       15235 |
+|   11267 |  4.99 | JEFFERY     | Jon      |       15470 |
+|   11268 |  2.99 | JEFFERY     | Mike     |       15727 |
+|   11269 |  0.99 | JEFFERY     | Jon      |       15761 |
+|   11270 |  4.99 | TRAVIS      | Mike     |         267 |
+|   11271 |  8.99 | TRAVIS      | Jon      |         630 |
+|   11272 |  4.99 | TRAVIS      | Jon      |         833 |
+|   11273 |  3.99 | TRAVIS      | Mike     |        1921 |
+|   11274 |  4.99 | TRAVIS      | Mike     |        3952 |
+|   11275 |  2.99 | TRAVIS      | Mike     |        4418 |
+|   11276 |  9.99 | TRAVIS      | Mike     |        4421 |
+|   11277 |  6.99 | TRAVIS      | Jon      |        6258 |
+|   11278 |  4.99 | TRAVIS      | Mike     |        6312 |
+|   11279 |  2.99 | TRAVIS      | Mike     |        8877 |
+|   11280 |  2.99 | TRAVIS      | Jon      |        9049 |
+|   11281 |  0.99 | TRAVIS      | Mike     |       10478 |
+|   11282 |  7.99 | TRAVIS      | Mike     |       11217 |
+|   11283 |  6.99 | TRAVIS      | Mike     |       11291 |
+|   11284 |  0.99 | TRAVIS      | Jon      |       11303 |
+|   11285 |  0.99 | TRAVIS      | Jon      |       12074 |
+|   11286 |  4.99 | TRAVIS      | Jon      |       12281 |
+|   11287 |  4.99 | TRAVIS      | Mike     |       13545 |
+|   11288 |  1.99 | TRAVIS      | Mike     |       13927 |
+|   11289 |  4.99 | TRAVIS      | Jon      |       14121 |
+|   11290 |  6.99 | TRAVIS      | Mike     |       14304 |
+|   11291 |  2.99 | TRAVIS      | Mike     |       14607 |
+|   11292 |  2.99 | TRAVIS      | Jon      |       14882 |
+|   11293 |  0.99 | TRAVIS      | Mike     |       15795 |
+|   11294 |  2.99 | TRAVIS      | Jon      |       13261 |
+|   11295 |  2.99 | JEFF        | Mike     |        2825 |
+|   11296 |  2.99 | JEFF        | Jon      |        2943 |
+|   11297 |  2.99 | JEFF        | Jon      |        2969 |
+|   11298 |  0.99 | JEFF        | Mike     |        3805 |
+|   11299 |  7.99 | JEFF        | Jon      |        4852 |
+|   11300 |  2.99 | JEFF        | Mike     |        4865 |
+|   11301 |  0.99 | JEFF        | Mike     |        4938 |
+|   11302 |  4.99 | JEFF        | Mike     |        6150 |
+|   11303 |  4.99 | JEFF        | Mike     |        6970 |
+|   11304 |  5.99 | JEFF        | Jon      |        8546 |
+|   11305 |  0.99 | JEFF        | Jon      |        8591 |
+|   11306 | 10.99 | JEFF        | Jon      |        8886 |
+|   11307 |  4.99 | JEFF        | Mike     |        9558 |
+|   11308 |  5.99 | JEFF        | Jon      |       10537 |
+|   11309 |  0.99 | JEFF        | Mike     |       10709 |
+|   11310 |  2.99 | JEFF        | Jon      |       10915 |
+|   11311 |  2.99 | JEFF        | Mike     |       11270 |
+|   11312 |  3.99 | JEFF        | Jon      |       11322 |
+|   11313 |  1.99 | JEFF        | Jon      |       11409 |
+|   11314 |  4.99 | JEFF        | Mike     |       11650 |
+|   11315 |  2.99 | JEFF        | Mike     |       11769 |
+|   11316 |  0.99 | JEFF        | Mike     |       11910 |
+|   11317 |  0.99 | JEFF        | Jon      |       13312 |
+|   11318 |  2.99 | JEFF        | Mike     |       13537 |
+|   11319 |  0.99 | JEFF        | Mike     |       13970 |
+|   11320 |  0.99 | JEFF        | Mike     |       14484 |
+|   11321 |  4.99 | JEFF        | Mike     |       14836 |
+|   11322 |  2.99 | JEFF        | Jon      |       14860 |
+|   11323 |  4.99 | JEFF        | Mike     |       15466 |
+|   11324 |  5.99 | JEFF        | Jon      |       15957 |
+|   11325 |  2.99 | CHAD        | Mike     |          62 |
+|   11326 |  2.99 | CHAD        | Jon      |        2793 |
+|   11327 |  0.99 | CHAD        | Mike     |        3596 |
+|   11328 |  4.99 | CHAD        | Mike     |        3694 |
+|   11329 |  0.99 | CHAD        | Mike     |        4224 |
+|   11330 |  5.99 | CHAD        | Jon      |        5333 |
+|   11331 |  0.99 | CHAD        | Jon      |        5863 |
+|   11332 |  3.99 | CHAD        | Mike     |        5900 |
+|   11333 |  0.99 | CHAD        | Jon      |        5933 |
+|   11334 |  0.99 | CHAD        | Jon      |        6173 |
+|   11335 |  3.99 | CHAD        | Jon      |        6587 |
+|   11336 |  4.99 | CHAD        | Mike     |        7362 |
+|   11337 |  2.99 | CHAD        | Mike     |        7619 |
+|   11338 |  4.99 | CHAD        | Mike     |        7796 |
+|   11339 |  2.99 | CHAD        | Mike     |       10150 |
+|   11340 |  2.99 | CHAD        | Mike     |       10372 |
+|   11341 |  4.99 | CHAD        | Jon      |       11025 |
+|   11342 |  2.99 | CHAD        | Mike     |       11313 |
+|   11343 |  2.99 | CHAD        | Jon      |       11323 |
+|   11344 |  2.99 | CHAD        | Mike     |       11425 |
+|   11345 |  6.99 | CHAD        | Jon      |       11689 |
+|   11346 |  7.99 | CHAD        | Mike     |       12460 |
+|   11347 |  5.99 | CHAD        | Mike     |       12720 |
+|   11348 |  0.99 | CHAD        | Jon      |       14308 |
+|   11349 |  4.99 | CHAD        | Jon      |       15779 |
+|   11350 |  4.99 | JACOB       | Jon      |         744 |
+|   11351 |  3.99 | JACOB       | Jon      |        2672 |
+|   11352 |  0.99 | JACOB       | Mike     |        2698 |
+|   11353 |  0.99 | JACOB       | Mike     |        2726 |
+|   11354 |  4.99 | JACOB       | Mike     |        4176 |
+|   11355 |  4.99 | JACOB       | Jon      |        5081 |
+|   11356 |  4.99 | JACOB       | Mike     |        5168 |
+|   11357 |  0.99 | JACOB       | Jon      |        5911 |
+|   11358 |  3.99 | JACOB       | Jon      |        6086 |
+|   11359 |  4.99 | JACOB       | Jon      |        6096 |
+|   11360 |  4.99 | JACOB       | Jon      |        6582 |
+|   11361 |  4.99 | JACOB       | Mike     |        6588 |
+|   11362 |  2.99 | JACOB       | Jon      |        7081 |
+|   11363 |  0.99 | JACOB       | Jon      |        8485 |
+|   11364 |  0.99 | JACOB       | Mike     |        9362 |
+|   11365 |  4.99 | JACOB       | Jon      |       10291 |
+|   11366 | 10.99 | JACOB       | Jon      |       10601 |
+|   11367 |  4.99 | JACOB       | Mike     |       10766 |
+|   11368 |  5.99 | JACOB       | Jon      |       11236 |
+|   11369 |  0.99 | JACOB       | Jon      |       14525 |
+|   11370 |  0.99 | JACOB       | Jon      |       15597 |
+|   11371 |  0.99 | LEE         | Mike     |         507 |
+|   11372 |  0.99 | LEE         | Mike     |         931 |
+|   11373 |  4.99 | LEE         | Mike     |        1693 |
+|   11374 |  2.99 | LEE         | Jon      |        2407 |
+|   11375 |  4.99 | LEE         | Mike     |        3170 |
+|   11376 |  7.99 | LEE         | Mike     |        3491 |
+|   11377 |  5.99 | LEE         | Jon      |        3703 |
+|   11378 |  8.99 | LEE         | Mike     |        3988 |
+|   11379 |  5.99 | LEE         | Jon      |        4456 |
+|   11380 |  0.99 | LEE         | Mike     |        6220 |
+|   11381 |  3.99 | LEE         | Jon      |        6960 |
+|   11382 |  4.99 | LEE         | Jon      |        7449 |
+|   11383 |  2.99 | LEE         | Jon      |        8025 |
+|   11384 |  4.99 | LEE         | Mike     |        8268 |
+|   11385 |  4.99 | LEE         | Mike     |        8725 |
+|   11386 |  4.99 | LEE         | Jon      |        9377 |
+|   11387 |  0.99 | LEE         | Jon      |        9875 |
+|   11388 |  4.99 | LEE         | Mike     |       10200 |
+|   11389 |  2.99 | LEE         | Jon      |       11089 |
+|   11390 |  4.99 | LEE         | Mike     |       11263 |
+|   11391 |  3.99 | LEE         | Mike     |       11523 |
+|   11392 |  4.99 | LEE         | Mike     |       12279 |
+|   11393 |  9.99 | LEE         | Jon      |       13461 |
+|   11394 |  4.99 | LEE         | Mike     |       13872 |
+|   11395 |  4.99 | LEE         | Mike     |       14742 |
+|   11396 |  3.99 | LEE         | Mike     |       14887 |
+|   11397 |  0.99 | LEE         | Jon      |       15710 |
+|   11398 |  0.99 | MELVIN      | Mike     |         398 |
+|   11399 |  0.99 | MELVIN      | Mike     |        1846 |
+|   11400 |  4.99 | MELVIN      | Mike     |        1897 |
+|   11401 |  2.99 | MELVIN      | Jon      |        2747 |
+|   11402 |  5.99 | MELVIN      | Mike     |        2778 |
+|   11403 |  4.99 | MELVIN      | Mike     |        3553 |
+|   11404 |  2.99 | MELVIN      | Jon      |        4463 |
+|   11405 |  0.99 | MELVIN      | Jon      |        4504 |
+|   11406 |  1.99 | MELVIN      | Mike     |        5784 |
+|   11407 |  0.99 | MELVIN      | Jon      |        7827 |
+|   11408 |  4.99 | MELVIN      | Jon      |        8206 |
+|   11409 |  4.99 | MELVIN      | Jon      |        9541 |
+|   11410 |  6.99 | MELVIN      | Jon      |       10833 |
+|   11411 |  6.99 | MELVIN      | Jon      |       11325 |
+|   11412 |  2.99 | MELVIN      | Mike     |       11658 |
+|   11413 |  4.99 | MELVIN      | Mike     |       11842 |
+|   11414 |  9.99 | MELVIN      | Mike     |       12907 |
+|   11415 |  1.99 | MELVIN      | Jon      |       13216 |
+|   11416 |  1.99 | MELVIN      | Jon      |       13625 |
+|   11417 |  0.99 | MELVIN      | Jon      |       13709 |
+|   11418 |  4.99 | MELVIN      | Jon      |       13722 |
+|   11419 |  4.99 | MELVIN      | Mike     |       14861 |
+|   11420 |  3.99 | MELVIN      | Mike     |       15272 |
+|   11421 |  2.99 | MELVIN      | Mike     |       15273 |
+|   11422 |  2.99 | MELVIN      | Jon      |       15316 |
+|   11423 |  2.99 | MELVIN      | Jon      |       15441 |
+|   11424 |  3.99 | ALFRED      | Mike     |        1504 |
+|   11425 |  0.99 | ALFRED      | Jon      |        1827 |
+|   11426 |  6.99 | ALFRED      | Mike     |        2600 |
+|   11427 |  6.99 | ALFRED      | Jon      |        2758 |
+|   11428 |  8.99 | ALFRED      | Mike     |        3072 |
+|   11429 |  0.99 | ALFRED      | Jon      |        4105 |
+|   11430 |  0.99 | ALFRED      | Mike     |        4250 |
+|   11431 |  2.99 | ALFRED      | Mike     |        4679 |
+|   11432 |  1.99 | ALFRED      | Mike     |        6506 |
+|   11433 |  5.99 | ALFRED      | Mike     |        7016 |
+|   11434 |  2.99 | ALFRED      | Jon      |        7141 |
+|   11435 |  4.99 | ALFRED      | Mike     |        7157 |
+|   11436 |  0.99 | ALFRED      | Mike     |        7290 |
+|   11437 |  9.99 | ALFRED      | Jon      |        7539 |
+|   11438 |  9.99 | ALFRED      | Mike     |        7849 |
+|   11439 |  3.99 | ALFRED      | Jon      |        8082 |
+|   11440 |  9.99 | ALFRED      | Jon      |        8595 |
+|   11441 |  2.99 | ALFRED      | Jon      |        9026 |
+|   11442 |  2.99 | ALFRED      | Mike     |       10488 |
+|   11443 |  2.99 | ALFRED      | Mike     |       11091 |
+|   11444 |  4.99 | ALFRED      | Jon      |       11514 |
+|   11445 |  4.99 | ALFRED      | Jon      |       12806 |
+|   11446 |  6.99 | ALFRED      | Jon      |       14191 |
+|   11447 |  4.99 | ALFRED      | Jon      |       14902 |
+|   11448 |  0.99 | ALFRED      | Mike     |       15380 |
+|   11449 |  4.99 | ALFRED      | Mike     |       15755 |
+|   11450 |  0.99 | KYLE        | Jon      |         403 |
+|   11451 |  4.99 | KYLE        | Jon      |        3044 |
+|   11452 |  6.99 | KYLE        | Mike     |        3166 |
+|   11453 |  0.99 | KYLE        | Jon      |        3404 |
+|   11454 |  0.99 | KYLE        | Jon      |        3746 |
+|   11455 |  0.99 | KYLE        | Jon      |        4512 |
+|   11456 |  0.99 | KYLE        | Jon      |        4559 |
+|   11457 |  5.99 | KYLE        | Jon      |        4696 |
+|   11458 |  0.99 | KYLE        | Mike     |        5568 |
+|   11459 |  3.99 | KYLE        | Mike     |        5611 |
+|   11460 |  2.99 | KYLE        | Mike     |        6589 |
+|   11461 |  2.99 | KYLE        | Mike     |        7594 |
+|   11462 |  2.99 | KYLE        | Jon      |        8194 |
+|   11463 |  4.99 | KYLE        | Mike     |        8918 |
+|   11464 |  1.99 | KYLE        | Jon      |        8964 |
+|   11465 |  2.99 | KYLE        | Jon      |        8999 |
+|   11466 |  4.99 | KYLE        | Mike     |        9471 |
+|   11467 |  8.99 | KYLE        | Mike     |        9516 |
+|   11468 |  4.99 | KYLE        | Jon      |        9878 |
+|   11469 |  6.99 | KYLE        | Mike     |       10017 |
+|   11470 |  4.99 | KYLE        | Jon      |       10369 |
+|   11471 |  2.99 | KYLE        | Mike     |       10866 |
+|   11472 |  2.99 | KYLE        | Jon      |       11374 |
+|   11473 |  6.99 | KYLE        | Jon      |       11562 |
+|   11474 |  2.99 | KYLE        | Jon      |       11833 |
+|   11475 |  0.99 | KYLE        | Jon      |       12729 |
+|   11476 |  3.99 | KYLE        | Jon      |       13793 |
+|   11477 |  0.99 | KYLE        | Jon      |       15113 |
+|   11478 |  9.99 | KYLE        | Jon      |       15941 |
+|   11479 |  0.99 | KYLE        | Mike     |       15094 |
+|   11480 |  5.99 | FRANCIS     | Jon      |        1098 |
+|   11481 |  6.99 | FRANCIS     | Mike     |        3276 |
+|   11482 |  4.99 | FRANCIS     | Mike     |        3807 |
+|   11483 |  2.99 | FRANCIS     | Jon      |        4361 |
+|   11484 |  5.99 | FRANCIS     | Jon      |        4362 |
+|   11485 |  8.99 | FRANCIS     | Jon      |        4483 |
+|   11486 |  2.99 | FRANCIS     | Mike     |        4659 |
+|   11487 |  7.99 | FRANCIS     | Mike     |        4884 |
+|   11488 |  7.99 | FRANCIS     | Mike     |        4939 |
+|   11489 |  2.99 | FRANCIS     | Jon      |        5363 |
+|   11490 |  4.99 | FRANCIS     | Mike     |        5371 |
+|   11491 |  2.99 | FRANCIS     | Jon      |        6318 |
+|   11492 |  2.99 | FRANCIS     | Mike     |        6603 |
+|   11493 |  4.99 | FRANCIS     | Mike     |        7249 |
+|   11494 |  0.99 | FRANCIS     | Mike     |        8974 |
+|   11495 |  0.99 | FRANCIS     | Mike     |        9170 |
+|   11496 |  2.99 | FRANCIS     | Jon      |        9682 |
+|   11497 |  0.99 | FRANCIS     | Mike     |       10121 |
+|   11498 |  0.99 | FRANCIS     | Jon      |       10163 |
+|   11499 |  0.99 | FRANCIS     | Mike     |       10545 |
+|   11500 |  0.99 | FRANCIS     | Jon      |       13040 |
+|   11501 |  5.99 | FRANCIS     | Jon      |       14089 |
+|   11502 |  4.99 | FRANCIS     | Jon      |       14881 |
+|   11503 |  0.99 | FRANCIS     | Mike     |       15064 |
+|   11504 |  6.99 | FRANCIS     | Jon      |       15784 |
+|   11505 |  2.99 | FRANCIS     | Jon      |       16036 |
+|   11506 |  0.99 | BRADLEY     | Jon      |         604 |
+|   11507 |  6.99 | BRADLEY     | Mike     |        1709 |
+|   11508 |  7.99 | BRADLEY     | Mike     |        1842 |
+|   11509 |  2.99 | BRADLEY     | Mike     |        2204 |
+|   11510 |  0.99 | BRADLEY     | Mike     |        2804 |
+|   11511 |  0.99 | BRADLEY     | Mike     |        3243 |
+|   11512 |  2.99 | BRADLEY     | Jon      |        4114 |
+|   11513 |  4.99 | BRADLEY     | Jon      |        4398 |
+|   11514 |  4.99 | BRADLEY     | Mike     |        4900 |
+|   11515 |  3.99 | BRADLEY     | Mike     |        5725 |
+|   11516 |  4.99 | BRADLEY     | Mike     |        7495 |
+|   11517 | 10.99 | BRADLEY     | Mike     |        7527 |
+|   11518 |  4.99 | BRADLEY     | Mike     |        7711 |
+|   11519 |  5.99 | BRADLEY     | Mike     |        7789 |
+|   11520 |  5.99 | BRADLEY     | Mike     |        9185 |
+|   11521 |  4.99 | BRADLEY     | Jon      |        9247 |
+|   11522 | 10.99 | BRADLEY     | Jon      |       10172 |
+|   11523 |  1.99 | BRADLEY     | Mike     |       10505 |
+|   11524 |  0.99 | BRADLEY     | Jon      |       11237 |
+|   11525 |  0.99 | BRADLEY     | Jon      |       11876 |
+|   11526 |  6.99 | BRADLEY     | Jon      |       11938 |
+|   11527 |  5.99 | BRADLEY     | Jon      |       12548 |
+|   11528 |  4.99 | BRADLEY     | Jon      |       12707 |
+|   11529 |  4.99 | BRADLEY     | Mike     |       12822 |
+|   11530 |  2.99 | BRADLEY     | Jon      |       13834 |
+|   11531 |  6.99 | BRADLEY     | Jon      |       14151 |
+|   11532 |  2.99 | BRADLEY     | Jon      |       14826 |
+|   11533 |  6.99 | JESUS       | Jon      |          82 |
+|   11534 |  5.99 | JESUS       | Mike     |        1342 |
+|   11535 |  3.99 | JESUS       | Jon      |        1628 |
+|   11536 |  5.99 | JESUS       | Mike     |        1648 |
+|   11537 |  1.99 | JESUS       | Mike     |        1857 |
+|   11538 |  0.99 | JESUS       | Jon      |        2466 |
+|   11539 |  3.99 | JESUS       | Mike     |        4793 |
+|   11540 |  2.99 | JESUS       | Jon      |        5476 |
+|   11541 |  5.99 | JESUS       | Jon      |        5586 |
+|   11542 |  6.99 | JESUS       | Mike     |        6423 |
+|   11543 |  2.99 | JESUS       | Mike     |        6509 |
+|   11544 |  7.99 | JESUS       | Jon      |        6938 |
+|   11545 |  3.99 | JESUS       | Jon      |        8182 |
+|   11546 |  5.99 | JESUS       | Mike     |        8531 |
+|   11547 |  5.99 | JESUS       | Jon      |        8658 |
+|   11548 |  2.99 | JESUS       | Jon      |        9978 |
+|   11549 |  4.99 | JESUS       | Mike     |       10417 |
+|   11550 |  5.99 | JESUS       | Mike     |       10464 |
+|   11551 |  4.99 | JESUS       | Jon      |       10560 |
+|   11552 |  5.99 | JESUS       | Mike     |       11024 |
+|   11553 |  1.99 | JESUS       | Mike     |       13720 |
+|   11554 |  6.99 | JESUS       | Jon      |       14201 |
+|   11555 |  3.99 | JESUS       | Mike     |       14287 |
+|   11556 |  3.99 | JESUS       | Mike     |       15330 |
+|   11557 |  4.99 | HERBERT     | Jon      |         634 |
+|   11558 |  3.99 | HERBERT     | Mike     |        1227 |
+|   11559 |  2.99 | HERBERT     | Jon      |        1471 |
+|   11560 |  3.99 | HERBERT     | Mike     |        1601 |
+|   11561 |  2.99 | HERBERT     | Mike     |        2677 |
+|   11562 |  0.99 | HERBERT     | Jon      |        3377 |
+|   11563 |  2.99 | HERBERT     | Mike     |        3702 |
+|   11564 |  5.99 | HERBERT     | Mike     |        3925 |
+|   11565 |  0.99 | HERBERT     | Mike     |        4151 |
+|   11566 |  4.99 | HERBERT     | Mike     |        5373 |
+|   11567 |  5.99 | HERBERT     | Mike     |        6735 |
+|   11568 |  6.99 | HERBERT     | Mike     |        7823 |
+|   11569 |  2.99 | HERBERT     | Mike     |        8155 |
+|   11570 |  4.99 | HERBERT     | Jon      |        8387 |
+|   11571 |  4.99 | HERBERT     | Jon      |        8528 |
+|   11572 |  5.99 | HERBERT     | Mike     |        9904 |
+|   11573 |  2.99 | HERBERT     | Jon      |        9982 |
+|   11574 |  4.99 | HERBERT     | Jon      |       10577 |
+|   11575 |  2.99 | HERBERT     | Jon      |       10888 |
+|   11576 |  0.99 | HERBERT     | Jon      |       11536 |
+|   11577 |  5.99 | FREDERICK   | Jon      |         150 |
+|   11578 |  2.99 | FREDERICK   | Jon      |         290 |
+|   11579 |  7.99 | FREDERICK   | Jon      |         601 |
+|   11580 |  4.99 | FREDERICK   | Jon      |         799 |
+|   11581 |  4.99 | FREDERICK   | Jon      |         844 |
+|   11582 |  5.99 | FREDERICK   | Jon      |        1781 |
+|   11583 |  2.99 | FREDERICK   | Jon      |        1798 |
+|   11584 |  7.99 | FREDERICK   | Jon      |        1916 |
+|   11585 |  2.99 | FREDERICK   | Mike     |        3409 |
+|   11586 |  4.99 | FREDERICK   | Jon      |        5868 |
+|   11587 |  7.99 | FREDERICK   | Jon      |        6196 |
+|   11588 |  6.99 | FREDERICK   | Jon      |        6886 |
+|   11589 |  6.99 | FREDERICK   | Mike     |        6977 |
+|   11590 |  4.99 | FREDERICK   | Jon      |        7352 |
+|   11591 |  1.99 | FREDERICK   | Jon      |        8136 |
+|   11592 |  2.99 | FREDERICK   | Jon      |        8143 |
+|   11593 |  7.99 | FREDERICK   | Jon      |        8175 |
+|   11594 |  0.99 | FREDERICK   | Mike     |        9849 |
+|   11595 |  2.99 | FREDERICK   | Mike     |       12259 |
+|   11596 |  4.99 | FREDERICK   | Mike     |       12953 |
+|   11597 |  4.99 | FREDERICK   | Jon      |       14495 |
+|   11598 |  2.99 | RAY         | Jon      |          30 |
+|   11599 |  4.99 | RAY         | Mike     |         364 |
+|   11600 |  0.99 | RAY         | Jon      |        1207 |
+|   11601 |  2.99 | RAY         | Mike     |        1274 |
+|   11602 |  2.99 | RAY         | Mike     |        1538 |
+|   11603 |  6.99 | RAY         | Mike     |        1759 |
+|   11604 |  0.99 | RAY         | Jon      |        2892 |
+|   11605 |  0.99 | RAY         | Jon      |        3153 |
+|   11606 |  4.99 | RAY         | Mike     |        5002 |
+|   11607 |  5.99 | RAY         | Mike     |        5217 |
+|   11608 |  6.99 | RAY         | Jon      |        5879 |
+|   11609 |  6.99 | RAY         | Mike     |        5958 |
+|   11610 |  0.99 | RAY         | Jon      |        6043 |
+|   11611 |  4.99 | RAY         | Mike     |        8560 |
+|   11612 |  2.99 | RAY         | Jon      |        9450 |
+|   11613 |  0.99 | RAY         | Mike     |       12723 |
+|   11614 |  4.99 | RAY         | Mike     |       12965 |
+|   11615 |  0.99 | RAY         | Mike     |       13007 |
+|   11616 |  0.99 | RAY         | Jon      |       13452 |
+|   11617 |  2.99 | RAY         | Jon      |       13454 |
+|   11618 |  5.99 | RAY         | Mike     |       14058 |
+|   11619 |  4.99 | RAY         | Mike     |       15031 |
+|   11620 |  2.99 | JOEL        | Jon      |        1126 |
+|   11621 |  2.99 | JOEL        | Jon      |        1561 |
+|   11622 |  4.99 | JOEL        | Mike     |        2096 |
+|   11623 |  3.99 | JOEL        | Mike     |        2269 |
+|   11624 |  4.99 | JOEL        | Jon      |        2281 |
+|   11625 |  2.99 | JOEL        | Jon      |        2761 |
+|   11626 |  6.99 | JOEL        | Jon      |        3304 |
+|   11627 |  8.99 | JOEL        | Jon      |        3369 |
+|   11628 |  3.99 | JOEL        | Mike     |        4144 |
+|   11629 |  2.99 | JOEL        | Mike     |        4801 |
+|   11630 |  0.99 | JOEL        | Mike     |        4863 |
+|   11631 |  4.99 | JOEL        | Jon      |        7978 |
+|   11632 |  4.99 | JOEL        | Jon      |        8810 |
+|   11633 |  0.99 | JOEL        | Jon      |       10508 |
+|   11634 |  4.99 | JOEL        | Mike     |       10527 |
+|   11635 |  6.99 | JOEL        | Jon      |       10959 |
+|   11636 |  2.99 | JOEL        | Jon      |       11538 |
+|   11637 |  6.99 | JOEL        | Mike     |       12273 |
+|   11638 |  1.99 | JOEL        | Jon      |       13153 |
+|   11639 |  4.99 | JOEL        | Mike     |       13784 |
+|   11640 |  2.99 | JOEL        | Mike     |       15809 |
+|   11641 |  2.99 | JOEL        | Mike     |       15960 |
+|   11642 |  2.99 | JOEL        | Jon      |       13587 |
+|   11643 |  7.99 | EDWIN       | Jon      |         326 |
+|   11644 |  5.99 | EDWIN       | Mike     |         550 |
+|   11645 |  8.99 | EDWIN       | Mike     |         897 |
+|   11646 |  5.99 | EDWIN       | Jon      |        1180 |
+|   11647 |  2.99 | EDWIN       | Jon      |        1597 |
+|   11648 |  4.99 | EDWIN       | Jon      |        3194 |
+|   11649 |  5.99 | EDWIN       | Mike     |        4965 |
+|   11650 |  4.99 | EDWIN       | Mike     |        4973 |
+|   11651 |  2.99 | EDWIN       | Mike     |        5204 |
+|   11652 |  6.99 | EDWIN       | Mike     |        5322 |
+|   11653 |  4.99 | EDWIN       | Mike     |        5944 |
+|   11654 |  4.99 | EDWIN       | Mike     |        5990 |
+|   11655 |  4.99 | EDWIN       | Jon      |        7326 |
+|   11656 |  0.99 | EDWIN       | Jon      |        7681 |
+|   11657 |  4.99 | EDWIN       | Jon      |        8079 |
+|   11658 |  6.99 | EDWIN       | Jon      |        8094 |
+|   11659 |  4.99 | EDWIN       | Jon      |        9916 |
+|   11660 |  2.99 | EDWIN       | Jon      |        9984 |
+|   11661 |  0.99 | EDWIN       | Jon      |       11870 |
+|   11662 |  6.99 | EDWIN       | Mike     |       12767 |
+|   11663 |  2.99 | EDWIN       | Mike     |       14027 |
+|   11664 |  4.99 | EDWIN       | Mike     |       15523 |
+|   11665 |  6.99 | EDWIN       | Mike     |       15713 |
+|   11666 |  8.99 | DON         | Jon      |         146 |
+|   11667 | 10.99 | DON         | Mike     |         691 |
+|   11668 |  6.99 | DON         | Jon      |        4087 |
+|   11669 |  0.99 | DON         | Jon      |        4158 |
+|   11670 |  7.99 | DON         | Jon      |        4988 |
+|   11671 |  0.99 | DON         | Jon      |        5457 |
+|   11672 |  8.99 | DON         | Mike     |        5969 |
+|   11673 |  5.99 | DON         | Mike     |        6765 |
+|   11674 |  0.99 | DON         | Mike     |        6848 |
+|   11675 |  4.99 | DON         | Mike     |        6850 |
+|   11676 |  4.99 | DON         | Mike     |        7821 |
+|   11677 |  4.99 | DON         | Jon      |        7907 |
+|   11678 |  5.99 | DON         | Mike     |        8414 |
+|   11679 |  2.99 | DON         | Mike     |        8713 |
+|   11680 |  4.99 | DON         | Jon      |        9161 |
+|   11681 |  3.99 | DON         | Mike     |        9294 |
+|   11682 |  4.99 | DON         | Mike     |       10663 |
+|   11683 |  2.99 | DON         | Mike     |       11664 |
+|   11684 |  6.99 | DON         | Jon      |       12669 |
+|   11685 |  4.99 | DON         | Jon      |       13273 |
+|   11686 |  4.99 | DON         | Mike     |       13801 |
+|   11687 |  4.99 | DON         | Jon      |       14523 |
+|   11688 |  6.99 | DON         | Mike     |       14559 |
+|   11689 |  4.99 | DON         | Jon      |       15476 |
+|   11690 |  5.99 | DON         | Mike     |       15502 |
+|   11691 |  5.99 | EDDIE       | Jon      |         508 |
+|   11692 |  0.99 | EDDIE       | Mike     |        1225 |
+|   11693 |  5.99 | EDDIE       | Jon      |        1584 |
+|   11694 |  7.99 | EDDIE       | Jon      |        2415 |
+|   11695 |  3.99 | EDDIE       | Mike     |        2430 |
+|   11696 |  3.99 | EDDIE       | Mike     |        2494 |
+|   11697 |  2.99 | EDDIE       | Mike     |        3014 |
+|   11698 |  2.99 | EDDIE       | Jon      |        3037 |
+|   11699 |  2.99 | EDDIE       | Mike     |        4414 |
+|   11700 |  6.99 | EDDIE       | Jon      |        4654 |
+|   11701 | 10.99 | EDDIE       | Jon      |        4960 |
+|   11702 |  2.99 | EDDIE       | Jon      |        5464 |
+|   11703 |  0.99 | EDDIE       | Jon      |        6972 |
+|   11704 |  6.99 | EDDIE       | Mike     |        7260 |
+|   11705 |  2.99 | EDDIE       | Jon      |        7479 |
+|   11706 |  0.99 | EDDIE       | Mike     |        8205 |
+|   11707 |  4.99 | EDDIE       | Mike     |        9350 |
+|   11708 |  3.99 | EDDIE       | Mike     |       11242 |
+|   11709 |  2.99 | EDDIE       | Mike     |       11867 |
+|   11710 |  2.99 | EDDIE       | Jon      |       12030 |
+|   11711 |  2.99 | EDDIE       | Jon      |       12146 |
+|   11712 |  7.99 | EDDIE       | Jon      |       12624 |
+|   11713 |  9.99 | EDDIE       | Jon      |       13359 |
+|   11714 |  7.99 | EDDIE       | Mike     |       13383 |
+|   11715 |  4.99 | EDDIE       | Jon      |       14553 |
+|   11716 |  3.99 | EDDIE       | Jon      |       15016 |
+|   11717 |  4.99 | EDDIE       | Jon      |       15385 |
+|   11718 |  7.99 | RICKY       | Mike     |         757 |
+|   11719 |  4.99 | RICKY       | Mike     |         806 |
+|   11720 |  0.99 | RICKY       | Jon      |        1443 |
+|   11721 |  0.99 | RICKY       | Mike     |        2984 |
+|   11722 |  0.99 | RICKY       | Mike     |        3690 |
+|   11723 |  8.99 | RICKY       | Mike     |        3918 |
+|   11724 |  4.99 | RICKY       | Jon      |        5220 |
+|   11725 |  4.99 | RICKY       | Jon      |        6051 |
+|   11726 |  2.99 | RICKY       | Mike     |        6935 |
+|   11727 |  5.99 | RICKY       | Mike     |        8386 |
+|   11728 |  4.99 | RICKY       | Jon      |        8891 |
+|   11729 |  0.99 | RICKY       | Jon      |        9269 |
+|   11730 |  3.99 | RICKY       | Mike     |        9655 |
+|   11731 |  4.99 | RICKY       | Jon      |        9829 |
+|   11732 |  6.99 | RICKY       | Mike     |       10998 |
+|   11733 |  2.99 | RICKY       | Mike     |       11041 |
+|   11734 |  3.99 | RICKY       | Mike     |       11786 |
+|   11735 |  0.99 | RICKY       | Mike     |       11796 |
+|   11736 |  0.99 | RICKY       | Jon      |       12046 |
+|   11737 |  4.99 | RICKY       | Mike     |       12741 |
+|   11738 |  0.99 | RICKY       | Jon      |       13208 |
+|   11739 |  4.99 | RICKY       | Mike     |       14696 |
+|   11740 |  1.99 | RICKY       | Mike     |       14765 |
+|   11741 |  0.99 | RICKY       | Mike     |       14850 |
+|   11742 |  2.99 | RICKY       | Mike     |       15136 |
+|   11743 |  7.99 | TROY        | Mike     |          45 |
+|   11744 |  3.99 | TROY        | Mike     |         256 |
+|   11745 |  5.99 | TROY        | Mike     |         848 |
+|   11746 |  9.99 | TROY        | Mike     |        2291 |
+|   11747 |  1.99 | TROY        | Jon      |        3851 |
+|   11748 |  2.99 | TROY        | Jon      |        3944 |
+|   11749 |  0.99 | TROY        | Jon      |        4643 |
+|   11750 |  2.99 | TROY        | Jon      |        4751 |
+|   11751 |  4.99 | TROY        | Mike     |        4782 |
+|   11752 |  0.99 | TROY        | Mike     |        5959 |
+|   11753 |  4.99 | TROY        | Mike     |        7593 |
+|   11754 |  5.99 | TROY        | Jon      |        8027 |
+|   11755 |  9.99 | TROY        | Jon      |        8097 |
+|   11756 |  9.99 | TROY        | Mike     |        9345 |
+|   11757 |  0.99 | TROY        | Mike     |        9539 |
+|   11758 |  5.99 | TROY        | Mike     |        9638 |
+|   11759 |  3.99 | TROY        | Jon      |       10216 |
+|   11760 |  0.99 | TROY        | Jon      |       11160 |
+|   11761 |  2.99 | TROY        | Mike     |       11580 |
+|   11762 |  4.99 | TROY        | Jon      |       11615 |
+|   11763 |  5.99 | TROY        | Jon      |       11896 |
+|   11764 |  0.99 | TROY        | Jon      |       12297 |
+|   11765 |  6.99 | TROY        | Jon      |       12429 |
+|   11766 |  9.99 | TROY        | Jon      |       13099 |
+|   11767 |  7.99 | TROY        | Jon      |       13382 |
+|   11768 |  3.99 | TROY        | Mike     |       13533 |
+|   11769 |  5.99 | TROY        | Mike     |       13760 |
+|   11770 |  0.99 | TROY        | Mike     |       13814 |
+|   11771 |  2.99 | TROY        | Jon      |       13826 |
+|   11772 |  4.99 | TROY        | Jon      |       15766 |
+|   11773 |  2.99 | RANDALL     | Mike     |         192 |
+|   11774 |  4.99 | RANDALL     | Jon      |         656 |
+|   11775 |  5.99 | RANDALL     | Mike     |         666 |
+|   11776 |  5.99 | RANDALL     | Jon      |        2239 |
+|   11777 |  2.99 | RANDALL     | Mike     |        2792 |
+|   11778 |  2.99 | RANDALL     | Jon      |        3265 |
+|   11779 |  4.99 | RANDALL     | Mike     |        3747 |
+|   11780 |  4.99 | RANDALL     | Jon      |        4765 |
+|   11781 |  4.99 | RANDALL     | Jon      |        5085 |
+|   11782 |  1.99 | RANDALL     | Mike     |        5167 |
+|   11783 |  2.99 | RANDALL     | Jon      |        5744 |
+|   11784 |  6.99 | RANDALL     | Jon      |        5864 |
+|   11785 |  2.99 | RANDALL     | Jon      |        8215 |
+|   11786 |  2.99 | RANDALL     | Jon      |        9172 |
+|   11787 |  2.99 | RANDALL     | Jon      |        9333 |
+|   11788 |  8.99 | RANDALL     | Jon      |       10009 |
+|   11789 |  0.99 | RANDALL     | Jon      |       10249 |
+|   11790 |  3.99 | RANDALL     | Jon      |       11417 |
+|   11791 |  8.99 | RANDALL     | Mike     |       12205 |
+|   11792 |  7.99 | RANDALL     | Jon      |       13838 |
+|   11793 |  2.99 | RANDALL     | Mike     |       13839 |
+|   11794 |  1.99 | RANDALL     | Mike     |       13905 |
+|   11795 |  1.99 | RANDALL     | Mike     |       14993 |
+|   11796 |  4.99 | BARRY       | Jon      |          23 |
+|   11797 |  0.99 | BARRY       | Jon      |        1036 |
+|   11798 |  6.99 | BARRY       | Mike     |        1138 |
+|   11799 |  4.99 | BARRY       | Mike     |        1431 |
+|   11800 |  0.99 | BARRY       | Jon      |        1779 |
+|   11801 |  0.99 | BARRY       | Jon      |        2206 |
+|   11802 |  4.99 | BARRY       | Mike     |        2591 |
+|   11803 |  4.99 | BARRY       | Mike     |        3315 |
+|   11804 |  0.99 | BARRY       | Jon      |        3368 |
+|   11805 |  4.99 | BARRY       | Mike     |        4355 |
+|   11806 |  2.99 | BARRY       | Jon      |        4446 |
+|   11807 |  4.99 | BARRY       | Jon      |        5316 |
+|   11808 |  4.99 | BARRY       | Jon      |        5426 |
+|   11809 |  2.99 | BARRY       | Mike     |        5870 |
+|   11810 |  4.99 | BARRY       | Jon      |        6138 |
+|   11811 |  3.99 | BARRY       | Mike     |        6563 |
+|   11812 |  4.99 | BARRY       | Jon      |        6615 |
+|   11813 |  1.99 | BARRY       | Jon      |        7357 |
+|   11814 |  8.99 | BARRY       | Jon      |        7374 |
+|   11815 |  0.99 | BARRY       | Mike     |        7598 |
+|   11816 |  2.99 | BARRY       | Jon      |        8547 |
+|   11817 |  3.99 | BARRY       | Mike     |        9082 |
+|   11818 |  0.99 | BARRY       | Jon      |        9782 |
+|   11819 |  6.99 | BARRY       | Mike     |       10512 |
+|   11820 |  4.99 | BARRY       | Mike     |       10607 |
+|   11821 |  4.99 | BARRY       | Jon      |       11644 |
+|   11822 |  4.99 | BARRY       | Jon      |       11933 |
+|   11823 |  0.99 | BARRY       | Jon      |       12654 |
+|   11824 |  7.99 | BARRY       | Jon      |       13319 |
+|   11825 |  4.99 | BARRY       | Mike     |       13414 |
+|   11826 |  5.99 | BARRY       | Jon      |       14582 |
+|   11827 |  5.99 | BARRY       | Jon      |       15893 |
+|   11828 |  0.99 | BARRY       | Jon      |       12524 |
+|   11829 |  2.99 | ALEXANDER   | Mike     |         126 |
+|   11830 |  0.99 | ALEXANDER   | Jon      |         367 |
+|   11831 |  9.99 | ALEXANDER   | Mike     |         786 |
+|   11832 |  4.99 | ALEXANDER   | Mike     |        1264 |
+|   11833 |  0.99 | ALEXANDER   | Jon      |        1557 |
+|   11834 |  4.99 | ALEXANDER   | Jon      |        2097 |
+|   11835 |  2.99 | ALEXANDER   | Mike     |        2621 |
+|   11836 |  2.99 | ALEXANDER   | Mike     |        2992 |
+|   11837 |  6.99 | ALEXANDER   | Mike     |        3294 |
+|   11838 |  5.99 | ALEXANDER   | Jon      |        3774 |
+|   11839 |  2.99 | ALEXANDER   | Mike     |        4528 |
+|   11840 |  4.99 | ALEXANDER   | Mike     |        4813 |
+|   11841 |  5.99 | ALEXANDER   | Jon      |        5801 |
+|   11842 |  2.99 | ALEXANDER   | Mike     |        5893 |
+|   11843 |  2.99 | ALEXANDER   | Mike     |        6577 |
+|   11844 |  2.99 | ALEXANDER   | Jon      |        6672 |
+|   11845 |  2.99 | ALEXANDER   | Mike     |        8343 |
+|   11846 |  2.99 | ALEXANDER   | Mike     |        8624 |
+|   11847 |  2.99 | ALEXANDER   | Jon      |        8703 |
+|   11848 |  0.99 | ALEXANDER   | Mike     |        9275 |
+|   11849 |  6.99 | ALEXANDER   | Mike     |        9322 |
+|   11850 |  1.99 | ALEXANDER   | Jon      |       10744 |
+|   11851 |  2.99 | ALEXANDER   | Mike     |       10905 |
+|   11852 |  6.99 | ALEXANDER   | Jon      |       11042 |
+|   11853 |  5.99 | ALEXANDER   | Jon      |       11544 |
+|   11854 |  2.99 | ALEXANDER   | Mike     |       11989 |
+|   11855 |  2.99 | ALEXANDER   | Mike     |       12621 |
+|   11856 |  5.99 | ALEXANDER   | Jon      |       12755 |
+|   11857 |  3.99 | ALEXANDER   | Jon      |       12826 |
+|   11858 |  4.99 | ALEXANDER   | Jon      |       13358 |
+|   11859 |  5.99 | ALEXANDER   | Jon      |       14730 |
+|   11860 |  9.99 | ALEXANDER   | Jon      |       15044 |
+|   11861 |  4.99 | ALEXANDER   | Jon      |       15162 |
+|   11862 |  4.99 | ALEXANDER   | Jon      |       15653 |
+|   11863 |  1.99 | ALEXANDER   | Mike     |       15818 |
+|   11864 |  0.99 | ALEXANDER   | Mike     |       16018 |
+|   11865 |  4.99 | BERNARD     | Jon      |         957 |
+|   11866 |  2.99 | BERNARD     | Mike     |        4301 |
+|   11867 |  7.99 | BERNARD     | Mike     |        4946 |
+|   11868 |  2.99 | BERNARD     | Jon      |        5423 |
+|   11869 |  0.99 | BERNARD     | Jon      |        5594 |
+|   11870 |  2.99 | BERNARD     | Jon      |        5731 |
+|   11871 |  0.99 | BERNARD     | Jon      |        5782 |
+|   11872 |  4.99 | BERNARD     | Jon      |        7585 |
+|   11873 |  0.99 | BERNARD     | Mike     |        7614 |
+|   11874 |  9.99 | BERNARD     | Mike     |        7806 |
+|   11875 |  4.99 | BERNARD     | Mike     |        9001 |
+|   11876 |  2.99 | BERNARD     | Mike     |        9195 |
+|   11877 |  4.99 | BERNARD     | Mike     |        9547 |
+|   11878 |  6.99 | BERNARD     | Jon      |       12403 |
+|   11879 |  0.99 | BERNARD     | Mike     |       12850 |
+|   11880 |  4.99 | BERNARD     | Jon      |       13384 |
+|   11881 |  2.99 | BERNARD     | Jon      |       13779 |
+|   11882 |  0.99 | BERNARD     | Mike     |       14555 |
+|   11883 |  7.99 | BERNARD     | Jon      |       14863 |
+|   11884 |  0.99 | BERNARD     | Jon      |       15264 |
+|   11885 |  4.99 | BERNARD     | Mike     |       15925 |
+|   11886 |  4.99 | BERNARD     | Mike     |       13106 |
+|   11887 |  4.99 | MARIO       | Mike     |         823 |
+|   11888 |  4.99 | MARIO       | Mike     |        1602 |
+|   11889 |  4.99 | MARIO       | Jon      |        2328 |
+|   11890 |  0.99 | MARIO       | Jon      |        3629 |
+|   11891 |  2.99 | MARIO       | Jon      |        3695 |
+|   11892 |  8.99 | MARIO       | Mike     |        4084 |
+|   11893 |  0.99 | MARIO       | Jon      |        4208 |
+|   11894 |  2.99 | MARIO       | Jon      |        5129 |
+|   11895 |  0.99 | MARIO       | Mike     |        5811 |
+|   11896 |  2.99 | MARIO       | Jon      |        6636 |
+|   11897 |  4.99 | MARIO       | Mike     |        6642 |
+|   11898 |  5.99 | MARIO       | Mike     |        6941 |
+|   11899 |  2.99 | MARIO       | Jon      |        8237 |
+|   11900 |  0.99 | MARIO       | Mike     |        8281 |
+|   11901 |  4.99 | MARIO       | Mike     |        8427 |
+|   11902 |  4.99 | MARIO       | Mike     |        8575 |
+|   11903 |  4.99 | MARIO       | Jon      |        8617 |
+|   11904 | 10.99 | MARIO       | Jon      |        9644 |
+|   11905 |  2.99 | MARIO       | Jon      |        9854 |
+|   11906 |  1.99 | MARIO       | Jon      |       10139 |
+|   11907 |  1.99 | MARIO       | Mike     |       10846 |
+|   11908 |  1.99 | MARIO       | Jon      |       11247 |
+|   11909 |  2.99 | MARIO       | Jon      |       13483 |
+|   11910 |  4.99 | MARIO       | Jon      |       13739 |
+|   11911 |  4.99 | MARIO       | Mike     |       13932 |
+|   11912 |  4.99 | MARIO       | Jon      |       14796 |
+|   11913 |  3.99 | MARIO       | Jon      |       15070 |
+|   11914 |  4.99 | MARIO       | Mike     |       14878 |
+|   11915 |  0.99 | LEROY       | Jon      |         466 |
+|   11916 |  6.99 | LEROY       | Jon      |         558 |
+|   11917 |  5.99 | LEROY       | Mike     |         632 |
+|   11918 |  5.99 | LEROY       | Mike     |        1251 |
+|   11919 |  0.99 | LEROY       | Jon      |        1358 |
+|   11920 |  8.99 | LEROY       | Jon      |        1576 |
+|   11921 |  2.99 | LEROY       | Mike     |        1774 |
+|   11922 |  4.99 | LEROY       | Jon      |        3545 |
+|   11923 |  2.99 | LEROY       | Mike     |        3661 |
+|   11924 |  5.99 | LEROY       | Mike     |        4052 |
+|   11925 |  2.99 | LEROY       | Mike     |        4058 |
+|   11926 |  2.99 | LEROY       | Jon      |        4365 |
+|   11927 |  3.99 | LEROY       | Jon      |        4577 |
+|   11928 |  4.99 | LEROY       | Jon      |        6590 |
+|   11929 |  2.99 | LEROY       | Jon      |        6632 |
+|   11930 |  2.99 | LEROY       | Jon      |        7427 |
+|   11931 |  0.99 | LEROY       | Mike     |        7460 |
+|   11932 |  2.99 | LEROY       | Mike     |        7671 |
+|   11933 |  2.99 | LEROY       | Mike     |        8044 |
+|   11934 |  4.99 | LEROY       | Mike     |        8758 |
+|   11935 |  4.99 | LEROY       | Mike     |        9180 |
+|   11936 |  5.99 | LEROY       | Jon      |        9873 |
+|   11937 |  2.99 | LEROY       | Mike     |       10034 |
+|   11938 |  6.99 | LEROY       | Jon      |       10365 |
+|   11939 |  0.99 | LEROY       | Jon      |       10452 |
+|   11940 |  0.99 | LEROY       | Mike     |       12948 |
+|   11941 |  0.99 | LEROY       | Jon      |       13004 |
+|   11942 |  7.99 | LEROY       | Mike     |       13155 |
+|   11943 |  0.99 | LEROY       | Jon      |       14199 |
+|   11944 |  1.99 | LEROY       | Mike     |       14418 |
+|   11945 |  0.99 | LEROY       | Mike     |       14466 |
+|   11946 |  2.99 | LEROY       | Jon      |       15207 |
+|   11947 |  4.99 | FRANCISCO   | Jon      |        1068 |
+|   11948 |  2.99 | FRANCISCO   | Mike     |        2871 |
+|   11949 |  5.99 | FRANCISCO   | Jon      |        3510 |
+|   11950 |  5.99 | FRANCISCO   | Jon      |        6625 |
+|   11951 |  4.99 | FRANCISCO   | Mike     |        6913 |
+|   11952 |  2.99 | FRANCISCO   | Jon      |        6983 |
+|   11953 |  2.99 | FRANCISCO   | Mike     |        7317 |
+|   11954 |  8.99 | FRANCISCO   | Mike     |        7667 |
+|   11955 |  9.99 | FRANCISCO   | Mike     |        7987 |
+|   11956 |  1.99 | FRANCISCO   | Jon      |        9740 |
+|   11957 |  4.99 | FRANCISCO   | Mike     |       10014 |
+|   11958 |  5.99 | FRANCISCO   | Jon      |       10081 |
+|   11959 |  0.99 | FRANCISCO   | Jon      |       10360 |
+|   11960 |  4.99 | FRANCISCO   | Mike     |       11449 |
+|   11961 |  4.99 | FRANCISCO   | Mike     |       12415 |
+|   11962 |  4.99 | FRANCISCO   | Jon      |       12857 |
+|   11963 |  2.99 | FRANCISCO   | Mike     |       13489 |
+|   11964 |  2.99 | FRANCISCO   | Mike     |       14561 |
+|   11965 |  6.99 | FRANCISCO   | Jon      |       14611 |
+|   11966 |  0.99 | FRANCISCO   | Mike     |       15182 |
+|   11967 |  4.99 | FRANCISCO   | Jon      |       15393 |
+|   11968 |  0.99 | FRANCISCO   | Mike     |       15519 |
+|   11969 |  8.99 | MARCUS      | Mike     |         201 |
+|   11970 |  0.99 | MARCUS      | Mike     |         557 |
+|   11971 |  0.99 | MARCUS      | Mike     |        1239 |
+|   11972 |  3.99 | MARCUS      | Jon      |        1397 |
+|   11973 |  1.99 | MARCUS      | Jon      |        1441 |
+|   11974 |  4.99 | MARCUS      | Mike     |        2551 |
+|   11975 |  7.99 | MARCUS      | Jon      |        3301 |
+|   11976 |  5.99 | MARCUS      | Jon      |        3415 |
+|   11977 |  4.99 | MARCUS      | Jon      |        3498 |
+|   11978 |  0.99 | MARCUS      | Mike     |        3539 |
+|   11979 |  6.99 | MARCUS      | Jon      |        4648 |
+|   11980 |  2.99 | MARCUS      | Mike     |        5753 |
+|   11981 |  2.99 | MARCUS      | Jon      |        5825 |
+|   11982 |  2.99 | MARCUS      | Jon      |        6285 |
+|   11983 |  3.99 | MARCUS      | Jon      |        7679 |
+|   11984 |  1.99 | MARCUS      | Jon      |        9634 |
+|   11985 |  4.99 | MARCUS      | Mike     |       10529 |
+|   11986 |  4.99 | MARCUS      | Mike     |       10693 |
+|   11987 |  0.99 | MARCUS      | Jon      |       11353 |
+|   11988 |  6.99 | MARCUS      | Jon      |       11419 |
+|   11989 |  4.99 | MARCUS      | Mike     |       11728 |
+|   11990 |  6.99 | MARCUS      | Mike     |       12161 |
+|   11991 |  2.99 | MARCUS      | Jon      |       12712 |
+|   11992 |  2.99 | MARCUS      | Jon      |       12946 |
+|   11993 |  0.99 | MARCUS      | Mike     |       13488 |
+|   11994 |  2.99 | MARCUS      | Jon      |       13559 |
+|   11995 |  0.99 | MARCUS      | Mike     |       13924 |
+|   11996 |  4.99 | MARCUS      | Mike     |       15249 |
+|   11997 |  0.99 | MARCUS      | Mike     |       15557 |
+|   11998 |  4.99 | MARCUS      | Jon      |       15815 |
+|   11999 |  2.99 | MICHEAL     | Mike     |         481 |
+|   12000 |  2.99 | MICHEAL     | Mike     |         960 |
+|   12001 |  0.99 | MICHEAL     | Mike     |        4041 |
+|   12002 |  0.99 | MICHEAL     | Mike     |        4193 |
+|   12003 |  2.99 | MICHEAL     | Jon      |        5225 |
+|   12004 |  0.99 | MICHEAL     | Mike     |        6346 |
+|   12005 |  2.99 | MICHEAL     | Jon      |        7351 |
+|   12006 |  4.99 | MICHEAL     | Jon      |        7971 |
+|   12007 |  8.99 | MICHEAL     | Mike     |        8851 |
+|   12008 |  0.99 | MICHEAL     | Jon      |        8911 |
+|   12009 |  4.99 | MICHEAL     | Jon      |        9625 |
+|   12010 |  0.99 | MICHEAL     | Mike     |       10007 |
+|   12011 |  1.99 | MICHEAL     | Jon      |       10334 |
+|   12012 |  0.99 | MICHEAL     | Jon      |       10341 |
+|   12013 |  9.99 | MICHEAL     | Jon      |       10936 |
+|   12014 |  7.99 | MICHEAL     | Mike     |       11383 |
+|   12015 |  4.99 | MICHEAL     | Mike     |       11868 |
+|   12016 |  3.99 | MICHEAL     | Mike     |       11877 |
+|   12017 |  0.99 | MICHEAL     | Jon      |       13586 |
+|   12018 |  6.99 | MICHEAL     | Mike     |       14612 |
+|   12019 |  2.99 | MICHEAL     | Jon      |       14673 |
+|   12020 |  6.99 | MICHEAL     | Mike     |       14866 |
+|   12021 |  4.99 | MICHEAL     | Mike     |       14955 |
+|   12022 |  3.99 | MICHEAL     | Mike     |       15123 |
+|   12023 |  6.99 | MICHEAL     | Mike     |       15791 |
+|   12024 |  2.99 | MICHEAL     | Jon      |       15906 |
+|   12025 |  0.99 | THEODORE    | Jon      |          14 |
+|   12026 |  0.99 | THEODORE    | Mike     |         236 |
+|   12027 |  4.99 | THEODORE    | Mike     |         355 |
+|   12028 |  4.99 | THEODORE    | Mike     |        2248 |
+|   12029 |  3.99 | THEODORE    | Jon      |        2335 |
+|   12030 |  6.99 | THEODORE    | Jon      |        2520 |
+|   12031 |  0.99 | THEODORE    | Jon      |        2710 |
+|   12032 |  2.99 | THEODORE    | Mike     |        3060 |
+|   12033 |  0.99 | THEODORE    | Jon      |        3168 |
+|   12034 |  4.99 | THEODORE    | Jon      |        4358 |
+|   12035 |  4.99 | THEODORE    | Jon      |        5393 |
+|   12036 |  2.99 | THEODORE    | Jon      |        5409 |
+|   12037 |  0.99 | THEODORE    | Jon      |        6454 |
+|   12038 |  4.99 | THEODORE    | Mike     |        6510 |
+|   12039 |  0.99 | THEODORE    | Mike     |        6535 |
+|   12040 |  6.99 | THEODORE    | Mike     |        6734 |
+|   12041 |  5.99 | THEODORE    | Mike     |        7005 |
+|   12042 |  0.99 | THEODORE    | Jon      |        7089 |
+|   12043 |  4.99 | THEODORE    | Mike     |        7576 |
+|   12044 |  6.99 | THEODORE    | Jon      |        8284 |
+|   12045 |  4.99 | THEODORE    | Mike     |        8309 |
+|   12046 |  4.99 | THEODORE    | Jon      |        8670 |
+|   12047 |  0.99 | THEODORE    | Jon      |        8691 |
+|   12048 |  9.99 | THEODORE    | Jon      |        8922 |
+|   12049 |  3.99 | THEODORE    | Mike     |        8923 |
+|   12050 |  0.99 | THEODORE    | Mike     |        9116 |
+|   12051 |  3.99 | THEODORE    | Mike     |       11051 |
+|   12052 |  0.99 | THEODORE    | Jon      |       12253 |
+|   12053 |  8.99 | THEODORE    | Jon      |       12480 |
+|   12054 |  1.99 | THEODORE    | Mike     |       15808 |
+|   12055 |  0.99 | THEODORE    | Jon      |       15951 |
+|   12056 |  2.99 | CLIFFORD    | Mike     |         461 |
+|   12057 |  0.99 | CLIFFORD    | Jon      |         732 |
+|   12058 |  0.99 | CLIFFORD    | Jon      |        1230 |
+|   12059 |  2.99 | CLIFFORD    | Jon      |        1890 |
+|   12060 |  4.99 | CLIFFORD    | Mike     |        2025 |
+|   12061 |  4.99 | CLIFFORD    | Jon      |        2285 |
+|   12062 |  4.99 | CLIFFORD    | Jon      |        4403 |
+|   12063 |  6.99 | CLIFFORD    | Mike     |        4858 |
+|   12064 |  4.99 | CLIFFORD    | Mike     |        5331 |
+|   12065 |  0.99 | CLIFFORD    | Mike     |        5734 |
+|   12066 |  2.99 | CLIFFORD    | Jon      |        5987 |
+|   12067 |  0.99 | CLIFFORD    | Mike     |        6651 |
+|   12068 |  1.99 | CLIFFORD    | Mike     |        6690 |
+|   12069 |  8.99 | CLIFFORD    | Mike     |        8537 |
+|   12070 |  4.99 | CLIFFORD    | Jon      |        8945 |
+|   12071 |  5.99 | CLIFFORD    | Jon      |        9076 |
+|   12072 |  6.99 | CLIFFORD    | Mike     |        9288 |
+|   12073 |  2.99 | CLIFFORD    | Mike     |       10425 |
+|   12074 |  5.99 | CLIFFORD    | Jon      |       10957 |
+|   12075 |  0.99 | CLIFFORD    | Jon      |       11108 |
+|   12076 |  5.99 | CLIFFORD    | Mike     |       11465 |
+|   12077 |  0.99 | CLIFFORD    | Jon      |       12511 |
+|   12078 |  2.99 | CLIFFORD    | Mike     |       13072 |
+|   12079 |  0.99 | CLIFFORD    | Jon      |       13110 |
+|   12080 |  4.99 | CLIFFORD    | Mike     |       13848 |
+|   12081 |  5.99 | CLIFFORD    | Jon      |       14443 |
+|   12082 |  2.99 | CLIFFORD    | Mike     |       15108 |
+|   12083 |  4.99 | CLIFFORD    | Mike     |       15997 |
+|   12084 |  4.99 | CLIFFORD    | Jon      |       16032 |
+|   12085 |  4.99 | MIGUEL      | Mike     |         299 |
+|   12086 |  2.99 | MIGUEL      | Jon      |        1123 |
+|   12087 |  5.99 | MIGUEL      | Mike     |        1313 |
+|   12088 |  7.99 | MIGUEL      | Jon      |        1823 |
+|   12089 |  0.99 | MIGUEL      | Jon      |        2697 |
+|   12090 |  3.99 | MIGUEL      | Jon      |        3225 |
+|   12091 |  5.99 | MIGUEL      | Jon      |        3347 |
+|   12092 |  5.99 | MIGUEL      | Jon      |        3959 |
+|   12093 |  6.99 | MIGUEL      | Jon      |        3992 |
+|   12094 |  0.99 | MIGUEL      | Jon      |        4024 |
+|   12095 |  2.99 | MIGUEL      | Jon      |        4206 |
+|   12096 |  1.99 | MIGUEL      | Mike     |        4406 |
+|   12097 |  2.99 | MIGUEL      | Jon      |        4537 |
+|   12098 |  2.99 | MIGUEL      | Jon      |        4558 |
+|   12099 |  2.99 | MIGUEL      | Jon      |        6341 |
+|   12100 |  4.99 | MIGUEL      | Jon      |        6985 |
+|   12101 | 10.99 | MIGUEL      | Mike     |        9178 |
+|   12102 |  8.99 | MIGUEL      | Jon      |       11608 |
+|   12103 |  9.99 | MIGUEL      | Mike     |       11798 |
+|   12104 |  2.99 | MIGUEL      | Mike     |       12446 |
+|   12105 |  2.99 | MIGUEL      | Mike     |       13220 |
+|   12106 |  3.99 | MIGUEL      | Jon      |       13250 |
+|   12107 |  3.99 | MIGUEL      | Mike     |       13982 |
+|   12108 |  3.99 | MIGUEL      | Mike     |       14580 |
+|   12109 |  2.99 | MIGUEL      | Mike     |       14711 |
+|   12110 |  9.99 | MIGUEL      | Jon      |       15358 |
+|   12111 |  4.99 | MIGUEL      | Mike     |       15427 |
+|   12112 |  3.98 | MIGUEL      | Jon      |       14734 |
+|   12113 |  0.00 | MIGUEL      | Mike     |       13577 |
+|   12114 |  4.99 | OSCAR       | Jon      |         263 |
+|   12115 |  5.99 | OSCAR       | Jon      |         325 |
+|   12116 |  7.99 | OSCAR       | Mike     |         849 |
+|   12117 |  4.99 | OSCAR       | Jon      |        1295 |
+|   12118 |  0.99 | OSCAR       | Mike     |        2348 |
+|   12119 |  2.99 | OSCAR       | Jon      |        2970 |
+|   12120 |  0.99 | OSCAR       | Mike     |        3503 |
+|   12121 |  8.99 | OSCAR       | Mike     |        3977 |
+|   12122 |  3.99 | OSCAR       | Jon      |        4433 |
+|   12123 |  2.99 | OSCAR       | Mike     |        5824 |
+|   12124 |  6.99 | OSCAR       | Jon      |        7755 |
+|   12125 |  3.99 | OSCAR       | Jon      |        7803 |
+|   12126 |  2.99 | OSCAR       | Jon      |        8002 |
+|   12127 |  5.99 | OSCAR       | Jon      |       10083 |
+|   12128 |  2.99 | OSCAR       | Jon      |       10409 |
+|   12129 |  4.99 | OSCAR       | Mike     |       10416 |
+|   12130 |  6.99 | OSCAR       | Mike     |       10516 |
+|   12131 |  6.99 | OSCAR       | Jon      |       10688 |
+|   12132 |  4.99 | OSCAR       | Mike     |       12212 |
+|   12133 |  7.99 | OSCAR       | Jon      |       14962 |
+|   12134 |  3.99 | JAY         | Jon      |         548 |
+|   12135 |  4.99 | JAY         | Jon      |        1639 |
+|   12136 |  0.99 | JAY         | Mike     |        1739 |
+|   12137 |  2.99 | JAY         | Jon      |        1914 |
+|   12138 |  0.99 | JAY         | Jon      |        2278 |
+|   12139 |  4.99 | JAY         | Mike     |        2501 |
+|   12140 |  2.99 | JAY         | Mike     |        2626 |
+|   12141 |  4.99 | JAY         | Mike     |        3155 |
+|   12142 |  3.99 | JAY         | Mike     |        3570 |
+|   12143 |  7.99 | JAY         | Mike     |        5999 |
+|   12144 |  4.99 | JAY         | Mike     |        6028 |
+|   12145 |  2.99 | JAY         | Jon      |        7365 |
+|   12146 |  0.99 | JAY         | Mike     |        7610 |
+|   12147 |  0.99 | JAY         | Mike     |        7626 |
+|   12148 |  4.99 | JAY         | Jon      |        8733 |
+|   12149 |  2.99 | JAY         | Jon      |       10432 |
+|   12150 |  3.99 | JAY         | Mike     |       10984 |
+|   12151 |  0.99 | JAY         | Jon      |       12812 |
+|   12152 |  4.99 | JAY         | Jon      |       13731 |
+|   12153 |  0.99 | JAY         | Mike     |       13810 |
+|   12154 |  4.99 | JAY         | Mike     |       13828 |
+|   12155 |  4.99 | JAY         | Mike     |       14282 |
+|   12156 |  0.99 | JAY         | Jon      |       15019 |
+|   12157 |  4.99 | JAY         | Mike     |       15327 |
+|   12158 |  4.99 | JAY         | Jon      |       15419 |
+|   12159 |  0.99 | JAY         | Mike     |       14172 |
+|   12160 |  0.99 | JIM         | Jon      |          77 |
+|   12161 |  2.99 | JIM         | Jon      |         328 |
+|   12162 |  2.99 | JIM         | Jon      |        1113 |
+|   12163 |  0.99 | JIM         | Mike     |        1202 |
+|   12164 |  0.99 | JIM         | Mike     |        1851 |
+|   12165 |  6.99 | JIM         | Mike     |        1940 |
+|   12166 |  1.99 | JIM         | Mike     |        2671 |
+|   12167 |  3.99 | JIM         | Mike     |        2909 |
+|   12168 |  0.99 | JIM         | Jon      |        2917 |
+|   12169 |  6.99 | JIM         | Mike     |        3316 |
+|   12170 |  4.99 | JIM         | Jon      |        3826 |
+|   12171 |  2.99 | JIM         | Mike     |        4538 |
+|   12172 |  8.99 | JIM         | Mike     |        4794 |
+|   12173 |  4.99 | JIM         | Jon      |        4930 |
+|   12174 |  3.99 | JIM         | Mike     |        5005 |
+|   12175 |  8.99 | JIM         | Jon      |        5518 |
+|   12176 |  2.99 | JIM         | Mike     |        7018 |
+|   12177 |  8.99 | JIM         | Jon      |       10337 |
+|   12178 |  2.99 | JIM         | Mike     |       10856 |
+|   12179 |  2.99 | JIM         | Jon      |       10950 |
+|   12180 |  6.99 | JIM         | Jon      |       11167 |
+|   12181 |  6.99 | JIM         | Jon      |       11381 |
+|   12182 |  2.99 | JIM         | Mike     |       11790 |
+|   12183 |  2.99 | JIM         | Jon      |       12371 |
+|   12184 |  4.99 | JIM         | Mike     |       12422 |
+|   12185 |  1.99 | JIM         | Jon      |       13003 |
+|   12186 |  2.99 | JIM         | Jon      |       13100 |
+|   12187 |  2.99 | JIM         | Jon      |       13252 |
+|   12188 |  0.99 | JIM         | Jon      |       13380 |
+|   12189 |  2.99 | JIM         | Mike     |       13666 |
+|   12190 |  2.99 | JIM         | Mike     |       13705 |
+|   12191 |  0.99 | JIM         | Jon      |       14500 |
+|   12192 |  4.99 | JIM         | Mike     |       15651 |
+|   12193 |  2.99 | TOM         | Mike     |         354 |
+|   12194 |  2.99 | TOM         | Jon      |         714 |
+|   12195 |  1.99 | TOM         | Mike     |         726 |
+|   12196 |  4.99 | TOM         | Jon      |        1203 |
+|   12197 |  5.99 | TOM         | Mike     |        1512 |
+|   12198 |  3.99 | TOM         | Mike     |        1794 |
+|   12199 |  0.99 | TOM         | Mike     |        2263 |
+|   12200 |  4.99 | TOM         | Jon      |        2266 |
+|   12201 |  0.99 | TOM         | Mike     |        2504 |
+|   12202 |  0.99 | TOM         | Jon      |        2661 |
+|   12203 |  3.99 | TOM         | Jon      |        3638 |
+|   12204 |  2.99 | TOM         | Mike     |        3791 |
+|   12205 |  6.99 | TOM         | Jon      |        3907 |
+|   12206 |  0.99 | TOM         | Mike     |        4348 |
+|   12207 |  4.99 | TOM         | Jon      |        4353 |
+|   12208 |  2.99 | TOM         | Jon      |        4417 |
+|   12209 |  0.99 | TOM         | Mike     |        4720 |
+|   12210 |  1.99 | TOM         | Mike     |        5177 |
+|   12211 |  0.99 | TOM         | Jon      |        5480 |
+|   12212 |  2.99 | TOM         | Jon      |        6959 |
+|   12213 |  6.99 | TOM         | Jon      |        7899 |
+|   12214 |  1.99 | TOM         | Mike     |        8898 |
+|   12215 |  6.99 | TOM         | Jon      |        9379 |
+|   12216 |  4.99 | TOM         | Jon      |       11715 |
+|   12217 |  3.99 | TOM         | Mike     |       11735 |
+|   12218 |  0.99 | TOM         | Mike     |       12355 |
+|   12219 |  4.99 | TOM         | Mike     |       12630 |
+|   12220 |  4.99 | TOM         | Mike     |       13080 |
+|   12221 |  3.99 | TOM         | Mike     |       13642 |
+|   12222 |  0.99 | TOM         | Mike     |       14660 |
+|   12223 |  0.99 | TOM         | Mike     |       15909 |
+|   12224 |  4.99 | TOM         | Mike     |       14175 |
+|   12225 |  5.99 | CALVIN      | Jon      |        2852 |
+|   12226 |  7.99 | CALVIN      | Mike     |        2853 |
+|   12227 |  4.99 | CALVIN      | Jon      |        2887 |
+|   12228 |  0.99 | CALVIN      | Jon      |        3929 |
+|   12229 |  8.99 | CALVIN      | Jon      |        4033 |
+|   12230 |  4.99 | CALVIN      | Mike     |        4717 |
+|   12231 |  2.99 | CALVIN      | Jon      |        4805 |
+|   12232 |  6.99 | CALVIN      | Jon      |        5359 |
+|   12233 |  4.99 | CALVIN      | Mike     |        6752 |
+|   12234 |  0.99 | CALVIN      | Mike     |        7563 |
+|   12235 |  6.99 | CALVIN      | Jon      |        9289 |
+|   12236 |  6.99 | CALVIN      | Jon      |        9406 |
+|   12237 |  1.99 | CALVIN      | Jon      |        9900 |
+|   12238 |  4.99 | CALVIN      | Mike     |       11794 |
+|   12239 |  2.99 | CALVIN      | Mike     |       12703 |
+|   12240 |  7.99 | CALVIN      | Mike     |       13711 |
+|   12241 |  4.99 | CALVIN      | Mike     |       13785 |
+|   12242 |  2.99 | CALVIN      | Mike     |       14133 |
+|   12243 |  5.99 | CALVIN      | Jon      |       14306 |
+|   12244 |  4.99 | CALVIN      | Jon      |       14644 |
+|   12245 |  4.99 | CALVIN      | Mike     |       14652 |
+|   12246 |  0.99 | CALVIN      | Mike     |       15252 |
+|   12247 |  4.99 | CALVIN      | Jon      |       15627 |
+|   12248 |  7.99 | ALEX        | Mike     |         735 |
+|   12249 |  4.99 | ALEX        | Jon      |        1647 |
+|   12250 |  7.99 | ALEX        | Jon      |        1844 |
+|   12251 |  1.99 | ALEX        | Mike     |        1861 |
+|   12252 |  4.99 | ALEX        | Mike     |        1938 |
+|   12253 |  5.99 | ALEX        | Jon      |        2048 |
+|   12254 |  5.99 | ALEX        | Jon      |        2182 |
+|   12255 |  2.99 | ALEX        | Mike     |        2437 |
+|   12256 |  9.99 | ALEX        | Jon      |        2666 |
+|   12257 |  2.99 | ALEX        | Mike     |        3221 |
+|   12258 |  4.99 | ALEX        | Mike     |        3362 |
+|   12259 |  7.99 | ALEX        | Mike     |        3622 |
+|   12260 |  4.99 | ALEX        | Jon      |        4562 |
+|   12261 |  4.99 | ALEX        | Jon      |        5088 |
+|   12262 |  2.99 | ALEX        | Jon      |        5446 |
+|   12263 |  4.99 | ALEX        | Jon      |        6260 |
+|   12264 |  0.99 | ALEX        | Jon      |        6701 |
+|   12265 |  2.99 | ALEX        | Jon      |        8481 |
+|   12266 |  0.99 | ALEX        | Mike     |        8806 |
+|   12267 |  0.99 | ALEX        | Jon      |        9041 |
+|   12268 |  9.99 | ALEX        | Mike     |        9372 |
+|   12269 |  3.99 | ALEX        | Mike     |       10005 |
+|   12270 |  0.99 | ALEX        | Jon      |       12347 |
+|   12271 |  0.99 | ALEX        | Mike     |       12553 |
+|   12272 |  8.99 | ALEX        | Jon      |       13496 |
+|   12273 |  2.99 | ALEX        | Jon      |       13513 |
+|   12274 |  8.99 | ALEX        | Jon      |       13694 |
+|   12275 |  6.99 | ALEX        | Mike     |       13805 |
+|   12276 |  0.99 | ALEX        | Mike     |       14799 |
+|   12277 |  2.99 | ALEX        | Jon      |       14843 |
+|   12278 |  4.99 | ALEX        | Jon      |       15012 |
+|   12279 |  3.99 | ALEX        | Mike     |       15301 |
+|   12280 |  1.99 | ALEX        | Jon      |       15608 |
+|   12281 |  0.99 | JON         | Jon      |         115 |
+|   12282 |  0.99 | JON         | Jon      |         343 |
+|   12283 |  1.99 | JON         | Jon      |        1382 |
+|   12284 |  1.99 | JON         | Mike     |        1802 |
+|   12285 |  2.99 | JON         | Mike     |        1906 |
+|   12286 |  0.99 | JON         | Jon      |        2356 |
+|   12287 |  2.99 | JON         | Jon      |        4195 |
+|   12288 |  8.99 | JON         | Mike     |        4861 |
+|   12289 |  2.99 | JON         | Mike     |        4964 |
+|   12290 |  6.99 | JON         | Mike     |        5504 |
+|   12291 |  4.99 | JON         | Jon      |        6729 |
+|   12292 |  4.99 | JON         | Mike     |        7388 |
+|   12293 |  4.99 | JON         | Jon      |        7498 |
+|   12294 |  5.99 | JON         | Jon      |        7905 |
+|   12295 |  2.99 | JON         | Jon      |        8291 |
+|   12296 |  0.99 | JON         | Mike     |       10436 |
+|   12297 |  4.99 | JON         | Mike     |       11605 |
+|   12298 |  2.99 | JON         | Mike     |       12163 |
+|   12299 |  4.99 | JON         | Mike     |       12314 |
+|   12300 |  2.99 | JON         | Jon      |       13083 |
+|   12301 |  4.99 | JON         | Jon      |       13813 |
+|   12302 |  2.99 | JON         | Mike     |       14294 |
+|   12303 |  4.99 | JON         | Jon      |       14583 |
+|   12304 |  1.99 | JON         | Mike     |       15494 |
+|   12305 |  4.99 | RONNIE      | Jon      |          19 |
+|   12306 |  2.99 | RONNIE      | Mike     |        1288 |
+|   12307 |  0.99 | RONNIE      | Mike     |        1700 |
+|   12308 |  5.99 | RONNIE      | Jon      |        2103 |
+|   12309 |  6.99 | RONNIE      | Jon      |        2146 |
+|   12310 |  4.99 | RONNIE      | Mike     |        2192 |
+|   12311 |  0.99 | RONNIE      | Mike     |        2404 |
+|   12312 |  2.99 | RONNIE      | Mike     |        2581 |
+|   12313 |  7.99 | RONNIE      | Mike     |        3743 |
+|   12314 |  2.99 | RONNIE      | Jon      |        3881 |
+|   12315 |  3.99 | RONNIE      | Mike     |        4141 |
+|   12316 |  0.99 | RONNIE      | Jon      |        5964 |
+|   12317 |  0.99 | RONNIE      | Jon      |        6023 |
+|   12318 |  2.99 | RONNIE      | Jon      |        7248 |
+|   12319 |  4.99 | RONNIE      | Mike     |        8749 |
+|   12320 |  5.99 | RONNIE      | Jon      |       10519 |
+|   12321 |  2.99 | RONNIE      | Mike     |       10813 |
+|   12322 |  4.99 | RONNIE      | Mike     |       12188 |
+|   12323 |  8.99 | RONNIE      | Mike     |       13144 |
+|   12324 |  4.99 | RONNIE      | Mike     |       13348 |
+|   12325 |  4.99 | RONNIE      | Mike     |       13547 |
+|   12326 |  2.99 | RONNIE      | Jon      |       14253 |
+|   12327 |  1.99 | RONNIE      | Jon      |       14690 |
+|   12328 |  3.99 | RONNIE      | Mike     |       15720 |
+|   12329 |  2.99 | RONNIE      | Mike     |       15910 |
+|   12330 |  7.99 | BILL        | Jon      |        1024 |
+|   12331 |  4.99 | BILL        | Jon      |        1453 |
+|   12332 |  0.99 | BILL        | Jon      |        1727 |
+|   12333 |  0.99 | BILL        | Mike     |        2030 |
+|   12334 |  7.99 | BILL        | Mike     |        2172 |
+|   12335 |  4.99 | BILL        | Mike     |        2670 |
+|   12336 |  3.99 | BILL        | Mike     |        2762 |
+|   12337 |  0.99 | BILL        | Mike     |        2811 |
+|   12338 |  2.99 | BILL        | Jon      |        3115 |
+|   12339 |  2.99 | BILL        | Jon      |        3184 |
+|   12340 |  5.99 | BILL        | Jon      |        4600 |
+|   12341 |  0.99 | BILL        | Mike     |        5500 |
+|   12342 |  7.99 | BILL        | Mike     |        6467 |
+|   12343 |  1.99 | BILL        | Mike     |        7184 |
+|   12344 |  4.99 | BILL        | Jon      |        8373 |
+|   12345 |  2.99 | BILL        | Mike     |        8502 |
+|   12346 |  2.99 | BILL        | Mike     |       10049 |
+|   12347 |  6.99 | BILL        | Jon      |       11956 |
+|   12348 |  4.99 | BILL        | Mike     |       12115 |
+|   12349 |  4.99 | BILL        | Mike     |       12171 |
+|   12350 |  0.99 | BILL        | Mike     |       13088 |
+|   12351 |  2.99 | BILL        | Mike     |       13150 |
+|   12352 |  0.99 | BILL        | Jon      |       13934 |
+|   12353 | 10.99 | BILL        | Jon      |       14327 |
+|   12354 |  6.99 | BILL        | Mike     |       14365 |
+|   12355 |  3.99 | BILL        | Mike     |       15128 |
+|   12356 |  3.98 | BILL        | Mike     |       12645 |
+|   12357 |  0.00 | BILL        | Jon      |       14516 |
+|   12358 |  5.99 | LLOYD       | Jon      |        2629 |
+|   12359 |  0.99 | LLOYD       | Jon      |        3322 |
+|   12360 |  2.99 | LLOYD       | Jon      |        4525 |
+|   12361 |  2.99 | LLOYD       | Mike     |        5412 |
+|   12362 |  0.99 | LLOYD       | Mike     |        5572 |
+|   12363 |  3.99 | LLOYD       | Jon      |        6250 |
+|   12364 |  5.99 | LLOYD       | Mike     |        6431 |
+|   12365 |  7.99 | LLOYD       | Jon      |        6595 |
+|   12366 |  1.99 | LLOYD       | Mike     |        6654 |
+|   12367 |  3.99 | LLOYD       | Jon      |        7923 |
+|   12368 |  0.99 | LLOYD       | Mike     |        8158 |
+|   12369 |  2.99 | LLOYD       | Jon      |       11138 |
+|   12370 |  2.99 | LLOYD       | Jon      |       11975 |
+|   12371 |  0.99 | LLOYD       | Jon      |       12768 |
+|   12372 |  2.99 | LLOYD       | Jon      |       13259 |
+|   12373 |  2.99 | LLOYD       | Jon      |       13487 |
+|   12374 |  4.99 | LLOYD       | Jon      |       13571 |
+|   12375 |  4.99 | LLOYD       | Jon      |       14428 |
+|   12376 |  4.99 | LLOYD       | Mike     |       15604 |
+|   12377 |  2.99 | TOMMY       | Jon      |           2 |
+|   12378 |  0.99 | TOMMY       | Jon      |        1876 |
+|   12379 |  2.99 | TOMMY       | Jon      |        1977 |
+|   12380 |  4.99 | TOMMY       | Jon      |        2075 |
+|   12381 |  0.99 | TOMMY       | Mike     |        2899 |
+|   12382 |  4.99 | TOMMY       | Jon      |        3041 |
+|   12383 |  0.99 | TOMMY       | Jon      |        3045 |
+|   12384 |  9.99 | TOMMY       | Jon      |        3234 |
+|   12385 |  2.99 | TOMMY       | Mike     |        3506 |
+|   12386 |  2.99 | TOMMY       | Jon      |        4519 |
+|   12387 |  3.99 | TOMMY       | Mike     |        5301 |
+|   12388 |  0.99 | TOMMY       | Mike     |        5695 |
+|   12389 |  0.99 | TOMMY       | Mike     |        6206 |
+|   12390 |  3.99 | TOMMY       | Jon      |        6750 |
+|   12391 |  6.99 | TOMMY       | Mike     |        7623 |
+|   12392 |  4.99 | TOMMY       | Jon      |        7639 |
+|   12393 |  4.99 | TOMMY       | Mike     |        7717 |
+|   12394 |  5.99 | TOMMY       | Mike     |        7820 |
+|   12395 |  6.99 | TOMMY       | Mike     |        7913 |
+|   12396 |  9.99 | TOMMY       | Mike     |        8289 |
+|   12397 | 10.99 | TOMMY       | Jon      |        8557 |
+|   12398 |  2.99 | TOMMY       | Mike     |        8897 |
+|   12399 |  6.99 | TOMMY       | Mike     |        9137 |
+|   12400 |  2.99 | TOMMY       | Jon      |        9639 |
+|   12401 |  4.99 | TOMMY       | Mike     |        9744 |
+|   12402 |  4.99 | TOMMY       | Jon      |       10117 |
+|   12403 |  6.99 | TOMMY       | Mike     |       10233 |
+|   12404 |  4.99 | TOMMY       | Jon      |       10255 |
+|   12405 |  7.99 | TOMMY       | Mike     |       10499 |
+|   12406 |  2.99 | TOMMY       | Mike     |       10531 |
+|   12407 |  6.99 | TOMMY       | Mike     |       12527 |
+|   12408 |  7.99 | TOMMY       | Mike     |       12629 |
+|   12409 | 10.99 | TOMMY       | Jon      |       13960 |
+|   12410 |  4.99 | TOMMY       | Mike     |       13967 |
+|   12411 |  3.99 | TOMMY       | Mike     |       14315 |
+|   12412 |  5.99 | TOMMY       | Mike     |       15126 |
+|   12413 |  2.99 | TOMMY       | Jon      |       15342 |
+|   12414 |  0.99 | TOMMY       | Mike     |       15814 |
+|   12415 |  4.99 | LEON        | Mike     |         223 |
+|   12416 |  0.99 | LEON        | Jon      |         298 |
+|   12417 |  0.99 | LEON        | Mike     |         880 |
+|   12418 |  4.99 | LEON        | Jon      |        1064 |
+|   12419 |  0.99 | LEON        | Jon      |        1392 |
+|   12420 |  4.99 | LEON        | Jon      |        3820 |
+|   12421 |  7.99 | LEON        | Mike     |        4452 |
+|   12422 |  3.99 | LEON        | Jon      |        5482 |
+|   12423 |  4.99 | LEON        | Mike     |        6613 |
+|   12424 |  5.99 | LEON        | Mike     |        6788 |
+|   12425 |  6.99 | LEON        | Mike     |        7125 |
+|   12426 |  3.99 | LEON        | Mike     |        7785 |
+|   12427 |  2.99 | LEON        | Jon      |        8656 |
+|   12428 | 10.99 | LEON        | Jon      |       10754 |
+|   12429 |  1.99 | LEON        | Mike     |       10926 |
+|   12430 |  2.99 | LEON        | Jon      |       11554 |
+|   12431 |  5.99 | LEON        | Mike     |       12056 |
+|   12432 |  4.99 | LEON        | Jon      |       12586 |
+|   12433 |  0.99 | LEON        | Mike     |       12865 |
+|   12434 |  8.99 | LEON        | Jon      |       13215 |
+|   12435 |  3.99 | LEON        | Mike     |       13341 |
+|   12436 |  5.99 | LEON        | Jon      |       13920 |
+|   12437 |  0.99 | LEON        | Jon      |       14864 |
+|   12438 |  3.99 | LEON        | Mike     |       14923 |
+|   12439 |  2.99 | LEON        | Jon      |       15954 |
+|   12440 |  6.99 | DEREK       | Mike     |         684 |
+|   12441 |  5.99 | DEREK       | Jon      |        3127 |
+|   12442 |  4.99 | DEREK       | Jon      |        3319 |
+|   12443 |  0.99 | DEREK       | Jon      |        3698 |
+|   12444 |  2.99 | DEREK       | Jon      |        4586 |
+|   12445 |  0.99 | DEREK       | Mike     |        5650 |
+|   12446 |  2.99 | DEREK       | Mike     |        5809 |
+|   12447 |  2.99 | DEREK       | Jon      |        7334 |
+|   12448 |  2.99 | DEREK       | Jon      |        7664 |
+|   12449 |  0.99 | DEREK       | Jon      |        8133 |
+|   12450 |  0.99 | DEREK       | Jon      |        8164 |
+|   12451 |  4.99 | DEREK       | Jon      |        9499 |
+|   12452 |  0.99 | DEREK       | Mike     |        9885 |
+|   12453 |  4.99 | DEREK       | Jon      |       10113 |
+|   12454 |  2.99 | DEREK       | Mike     |       10260 |
+|   12455 |  0.99 | DEREK       | Jon      |       11063 |
+|   12456 |  0.99 | DEREK       | Jon      |       11219 |
+|   12457 |  2.99 | DEREK       | Jon      |       12022 |
+|   12458 |  2.99 | DEREK       | Mike     |       13223 |
+|   12459 |  2.99 | DEREK       | Mike     |       13269 |
+|   12460 |  4.99 | DEREK       | Mike     |       14186 |
+|   12461 |  4.99 | DEREK       | Mike     |       14893 |
+|   12462 |  2.99 | DEREK       | Mike     |       15067 |
+|   12463 |  4.99 | DEREK       | Jon      |       15187 |
+|   12464 |  6.99 | DEREK       | Mike     |       15336 |
+|   12465 |  2.99 | DEREK       | Jon      |       15411 |
+|   12466 |  2.99 | DEREK       | Jon      |       15449 |
+|   12467 |  7.99 | DEREK       | Jon      |       15613 |
+|   12468 |  2.99 | WARREN      | Jon      |         156 |
+|   12469 |  3.99 | WARREN      | Jon      |         590 |
+|   12470 |  5.99 | WARREN      | Jon      |        1773 |
+|   12471 |  9.99 | WARREN      | Jon      |        1926 |
+|   12472 |  4.99 | WARREN      | Mike     |        3279 |
+|   12473 |  4.99 | WARREN      | Mike     |        4500 |
+|   12474 |  3.99 | WARREN      | Jon      |        4728 |
+|   12475 |  4.99 | WARREN      | Mike     |        6583 |
+|   12476 |  0.99 | WARREN      | Mike     |        6630 |
+|   12477 |  7.99 | WARREN      | Mike     |        6710 |
+|   12478 |  6.99 | WARREN      | Mike     |        6721 |
+|   12479 |  8.99 | WARREN      | Jon      |        7295 |
+|   12480 |  6.99 | WARREN      | Mike     |        7324 |
+|   12481 |  8.99 | WARREN      | Mike     |        7762 |
+|   12482 |  4.99 | WARREN      | Mike     |        7932 |
+|   12483 |  2.99 | WARREN      | Jon      |        7935 |
+|   12484 |  2.99 | WARREN      | Mike     |        8066 |
+|   12485 |  0.99 | WARREN      | Mike     |        8282 |
+|   12486 |  3.99 | WARREN      | Mike     |        8290 |
+|   12487 |  2.99 | WARREN      | Jon      |        8757 |
+|   12488 |  0.99 | WARREN      | Mike     |        9891 |
+|   12489 |  2.99 | WARREN      | Mike     |       10283 |
+|   12490 |  6.99 | WARREN      | Jon      |       11639 |
+|   12491 |  2.99 | WARREN      | Mike     |       11808 |
+|   12492 |  4.99 | WARREN      | Mike     |       12466 |
+|   12493 |  0.99 | WARREN      | Jon      |       12582 |
+|   12494 |  8.99 | WARREN      | Mike     |       12802 |
+|   12495 |  8.99 | WARREN      | Jon      |       13041 |
+|   12496 |  4.99 | WARREN      | Mike     |       13328 |
+|   12497 |  7.99 | WARREN      | Mike     |       13492 |
+|   12498 |  2.99 | WARREN      | Jon      |       15581 |
+|   12499 |  2.99 | WARREN      | Mike     |       15943 |
+|   12500 |  0.99 | WARREN      | Mike     |       16013 |
+|   12501 |  1.99 | DARRELL     | Mike     |         560 |
+|   12502 |  2.99 | DARRELL     | Mike     |        1284 |
+|   12503 |  4.99 | DARRELL     | Jon      |        2527 |
+|   12504 |  2.99 | DARRELL     | Mike     |        3217 |
+|   12505 |  4.99 | DARRELL     | Mike     |        3309 |
+|   12506 |  2.99 | DARRELL     | Mike     |        5026 |
+|   12507 |  2.99 | DARRELL     | Mike     |        5157 |
+|   12508 |  0.99 | DARRELL     | Mike     |        5448 |
+|   12509 |  0.99 | DARRELL     | Jon      |        6294 |
+|   12510 |  6.99 | DARRELL     | Mike     |        6932 |
+|   12511 |  0.99 | DARRELL     | Mike     |        7013 |
+|   12512 |  0.99 | DARRELL     | Mike     |        7361 |
+|   12513 |  2.99 | DARRELL     | Mike     |        8762 |
+|   12514 |  7.99 | DARRELL     | Jon      |        9405 |
+|   12515 |  2.99 | DARRELL     | Mike     |        9954 |
+|   12516 |  3.99 | DARRELL     | Mike     |       10275 |
+|   12517 |  0.99 | DARRELL     | Jon      |       10405 |
+|   12518 |  2.99 | DARRELL     | Jon      |       10906 |
+|   12519 |  7.99 | DARRELL     | Jon      |       12096 |
+|   12520 |  6.99 | DARRELL     | Jon      |       12679 |
+|   12521 |  2.99 | DARRELL     | Mike     |       12950 |
+|   12522 |  4.99 | DARRELL     | Jon      |       13938 |
+|   12523 |  0.99 | DARRELL     | Mike     |       14689 |
+|   12524 |  2.99 | DARRELL     | Mike     |       14859 |
+|   12525 |  7.99 | DARRELL     | Jon      |       15151 |
+|   12526 |  3.99 | JEROME      | Mike     |         305 |
+|   12527 |  1.99 | JEROME      | Jon      |         373 |
+|   12528 |  4.99 | JEROME      | Jon      |        1277 |
+|   12529 |  2.99 | JEROME      | Mike     |        3167 |
+|   12530 |  4.99 | JEROME      | Mike     |        3761 |
+|   12531 |  5.99 | JEROME      | Mike     |        4337 |
+|   12532 |  6.99 | JEROME      | Jon      |        5455 |
+|   12533 |  4.99 | JEROME      | Mike     |        5910 |
+|   12534 |  3.99 | JEROME      | Jon      |        6601 |
+|   12535 |  5.99 | JEROME      | Mike     |        9600 |
+|   12536 |  1.99 | JEROME      | Jon      |       11275 |
+|   12537 |  8.99 | JEROME      | Mike     |       13644 |
+|   12538 |  2.99 | JEROME      | Jon      |       13943 |
+|   12539 |  6.99 | JEROME      | Mike     |       15092 |
+|   12540 |  0.99 | JEROME      | Jon      |       15854 |
+|   12541 |  4.99 | JEROME      | Mike     |       15983 |
+|   12542 |  0.99 | FLOYD       | Jon      |         640 |
+|   12543 |  2.99 | FLOYD       | Mike     |        1337 |
+|   12544 |  4.99 | FLOYD       | Mike     |        2079 |
+|   12545 |  8.99 | FLOYD       | Mike     |        2159 |
+|   12546 |  0.99 | FLOYD       | Jon      |        2524 |
+|   12547 |  0.99 | FLOYD       | Mike     |        4763 |
+|   12548 |  3.99 | FLOYD       | Jon      |        6904 |
+|   12549 |  2.99 | FLOYD       | Jon      |        7508 |
+|   12550 |  3.99 | FLOYD       | Mike     |       10542 |
+|   12551 |  2.99 | FLOYD       | Mike     |       11156 |
+|   12552 |  4.99 | FLOYD       | Mike     |       11586 |
+|   12553 |  6.99 | FLOYD       | Jon      |       11648 |
+|   12554 |  4.99 | FLOYD       | Jon      |       12106 |
+|   12555 |  4.99 | FLOYD       | Mike     |       12814 |
+|   12556 |  4.99 | FLOYD       | Mike     |       12864 |
+|   12557 |  3.99 | FLOYD       | Mike     |       15550 |
+|   12558 |  4.99 | FLOYD       | Jon      |       15859 |
+|   12559 |  2.99 | LEO         | Jon      |        1104 |
+|   12560 |  7.99 | LEO         | Jon      |        1808 |
+|   12561 |  8.99 | LEO         | Jon      |        2446 |
+|   12562 |  3.99 | LEO         | Mike     |        3022 |
+|   12563 |  4.99 | LEO         | Jon      |        3237 |
+|   12564 |  2.99 | LEO         | Jon      |        3343 |
+|   12565 |  0.99 | LEO         | Jon      |        5048 |
+|   12566 |  4.99 | LEO         | Mike     |        5691 |
+|   12567 |  6.99 | LEO         | Mike     |        6073 |
+|   12568 |  2.99 | LEO         | Jon      |        7080 |
+|   12569 |  0.99 | LEO         | Jon      |        8276 |
+|   12570 |  3.99 | LEO         | Mike     |        9202 |
+|   12571 |  2.99 | LEO         | Mike     |        9257 |
+|   12572 |  4.99 | LEO         | Mike     |       10469 |
+|   12573 |  0.99 | LEO         | Jon      |       11343 |
+|   12574 |  4.99 | LEO         | Mike     |       11359 |
+|   12575 |  7.99 | LEO         | Mike     |       12048 |
+|   12576 |  2.99 | LEO         | Mike     |       13478 |
+|   12577 |  5.99 | LEO         | Mike     |       13884 |
+|   12578 |  4.99 | LEO         | Mike     |       13988 |
+|   12579 |  2.99 | LEO         | Jon      |       14546 |
+|   12580 |  4.99 | LEO         | Jon      |       15230 |
+|   12581 |  7.99 | LEO         | Mike     |       16005 |
+|   12582 |  4.99 | ALVIN       | Jon      |         225 |
+|   12583 |  8.99 | ALVIN       | Mike     |        1737 |
+|   12584 |  4.99 | ALVIN       | Jon      |        2121 |
+|   12585 |  9.99 | ALVIN       | Jon      |        2870 |
+|   12586 |  6.99 | ALVIN       | Mike     |        3250 |
+|   12587 |  0.99 | ALVIN       | Mike     |        4216 |
+|   12588 |  4.99 | ALVIN       | Jon      |        4222 |
+|   12589 |  4.99 | ALVIN       | Mike     |        4259 |
+|   12590 |  4.99 | ALVIN       | Jon      |        5160 |
+|   12591 |  6.99 | ALVIN       | Jon      |        6271 |
+|   12592 |  2.99 | ALVIN       | Jon      |        7360 |
+|   12593 |  5.99 | ALVIN       | Jon      |        7573 |
+|   12594 |  2.99 | ALVIN       | Mike     |        7611 |
+|   12595 |  7.99 | ALVIN       | Mike     |        8010 |
+|   12596 |  6.99 | ALVIN       | Jon      |        8061 |
+|   12597 |  2.99 | ALVIN       | Jon      |        8224 |
+|   12598 |  8.99 | ALVIN       | Jon      |        8480 |
+|   12599 |  4.99 | ALVIN       | Mike     |        8767 |
+|   12600 |  0.99 | ALVIN       | Jon      |       10239 |
+|   12601 |  2.99 | ALVIN       | Jon      |       11332 |
+|   12602 |  4.99 | ALVIN       | Mike     |       11874 |
+|   12603 |  2.99 | ALVIN       | Mike     |       12266 |
+|   12604 |  9.99 | ALVIN       | Mike     |       12437 |
+|   12605 |  2.99 | ALVIN       | Mike     |       12641 |
+|   12606 |  2.99 | ALVIN       | Mike     |       14402 |
+|   12607 |  0.99 | ALVIN       | Mike     |       14451 |
+|   12608 |  3.99 | ALVIN       | Mike     |       14842 |
+|   12609 |  0.99 | ALVIN       | Mike     |       15032 |
+|   12610 |  2.99 | ALVIN       | Jon      |       15830 |
+|   12611 |  6.99 | TIM         | Jon      |         101 |
+|   12612 |  4.99 | TIM         | Mike     |         186 |
+|   12613 |  6.99 | TIM         | Jon      |         296 |
+|   12614 |  0.99 | TIM         | Jon      |         459 |
+|   12615 |  0.99 | TIM         | Mike     |         673 |
+|   12616 |  2.99 | TIM         | Jon      |        1229 |
+|   12617 |  8.99 | TIM         | Mike     |        1627 |
+|   12618 |  2.99 | TIM         | Mike     |        1821 |
+|   12619 |  2.99 | TIM         | Mike     |        1975 |
+|   12620 |  4.99 | TIM         | Jon      |        2462 |
+|   12621 |  0.99 | TIM         | Mike     |        2831 |
+|   12622 |  2.99 | TIM         | Jon      |        3724 |
+|   12623 |  5.99 | TIM         | Mike     |        3840 |
+|   12624 |  3.99 | TIM         | Jon      |        4184 |
+|   12625 |  3.99 | TIM         | Jon      |        4527 |
+|   12626 |  2.99 | TIM         | Mike     |        5285 |
+|   12627 |  0.99 | TIM         | Mike     |        6392 |
+|   12628 |  4.99 | TIM         | Mike     |        6581 |
+|   12629 |  5.99 | TIM         | Jon      |        6815 |
+|   12630 |  4.99 | TIM         | Jon      |        7292 |
+|   12631 |  0.99 | TIM         | Mike     |        7685 |
+|   12632 |  5.99 | TIM         | Jon      |        8423 |
+|   12633 |  6.99 | TIM         | Jon      |        8768 |
+|   12634 |  0.99 | TIM         | Mike     |        9598 |
+|   12635 |  6.99 | TIM         | Mike     |        9690 |
+|   12636 | 10.99 | TIM         | Jon      |       11257 |
+|   12637 |  4.99 | TIM         | Jon      |       11633 |
+|   12638 |  6.99 | TIM         | Jon      |       12026 |
+|   12639 |  3.99 | TIM         | Jon      |       13221 |
+|   12640 |  0.99 | TIM         | Mike     |       13417 |
+|   12641 |  4.99 | TIM         | Jon      |       14154 |
+|   12642 |  4.99 | TIM         | Jon      |       14210 |
+|   12643 |  9.99 | TIM         | Mike     |       14309 |
+|   12644 |  2.99 | TIM         | Mike     |       14313 |
+|   12645 |  9.99 | TIM         | Mike     |       14614 |
+|   12646 |  4.99 | TIM         | Jon      |       15435 |
+|   12647 |  1.99 | TIM         | Mike     |       15522 |
+|   12648 |  2.99 | TIM         | Mike     |       15836 |
+|   12649 |  0.99 | TIM         | Jon      |       16044 |
+|   12650 |  0.99 | WESLEY      | Mike     |         168 |
+|   12651 |  7.99 | WESLEY      | Jon      |         506 |
+|   12652 |  4.99 | WESLEY      | Jon      |         529 |
+|   12653 |  1.99 | WESLEY      | Jon      |         936 |
+|   12654 |  2.99 | WESLEY      | Mike     |        1119 |
+|   12655 |  0.99 | WESLEY      | Jon      |        1399 |
+|   12656 |  9.99 | WESLEY      | Mike     |        1680 |
+|   12657 |  4.99 | WESLEY      | Jon      |        3522 |
+|   12658 | 10.99 | WESLEY      | Mike     |        3526 |
+|   12659 |  3.99 | WESLEY      | Jon      |        4067 |
+|   12660 |  0.99 | WESLEY      | Jon      |        4123 |
+|   12661 |  0.99 | WESLEY      | Mike     |        5133 |
+|   12662 |  3.99 | WESLEY      | Mike     |        5299 |
+|   12663 |  6.99 | WESLEY      | Jon      |        5664 |
+|   12664 |  0.99 | WESLEY      | Jon      |        6022 |
+|   12665 |  4.99 | WESLEY      | Jon      |        6099 |
+|   12666 |  4.99 | WESLEY      | Mike     |        6797 |
+|   12667 |  3.99 | WESLEY      | Mike     |        6955 |
+|   12668 |  6.99 | WESLEY      | Jon      |        7062 |
+|   12669 |  6.99 | WESLEY      | Jon      |        7271 |
+|   12670 |  4.99 | WESLEY      | Jon      |        7756 |
+|   12671 |  4.99 | WESLEY      | Mike     |        7914 |
+|   12672 |  0.99 | WESLEY      | Jon      |        8791 |
+|   12673 |  2.99 | WESLEY      | Mike     |        9187 |
+|   12674 |  4.99 | WESLEY      | Jon      |       10075 |
+|   12675 |  4.99 | WESLEY      | Mike     |       10258 |
+|   12676 |  4.99 | WESLEY      | Mike     |       10316 |
+|   12677 |  2.99 | WESLEY      | Mike     |       10658 |
+|   12678 |  2.99 | WESLEY      | Mike     |       10741 |
+|   12679 |  0.99 | WESLEY      | Jon      |       11185 |
+|   12680 |  0.99 | WESLEY      | Jon      |       12035 |
+|   12681 |  4.99 | WESLEY      | Mike     |       12447 |
+|   12682 |  6.99 | WESLEY      | Mike     |       12633 |
+|   12683 |  4.99 | WESLEY      | Mike     |       13654 |
+|   12684 |  2.99 | WESLEY      | Mike     |       13763 |
+|   12685 |  7.99 | WESLEY      | Jon      |       14197 |
+|   12686 |  2.99 | WESLEY      | Jon      |       14661 |
+|   12687 |  4.99 | WESLEY      | Mike     |       15487 |
+|   12688 |  9.99 | WESLEY      | Mike     |       15561 |
+|   12689 |  2.99 | WESLEY      | Mike     |       15851 |
+|   12690 |  2.99 | GORDON      | Jon      |          60 |
+|   12691 |  0.99 | GORDON      | Jon      |        1256 |
+|   12692 |  0.99 | GORDON      | Mike     |        1283 |
+|   12693 |  7.99 | GORDON      | Jon      |        1594 |
+|   12694 |  5.99 | GORDON      | Mike     |        3764 |
+|   12695 |  4.99 | GORDON      | Mike     |        3841 |
+|   12696 |  4.99 | GORDON      | Mike     |        3922 |
+|   12697 |  4.99 | GORDON      | Mike     |        4373 |
+|   12698 |  6.99 | GORDON      | Jon      |        4502 |
+|   12699 |  4.99 | GORDON      | Jon      |        5082 |
+|   12700 |  3.99 | GORDON      | Mike     |        6009 |
+|   12701 |  2.99 | GORDON      | Mike     |        6198 |
+|   12702 |  4.99 | GORDON      | Jon      |        6703 |
+|   12703 | 10.99 | GORDON      | Mike     |        6927 |
+|   12704 |  5.99 | GORDON      | Mike     |        6942 |
+|   12705 |  4.99 | GORDON      | Mike     |        7663 |
+|   12706 |  8.99 | GORDON      | Jon      |        8476 |
+|   12707 |  6.99 | GORDON      | Mike     |        8890 |
+|   12708 |  5.99 | GORDON      | Mike     |        9422 |
+|   12709 |  2.99 | GORDON      | Mike     |        9687 |
+|   12710 |  4.99 | GORDON      | Mike     |       10006 |
+|   12711 |  0.99 | GORDON      | Mike     |       10236 |
+|   12712 |  4.99 | GORDON      | Jon      |       10944 |
+|   12713 |  1.99 | GORDON      | Jon      |       11397 |
+|   12714 |  2.99 | GORDON      | Jon      |       11711 |
+|   12715 |  0.99 | GORDON      | Mike     |       11742 |
+|   12716 |  3.99 | GORDON      | Jon      |       12177 |
+|   12717 |  8.99 | GORDON      | Jon      |       12423 |
+|   12718 | 10.99 | GORDON      | Mike     |       12753 |
+|   12719 |  4.99 | GORDON      | Jon      |       13585 |
+|   12720 |  4.99 | GORDON      | Mike     |       13592 |
+|   12721 |  4.99 | GORDON      | Jon      |       14405 |
+|   12722 |  2.99 | DEAN        | Mike     |         616 |
+|   12723 |  4.99 | DEAN        | Mike     |        1447 |
+|   12724 |  2.99 | DEAN        | Jon      |        1449 |
+|   12725 |  2.99 | DEAN        | Jon      |        2165 |
+|   12726 |  4.99 | DEAN        | Jon      |        2350 |
+|   12727 |  4.99 | DEAN        | Jon      |        3073 |
+|   12728 |  0.99 | DEAN        | Mike     |        3917 |
+|   12729 |  2.99 | DEAN        | Mike     |        4020 |
+|   12730 |  2.99 | DEAN        | Jon      |        6293 |
+|   12731 |  8.99 | DEAN        | Mike     |        6336 |
+|   12732 |  5.99 | DEAN        | Mike     |        6912 |
+|   12733 |  0.99 | DEAN        | Mike     |        8199 |
+|   12734 |  2.99 | DEAN        | Mike     |        9077 |
+|   12735 |  0.99 | DEAN        | Mike     |        9502 |
+|   12736 |  2.99 | DEAN        | Jon      |        9560 |
+|   12737 |  2.99 | DEAN        | Mike     |       10430 |
+|   12738 |  3.99 | DEAN        | Jon      |       10828 |
+|   12739 |  4.99 | DEAN        | Jon      |       11601 |
+|   12740 |  4.99 | DEAN        | Mike     |       12271 |
+|   12741 |  5.99 | DEAN        | Mike     |       13661 |
+|   12742 |  7.99 | DEAN        | Mike     |       14085 |
+|   12743 |  4.99 | DEAN        | Mike     |       14094 |
+|   12744 |  5.99 | DEAN        | Mike     |       14317 |
+|   12745 |  2.99 | DEAN        | Jon      |       14538 |
+|   12746 |  7.99 | DEAN        | Jon      |       14942 |
+|   12747 |  0.99 | DEAN        | Jon      |       15184 |
+|   12748 |  1.99 | DEAN        | Mike     |       15654 |
+|   12749 |  0.99 | GREG        | Jon      |         142 |
+|   12750 |  2.99 | GREG        | Jon      |         249 |
+|   12751 |  0.99 | GREG        | Jon      |         800 |
+|   12752 |  4.99 | GREG        | Jon      |         994 |
+|   12753 |  4.99 | GREG        | Mike     |        1389 |
+|   12754 |  6.99 | GREG        | Jon      |        1776 |
+|   12755 |  5.99 | GREG        | Mike     |        2538 |
+|   12756 |  0.99 | GREG        | Mike     |        2974 |
+|   12757 |  4.99 | GREG        | Mike     |        2991 |
+|   12758 |  0.99 | GREG        | Mike     |        3254 |
+|   12759 |  6.99 | GREG        | Jon      |        3815 |
+|   12760 |  2.99 | GREG        | Jon      |        5318 |
+|   12761 |  3.99 | GREG        | Mike     |        5612 |
+|   12762 |  6.99 | GREG        | Mike     |        6119 |
+|   12763 |  5.99 | GREG        | Jon      |        6274 |
+|   12764 |  5.99 | GREG        | Mike     |        6308 |
+|   12765 |  2.99 | GREG        | Mike     |        6584 |
+|   12766 |  5.99 | GREG        | Jon      |        8929 |
+|   12767 |  6.99 | GREG        | Jon      |        9926 |
+|   12768 |  6.99 | GREG        | Mike     |       10282 |
+|   12769 |  0.99 | GREG        | Mike     |       10627 |
+|   12770 |  6.99 | GREG        | Mike     |       11911 |
+|   12771 |  4.99 | GREG        | Jon      |       12763 |
+|   12772 |  8.99 | GREG        | Jon      |       13188 |
+|   12773 |  4.99 | GREG        | Mike     |       14209 |
+|   12774 |  4.99 | GREG        | Jon      |       14596 |
+|   12775 |  4.99 | GREG        | Mike     |       14597 |
+|   12776 |  5.99 | GREG        | Jon      |       15185 |
+|   12777 |  2.99 | GREG        | Jon      |       15278 |
+|   12778 |  4.99 | GREG        | Jon      |       14928 |
+|   12779 |  4.99 | JORGE       | Mike     |         348 |
+|   12780 |  2.99 | JORGE       | Jon      |         942 |
+|   12781 |  3.99 | JORGE       | Jon      |         973 |
+|   12782 |  0.99 | JORGE       | Jon      |        1748 |
+|   12783 |  2.99 | JORGE       | Mike     |        2125 |
+|   12784 |  4.99 | JORGE       | Jon      |        2553 |
+|   12785 |  4.99 | JORGE       | Jon      |        2748 |
+|   12786 |  0.99 | JORGE       | Mike     |        3971 |
+|   12787 |  4.99 | JORGE       | Jon      |        4006 |
+|   12788 |  4.99 | JORGE       | Jon      |        4625 |
+|   12789 |  0.99 | JORGE       | Mike     |        4873 |
+|   12790 |  5.99 | JORGE       | Jon      |        5447 |
+|   12791 |  2.99 | JORGE       | Mike     |        6446 |
+|   12792 |  4.99 | JORGE       | Jon      |        6890 |
+|   12793 |  4.99 | JORGE       | Mike     |        7111 |
+|   12794 |  2.99 | JORGE       | Mike     |        7215 |
+|   12795 |  1.99 | JORGE       | Jon      |        7918 |
+|   12796 |  7.99 | JORGE       | Jon      |        7928 |
+|   12797 |  4.99 | JORGE       | Mike     |        9025 |
+|   12798 |  8.99 | JORGE       | Jon      |        9120 |
+|   12799 |  2.99 | JORGE       | Mike     |       10867 |
+|   12800 |  2.99 | JORGE       | Jon      |       11006 |
+|   12801 |  4.99 | JORGE       | Mike     |       11216 |
+|   12802 |  0.99 | JORGE       | Mike     |       11336 |
+|   12803 |  7.99 | JORGE       | Jon      |       11421 |
+|   12804 |  0.99 | JORGE       | Mike     |       11741 |
+|   12805 |  4.99 | JORGE       | Jon      |       13984 |
+|   12806 |  0.99 | JORGE       | Jon      |       14202 |
+|   12807 |  0.99 | JORGE       | Jon      |       14550 |
+|   12808 |  4.99 | JORGE       | Jon      |       14658 |
+|   12809 |  4.99 | JORGE       | Jon      |       14757 |
+|   12810 |  4.99 | JORGE       | Mike     |       15118 |
+|   12811 |  2.99 | JORGE       | Jon      |       15400 |
+|   12812 |  4.99 | JORGE       | Jon      |       16024 |
+|   12813 |  7.99 | DUSTIN      | Mike     |         816 |
+|   12814 |  8.99 | DUSTIN      | Mike     |        1758 |
+|   12815 |  7.99 | DUSTIN      | Jon      |        2944 |
+|   12816 |  4.99 | DUSTIN      | Jon      |        3787 |
+|   12817 |  1.99 | DUSTIN      | Jon      |        4048 |
+|   12818 |  2.99 | DUSTIN      | Mike     |        4481 |
+|   12819 |  0.99 | DUSTIN      | Mike     |        4533 |
+|   12820 |  0.99 | DUSTIN      | Jon      |        4785 |
+|   12821 |  2.99 | DUSTIN      | Mike     |        4809 |
+|   12822 |  4.99 | DUSTIN      | Jon      |        4886 |
+|   12823 |  0.99 | DUSTIN      | Mike     |        5251 |
+|   12824 |  7.99 | DUSTIN      | Mike     |        6499 |
+|   12825 |  2.99 | DUSTIN      | Mike     |        8991 |
+|   12826 |  5.99 | DUSTIN      | Jon      |       10376 |
+|   12827 |  0.99 | DUSTIN      | Jon      |       11117 |
+|   12828 |  2.99 | DUSTIN      | Mike     |       11489 |
+|   12829 |  2.99 | DUSTIN      | Jon      |       11537 |
+|   12830 |  2.99 | DUSTIN      | Mike     |       12083 |
+|   12831 |  4.99 | DUSTIN      | Mike     |       12236 |
+|   12832 |  0.99 | DUSTIN      | Mike     |       12440 |
+|   12833 |  2.99 | DUSTIN      | Jon      |       12597 |
+|   12834 |  4.99 | DUSTIN      | Mike     |       12702 |
+|   12835 |  0.99 | DUSTIN      | Mike     |       14728 |
+|   12836 |  4.99 | DUSTIN      | Jon      |       15046 |
+|   12837 |  6.99 | DUSTIN      | Mike     |       15558 |
+|   12838 |  0.99 | DUSTIN      | Mike     |       11909 |
+|   12839 |  4.99 | PEDRO       | Jon      |         417 |
+|   12840 |  0.99 | PEDRO       | Mike     |         702 |
+|   12841 |  5.99 | PEDRO       | Jon      |        3980 |
+|   12842 |  6.99 | PEDRO       | Mike     |        4013 |
+|   12843 |  4.99 | PEDRO       | Mike     |        4617 |
+|   12844 |  0.99 | PEDRO       | Jon      |        5379 |
+|   12845 |  0.99 | PEDRO       | Mike     |        5407 |
+|   12846 |  9.99 | PEDRO       | Jon      |        5415 |
+|   12847 |  2.99 | PEDRO       | Jon      |        5469 |
+|   12848 |  4.99 | PEDRO       | Mike     |        6224 |
+|   12849 |  7.99 | PEDRO       | Mike     |        7641 |
+|   12850 |  1.99 | PEDRO       | Mike     |        7775 |
+|   12851 |  5.99 | PEDRO       | Jon      |        8207 |
+|   12852 |  7.99 | PEDRO       | Mike     |        9183 |
+|   12853 |  2.99 | PEDRO       | Mike     |        9647 |
+|   12854 |  2.99 | PEDRO       | Mike     |        9737 |
+|   12855 |  3.99 | PEDRO       | Jon      |       10162 |
+|   12856 |  0.99 | PEDRO       | Mike     |       10357 |
+|   12857 |  3.99 | PEDRO       | Mike     |       10633 |
+|   12858 |  5.99 | PEDRO       | Mike     |       11293 |
+|   12859 |  4.99 | PEDRO       | Mike     |       11770 |
+|   12860 |  2.99 | PEDRO       | Jon      |       14303 |
+|   12861 |  1.99 | PEDRO       | Mike     |       15097 |
+|   12862 |  4.99 | PEDRO       | Mike     |       15288 |
+|   12863 |  4.99 | DERRICK     | Mike     |         489 |
+|   12864 |  2.99 | DERRICK     | Mike     |         771 |
+|   12865 |  3.99 | DERRICK     | Mike     |        1682 |
+|   12866 |  0.99 | DERRICK     | Mike     |        2080 |
+|   12867 |  4.99 | DERRICK     | Jon      |        2508 |
+|   12868 |  2.99 | DERRICK     | Jon      |        3448 |
+|   12869 |  7.99 | DERRICK     | Jon      |        3477 |
+|   12870 |  5.99 | DERRICK     | Mike     |        4010 |
+|   12871 |  4.99 | DERRICK     | Jon      |        4171 |
+|   12872 |  4.99 | DERRICK     | Jon      |        5644 |
+|   12873 |  2.99 | DERRICK     | Mike     |        6151 |
+|   12874 |  0.99 | DERRICK     | Mike     |        7461 |
+|   12875 |  0.99 | DERRICK     | Mike     |        8146 |
+|   12876 |  6.99 | DERRICK     | Jon      |        9325 |
+|   12877 |  3.99 | DERRICK     | Jon      |        9743 |
+|   12878 |  4.99 | DERRICK     | Mike     |       10346 |
+|   12879 |  9.99 | DERRICK     | Mike     |       10617 |
+|   12880 |  6.99 | DERRICK     | Mike     |       10826 |
+|   12881 |  4.99 | DERRICK     | Mike     |       12616 |
+|   12882 |  5.99 | DERRICK     | Jon      |       12709 |
+|   12883 |  0.99 | DERRICK     | Mike     |       15413 |
+|   12884 |  0.99 | DERRICK     | Mike     |       13941 |
+|   12885 |  2.99 | DAN         | Mike     |         882 |
+|   12886 |  6.99 | DAN         | Mike     |        1714 |
+|   12887 |  2.99 | DAN         | Mike     |        2187 |
+|   12888 | 10.99 | DAN         | Mike     |        2306 |
+|   12889 |  4.99 | DAN         | Jon      |        2676 |
+|   12890 |  5.99 | DAN         | Jon      |        4237 |
+|   12891 |  2.99 | DAN         | Mike     |        4283 |
+|   12892 |  7.99 | DAN         | Jon      |        4956 |
+|   12893 |  2.99 | DAN         | Jon      |        6265 |
+|   12894 |  2.99 | DAN         | Jon      |        7302 |
+|   12895 | 10.99 | DAN         | Jon      |        7904 |
+|   12896 |  6.99 | DAN         | Mike     |        8515 |
+|   12897 |  5.99 | DAN         | Mike     |        8821 |
+|   12898 |  2.99 | DAN         | Jon      |        8857 |
+|   12899 |  8.99 | DAN         | Jon      |        9446 |
+|   12900 |  4.99 | DAN         | Mike     |       10500 |
+|   12901 |  0.99 | DAN         | Jon      |       10912 |
+|   12902 |  4.99 | DAN         | Jon      |       12420 |
+|   12903 |  0.99 | DAN         | Mike     |       13002 |
+|   12904 |  3.99 | DAN         | Jon      |       14552 |
+|   12905 |  2.99 | DAN         | Jon      |       15091 |
+|   12906 |  2.99 | DAN         | Mike     |       15929 |
+|   12907 |  0.99 | LEWIS       | Mike     |        1708 |
+|   12908 |  4.99 | LEWIS       | Jon      |        2358 |
+|   12909 |  6.99 | LEWIS       | Mike     |        2529 |
+|   12910 |  8.99 | LEWIS       | Jon      |        2616 |
+|   12911 |  4.99 | LEWIS       | Jon      |        2765 |
+|   12912 |  4.99 | LEWIS       | Jon      |        3259 |
+|   12913 |  4.99 | LEWIS       | Mike     |        3691 |
+|   12914 |  4.99 | LEWIS       | Mike     |        5837 |
+|   12915 |  2.99 | LEWIS       | Mike     |        7522 |
+|   12916 |  4.99 | LEWIS       | Jon      |        8488 |
+|   12917 |  4.99 | LEWIS       | Mike     |        9665 |
+|   12918 |  4.99 | LEWIS       | Jon      |       10016 |
+|   12919 |  0.99 | LEWIS       | Jon      |       10127 |
+|   12920 |  2.99 | LEWIS       | Mike     |       11906 |
+|   12921 |  2.99 | LEWIS       | Jon      |       13162 |
+|   12922 |  4.99 | LEWIS       | Jon      |       13507 |
+|   12923 |  4.99 | LEWIS       | Mike     |       15027 |
+|   12924 |  4.99 | LEWIS       | Jon      |       15188 |
+|   12925 |  4.99 | LEWIS       | Mike     |       15724 |
+|   12926 |  3.99 | ZACHARY     | Jon      |         132 |
+|   12927 |  7.99 | ZACHARY     | Mike     |         709 |
+|   12928 |  2.99 | ZACHARY     | Mike     |        1902 |
+|   12929 |  3.99 | ZACHARY     | Jon      |        1947 |
+|   12930 |  2.99 | ZACHARY     | Jon      |        1987 |
+|   12931 |  3.99 | ZACHARY     | Jon      |        2071 |
+|   12932 |  2.99 | ZACHARY     | Jon      |        2376 |
+|   12933 |  6.99 | ZACHARY     | Jon      |        2764 |
+|   12934 |  6.99 | ZACHARY     | Jon      |        3537 |
+|   12935 |  0.99 | ZACHARY     | Mike     |        3798 |
+|   12936 |  8.99 | ZACHARY     | Jon      |        4183 |
+|   12937 |  0.99 | ZACHARY     | Mike     |        5481 |
+|   12938 |  4.99 | ZACHARY     | Mike     |        5751 |
+|   12939 |  7.99 | ZACHARY     | Jon      |        6084 |
+|   12940 |  1.99 | ZACHARY     | Mike     |        6421 |
+|   12941 |  0.99 | ZACHARY     | Mike     |        6597 |
+|   12942 |  8.99 | ZACHARY     | Jon      |        6849 |
+|   12943 |  7.99 | ZACHARY     | Mike     |        7060 |
+|   12944 |  2.99 | ZACHARY     | Jon      |        7893 |
+|   12945 |  5.99 | ZACHARY     | Mike     |        9347 |
+|   12946 |  8.99 | ZACHARY     | Mike     |        9439 |
+|   12947 |  2.99 | ZACHARY     | Jon      |        9697 |
+|   12948 |  7.99 | ZACHARY     | Jon      |        9754 |
+|   12949 |  4.99 | ZACHARY     | Jon      |       10303 |
+|   12950 |  4.99 | ZACHARY     | Jon      |       11109 |
+|   12951 |  1.99 | ZACHARY     | Jon      |       11584 |
+|   12952 |  4.99 | ZACHARY     | Jon      |       11835 |
+|   12953 |  0.99 | ZACHARY     | Jon      |       12401 |
+|   12954 |  8.99 | ZACHARY     | Jon      |       13078 |
+|   12955 |  2.99 | ZACHARY     | Mike     |       13974 |
+|   12956 |  0.99 | ZACHARY     | Mike     |       12101 |
+|   12957 |  0.99 | COREY       | Mike     |         518 |
+|   12958 |  6.99 | COREY       | Mike     |         720 |
+|   12959 |  9.99 | COREY       | Jon      |         822 |
+|   12960 |  0.99 | COREY       | Mike     |        1353 |
+|   12961 |  0.99 | COREY       | Mike     |        1733 |
+|   12962 |  7.99 | COREY       | Jon      |        3507 |
+|   12963 |  2.99 | COREY       | Jon      |        5633 |
+|   12964 |  2.99 | COREY       | Mike     |        6191 |
+|   12965 |  2.99 | COREY       | Mike     |        7257 |
+|   12966 |  9.99 | COREY       | Jon      |        7910 |
+|   12967 |  4.99 | COREY       | Jon      |        8847 |
+|   12968 |  6.99 | COREY       | Mike     |        8967 |
+|   12969 |  4.99 | COREY       | Jon      |        9332 |
+|   12970 |  1.99 | COREY       | Jon      |       10808 |
+|   12971 |  0.99 | COREY       | Jon      |       11017 |
+|   12972 |  5.99 | COREY       | Mike     |       11369 |
+|   12973 |  4.99 | COREY       | Jon      |       12905 |
+|   12974 |  0.99 | COREY       | Jon      |       13092 |
+|   12975 |  9.99 | COREY       | Jon      |       13131 |
+|   12976 |  4.99 | COREY       | Mike     |       13831 |
+|   12977 |  2.99 | COREY       | Jon      |       15363 |
+|   12978 |  4.99 | COREY       | Jon      |       15579 |
+|   12979 |  5.99 | HERMAN      | Jon      |        1109 |
+|   12980 |  2.99 | HERMAN      | Jon      |        1168 |
+|   12981 |  4.99 | HERMAN      | Jon      |        2296 |
+|   12982 |  4.99 | HERMAN      | Jon      |        3285 |
+|   12983 |  0.99 | HERMAN      | Jon      |        3293 |
+|   12984 |  0.99 | HERMAN      | Mike     |        3863 |
+|   12985 |  2.99 | HERMAN      | Mike     |        4473 |
+|   12986 |  1.99 | HERMAN      | Mike     |        4505 |
+|   12987 |  0.99 | HERMAN      | Mike     |        4532 |
+|   12988 | 10.99 | HERMAN      | Mike     |        4668 |
+|   12989 |  2.99 | HERMAN      | Jon      |        5711 |
+|   12990 |  0.99 | HERMAN      | Mike     |        6044 |
+|   12991 |  4.99 | HERMAN      | Mike     |        7228 |
+|   12992 |  7.99 | HERMAN      | Jon      |        7836 |
+|   12993 |  6.99 | HERMAN      | Mike     |        8243 |
+|   12994 |  6.99 | HERMAN      | Jon      |        8271 |
+|   12995 |  4.99 | HERMAN      | Mike     |        9481 |
+|   12996 |  3.99 | HERMAN      | Mike     |       10018 |
+|   12997 |  0.99 | HERMAN      | Jon      |       11207 |
+|   12998 |  2.99 | HERMAN      | Jon      |       11387 |
+|   12999 |  4.99 | HERMAN      | Mike     |       11752 |
+|   13000 |  4.99 | HERMAN      | Mike     |       11885 |
+|   13001 |  2.99 | HERMAN      | Jon      |       12160 |
+|   13002 |  4.99 | HERMAN      | Mike     |       12981 |
+|   13003 |  2.99 | HERMAN      | Jon      |       13497 |
+|   13004 |  4.99 | HERMAN      | Jon      |       13878 |
+|   13005 |  1.99 | HERMAN      | Mike     |       13990 |
+|   13006 |  4.99 | HERMAN      | Jon      |       14280 |
+|   13007 |  0.99 | HERMAN      | Jon      |       14584 |
+|   13008 |  8.99 | MAURICE     | Mike     |         259 |
+|   13009 |  2.99 | MAURICE     | Jon      |         680 |
+|   13010 |  0.99 | MAURICE     | Jon      |         879 |
+|   13011 |  2.99 | MAURICE     | Jon      |        3048 |
+|   13012 |  0.99 | MAURICE     | Jon      |        3255 |
+|   13013 |  2.99 | MAURICE     | Jon      |        3650 |
+|   13014 |  4.99 | MAURICE     | Mike     |        4768 |
+|   13015 |  4.99 | MAURICE     | Mike     |        5334 |
+|   13016 |  4.99 | MAURICE     | Mike     |        5466 |
+|   13017 |  8.99 | MAURICE     | Jon      |        5810 |
+|   13018 |  2.99 | MAURICE     | Jon      |        5880 |
+|   13019 |  8.99 | MAURICE     | Mike     |        6355 |
+|   13020 |  7.99 | MAURICE     | Jon      |        6447 |
+|   13021 |  5.99 | MAURICE     | Jon      |        6844 |
+|   13022 |  6.99 | MAURICE     | Jon      |        7840 |
+|   13023 |  2.99 | MAURICE     | Jon      |        8584 |
+|   13024 |  6.99 | MAURICE     | Jon      |        9874 |
+|   13025 |  4.99 | MAURICE     | Jon      |       10824 |
+|   13026 |  2.99 | MAURICE     | Jon      |       10839 |
+|   13027 |  6.99 | MAURICE     | Jon      |       11498 |
+|   13028 |  4.99 | MAURICE     | Mike     |       13174 |
+|   13029 |  4.99 | MAURICE     | Jon      |       14383 |
+|   13030 |  0.99 | MAURICE     | Jon      |       14732 |
+|   13031 |  6.99 | MAURICE     | Jon      |       14891 |
+|   13032 |  4.99 | MAURICE     | Jon      |       14995 |
+|   13033 |  0.99 | MAURICE     | Mike     |       15391 |
+|   13034 |  5.99 | MAURICE     | Mike     |       15849 |
+|   13035 |  2.99 | MAURICE     | Jon      |       15865 |
+|   13036 |  3.99 | MAURICE     | Mike     |       15879 |
+|   13037 |  6.99 | VERNON      | Jon      |         742 |
+|   13038 |  4.99 | VERNON      | Mike     |        2855 |
+|   13039 |  0.99 | VERNON      | Jon      |        2867 |
+|   13040 |  8.99 | VERNON      | Mike     |        3380 |
+|   13041 |  4.99 | VERNON      | Jon      |        3559 |
+|   13042 |  4.99 | VERNON      | Mike     |        5823 |
+|   13043 |  4.99 | VERNON      | Jon      |        6478 |
+|   13044 |  9.99 | VERNON      | Jon      |        6899 |
+|   13045 |  0.99 | VERNON      | Jon      |        7137 |
+|   13046 |  4.99 | VERNON      | Mike     |        7381 |
+|   13047 |  4.99 | VERNON      | Mike     |        7669 |
+|   13048 |  7.99 | VERNON      | Mike     |        8057 |
+|   13049 |  4.99 | VERNON      | Mike     |        8356 |
+|   13050 |  0.99 | VERNON      | Jon      |       10677 |
+|   13051 |  6.99 | VERNON      | Mike     |       10953 |
+|   13052 |  3.99 | VERNON      | Jon      |       12331 |
+|   13053 |  2.99 | VERNON      | Jon      |       12695 |
+|   13054 |  2.99 | VERNON      | Jon      |       12875 |
+|   13055 |  4.99 | ROBERTO     | Jon      |          35 |
+|   13056 |  2.99 | ROBERTO     | Jon      |         668 |
+|   13057 |  2.99 | ROBERTO     | Jon      |         727 |
+|   13058 |  3.99 | ROBERTO     | Mike     |        1351 |
+|   13059 |  3.99 | ROBERTO     | Jon      |        1643 |
+|   13060 |  4.99 | ROBERTO     | Mike     |        2015 |
+|   13061 |  5.99 | ROBERTO     | Mike     |        2044 |
+|   13062 |  4.99 | ROBERTO     | Mike     |        4214 |
+|   13063 |  2.99 | ROBERTO     | Mike     |        5389 |
+|   13064 |  6.99 | ROBERTO     | Jon      |        5708 |
+|   13065 |  0.99 | ROBERTO     | Mike     |        5852 |
+|   13066 |  6.99 | ROBERTO     | Jon      |        5866 |
+|   13067 |  5.99 | ROBERTO     | Jon      |        5977 |
+|   13068 |  2.99 | ROBERTO     | Jon      |        6296 |
+|   13069 |  6.99 | ROBERTO     | Mike     |        6863 |
+|   13070 |  4.99 | ROBERTO     | Jon      |        7440 |
+|   13071 |  2.99 | ROBERTO     | Jon      |        7548 |
+|   13072 |  0.99 | ROBERTO     | Jon      |        8508 |
+|   13073 |  5.99 | ROBERTO     | Jon      |        9141 |
+|   13074 |  9.99 | ROBERTO     | Jon      |        9414 |
+|   13075 |  4.99 | ROBERTO     | Mike     |        9769 |
+|   13076 |  8.99 | ROBERTO     | Jon      |       10166 |
+|   13077 |  4.99 | ROBERTO     | Jon      |       11871 |
+|   13078 |  0.99 | ROBERTO     | Mike     |       12024 |
+|   13079 |  4.99 | ROBERTO     | Mike     |       12771 |
+|   13080 |  7.99 | ROBERTO     | Mike     |       12993 |
+|   13081 |  0.99 | ROBERTO     | Jon      |       13160 |
+|   13082 |  3.99 | ROBERTO     | Jon      |       13956 |
+|   13083 |  2.99 | ROBERTO     | Mike     |       15607 |
+|   13084 |  4.99 | ROBERTO     | Mike     |       16026 |
+|   13085 |  2.99 | CLYDE       | Mike     |        1009 |
+|   13086 |  2.99 | CLYDE       | Jon      |        1684 |
+|   13087 |  8.99 | CLYDE       | Mike     |        1721 |
+|   13088 |  0.99 | CLYDE       | Jon      |        3579 |
+|   13089 |  1.99 | CLYDE       | Mike     |        3899 |
+|   13090 |  0.99 | CLYDE       | Mike     |        3904 |
+|   13091 |  3.99 | CLYDE       | Jon      |        4137 |
+|   13092 |  2.99 | CLYDE       | Jon      |        4667 |
+|   13093 |  2.99 | CLYDE       | Mike     |        5193 |
+|   13094 |  3.99 | CLYDE       | Mike     |        5343 |
+|   13095 |  3.99 | CLYDE       | Mike     |        5367 |
+|   13096 |  4.99 | CLYDE       | Mike     |        5820 |
+|   13097 |  4.99 | CLYDE       | Jon      |        6810 |
+|   13098 |  4.99 | CLYDE       | Jon      |        6902 |
+|   13099 |  4.99 | CLYDE       | Mike     |        7144 |
+|   13100 |  6.99 | CLYDE       | Jon      |        8984 |
+|   13101 |  2.99 | CLYDE       | Jon      |        9039 |
+|   13102 |  4.99 | CLYDE       | Mike     |        9053 |
+|   13103 |  2.99 | CLYDE       | Jon      |        9189 |
+|   13104 |  2.99 | CLYDE       | Mike     |        9535 |
+|   13105 |  0.99 | CLYDE       | Mike     |        9565 |
+|   13106 |  4.99 | CLYDE       | Mike     |       10771 |
+|   13107 |  6.99 | CLYDE       | Jon      |       10772 |
+|   13108 |  3.99 | CLYDE       | Jon      |       11188 |
+|   13109 |  4.99 | CLYDE       | Mike     |       11921 |
+|   13110 |  2.99 | CLYDE       | Mike     |       11974 |
+|   13111 |  8.99 | CLYDE       | Jon      |       12261 |
+|   13112 |  0.99 | CLYDE       | Jon      |       12487 |
+|   13113 |  2.99 | CLYDE       | Jon      |       13055 |
+|   13114 |  8.99 | GLEN        | Mike     |         909 |
+|   13115 |  2.99 | GLEN        | Jon      |         946 |
+|   13116 |  0.99 | GLEN        | Jon      |        1129 |
+|   13117 |  4.99 | GLEN        | Mike     |        2036 |
+|   13118 |  5.99 | GLEN        | Mike     |        2102 |
+|   13119 |  2.99 | GLEN        | Jon      |        2566 |
+|   13120 |  2.99 | GLEN        | Jon      |        2797 |
+|   13121 |  4.99 | GLEN        | Mike     |        3835 |
+|   13122 |  4.99 | GLEN        | Jon      |        4110 |
+|   13123 |  4.99 | GLEN        | Mike     |        4205 |
+|   13124 |  2.99 | GLEN        | Mike     |        4381 |
+|   13125 |  7.99 | GLEN        | Mike     |        4772 |
+|   13126 |  4.99 | GLEN        | Jon      |        5006 |
+|   13127 |  4.99 | GLEN        | Jon      |        6383 |
+|   13128 |  4.99 | GLEN        | Jon      |        7127 |
+|   13129 |  4.99 | GLEN        | Jon      |        7446 |
+|   13130 |  8.99 | GLEN        | Jon      |        8425 |
+|   13131 |  0.99 | GLEN        | Jon      |        9142 |
+|   13132 |  2.99 | GLEN        | Mike     |       10079 |
+|   13133 |  4.99 | GLEN        | Jon      |       10902 |
+|   13134 |  0.99 | GLEN        | Mike     |       12465 |
+|   13135 |  2.99 | GLEN        | Jon      |       12609 |
+|   13136 |  4.99 | GLEN        | Mike     |       13048 |
+|   13137 |  0.99 | GLEN        | Jon      |       13803 |
+|   13138 |  4.99 | GLEN        | Jon      |       14251 |
+|   13139 |  4.99 | GLEN        | Jon      |       14284 |
+|   13140 |  3.99 | HECTOR      | Jon      |        3100 |
+|   13141 |  1.99 | HECTOR      | Jon      |        3994 |
+|   13142 |  2.99 | HECTOR      | Jon      |        4854 |
+|   13143 |  3.99 | HECTOR      | Mike     |        5634 |
+|   13144 |  2.99 | HECTOR      | Mike     |        6928 |
+|   13145 |  2.99 | HECTOR      | Mike     |        7097 |
+|   13146 |  0.99 | HECTOR      | Mike     |        7788 |
+|   13147 |  4.99 | HECTOR      | Jon      |        7949 |
+|   13148 |  1.99 | HECTOR      | Jon      |        8510 |
+|   13149 |  2.99 | HECTOR      | Jon      |        8689 |
+|   13150 |  4.99 | HECTOR      | Mike     |        8814 |
+|   13151 |  7.99 | HECTOR      | Mike     |        8988 |
+|   13152 |  2.99 | HECTOR      | Jon      |        9457 |
+|   13153 |  3.99 | HECTOR      | Mike     |        9490 |
+|   13154 |  0.99 | HECTOR      | Jon      |       10123 |
+|   13155 |  2.99 | HECTOR      | Jon      |       10511 |
+|   13156 |  6.99 | HECTOR      | Jon      |       10555 |
+|   13157 |  6.99 | HECTOR      | Mike     |       10832 |
+|   13158 |  5.99 | HECTOR      | Jon      |       10877 |
+|   13159 |  9.99 | HECTOR      | Mike     |       10978 |
+|   13160 |  5.99 | HECTOR      | Mike     |       11669 |
+|   13161 |  5.99 | HECTOR      | Jon      |       11890 |
+|   13162 |  7.99 | HECTOR      | Mike     |       12493 |
+|   13163 |  4.99 | HECTOR      | Jon      |       13210 |
+|   13164 |  7.99 | HECTOR      | Mike     |       13658 |
+|   13165 |  2.99 | HECTOR      | Jon      |       15665 |
+|   13166 |  3.99 | SHANE       | Jon      |        1655 |
+|   13167 |  5.99 | SHANE       | Jon      |        1704 |
+|   13168 |  6.99 | SHANE       | Jon      |        4133 |
+|   13169 |  5.99 | SHANE       | Jon      |        4233 |
+|   13170 |  8.99 | SHANE       | Mike     |        5141 |
+|   13171 |  5.99 | SHANE       | Jon      |        6548 |
+|   13172 |  5.99 | SHANE       | Mike     |        7373 |
+|   13173 |  2.99 | SHANE       | Mike     |        8005 |
+|   13174 |  0.99 | SHANE       | Jon      |        8050 |
+|   13175 |  2.99 | SHANE       | Jon      |        8064 |
+|   13176 |  5.99 | SHANE       | Jon      |        9083 |
+|   13177 |  2.99 | SHANE       | Mike     |        9532 |
+|   13178 |  0.99 | SHANE       | Mike     |        9537 |
+|   13179 |  5.99 | SHANE       | Jon      |       10474 |
+|   13180 |  0.99 | SHANE       | Mike     |       10767 |
+|   13181 |  3.99 | SHANE       | Mike     |       11774 |
+|   13182 |  5.99 | SHANE       | Jon      |       12483 |
+|   13183 |  4.99 | SHANE       | Jon      |       13446 |
+|   13184 |  5.99 | SHANE       | Jon      |       14948 |
+|   13185 |  0.99 | SHANE       | Jon      |       15259 |
+|   13186 |  2.99 | SHANE       | Mike     |       15350 |
+|   13187 |  2.99 | SHANE       | Jon      |       15499 |
+|   13188 |  4.99 | RICARDO     | Mike     |         219 |
+|   13189 |  2.99 | RICARDO     | Jon      |         513 |
+|   13190 |  3.99 | RICARDO     | Jon      |        1614 |
+|   13191 |  0.99 | RICARDO     | Mike     |        2201 |
+|   13192 |  7.99 | RICARDO     | Mike     |        2370 |
+|   13193 |  4.99 | RICARDO     | Mike     |        2802 |
+|   13194 |  2.99 | RICARDO     | Jon      |        3816 |
+|   13195 |  3.99 | RICARDO     | Mike     |        4774 |
+|   13196 |  4.99 | RICARDO     | Mike     |        6963 |
+|   13197 |  0.99 | RICARDO     | Jon      |        9231 |
+|   13198 |  4.99 | RICARDO     | Mike     |        9459 |
+|   13199 |  9.99 | RICARDO     | Jon      |       11119 |
+|   13200 |  4.99 | RICARDO     | Mike     |       11705 |
+|   13201 |  6.99 | RICARDO     | Mike     |       12496 |
+|   13202 |  6.99 | RICARDO     | Jon      |       12701 |
+|   13203 |  4.99 | RICARDO     | Mike     |       13462 |
+|   13204 |  5.99 | RICARDO     | Jon      |       14095 |
+|   13205 |  2.99 | RICARDO     | Jon      |       14328 |
+|   13206 |  6.99 | RICARDO     | Jon      |       14424 |
+|   13207 |  0.99 | RICARDO     | Mike     |       15205 |
+|   13208 |  4.99 | RICARDO     | Mike     |       15981 |
+|   13209 |  6.99 | SAM         | Jon      |         585 |
+|   13210 |  4.99 | SAM         | Jon      |         676 |
+|   13211 |  3.99 | SAM         | Mike     |        1665 |
+|   13212 |  4.99 | SAM         | Mike     |        3476 |
+|   13213 |  4.99 | SAM         | Jon      |        3932 |
+|   13214 |  2.99 | SAM         | Mike     |        4083 |
+|   13215 |  5.99 | SAM         | Mike     |        4906 |
+|   13216 |  7.99 | SAM         | Jon      |        5173 |
+|   13217 |  0.99 | SAM         | Jon      |        5489 |
+|   13218 |  4.99 | SAM         | Mike     |        5654 |
+|   13219 |  2.99 | SAM         | Jon      |        6230 |
+|   13220 |  4.99 | SAM         | Mike     |        6803 |
+|   13221 |  2.99 | SAM         | Jon      |        6888 |
+|   13222 |  8.99 | SAM         | Jon      |        6923 |
+|   13223 |  5.99 | SAM         | Mike     |        8552 |
+|   13224 |  4.99 | SAM         | Jon      |        9108 |
+|   13225 |  0.99 | SAM         | Mike     |        9554 |
+|   13226 |  7.99 | SAM         | Mike     |       10786 |
+|   13227 |  7.99 | SAM         | Mike     |       10955 |
+|   13228 |  2.99 | SAM         | Jon      |       11965 |
+|   13229 |  4.99 | SAM         | Jon      |       14557 |
+|   13230 |  6.99 | SAM         | Jon      |       14761 |
+|   13231 |  2.99 | SAM         | Jon      |       15276 |
+|   13232 |  2.99 | SAM         | Mike     |       15448 |
+|   13233 |  2.99 | RICK        | Mike     |         484 |
+|   13234 |  0.99 | RICK        | Jon      |        1097 |
+|   13235 |  2.99 | RICK        | Jon      |        1198 |
+|   13236 |  4.99 | RICK        | Mike     |        1371 |
+|   13237 |  4.99 | RICK        | Jon      |        2026 |
+|   13238 |  4.99 | RICK        | Mike     |        2259 |
+|   13239 |  4.99 | RICK        | Jon      |        2391 |
+|   13240 |  4.99 | RICK        | Jon      |        3031 |
+|   13241 |  3.99 | RICK        | Mike     |        3440 |
+|   13242 |  8.99 | RICK        | Mike     |        4046 |
+|   13243 |  2.99 | RICK        | Mike     |        4392 |
+|   13244 |  6.99 | RICK        | Jon      |        5134 |
+|   13245 |  4.99 | RICK        | Mike     |        5889 |
+|   13246 |  2.99 | RICK        | Jon      |        6171 |
+|   13247 |  3.99 | RICK        | Jon      |        7019 |
+|   13248 |  6.99 | RICK        | Jon      |        7281 |
+|   13249 |  7.99 | RICK        | Jon      |        7688 |
+|   13250 |  6.99 | RICK        | Mike     |        7871 |
+|   13251 |  2.99 | RICK        | Jon      |       10036 |
+|   13252 |  4.99 | RICK        | Jon      |       10178 |
+|   13253 |  6.99 | RICK        | Jon      |       10974 |
+|   13254 |  4.99 | RICK        | Mike     |       11048 |
+|   13255 |  0.99 | RICK        | Mike     |       11590 |
+|   13256 |  4.99 | RICK        | Mike     |       11840 |
+|   13257 |  2.99 | RICK        | Jon      |       13607 |
+|   13258 |  0.99 | RICK        | Mike     |       14780 |
+|   13259 |  5.99 | RICK        | Jon      |       15685 |
+|   13260 |  2.99 | LESTER      | Mike     |          84 |
+|   13261 |  1.99 | LESTER      | Jon      |        1691 |
+|   13262 |  4.99 | LESTER      | Jon      |        1855 |
+|   13263 |  4.99 | LESTER      | Jon      |        1956 |
+|   13264 |  9.99 | LESTER      | Mike     |        3298 |
+|   13265 |  8.99 | LESTER      | Jon      |        4128 |
+|   13266 |  2.99 | LESTER      | Mike     |        4142 |
+|   13267 |  6.99 | LESTER      | Jon      |        4258 |
+|   13268 |  0.99 | LESTER      | Jon      |        5325 |
+|   13269 |  0.99 | LESTER      | Mike     |        5609 |
+|   13270 |  2.99 | LESTER      | Mike     |        6257 |
+|   13271 |  2.99 | LESTER      | Jon      |        7203 |
+|   13272 |  4.99 | LESTER      | Jon      |       12971 |
+|   13273 |  2.99 | LESTER      | Mike     |       14255 |
+|   13274 |  0.99 | LESTER      | Jon      |       15822 |
+|   13275 |  4.99 | LESTER      | Mike     |       15958 |
+|   13276 |  7.99 | BRENT       | Mike     |         543 |
+|   13277 |  3.99 | BRENT       | Jon      |        2109 |
+|   13278 |  4.99 | BRENT       | Mike     |        2365 |
+|   13279 |  0.99 | BRENT       | Mike     |        2579 |
+|   13280 |  2.99 | BRENT       | Mike     |        2864 |
+|   13281 |  4.99 | BRENT       | Jon      |        3586 |
+|   13282 |  5.99 | BRENT       | Mike     |        3655 |
+|   13283 |  7.99 | BRENT       | Mike     |        6549 |
+|   13284 |  4.99 | BRENT       | Mike     |        6552 |
+|   13285 |  2.99 | BRENT       | Mike     |        7026 |
+|   13286 |  7.99 | BRENT       | Jon      |        7043 |
+|   13287 |  4.99 | BRENT       | Mike     |        8298 |
+|   13288 |  2.99 | BRENT       | Mike     |        8616 |
+|   13289 |  6.99 | BRENT       | Mike     |       10777 |
+|   13290 |  7.99 | BRENT       | Jon      |       10885 |
+|   13291 |  2.99 | BRENT       | Mike     |       13638 |
+|   13292 |  6.99 | BRENT       | Jon      |       13675 |
+|   13293 |  4.99 | BRENT       | Mike     |       14117 |
+|   13294 |  4.99 | BRENT       | Jon      |       15177 |
+|   13295 |  0.99 | BRENT       | Mike     |       15355 |
+|   13296 |  6.99 | BRENT       | Mike     |       15490 |
+|   13297 |  2.99 | BRENT       | Jon      |       15878 |
+|   13298 |  2.99 | BRENT       | Jon      |       14160 |
+|   13299 |  4.99 | RAMON       | Mike     |         608 |
+|   13300 |  2.99 | RAMON       | Mike     |        1683 |
+|   13301 |  0.99 | RAMON       | Mike     |        3511 |
+|   13302 |  2.99 | RAMON       | Jon      |        3803 |
+|   13303 |  0.99 | RAMON       | Jon      |        3913 |
+|   13304 |  3.99 | RAMON       | Mike     |        4086 |
+|   13305 |  5.99 | RAMON       | Jon      |        4397 |
+|   13306 |  7.99 | RAMON       | Jon      |        4551 |
+|   13307 |  4.99 | RAMON       | Jon      |        5083 |
+|   13308 |  2.99 | RAMON       | Mike     |        5180 |
+|   13309 |  3.99 | RAMON       | Jon      |        7258 |
+|   13310 |  8.99 | RAMON       | Jon      |        7546 |
+|   13311 |  1.99 | RAMON       | Jon      |        7737 |
+|   13312 |  2.99 | RAMON       | Jon      |        8333 |
+|   13313 |  2.99 | RAMON       | Jon      |        8895 |
+|   13314 |  4.99 | RAMON       | Mike     |        8934 |
+|   13315 |  4.99 | RAMON       | Jon      |        9012 |
+|   13316 |  7.99 | RAMON       | Jon      |        9510 |
+|   13317 |  2.99 | RAMON       | Mike     |        9799 |
+|   13318 |  7.99 | RAMON       | Jon      |        9943 |
+|   13319 |  0.99 | RAMON       | Mike     |       10403 |
+|   13320 |  2.99 | RAMON       | Mike     |       10623 |
+|   13321 |  3.99 | RAMON       | Jon      |       11152 |
+|   13322 |  5.99 | RAMON       | Mike     |       11987 |
+|   13323 |  0.99 | RAMON       | Jon      |       13094 |
+|   13324 |  3.99 | RAMON       | Jon      |       13301 |
+|   13325 |  5.99 | RAMON       | Jon      |       14634 |
+|   13326 |  4.99 | RAMON       | Mike     |       14832 |
+|   13327 |  6.99 | RAMON       | Mike     |       15086 |
+|   13328 |  9.99 | RAMON       | Jon      |       15156 |
+|   13329 |  4.99 | RAMON       | Jon      |       15291 |
+|   13330 |  4.99 | CHARLIE     | Jon      |         623 |
+|   13331 |  4.99 | CHARLIE     | Jon      |         741 |
+|   13332 |  2.99 | CHARLIE     | Jon      |        2074 |
+|   13333 |  4.99 | CHARLIE     | Mike     |        2349 |
+|   13334 |  7.99 | CHARLIE     | Mike     |        2549 |
+|   13335 |  3.99 | CHARLIE     | Mike     |        3129 |
+|   13336 |  2.99 | CHARLIE     | Jon      |        3966 |
+|   13337 |  7.99 | CHARLIE     | Jon      |        5484 |
+|   13338 |  7.99 | CHARLIE     | Jon      |        6426 |
+|   13339 |  2.99 | CHARLIE     | Jon      |        7191 |
+|   13340 |  0.99 | CHARLIE     | Mike     |        8151 |
+|   13341 |  1.99 | CHARLIE     | Mike     |        8383 |
+|   13342 |  5.99 | CHARLIE     | Mike     |        8451 |
+|   13343 |  5.99 | CHARLIE     | Mike     |        8672 |
+|   13344 |  9.99 | CHARLIE     | Mike     |        9387 |
+|   13345 |  4.99 | CHARLIE     | Mike     |        9741 |
+|   13346 |  4.99 | CHARLIE     | Jon      |       10065 |
+|   13347 |  5.99 | CHARLIE     | Jon      |       10643 |
+|   13348 |  4.99 | CHARLIE     | Mike     |       10783 |
+|   13349 |  5.99 | CHARLIE     | Mike     |       12782 |
+|   13350 |  0.99 | CHARLIE     | Jon      |       12837 |
+|   13351 |  3.99 | CHARLIE     | Jon      |       13205 |
+|   13352 |  2.99 | CHARLIE     | Jon      |       13445 |
+|   13353 |  4.99 | CHARLIE     | Jon      |       13818 |
+|   13354 |  2.99 | CHARLIE     | Mike     |       15984 |
+|   13355 |  0.99 | CHARLIE     | Jon      |       13753 |
+|   13356 |  4.99 | TYLER       | Jon      |         322 |
+|   13357 |  0.99 | TYLER       | Jon      |         966 |
+|   13358 |  2.99 | TYLER       | Mike     |        2567 |
+|   13359 |  3.99 | TYLER       | Jon      |        3569 |
+|   13360 |  2.99 | TYLER       | Mike     |        4070 |
+|   13361 |  4.99 | TYLER       | Mike     |        4261 |
+|   13362 |  0.99 | TYLER       | Mike     |        4269 |
+|   13363 |  5.99 | TYLER       | Mike     |        5559 |
+|   13364 |  4.99 | TYLER       | Jon      |        5949 |
+|   13365 |  2.99 | TYLER       | Mike     |        7133 |
+|   13366 |  2.99 | TYLER       | Jon      |        8221 |
+|   13367 |  7.99 | TYLER       | Mike     |       11060 |
+|   13368 |  4.99 | TYLER       | Jon      |       11448 |
+|   13369 |  3.99 | TYLER       | Mike     |       11893 |
+|   13370 |  4.99 | TYLER       | Jon      |       12605 |
+|   13371 |  5.99 | TYLER       | Mike     |       13569 |
+|   13372 |  6.99 | TYLER       | Jon      |       14013 |
+|   13373 |  7.99 | TYLER       | Mike     |       14332 |
+|   13374 |  0.99 | TYLER       | Mike     |       14348 |
+|   13375 |  2.99 | TYLER       | Jon      |       15750 |
+|   13376 |  2.99 | TYLER       | Mike     |       13182 |
+|   13377 |  7.99 | GILBERT     | Mike     |        1100 |
+|   13378 |  8.99 | GILBERT     | Jon      |        2180 |
+|   13379 |  5.99 | GILBERT     | Mike     |        2298 |
+|   13380 |  2.99 | GILBERT     | Mike     |        2406 |
+|   13381 |  4.99 | GILBERT     | Jon      |        2818 |
+|   13382 |  2.99 | GILBERT     | Mike     |        3696 |
+|   13383 |  7.99 | GILBERT     | Jon      |        4218 |
+|   13384 |  4.99 | GILBERT     | Mike     |        4516 |
+|   13385 |  0.99 | GILBERT     | Mike     |        4578 |
+|   13386 |  0.99 | GILBERT     | Jon      |        4795 |
+|   13387 |  4.99 | GILBERT     | Mike     |        5030 |
+|   13388 |  4.99 | GILBERT     | Mike     |        5239 |
+|   13389 |  2.99 | GILBERT     | Jon      |        7603 |
+|   13390 |  2.99 | GILBERT     | Jon      |        8011 |
+|   13391 |  6.99 | GILBERT     | Mike     |        8150 |
+|   13392 |  6.99 | GILBERT     | Jon      |        8813 |
+|   13393 |  4.99 | GILBERT     | Jon      |        8867 |
+|   13394 |  9.99 | GILBERT     | Mike     |        9273 |
+|   13395 |  4.99 | GILBERT     | Jon      |        9850 |
+|   13396 |  7.99 | GILBERT     | Jon      |       10760 |
+|   13397 |  0.99 | GILBERT     | Mike     |       12123 |
+|   13398 |  4.99 | GILBERT     | Mike     |       13159 |
+|   13399 |  2.99 | GILBERT     | Mike     |       13289 |
+|   13400 |  0.99 | GILBERT     | Jon      |       14134 |
+|   13401 |  5.99 | GILBERT     | Mike     |       15362 |
+|   13402 |  0.99 | GILBERT     | Jon      |       15633 |
+|   13403 |  0.99 | GILBERT     | Mike     |       15919 |
+|   13404 |  4.99 | GILBERT     | Mike     |       12698 |
+|   13405 |  2.99 | GENE        | Jon      |          49 |
+|   13406 |  8.99 | GENE        | Mike     |         429 |
+|   13407 |  2.99 | GENE        | Jon      |         718 |
+|   13408 |  6.99 | GENE        | Mike     |        1253 |
+|   13409 |  2.99 | GENE        | Mike     |        1782 |
+|   13410 |  2.99 | GENE        | Mike     |        2344 |
+|   13411 |  4.99 | GENE        | Mike     |        2449 |
+|   13412 |  0.99 | GENE        | Mike     |        3098 |
+|   13413 |  0.99 | GENE        | Jon      |        3360 |
+|   13414 |  0.99 | GENE        | Jon      |        3828 |
+|   13415 |  2.99 | GENE        | Jon      |        3856 |
+|   13416 |  4.99 | GENE        | Mike     |        4311 |
+|   13417 |  2.99 | GENE        | Jon      |        4972 |
+|   13418 |  2.99 | GENE        | Mike     |        5286 |
+|   13419 |  0.99 | GENE        | Jon      |        5884 |
+|   13420 |  2.99 | GENE        | Mike     |        6058 |
+|   13421 |  1.99 | GENE        | Mike     |        6088 |
+|   13422 |  4.99 | GENE        | Mike     |        7285 |
+|   13423 |  6.99 | GENE        | Mike     |        7286 |
+|   13424 |  4.99 | GENE        | Mike     |        7341 |
+|   13425 |  4.99 | GENE        | Jon      |        8020 |
+|   13426 |  2.99 | GENE        | Mike     |        8229 |
+|   13427 |  0.99 | GENE        | Jon      |        9021 |
+|   13428 |  4.99 | GENE        | Jon      |        9689 |
+|   13429 |  0.99 | GENE        | Mike     |       10225 |
+|   13430 |  6.99 | GENE        | Mike     |       11455 |
+|   13431 |  2.99 | GENE        | Mike     |       12893 |
+|   13432 |  2.99 | MARC        | Jon      |          89 |
+|   13433 |  2.99 | MARC        | Mike     |        1355 |
+|   13434 |  4.99 | MARC        | Jon      |        1526 |
+|   13435 |  4.99 | MARC        | Jon      |        1830 |
+|   13436 |  1.99 | MARC        | Jon      |        3241 |
+|   13437 |  4.99 | MARC        | Mike     |        3794 |
+|   13438 |  2.99 | MARC        | Mike     |        5022 |
+|   13439 |  2.99 | MARC        | Jon      |        5392 |
+|   13440 |  3.99 | MARC        | Jon      |        5427 |
+|   13441 |  4.99 | MARC        | Mike     |        5956 |
+|   13442 |  4.99 | MARC        | Jon      |        6723 |
+|   13443 |  0.99 | MARC        | Mike     |        7800 |
+|   13444 |  0.99 | MARC        | Mike     |        7831 |
+|   13445 |  6.99 | MARC        | Mike     |        7898 |
+|   13446 |  4.99 | MARC        | Jon      |        8130 |
+|   13447 |  3.99 | MARC        | Mike     |        8770 |
+|   13448 |  0.99 | MARC        | Mike     |        9588 |
+|   13449 |  0.99 | MARC        | Jon      |       10333 |
+|   13450 |  2.99 | MARC        | Jon      |       10497 |
+|   13451 |  7.99 | MARC        | Mike     |       11513 |
+|   13452 |  0.99 | MARC        | Jon      |       11606 |
+|   13453 |  4.99 | MARC        | Jon      |       11978 |
+|   13454 |  8.99 | MARC        | Mike     |       12004 |
+|   13455 |  7.99 | MARC        | Mike     |       12354 |
+|   13456 |  3.99 | MARC        | Mike     |       12436 |
+|   13457 |  1.99 | MARC        | Mike     |       12587 |
+|   13458 |  4.99 | MARC        | Jon      |       12947 |
+|   13459 |  3.99 | MARC        | Jon      |       13822 |
+|   13460 |  3.99 | MARC        | Mike     |       14858 |
+|   13461 |  7.99 | MARC        | Mike     |       15587 |
+|   13462 |  8.99 | REGINALD    | Mike     |         112 |
+|   13463 |  8.99 | REGINALD    | Mike     |         389 |
+|   13464 |  0.99 | REGINALD    | Mike     |         610 |
+|   13465 |  5.99 | REGINALD    | Mike     |        1375 |
+|   13466 |  5.99 | REGINALD    | Jon      |        1388 |
+|   13467 |  3.99 | REGINALD    | Jon      |        2189 |
+|   13468 |  6.99 | REGINALD    | Jon      |        2526 |
+|   13469 |  2.99 | REGINALD    | Mike     |        2996 |
+|   13470 |  4.99 | REGINALD    | Jon      |        3926 |
+|   13471 |  0.99 | REGINALD    | Mike     |        4561 |
+|   13472 |  4.99 | REGINALD    | Jon      |        4790 |
+|   13473 |  4.99 | REGINALD    | Jon      |        6018 |
+|   13474 |  2.99 | REGINALD    | Jon      |        6187 |
+|   13475 |  3.99 | REGINALD    | Jon      |        6801 |
+|   13476 |  0.99 | REGINALD    | Mike     |        7857 |
+|   13477 |  2.99 | REGINALD    | Mike     |        7925 |
+|   13478 |  6.99 | REGINALD    | Mike     |        8538 |
+|   13479 |  0.99 | REGINALD    | Mike     |        8925 |
+|   13480 |  3.99 | REGINALD    | Jon      |        9290 |
+|   13481 |  6.99 | REGINALD    | Mike     |       10947 |
+|   13482 |  1.99 | REGINALD    | Jon      |       11218 |
+|   13483 |  2.99 | REGINALD    | Mike     |       12639 |
+|   13484 |  2.99 | REGINALD    | Jon      |       12813 |
+|   13485 |  4.99 | REGINALD    | Jon      |       13628 |
+|   13486 |  0.99 | REGINALD    | Mike     |       14407 |
+|   13487 |  4.99 | REGINALD    | Mike     |       14964 |
+|   13488 |  2.99 | REGINALD    | Mike     |       15584 |
+|   13489 |  2.99 | REGINALD    | Mike     |       15853 |
+|   13490 |  0.99 | RUBEN       | Mike     |         493 |
+|   13491 |  1.99 | RUBEN       | Mike     |         605 |
+|   13492 |  5.99 | RUBEN       | Jon      |        3222 |
+|   13493 |  7.99 | RUBEN       | Mike     |        3412 |
+|   13494 |  6.99 | RUBEN       | Jon      |        3541 |
+|   13495 |  6.99 | RUBEN       | Jon      |        3723 |
+|   13496 |  2.99 | RUBEN       | Jon      |        4769 |
+|   13497 |  1.99 | RUBEN       | Jon      |        5520 |
+|   13498 |  7.99 | RUBEN       | Jon      |        6095 |
+|   13499 |  0.99 | RUBEN       | Mike     |        7456 |
+|   13500 |  2.99 | RUBEN       | Mike     |        8021 |
+|   13501 |  2.99 | RUBEN       | Jon      |        8529 |
+|   13502 |  2.99 | RUBEN       | Mike     |        9359 |
+|   13503 |  4.99 | RUBEN       | Mike     |       10817 |
+|   13504 |  4.99 | RUBEN       | Jon      |       11393 |
+|   13505 |  1.99 | RUBEN       | Mike     |       11640 |
+|   13506 |  6.99 | RUBEN       | Jon      |       11799 |
+|   13507 |  4.99 | RUBEN       | Mike     |       12914 |
+|   13508 |  0.99 | RUBEN       | Jon      |       13889 |
+|   13509 |  4.99 | RUBEN       | Mike     |       15239 |
+|   13510 |  5.99 | RUBEN       | Mike     |       15699 |
+|   13511 |  2.99 | BRETT       | Jon      |         258 |
+|   13512 |  0.99 | BRETT       | Mike     |         861 |
+|   13513 |  2.99 | BRETT       | Mike     |         893 |
+|   13514 |  0.99 | BRETT       | Jon      |         965 |
+|   13515 |  7.99 | BRETT       | Jon      |        1696 |
+|   13516 |  0.99 | BRETT       | Jon      |        2420 |
+|   13517 |  0.99 | BRETT       | Mike     |        2911 |
+|   13518 |  2.99 | BRETT       | Jon      |        3614 |
+|   13519 |  2.99 | BRETT       | Mike     |        4606 |
+|   13520 |  5.99 | BRETT       | Jon      |        5368 |
+|   13521 |  2.99 | BRETT       | Jon      |        5662 |
+|   13522 |  7.99 | BRETT       | Jon      |        6414 |
+|   13523 |  8.99 | BRETT       | Mike     |        6760 |
+|   13524 |  2.99 | BRETT       | Jon      |        6828 |
+|   13525 |  8.99 | BRETT       | Jon      |        6924 |
+|   13526 |  3.99 | BRETT       | Jon      |        7213 |
+|   13527 |  4.99 | BRETT       | Mike     |        7255 |
+|   13528 |  4.99 | BRETT       | Mike     |        7757 |
+|   13529 |  4.99 | BRETT       | Mike     |        7884 |
+|   13530 |  4.99 | BRETT       | Jon      |        8034 |
+|   13531 |  0.99 | BRETT       | Jon      |        9232 |
+|   13532 |  4.99 | BRETT       | Mike     |        9599 |
+|   13533 |  4.99 | BRETT       | Jon      |       10390 |
+|   13534 |  0.99 | BRETT       | Mike     |       10938 |
+|   13535 |  4.99 | BRETT       | Jon      |       11036 |
+|   13536 |  0.99 | BRETT       | Mike     |       11301 |
+|   13537 |  4.99 | BRETT       | Mike     |       11317 |
+|   13538 |  0.99 | BRETT       | Mike     |       11435 |
+|   13539 |  0.99 | BRETT       | Mike     |       11620 |
+|   13540 |  4.99 | BRETT       | Mike     |       12762 |
+|   13541 |  9.99 | BRETT       | Mike     |       13052 |
+|   13542 |  4.99 | BRETT       | Mike     |       14411 |
+|   13543 |  3.99 | BRETT       | Mike     |       15486 |
+|   13544 |  3.99 | BRETT       | Mike     |       16034 |
+|   13545 |  1.99 | ANGEL       | Jon      |         109 |
+|   13546 |  5.99 | ANGEL       | Mike     |         353 |
+|   13547 |  2.99 | ANGEL       | Mike     |         631 |
+|   13548 |  4.99 | ANGEL       | Mike     |        1074 |
+|   13549 |  4.99 | ANGEL       | Jon      |        2108 |
+|   13550 |  2.99 | ANGEL       | Mike     |        2225 |
+|   13551 |  0.99 | ANGEL       | Jon      |        3430 |
+|   13552 |  6.99 | ANGEL       | Jon      |        3935 |
+|   13553 |  2.99 | ANGEL       | Jon      |        4570 |
+|   13554 |  2.99 | ANGEL       | Jon      |        5465 |
+|   13555 |  6.99 | ANGEL       | Mike     |        5925 |
+|   13556 |  4.99 | ANGEL       | Mike     |        6166 |
+|   13557 |  2.99 | ANGEL       | Mike     |        6529 |
+|   13558 |  4.99 | ANGEL       | Jon      |        6950 |
+|   13559 |  2.99 | ANGEL       | Mike     |        8178 |
+|   13560 |  0.99 | ANGEL       | Jon      |        9725 |
+|   13561 |  4.99 | ANGEL       | Mike     |        9974 |
+|   13562 |  2.99 | ANGEL       | Jon      |       11075 |
+|   13563 |  1.99 | ANGEL       | Mike     |       11161 |
+|   13564 |  4.99 | ANGEL       | Mike     |       11858 |
+|   13565 |  2.99 | ANGEL       | Jon      |       12370 |
+|   13566 |  4.99 | ANGEL       | Jon      |       12783 |
+|   13567 |  2.99 | ANGEL       | Mike     |       13332 |
+|   13568 |  2.99 | ANGEL       | Mike     |       13551 |
+|   13569 |  0.99 | ANGEL       | Mike     |       14823 |
+|   13570 |  2.99 | ANGEL       | Mike     |       14913 |
+|   13571 |  4.99 | ANGEL       | Jon      |       15056 |
+|   13572 |  2.99 | ANGEL       | Jon      |       15077 |
+|   13573 |  3.99 | ANGEL       | Mike     |       15588 |
+|   13574 |  4.99 | ANGEL       | Mike     |       15692 |
+|   13575 |  2.99 | ANGEL       | Mike     |       15726 |
+|   13576 |  0.99 | ANGEL       | Mike     |       15797 |
+|   13577 |  5.99 | NATHANIEL   | Jon      |         136 |
+|   13578 |  4.99 | NATHANIEL   | Jon      |         470 |
+|   13579 |  4.99 | NATHANIEL   | Mike     |         838 |
+|   13580 |  1.99 | NATHANIEL   | Mike     |        2720 |
+|   13581 |  6.99 | NATHANIEL   | Mike     |        2938 |
+|   13582 |  9.99 | NATHANIEL   | Jon      |        3712 |
+|   13583 |  6.99 | NATHANIEL   | Mike     |        3713 |
+|   13584 |  5.99 | NATHANIEL   | Mike     |        4329 |
+|   13585 |  0.99 | NATHANIEL   | Mike     |        4757 |
+|   13586 |  6.99 | NATHANIEL   | Jon      |        5153 |
+|   13587 |  3.99 | NATHANIEL   | Jon      |        7342 |
+|   13588 |  2.99 | NATHANIEL   | Mike     |        7567 |
+|   13589 |  2.99 | NATHANIEL   | Jon      |        7807 |
+|   13590 |  1.99 | NATHANIEL   | Jon      |        7875 |
+|   13591 |  4.99 | NATHANIEL   | Jon      |        7944 |
+|   13592 |  9.99 | NATHANIEL   | Mike     |        8393 |
+|   13593 |  0.99 | NATHANIEL   | Jon      |       10397 |
+|   13594 |  3.99 | NATHANIEL   | Jon      |       10509 |
+|   13595 |  2.99 | NATHANIEL   | Jon      |       11569 |
+|   13596 |  1.99 | NATHANIEL   | Mike     |       12769 |
+|   13597 |  2.99 | NATHANIEL   | Mike     |       13166 |
+|   13598 |  2.99 | NATHANIEL   | Jon      |       13206 |
+|   13599 |  2.99 | NATHANIEL   | Jon      |       13387 |
+|   13600 |  5.99 | NATHANIEL   | Jon      |       13859 |
+|   13601 |  4.99 | NATHANIEL   | Jon      |       15018 |
+|   13602 |  6.99 | NATHANIEL   | Mike     |       15166 |
+|   13603 |  8.99 | NATHANIEL   | Mike     |       15723 |
+|   13604 |  4.99 | NATHANIEL   | Jon      |       16022 |
+|   13605 |  2.99 | RAFAEL      | Mike     |         159 |
+|   13606 |  2.99 | RAFAEL      | Mike     |         645 |
+|   13607 |  5.99 | RAFAEL      | Jon      |        1799 |
+|   13608 |  4.99 | RAFAEL      | Jon      |        1886 |
+|   13609 |  7.99 | RAFAEL      | Mike     |        2773 |
+|   13610 |  5.99 | RAFAEL      | Mike     |        3137 |
+|   13611 |  5.99 | RAFAEL      | Jon      |        4008 |
+|   13612 |  6.99 | RAFAEL      | Mike     |        4507 |
+|   13613 |  9.99 | RAFAEL      | Jon      |        5976 |
+|   13614 |  4.99 | RAFAEL      | Jon      |        6292 |
+|   13615 |  0.99 | RAFAEL      | Mike     |        6441 |
+|   13616 |  4.99 | RAFAEL      | Mike     |        7784 |
+|   13617 |  5.99 | RAFAEL      | Jon      |       10219 |
+|   13618 |  2.99 | RAFAEL      | Mike     |       10896 |
+|   13619 |  0.99 | RAFAEL      | Mike     |       11163 |
+|   13620 |  2.99 | RAFAEL      | Mike     |       11907 |
+|   13621 |  3.99 | RAFAEL      | Jon      |       13612 |
+|   13622 |  2.99 | RAFAEL      | Mike     |       14398 |
+|   13623 |  2.99 | RAFAEL      | Mike     |       14802 |
+|   13624 |  4.99 | RAFAEL      | Mike     |       15436 |
+|   13625 |  4.99 | RAFAEL      | Jon      |       15867 |
+|   13626 |  3.99 | LESLIE      | Mike     |         114 |
+|   13627 |  2.99 | LESLIE      | Jon      |         387 |
+|   13628 |  3.99 | LESLIE      | Jon      |         410 |
+|   13629 |  8.99 | LESLIE      | Mike     |         547 |
+|   13630 |  0.99 | LESLIE      | Jon      |         907 |
+|   13631 |  2.99 | LESLIE      | Mike     |        1042 |
+|   13632 |  4.99 | LESLIE      | Jon      |        1153 |
+|   13633 |  6.99 | LESLIE      | Mike     |        1446 |
+|   13634 |  2.99 | LESLIE      | Mike     |        1467 |
+|   13635 |  0.99 | LESLIE      | Jon      |        1565 |
+|   13636 |  9.99 | LESLIE      | Mike     |        2755 |
+|   13637 |  6.99 | LESLIE      | Jon      |        2824 |
+|   13638 |  7.99 | LESLIE      | Jon      |        4594 |
+|   13639 |  6.99 | LESLIE      | Jon      |        4640 |
+|   13640 |  8.99 | LESLIE      | Jon      |        4806 |
+|   13641 |  0.99 | LESLIE      | Jon      |        5985 |
+|   13642 |  2.99 | LESLIE      | Mike     |        6783 |
+|   13643 |  0.99 | LESLIE      | Mike     |        7020 |
+|   13644 |  9.99 | LESLIE      | Jon      |        8096 |
+|   13645 |  0.99 | LESLIE      | Jon      |        8506 |
+|   13646 |  3.99 | LESLIE      | Jon      |        9654 |
+|   13647 |  2.99 | LESLIE      | Jon      |        9972 |
+|   13648 |  2.99 | LESLIE      | Mike     |       10477 |
+|   13649 |  4.99 | LESLIE      | Mike     |       10873 |
+|   13650 |  0.99 | LESLIE      | Jon      |       11238 |
+|   13651 |  4.99 | LESLIE      | Jon      |       11781 |
+|   13652 |  0.99 | LESLIE      | Mike     |       12994 |
+|   13653 |  2.99 | LESLIE      | Jon      |       13073 |
+|   13654 |  0.99 | LESLIE      | Jon      |       13767 |
+|   13655 |  1.99 | LESLIE      | Mike     |       14074 |
+|   13656 |  2.99 | LESLIE      | Mike     |       14337 |
+|   13657 |  6.99 | LESLIE      | Jon      |       14395 |
+|   13658 |  5.99 | LESLIE      | Jon      |       15022 |
+|   13659 |  1.99 | LESLIE      | Jon      |       15572 |
+|   13660 |  9.99 | LESLIE      | Mike     |       15694 |
+|   13661 |  0.99 | EDGAR       | Mike     |          52 |
+|   13662 |  4.99 | EDGAR       | Jon      |         713 |
+|   13663 |  4.99 | EDGAR       | Jon      |        1307 |
+|   13664 |  4.99 | EDGAR       | Mike     |        2143 |
+|   13665 |  4.99 | EDGAR       | Jon      |        2283 |
+|   13666 |  4.99 | EDGAR       | Mike     |        3660 |
+|   13667 |  2.99 | EDGAR       | Mike     |        3880 |
+|   13668 |  0.99 | EDGAR       | Jon      |        4440 |
+|   13669 |  2.99 | EDGAR       | Jon      |        4455 |
+|   13670 |  0.99 | EDGAR       | Jon      |        4744 |
+|   13671 |  2.99 | EDGAR       | Jon      |        4901 |
+|   13672 |  0.99 | EDGAR       | Mike     |        5962 |
+|   13673 |  6.99 | EDGAR       | Mike     |        6351 |
+|   13674 |  1.99 | EDGAR       | Mike     |        6396 |
+|   13675 |  2.99 | EDGAR       | Mike     |        6891 |
+|   13676 |  5.99 | EDGAR       | Jon      |        7770 |
+|   13677 |  5.99 | EDGAR       | Mike     |        7970 |
+|   13678 |  2.99 | EDGAR       | Jon      |        8369 |
+|   13679 |  2.99 | EDGAR       | Jon      |        8976 |
+|   13680 |  2.99 | EDGAR       | Mike     |        9003 |
+|   13681 |  6.99 | EDGAR       | Jon      |       12071 |
+|   13682 |  4.99 | EDGAR       | Jon      |       12275 |
+|   13683 |  4.99 | EDGAR       | Mike     |       12343 |
+|   13684 |  4.99 | EDGAR       | Jon      |       14625 |
+|   13685 |  2.99 | EDGAR       | Mike     |       15394 |
+|   13686 |  2.99 | MILTON      | Mike     |         369 |
+|   13687 |  2.99 | MILTON      | Jon      |         921 |
+|   13688 |  4.99 | MILTON      | Jon      |        1661 |
+|   13689 |  9.99 | MILTON      | Jon      |        5657 |
+|   13690 |  6.99 | MILTON      | Jon      |        5978 |
+|   13691 |  4.99 | MILTON      | Mike     |        6101 |
+|   13692 |  0.99 | MILTON      | Jon      |        6646 |
+|   13693 |  8.99 | MILTON      | Jon      |        6929 |
+|   13694 |  5.99 | MILTON      | Mike     |        7283 |
+|   13695 |  3.99 | MILTON      | Jon      |        7322 |
+|   13696 |  7.99 | MILTON      | Jon      |        7327 |
+|   13697 |  2.99 | MILTON      | Jon      |        7668 |
+|   13698 |  4.99 | MILTON      | Jon      |        7676 |
+|   13699 |  4.99 | MILTON      | Jon      |        8191 |
+|   13700 |  5.99 | MILTON      | Jon      |        9694 |
+|   13701 |  2.99 | MILTON      | Mike     |        9706 |
+|   13702 |  2.99 | MILTON      | Jon      |       10128 |
+|   13703 |  8.99 | MILTON      | Mike     |       10746 |
+|   13704 |  2.99 | MILTON      | Mike     |       11365 |
+|   13705 |  6.99 | MILTON      | Jon      |       11447 |
+|   13706 |  6.99 | MILTON      | Mike     |       13095 |
+|   13707 |  2.99 | MILTON      | Jon      |       13201 |
+|   13708 |  6.99 | MILTON      | Mike     |       15010 |
+|   13709 |  4.99 | MILTON      | Mike     |       15195 |
+|   13710 |  0.99 | MILTON      | Mike     |       14318 |
+|   13711 |  4.99 | RAUL        | Mike     |          22 |
+|   13712 |  8.99 | RAUL        | Mike     |         831 |
+|   13713 |  2.99 | RAUL        | Mike     |        1267 |
+|   13714 |  4.99 | RAUL        | Jon      |        2919 |
+|   13715 |  1.99 | RAUL        | Jon      |        4139 |
+|   13716 |  4.99 | RAUL        | Jon      |        4266 |
+|   13717 |  2.99 | RAUL        | Jon      |        4832 |
+|   13718 |  2.99 | RAUL        | Jon      |        5008 |
+|   13719 |  5.99 | RAUL        | Mike     |        6591 |
+|   13720 |  6.99 | RAUL        | Mike     |        7848 |
+|   13721 |  8.99 | RAUL        | Mike     |        8114 |
+|   13722 |  5.99 | RAUL        | Mike     |        8214 |
+|   13723 |  0.99 | RAUL        | Jon      |        8240 |
+|   13724 |  4.99 | RAUL        | Mike     |       10189 |
+|   13725 |  5.99 | RAUL        | Jon      |       10988 |
+|   13726 |  6.99 | RAUL        | Mike     |       11814 |
+|   13727 |  4.99 | RAUL        | Jon      |       12109 |
+|   13728 |  4.99 | RAUL        | Jon      |       14045 |
+|   13729 |  5.99 | RAUL        | Jon      |       14994 |
+|   13730 |  2.99 | RAUL        | Mike     |       15965 |
+|   13731 |  8.99 | BEN         | Mike     |          75 |
+|   13732 |  5.99 | BEN         | Mike     |         372 |
+|   13733 |  4.99 | BEN         | Jon      |        1118 |
+|   13734 |  5.99 | BEN         | Jon      |        1435 |
+|   13735 |  0.99 | BEN         | Jon      |        1757 |
+|   13736 |  0.99 | BEN         | Jon      |        1925 |
+|   13737 |  8.99 | BEN         | Mike     |        2729 |
+|   13738 |  0.99 | BEN         | Jon      |        2806 |
+|   13739 |  0.99 | BEN         | Jon      |        2817 |
+|   13740 |  8.99 | BEN         | Jon      |        3352 |
+|   13741 |  5.99 | BEN         | Jon      |        3465 |
+|   13742 |  2.99 | BEN         | Jon      |        3744 |
+|   13743 |  4.99 | BEN         | Mike     |        4014 |
+|   13744 |  4.99 | BEN         | Jon      |        5851 |
+|   13745 |  1.99 | BEN         | Mike     |        6531 |
+|   13746 |  2.99 | BEN         | Mike     |        7457 |
+|   13747 |  8.99 | BEN         | Mike     |        7678 |
+|   13748 |  9.99 | BEN         | Jon      |        7794 |
+|   13749 |  3.99 | BEN         | Jon      |        8763 |
+|   13750 |  4.99 | BEN         | Mike     |        8926 |
+|   13751 |  0.99 | BEN         | Mike     |       10131 |
+|   13752 |  7.99 | BEN         | Jon      |       10265 |
+|   13753 |  4.99 | BEN         | Jon      |       11996 |
+|   13754 |  0.99 | BEN         | Mike     |       12317 |
+|   13755 |  2.99 | BEN         | Jon      |       12406 |
+|   13756 |  4.99 | BEN         | Mike     |       15065 |
+|   13757 |  2.99 | CHESTER     | Mike     |          56 |
+|   13758 |  3.99 | CHESTER     | Mike     |         819 |
+|   13759 |  2.99 | CHESTER     | Jon      |        1281 |
+|   13760 |  2.99 | CHESTER     | Mike     |        1508 |
+|   13761 | 10.99 | CHESTER     | Jon      |        2966 |
+|   13762 |  4.99 | CHESTER     | Jon      |        3366 |
+|   13763 |  4.99 | CHESTER     | Jon      |        3600 |
+|   13764 |  0.99 | CHESTER     | Mike     |        3852 |
+|   13765 |  4.99 | CHESTER     | Mike     |        4482 |
+|   13766 |  3.99 | CHESTER     | Jon      |        5164 |
+|   13767 |  0.99 | CHESTER     | Mike     |        5601 |
+|   13768 |  0.99 | CHESTER     | Jon      |        6040 |
+|   13769 |  0.99 | CHESTER     | Mike     |        6320 |
+|   13770 |  4.99 | CHESTER     | Mike     |        8026 |
+|   13771 |  0.99 | CHESTER     | Mike     |        9095 |
+|   13772 |  6.99 | CHESTER     | Mike     |        9143 |
+|   13773 |  4.99 | CHESTER     | Mike     |        9760 |
+|   13774 |  2.99 | CHESTER     | Mike     |       10231 |
+|   13775 |  2.99 | CHESTER     | Jon      |       10429 |
+|   13776 |  6.99 | CHESTER     | Jon      |       12110 |
+|   13777 |  4.99 | CHESTER     | Mike     |       12920 |
+|   13778 |  4.99 | CHESTER     | Mike     |       14213 |
+|   13779 |  6.99 | CHESTER     | Mike     |       14302 |
+|   13780 |  4.99 | CHESTER     | Mike     |       15172 |
+|   13781 |  6.99 | CECIL       | Mike     |        1176 |
+|   13782 |  4.99 | CECIL       | Jon      |        2029 |
+|   13783 |  2.99 | CECIL       | Mike     |        2364 |
+|   13784 |  5.99 | CECIL       | Mike     |        4752 |
+|   13785 |  0.99 | CECIL       | Mike     |        4799 |
+|   13786 |  6.99 | CECIL       | Mike     |        5064 |
+|   13787 |  3.99 | CECIL       | Jon      |        5813 |
+|   13788 |  2.99 | CECIL       | Mike     |        7219 |
+|   13789 |  0.99 | CECIL       | Mike     |        7507 |
+|   13790 |  6.99 | CECIL       | Mike     |        7715 |
+|   13791 |  4.99 | CECIL       | Jon      |        8868 |
+|   13792 |  2.99 | CECIL       | Mike     |        9055 |
+|   13793 |  4.99 | CECIL       | Jon      |       10232 |
+|   13794 |  3.99 | CECIL       | Jon      |       10670 |
+|   13795 |  9.99 | CECIL       | Jon      |       11818 |
+|   13796 |  8.99 | CECIL       | Jon      |       12957 |
+|   13797 |  4.99 | CECIL       | Jon      |       13156 |
+|   13798 |  0.99 | CECIL       | Jon      |       13771 |
+|   13799 |  4.99 | CECIL       | Mike     |       14288 |
+|   13800 |  2.99 | CECIL       | Mike     |       14870 |
+|   13801 |  2.99 | CECIL       | Mike     |       15153 |
+|   13802 |  3.99 | CECIL       | Jon      |       15265 |
+|   13803 |  3.99 | CECIL       | Mike     |       15317 |
+|   13804 |  4.99 | CECIL       | Jon      |       15733 |
+|   13805 |  4.99 | CECIL       | Jon      |       15990 |
+|   13806 |  0.99 | CECIL       | Mike     |       12786 |
+|   13807 |  4.99 | DUANE       | Jon      |         993 |
+|   13808 |  2.99 | DUANE       | Mike     |        1607 |
+|   13809 |  7.99 | DUANE       | Jon      |        2290 |
+|   13810 |  1.99 | DUANE       | Jon      |        2737 |
+|   13811 |  0.99 | DUANE       | Jon      |        3872 |
+|   13812 |  2.99 | DUANE       | Jon      |        4055 |
+|   13813 |  4.99 | DUANE       | Jon      |        4178 |
+|   13814 |  4.99 | DUANE       | Jon      |        4220 |
+|   13815 |  7.99 | DUANE       | Mike     |        5741 |
+|   13816 |  4.99 | DUANE       | Mike     |        6027 |
+|   13817 |  0.99 | DUANE       | Mike     |        7655 |
+|   13818 |  4.99 | DUANE       | Jon      |        8320 |
+|   13819 |  4.99 | DUANE       | Mike     |        8350 |
+|   13820 |  9.99 | DUANE       | Jon      |        8683 |
+|   13821 |  5.99 | DUANE       | Mike     |        8798 |
+|   13822 |  2.99 | DUANE       | Jon      |        9862 |
+|   13823 |  3.99 | DUANE       | Mike     |       10012 |
+|   13824 |  2.99 | DUANE       | Jon      |       11081 |
+|   13825 |  2.99 | DUANE       | Mike     |       11165 |
+|   13826 |  3.99 | DUANE       | Mike     |       11407 |
+|   13827 |  3.99 | DUANE       | Mike     |       11755 |
+|   13828 |  5.99 | DUANE       | Mike     |       12559 |
+|   13829 |  2.99 | DUANE       | Jon      |       12784 |
+|   13830 |  4.99 | DUANE       | Jon      |       12807 |
+|   13831 |  5.99 | DUANE       | Mike     |       13596 |
+|   13832 |  4.99 | DUANE       | Mike     |       13690 |
+|   13833 |  7.99 | DUANE       | Jon      |       14844 |
+|   13834 |  4.99 | DUANE       | Mike     |       14875 |
+|   13835 |  4.99 | DUANE       | Mike     |       15035 |
+|   13836 |  6.99 | DUANE       | Jon      |       15289 |
+|   13837 |  5.99 | DUANE       | Jon      |       15545 |
+|   13838 |  4.99 | FRANKLIN    | Jon      |         536 |
+|   13839 |  4.99 | FRANKLIN    | Jon      |        1692 |
+|   13840 |  3.99 | FRANKLIN    | Mike     |        2002 |
+|   13841 |  0.99 | FRANKLIN    | Jon      |        2362 |
+|   13842 |  0.99 | FRANKLIN    | Mike     |        2789 |
+|   13843 |  2.99 | FRANKLIN    | Jon      |        3084 |
+|   13844 |  0.99 | FRANKLIN    | Mike     |        3385 |
+|   13845 |  5.99 | FRANKLIN    | Jon      |        3668 |
+|   13846 |  2.99 | FRANKLIN    | Jon      |        3860 |
+|   13847 |  4.99 | FRANKLIN    | Mike     |        7791 |
+|   13848 |  3.99 | FRANKLIN    | Mike     |        9038 |
+|   13849 |  1.99 | FRANKLIN    | Mike     |       11675 |
+|   13850 |  4.99 | FRANKLIN    | Jon      |       12067 |
+|   13851 |  4.99 | FRANKLIN    | Mike     |       12293 |
+|   13852 |  4.99 | FRANKLIN    | Mike     |       12302 |
+|   13853 |  0.99 | FRANKLIN    | Jon      |       12578 |
+|   13854 |  2.99 | FRANKLIN    | Mike     |       12752 |
+|   13855 |  3.99 | FRANKLIN    | Jon      |       13344 |
+|   13856 |  0.99 | FRANKLIN    | Mike     |       14052 |
+|   13857 |  1.99 | FRANKLIN    | Mike     |       14386 |
+|   13858 |  2.99 | FRANKLIN    | Mike     |       15451 |
+|   13859 |  5.99 | FRANKLIN    | Mike     |       15776 |
+|   13860 |  8.99 | ANDRE       | Jon      |         187 |
+|   13861 |  6.99 | ANDRE       | Jon      |         292 |
+|   13862 |  4.99 | ANDRE       | Mike     |        1244 |
+|   13863 |  5.99 | ANDRE       | Jon      |        1531 |
+|   13864 |  4.99 | ANDRE       | Jon      |        2003 |
+|   13865 |  4.99 | ANDRE       | Jon      |        2484 |
+|   13866 |  0.99 | ANDRE       | Jon      |        2513 |
+|   13867 |  3.99 | ANDRE       | Jon      |        3063 |
+|   13868 |  0.99 | ANDRE       | Jon      |        3782 |
+|   13869 |  6.99 | ANDRE       | Jon      |        4111 |
+|   13870 |  0.99 | ANDRE       | Jon      |        5216 |
+|   13871 |  2.99 | ANDRE       | Jon      |        5546 |
+|   13872 |  4.99 | ANDRE       | Jon      |        5697 |
+|   13873 |  3.99 | ANDRE       | Jon      |        7429 |
+|   13874 |  4.99 | ANDRE       | Mike     |        8706 |
+|   13875 |  4.99 | ANDRE       | Mike     |       10159 |
+|   13876 |  0.99 | ANDRE       | Jon      |       10716 |
+|   13877 |  3.99 | ANDRE       | Mike     |       11451 |
+|   13878 |  4.99 | ANDRE       | Jon      |       11572 |
+|   13879 |  3.99 | ANDRE       | Mike     |       11691 |
+|   13880 |  6.99 | ANDRE       | Jon      |       11937 |
+|   13881 |  2.99 | ANDRE       | Jon      |       12416 |
+|   13882 |  8.99 | ANDRE       | Mike     |       12486 |
+|   13883 |  5.99 | ANDRE       | Mike     |       12889 |
+|   13884 |  4.99 | ANDRE       | Jon      |       14072 |
+|   13885 |  3.99 | ANDRE       | Jon      |       14378 |
+|   13886 |  0.99 | ANDRE       | Jon      |       14414 |
+|   13887 |  4.99 | ANDRE       | Jon      |       15274 |
+|   13888 |  3.99 | ELMER       | Jon      |         339 |
+|   13889 |  1.99 | ELMER       | Mike     |         571 |
+|   13890 |  4.99 | ELMER       | Jon      |        1159 |
+|   13891 |  1.99 | ELMER       | Mike     |        1200 |
+|   13892 | 10.99 | ELMER       | Mike     |        1718 |
+|   13893 |  0.99 | ELMER       | Mike     |        2017 |
+|   13894 |  0.99 | ELMER       | Jon      |        3068 |
+|   13895 |  2.99 | ELMER       | Mike     |        3431 |
+|   13896 |  3.99 | ELMER       | Jon      |        5780 |
+|   13897 |  6.99 | ELMER       | Jon      |        6677 |
+|   13898 |  6.99 | ELMER       | Mike     |        6858 |
+|   13899 |  4.99 | ELMER       | Mike     |        7628 |
+|   13900 |  4.99 | ELMER       | Mike     |        7882 |
+|   13901 |  4.99 | ELMER       | Jon      |        8396 |
+|   13902 |  5.99 | ELMER       | Jon      |        8534 |
+|   13903 |  2.99 | ELMER       | Jon      |        8585 |
+|   13904 |  4.99 | ELMER       | Jon      |        9243 |
+|   13905 |  0.99 | ELMER       | Jon      |       11926 |
+|   13906 |  1.99 | ELMER       | Jon      |       11939 |
+|   13907 |  1.99 | ELMER       | Mike     |       12535 |
+|   13908 |  8.99 | ELMER       | Mike     |       13276 |
+|   13909 |  0.99 | ELMER       | Mike     |       14932 |
+|   13910 |  0.99 | ELMER       | Mike     |       15526 |
+|   13911 |  0.99 | ELMER       | Mike     |       15701 |
+|   13912 |  5.98 | ELMER       | Mike     |       12130 |
+|   13913 |  0.00 | ELMER       | Mike     |       12915 |
+|   13914 |  4.99 | BRAD        | Jon      |         850 |
+|   13915 |  4.99 | BRAD        | Jon      |        1653 |
+|   13916 |  8.99 | BRAD        | Mike     |        1809 |
+|   13917 |  4.99 | BRAD        | Mike     |        1850 |
+|   13918 |  2.99 | BRAD        | Jon      |        2534 |
+|   13919 |  0.99 | BRAD        | Mike     |        3113 |
+|   13920 |  2.99 | BRAD        | Jon      |        4094 |
+|   13921 |  4.99 | BRAD        | Mike     |        4109 |
+|   13922 |  4.99 | BRAD        | Mike     |        4369 |
+|   13923 |  4.99 | BRAD        | Jon      |        4374 |
+|   13924 |  0.99 | BRAD        | Jon      |        4934 |
+|   13925 |  2.99 | BRAD        | Mike     |        4993 |
+|   13926 |  7.99 | BRAD        | Mike     |        5206 |
+|   13927 |  5.99 | BRAD        | Jon      |        5974 |
+|   13928 |  4.99 | BRAD        | Jon      |        6594 |
+|   13929 |  0.99 | BRAD        | Jon      |        6903 |
+|   13930 |  3.99 | BRAD        | Jon      |        7988 |
+|   13931 |  4.99 | BRAD        | Mike     |       10063 |
+|   13932 |  4.99 | BRAD        | Jon      |       10358 |
+|   13933 |  4.99 | BRAD        | Jon      |       10433 |
+|   13934 |  3.99 | BRAD        | Mike     |       11684 |
+|   13935 |  0.99 | BRAD        | Jon      |       12705 |
+|   13936 |  0.99 | BRAD        | Mike     |       13396 |
+|   13937 |  4.99 | BRAD        | Jon      |       14190 |
+|   13938 |  5.99 | BRAD        | Mike     |       15559 |
+|   13939 |  2.99 | GABRIEL     | Mike     |         710 |
+|   13940 |  5.99 | GABRIEL     | Jon      |        1552 |
+|   13941 |  0.99 | GABRIEL     | Jon      |        3311 |
+|   13942 |  0.99 | GABRIEL     | Mike     |        3652 |
+|   13943 |  7.99 | GABRIEL     | Jon      |        4029 |
+|   13944 |  4.99 | GABRIEL     | Jon      |        4661 |
+|   13945 |  6.99 | GABRIEL     | Jon      |        4948 |
+|   13946 |  2.99 | GABRIEL     | Mike     |        6652 |
+|   13947 |  2.99 | GABRIEL     | Mike     |        6957 |
+|   13948 |  3.99 | GABRIEL     | Jon      |        7038 |
+|   13949 |  4.99 | GABRIEL     | Jon      |        7154 |
+|   13950 |  2.99 | GABRIEL     | Jon      |        7382 |
+|   13951 |  2.99 | GABRIEL     | Mike     |        7657 |
+|   13952 |  6.99 | GABRIEL     | Jon      |        7839 |
+|   13953 |  3.99 | GABRIEL     | Mike     |        8107 |
+|   13954 |  2.99 | GABRIEL     | Mike     |        8397 |
+|   13955 |  5.99 | GABRIEL     | Mike     |       10751 |
+|   13956 |  3.99 | GABRIEL     | Jon      |       11433 |
+|   13957 |  2.99 | GABRIEL     | Jon      |       12450 |
+|   13958 |  2.99 | GABRIEL     | Jon      |       12681 |
+|   13959 |  4.99 | GABRIEL     | Mike     |       13065 |
+|   13960 |  6.99 | GABRIEL     | Mike     |       13539 |
+|   13961 |  6.99 | GABRIEL     | Mike     |       14088 |
+|   13962 |  4.99 | GABRIEL     | Mike     |       14149 |
+|   13963 |  0.99 | GABRIEL     | Jon      |       14980 |
+|   13964 |  4.99 | GABRIEL     | Jon      |       15434 |
+|   13965 |  3.99 | RON         | Mike     |        1056 |
+|   13966 |  2.99 | RON         | Mike     |        1941 |
+|   13967 |  8.99 | RON         | Jon      |        2505 |
+|   13968 |  5.99 | RON         | Jon      |        2997 |
+|   13969 |  0.99 | RON         | Jon      |        4564 |
+|   13970 |  2.99 | RON         | Jon      |        4773 |
+|   13971 |  0.99 | RON         | Jon      |        5236 |
+|   13972 |  5.99 | RON         | Jon      |        5547 |
+|   13973 |  0.99 | RON         | Jon      |        6063 |
+|   13974 |  3.99 | RON         | Mike     |        6599 |
+|   13975 |  6.99 | RON         | Mike     |        9417 |
+|   13976 |  4.99 | RON         | Jon      |        9441 |
+|   13977 |  7.99 | RON         | Jon      |        9534 |
+|   13978 |  0.99 | RON         | Jon      |        9645 |
+|   13979 |  7.99 | RON         | Jon      |        9886 |
+|   13980 |  0.99 | RON         | Mike     |        9905 |
+|   13981 |  5.99 | RON         | Mike     |       10097 |
+|   13982 |  4.99 | RON         | Jon      |       10697 |
+|   13983 |  7.99 | RON         | Jon      |       12648 |
+|   13984 |  2.99 | RON         | Jon      |       12924 |
+|   13985 |  7.99 | RON         | Mike     |       13647 |
+|   13986 |  2.99 | RON         | Mike     |       14182 |
+|   13987 |  2.99 | RON         | Jon      |       15347 |
+|   13988 |  6.99 | MITCHELL    | Mike     |         962 |
+|   13989 |  0.99 | MITCHELL    | Mike     |        1411 |
+|   13990 |  6.99 | MITCHELL    | Jon      |        2174 |
+|   13991 |  4.99 | MITCHELL    | Mike     |        2772 |
+|   13992 |  4.99 | MITCHELL    | Jon      |        3482 |
+|   13993 |  7.99 | MITCHELL    | Mike     |        3499 |
+|   13994 |  2.99 | MITCHELL    | Jon      |        4346 |
+|   13995 |  4.99 | MITCHELL    | Jon      |        5799 |
+|   13996 | 10.99 | MITCHELL    | Mike     |        5802 |
+|   13997 |  3.99 | MITCHELL    | Mike     |        5853 |
+|   13998 |  2.99 | MITCHELL    | Mike     |        6029 |
+|   13999 |  5.99 | MITCHELL    | Jon      |        7198 |
+|   14000 |  4.99 | MITCHELL    | Mike     |        7720 |
+|   14001 |  0.99 | MITCHELL    | Mike     |        7936 |
+|   14002 |  2.99 | MITCHELL    | Mike     |        8294 |
+|   14003 |  2.99 | MITCHELL    | Jon      |        8435 |
+|   14004 |  2.99 | MITCHELL    | Mike     |        9803 |
+|   14005 |  0.99 | MITCHELL    | Mike     |       10072 |
+|   14006 |  4.99 | MITCHELL    | Jon      |       10530 |
+|   14007 |  0.99 | MITCHELL    | Mike     |       11566 |
+|   14008 |  4.99 | MITCHELL    | Mike     |       12517 |
+|   14009 |  5.99 | MITCHELL    | Mike     |       12628 |
+|   14010 |  5.99 | MITCHELL    | Mike     |       12647 |
+|   14011 |  0.99 | MITCHELL    | Mike     |       13311 |
+|   14012 |  2.99 | MITCHELL    | Jon      |       13438 |
+|   14013 |  2.99 | MITCHELL    | Jon      |       13659 |
+|   14014 |  5.99 | MITCHELL    | Jon      |       13746 |
+|   14015 |  4.99 | MITCHELL    | Mike     |       14372 |
+|   14016 |  0.99 | MITCHELL    | Mike     |       14509 |
+|   14017 |  0.99 | MITCHELL    | Mike     |       15465 |
+|   14018 |  2.99 | MITCHELL    | Jon      |       15492 |
+|   14019 |  7.99 | MITCHELL    | Mike     |       15948 |
+|   14020 |  0.99 | ROLAND      | Mike     |        1761 |
+|   14021 |  0.99 | ROLAND      | Jon      |        2053 |
+|   14022 |  0.99 | ROLAND      | Jon      |        4284 |
+|   14023 |  2.99 | ROLAND      | Jon      |        4439 |
+|   14024 |  2.99 | ROLAND      | Mike     |        5276 |
+|   14025 |  4.99 | ROLAND      | Jon      |        5458 |
+|   14026 |  6.99 | ROLAND      | Jon      |        5580 |
+|   14027 |  0.99 | ROLAND      | Jon      |        5686 |
+|   14028 |  1.99 | ROLAND      | Mike     |        7478 |
+|   14029 |  7.99 | ROLAND      | Mike     |        9556 |
+|   14030 |  1.99 | ROLAND      | Jon      |        9937 |
+|   14031 |  2.99 | ROLAND      | Mike     |       10587 |
+|   14032 |  2.99 | ROLAND      | Jon      |       11625 |
+|   14033 |  3.99 | ROLAND      | Mike     |       11967 |
+|   14034 |  4.99 | ROLAND      | Jon      |       12082 |
+|   14035 |  4.99 | ROLAND      | Mike     |       12530 |
+|   14036 |  2.99 | ROLAND      | Mike     |       13527 |
+|   14037 |  0.99 | ROLAND      | Mike     |       14423 |
+|   14038 |  3.99 | ROLAND      | Jon      |       14551 |
+|   14039 |  5.99 | ROLAND      | Jon      |       14738 |
+|   14040 |  4.99 | ROLAND      | Jon      |       15170 |
+|   14041 |  2.99 | ROLAND      | Jon      |       15329 |
+|   14042 |  4.99 | ROLAND      | Jon      |       11672 |
+|   14043 |  5.99 | ARNOLD      | Jon      |         426 |
+|   14044 |  3.99 | ARNOLD      | Mike     |        1289 |
+|   14045 |  8.99 | ARNOLD      | Jon      |        3102 |
+|   14046 |  2.99 | ARNOLD      | Mike     |        3188 |
+|   14047 |  0.99 | ARNOLD      | Jon      |        3191 |
+|   14048 |  0.99 | ARNOLD      | Mike     |        3594 |
+|   14049 |  4.99 | ARNOLD      | Jon      |        4078 |
+|   14050 |  9.99 | ARNOLD      | Jon      |        4563 |
+|   14051 |  4.99 | ARNOLD      | Jon      |        4701 |
+|   14052 |  6.99 | ARNOLD      | Jon      |        5271 |
+|   14053 |  6.99 | ARNOLD      | Jon      |        5514 |
+|   14054 |  4.99 | ARNOLD      | Jon      |        5532 |
+|   14055 |  0.99 | ARNOLD      | Jon      |        5936 |
+|   14056 |  4.99 | ARNOLD      | Jon      |        7262 |
+|   14057 |  2.99 | ARNOLD      | Mike     |        7955 |
+|   14058 |  4.99 | ARNOLD      | Jon      |        8181 |
+|   14059 |  6.99 | ARNOLD      | Mike     |        8642 |
+|   14060 |  2.99 | ARNOLD      | Mike     |        8966 |
+|   14061 |  7.99 | ARNOLD      | Mike     |        9047 |
+|   14062 |  7.99 | ARNOLD      | Jon      |        9227 |
+|   14063 |  4.99 | ARNOLD      | Mike     |        9335 |
+|   14064 |  5.99 | ARNOLD      | Mike     |        9412 |
+|   14065 |  5.99 | ARNOLD      | Jon      |        9533 |
+|   14066 |  0.99 | ARNOLD      | Jon      |       10223 |
+|   14067 |  3.99 | ARNOLD      | Mike     |       10411 |
+|   14068 |  7.99 | ARNOLD      | Mike     |       10675 |
+|   14069 |  5.99 | ARNOLD      | Jon      |       10821 |
+|   14070 |  2.99 | ARNOLD      | Jon      |       11696 |
+|   14071 |  1.99 | ARNOLD      | Jon      |       11830 |
+|   14072 |  6.99 | ARNOLD      | Jon      |       12494 |
+|   14073 |  6.99 | ARNOLD      | Jon      |       13605 |
+|   14074 |  2.99 | ARNOLD      | Jon      |       14467 |
+|   14075 |  6.99 | ARNOLD      | Mike     |       15921 |
+|   14076 |  4.99 | HARVEY      | Mike     |          42 |
+|   14077 |  0.99 | HARVEY      | Jon      |         664 |
+|   14078 |  6.99 | HARVEY      | Jon      |        1729 |
+|   14079 |  8.99 | HARVEY      | Mike     |        2447 |
+|   14080 |  7.99 | HARVEY      | Mike     |        2583 |
+|   14081 |  0.99 | HARVEY      | Jon      |        2669 |
+|   14082 |  4.99 | HARVEY      | Mike     |        4605 |
+|   14083 |  2.99 | HARVEY      | Jon      |        5155 |
+|   14084 |  6.99 | HARVEY      | Mike     |        5287 |
+|   14085 |  2.99 | HARVEY      | Jon      |        5932 |
+|   14086 |  4.99 | HARVEY      | Jon      |        6675 |
+|   14087 |  1.99 | HARVEY      | Jon      |        7642 |
+|   14088 |  0.99 | HARVEY      | Jon      |        8141 |
+|   14089 |  5.99 | HARVEY      | Mike     |        8372 |
+|   14090 |  2.99 | HARVEY      | Mike     |        9071 |
+|   14091 |  6.99 | HARVEY      | Jon      |        9667 |
+|   14092 |  1.99 | HARVEY      | Jon      |       10470 |
+|   14093 |  4.99 | HARVEY      | Mike     |       11827 |
+|   14094 |  2.99 | HARVEY      | Mike     |       12288 |
+|   14095 |  2.99 | HARVEY      | Mike     |       13133 |
+|   14096 |  4.99 | HARVEY      | Mike     |       14766 |
+|   14097 |  2.99 | HARVEY      | Mike     |       15040 |
+|   14098 |  0.99 | JARED       | Jon      |         118 |
+|   14099 |  4.99 | JARED       | Mike     |         982 |
+|   14100 |  1.99 | JARED       | Mike     |        1306 |
+|   14101 |  4.99 | JARED       | Jon      |        1651 |
+|   14102 |  2.99 | JARED       | Jon      |        3454 |
+|   14103 |  5.99 | JARED       | Mike     |        4366 |
+|   14104 |  4.99 | JARED       | Jon      |        5037 |
+|   14105 |  4.99 | JARED       | Jon      |        6161 |
+|   14106 |  6.99 | JARED       | Mike     |        6240 |
+|   14107 |  4.99 | JARED       | Jon      |        6745 |
+|   14108 |  8.99 | JARED       | Jon      |        7014 |
+|   14109 |  4.99 | JARED       | Mike     |        7040 |
+|   14110 |  6.99 | JARED       | Mike     |        8507 |
+|   14111 |  2.99 | JARED       | Jon      |       13626 |
+|   14112 |  4.99 | JARED       | Jon      |       14046 |
+|   14113 |  2.99 | JARED       | Mike     |       14178 |
+|   14114 |  2.99 | JARED       | Mike     |       14366 |
+|   14115 |  1.99 | JARED       | Jon      |       14680 |
+|   14116 |  6.99 | JARED       | Jon      |       15206 |
+|   14117 |  5.99 | ADRIAN      | Mike     |         437 |
+|   14118 |  2.99 | ADRIAN      | Jon      |        1772 |
+|   14119 |  6.99 | ADRIAN      | Mike     |        3993 |
+|   14120 |  2.99 | ADRIAN      | Mike     |        5841 |
+|   14121 |  7.99 | ADRIAN      | Jon      |        6098 |
+|   14122 |  6.99 | ADRIAN      | Jon      |        6388 |
+|   14123 |  1.99 | ADRIAN      | Mike     |        6689 |
+|   14124 |  4.99 | ADRIAN      | Jon      |        7337 |
+|   14125 |  4.99 | ADRIAN      | Jon      |        7591 |
+|   14126 |  0.99 | ADRIAN      | Mike     |        8007 |
+|   14127 |  4.99 | ADRIAN      | Mike     |        8960 |
+|   14128 |  5.99 | ADRIAN      | Jon      |        9507 |
+|   14129 |  0.99 | ADRIAN      | Mike     |        9702 |
+|   14130 |  2.99 | ADRIAN      | Mike     |       10496 |
+|   14131 |  2.99 | ADRIAN      | Jon      |       11406 |
+|   14132 |  1.99 | ADRIAN      | Mike     |       11660 |
+|   14133 |  0.99 | ADRIAN      | Mike     |       15159 |
+|   14134 |  3.99 | ADRIAN      | Jon      |       15623 |
+|   14135 |  2.99 | ADRIAN      | Mike     |       14954 |
+|   14136 |  4.99 | KARL        | Mike     |         495 |
+|   14137 |  4.99 | KARL        | Jon      |         679 |
+|   14138 |  2.99 | KARL        | Jon      |        1015 |
+|   14139 |  4.99 | KARL        | Mike     |        1255 |
+|   14140 |  0.99 | KARL        | Jon      |        1848 |
+|   14141 |  7.99 | KARL        | Jon      |        1865 |
+|   14142 |  2.99 | KARL        | Jon      |        1972 |
+|   14143 |  2.99 | KARL        | Mike     |        1981 |
+|   14144 |  4.99 | KARL        | Jon      |        2398 |
+|   14145 |  2.99 | KARL        | Mike     |        2828 |
+|   14146 |  6.99 | KARL        | Jon      |        2932 |
+|   14147 |  6.99 | KARL        | Mike     |        3339 |
+|   14148 |  1.99 | KARL        | Mike     |        3619 |
+|   14149 |  5.99 | KARL        | Jon      |        3905 |
+|   14150 |  6.99 | KARL        | Mike     |        4423 |
+|   14151 |  2.99 | KARL        | Jon      |        5056 |
+|   14152 |  3.99 | KARL        | Jon      |        5121 |
+|   14153 |  7.99 | KARL        | Mike     |        6316 |
+|   14154 |  4.99 | KARL        | Mike     |        6404 |
+|   14155 |  2.99 | KARL        | Jon      |        6650 |
+|   14156 |  3.99 | KARL        | Mike     |        6671 |
+|   14157 |  7.99 | KARL        | Jon      |        7270 |
+|   14158 |  0.99 | KARL        | Jon      |        7343 |
+|   14159 |  1.99 | KARL        | Jon      |        7399 |
+|   14160 |  5.99 | KARL        | Jon      |        7543 |
+|   14161 |  2.99 | KARL        | Jon      |        7883 |
+|   14162 |  4.99 | KARL        | Mike     |        8053 |
+|   14163 |  4.99 | KARL        | Mike     |        8232 |
+|   14164 |  2.99 | KARL        | Mike     |        8441 |
+|   14165 |  6.99 | KARL        | Jon      |        9577 |
+|   14166 |  4.99 | KARL        | Jon      |       10020 |
+|   14167 |  2.99 | KARL        | Jon      |       10199 |
+|   14168 |  4.99 | KARL        | Jon      |       11046 |
+|   14169 | 10.99 | KARL        | Mike     |       11503 |
+|   14170 |  2.99 | KARL        | Mike     |       11612 |
+|   14171 |  4.99 | KARL        | Jon      |       11702 |
+|   14172 |  0.99 | KARL        | Mike     |       12607 |
+|   14173 |  8.99 | KARL        | Jon      |       13224 |
+|   14174 |  0.99 | KARL        | Jon      |       13580 |
+|   14175 |  8.99 | KARL        | Mike     |       13617 |
+|   14176 |  6.99 | KARL        | Jon      |       14487 |
+|   14177 |  7.99 | KARL        | Mike     |       14590 |
+|   14178 |  2.99 | KARL        | Mike     |       15168 |
+|   14179 |  4.99 | KARL        | Mike     |       15395 |
+|   14180 |  9.99 | KARL        | Mike     |       16043 |
+|   14181 |  2.99 | CORY        | Mike     |        1398 |
+|   14182 |  0.99 | CORY        | Mike     |        2422 |
+|   14183 |  0.99 | CORY        | Jon      |        2496 |
+|   14184 |  2.99 | CORY        | Mike     |        2539 |
+|   14185 |  0.99 | CORY        | Mike     |        4888 |
+|   14186 |  0.99 | CORY        | Mike     |        5365 |
+|   14187 |  3.99 | CORY        | Jon      |        6003 |
+|   14188 |  4.99 | CORY        | Jon      |        6011 |
+|   14189 |  2.99 | CORY        | Mike     |        6050 |
+|   14190 |  1.99 | CORY        | Jon      |        6975 |
+|   14191 |  8.99 | CORY        | Mike     |        7506 |
+|   14192 |  0.99 | CORY        | Mike     |        8854 |
+|   14193 |  0.99 | CORY        | Jon      |        9750 |
+|   14194 |  3.99 | CORY        | Jon      |       10486 |
+|   14195 |  0.99 | CORY        | Jon      |       10613 |
+|   14196 |  5.99 | CORY        | Mike     |       11013 |
+|   14197 |  2.99 | CORY        | Mike     |       11150 |
+|   14198 |  0.99 | CORY        | Mike     |       11624 |
+|   14199 |  7.99 | CORY        | Mike     |       12136 |
+|   14200 |  6.99 | CORY        | Mike     |       12513 |
+|   14201 |  6.99 | CORY        | Mike     |       14352 |
+|   14202 |  2.99 | CORY        | Mike     |       15144 |
+|   14203 |  3.99 | CORY        | Mike     |       15552 |
+|   14204 |  2.99 | CORY        | Mike     |       14267 |
+|   14205 |  0.99 | CLAUDE      | Mike     |         204 |
+|   14206 |  0.99 | CLAUDE      | Jon      |         472 |
+|   14207 |  5.99 | CLAUDE      | Mike     |         533 |
+|   14208 |  3.99 | CLAUDE      | Jon      |         695 |
+|   14209 |  5.99 | CLAUDE      | Jon      |         793 |
+|   14210 |  2.99 | CLAUDE      | Jon      |        1875 |
+|   14211 |  4.99 | CLAUDE      | Mike     |        2019 |
+|   14212 |  4.99 | CLAUDE      | Jon      |        3654 |
+|   14213 |  0.99 | CLAUDE      | Mike     |        3664 |
+|   14214 |  9.99 | CLAUDE      | Jon      |        4050 |
+|   14215 |  5.99 | CLAUDE      | Mike     |        4593 |
+|   14216 |  3.99 | CLAUDE      | Jon      |        5215 |
+|   14217 |  0.99 | CLAUDE      | Jon      |        6561 |
+|   14218 |  7.99 | CLAUDE      | Mike     |        7569 |
+|   14219 |  4.99 | CLAUDE      | Jon      |        8112 |
+|   14220 |  3.99 | CLAUDE      | Mike     |        8727 |
+|   14221 |  8.99 | CLAUDE      | Jon      |        9488 |
+|   14222 |  3.99 | CLAUDE      | Mike     |       10084 |
+|   14223 |  0.99 | CLAUDE      | Mike     |       10673 |
+|   14224 |  2.99 | CLAUDE      | Mike     |       10880 |
+|   14225 |  3.99 | CLAUDE      | Mike     |       12818 |
+|   14226 |  2.99 | CLAUDE      | Jon      |       13518 |
+|   14227 |  7.99 | CLAUDE      | Mike     |       13600 |
+|   14228 |  2.99 | CLAUDE      | Jon      |       14148 |
+|   14229 |  6.99 | CLAUDE      | Jon      |       15880 |
+|   14230 |  2.99 | ERIK        | Mike     |         453 |
+|   14231 |  1.99 | ERIK        | Mike     |        1234 |
+|   14232 |  0.99 | ERIK        | Jon      |        1686 |
+|   14233 |  0.99 | ERIK        | Jon      |        3354 |
+|   14234 |  0.99 | ERIK        | Jon      |        4045 |
+|   14235 |  0.99 | ERIK        | Jon      |        4254 |
+|   14236 |  5.99 | ERIK        | Jon      |        4444 |
+|   14237 |  0.99 | ERIK        | Mike     |        4553 |
+|   14238 |  4.99 | ERIK        | Mike     |        5993 |
+|   14239 |  6.99 | ERIK        | Jon      |        6538 |
+|   14240 |  5.99 | ERIK        | Jon      |        6541 |
+|   14241 |  7.99 | ERIK        | Mike     |        6908 |
+|   14242 |  3.99 | ERIK        | Mike     |        7128 |
+|   14243 |  2.99 | ERIK        | Jon      |        8708 |
+|   14244 |  5.99 | ERIK        | Mike     |        8979 |
+|   14245 |  4.99 | ERIK        | Jon      |        9310 |
+|   14246 |  0.99 | ERIK        | Jon      |        9375 |
+|   14247 | 10.99 | ERIK        | Jon      |       10361 |
+|   14248 |  2.99 | ERIK        | Mike     |       11862 |
+|   14249 |  2.99 | ERIK        | Jon      |       12356 |
+|   14250 |  3.99 | ERIK        | Mike     |       12622 |
+|   14251 |  4.99 | ERIK        | Mike     |       13011 |
+|   14252 |  3.99 | ERIK        | Jon      |       13132 |
+|   14253 |  2.99 | ERIK        | Mike     |       13797 |
+|   14254 |  9.99 | ERIK        | Jon      |       13946 |
+|   14255 |  4.99 | ERIK        | Jon      |       14449 |
+|   14256 |  0.99 | ERIK        | Jon      |       14764 |
+|   14257 |  5.99 | ERIK        | Mike     |       14970 |
+|   14258 |  2.99 | ERIK        | Jon      |       15305 |
+|   14259 |  0.99 | DARRYL      | Mike     |         851 |
+|   14260 |  1.99 | DARRYL      | Jon      |        1273 |
+|   14261 |  0.99 | DARRYL      | Mike     |        1516 |
+|   14262 |  2.99 | DARRYL      | Mike     |        2158 |
+|   14263 |  2.99 | DARRYL      | Jon      |        3669 |
+|   14264 |  4.99 | DARRYL      | Jon      |        3887 |
+|   14265 |  0.99 | DARRYL      | Jon      |        5663 |
+|   14266 |  3.99 | DARRYL      | Mike     |        7031 |
+|   14267 |  1.99 | DARRYL      | Jon      |        7075 |
+|   14268 |  4.99 | DARRYL      | Mike     |        7218 |
+|   14269 |  4.99 | DARRYL      | Jon      |        8208 |
+|   14270 |  0.99 | DARRYL      | Mike     |        8736 |
+|   14271 |  4.99 | DARRYL      | Mike     |        9914 |
+|   14272 |  3.99 | DARRYL      | Jon      |       10211 |
+|   14273 |  4.99 | DARRYL      | Jon      |       10504 |
+|   14274 |  0.99 | DARRYL      | Mike     |       11326 |
+|   14275 |  4.99 | DARRYL      | Mike     |       12220 |
+|   14276 |  2.99 | DARRYL      | Mike     |       12387 |
+|   14277 |  4.99 | DARRYL      | Mike     |       12649 |
+|   14278 |  5.99 | DARRYL      | Mike     |       13998 |
+|   14279 |  5.99 | DARRYL      | Jon      |       14707 |
+|   14280 |  0.99 | DARRYL      | Jon      |       15066 |
+|   14281 |  2.99 | DARRYL      | Mike     |       13561 |
+|   14282 |  4.99 | JAMIE       | Mike     |         233 |
+|   14283 |  2.99 | JAMIE       | Mike     |         681 |
+|   14284 |  2.99 | JAMIE       | Jon      |        2972 |
+|   14285 |  5.99 | JAMIE       | Jon      |        3921 |
+|   14286 |  5.99 | JAMIE       | Mike     |        5587 |
+|   14287 |  0.99 | JAMIE       | Jon      |        5850 |
+|   14288 |  4.99 | JAMIE       | Jon      |        5904 |
+|   14289 |  4.99 | JAMIE       | Mike     |        6756 |
+|   14290 |  4.99 | JAMIE       | Mike     |        6876 |
+|   14291 |  2.99 | JAMIE       | Jon      |        7204 |
+|   14292 |  6.99 | JAMIE       | Mike     |        7391 |
+|   14293 |  2.99 | JAMIE       | Jon      |        7444 |
+|   14294 |  6.99 | JAMIE       | Jon      |        7753 |
+|   14295 |  5.99 | JAMIE       | Jon      |        8359 |
+|   14296 |  4.99 | JAMIE       | Jon      |        8860 |
+|   14297 |  0.99 | JAMIE       | Jon      |        8943 |
+|   14298 |  4.99 | JAMIE       | Jon      |        9107 |
+|   14299 |  4.99 | JAMIE       | Jon      |       10920 |
+|   14300 |  5.99 | JAMIE       | Mike     |       10941 |
+|   14301 |  4.99 | JAMIE       | Jon      |       11026 |
+|   14302 | 10.99 | JAMIE       | Mike     |       11265 |
+|   14303 |  2.99 | JAMIE       | Mike     |       11666 |
+|   14304 |  2.99 | JAMIE       | Mike     |       12923 |
+|   14305 |  8.99 | JAMIE       | Jon      |       13300 |
+|   14306 |  0.99 | JAMIE       | Jon      |       15360 |
+|   14307 |  2.99 | NEIL        | Mike     |          43 |
+|   14308 |  4.99 | NEIL        | Mike     |        1694 |
+|   14309 |  3.99 | NEIL        | Jon      |        2821 |
+|   14310 |  2.99 | NEIL        | Mike     |        4336 |
+|   14311 |  4.99 | NEIL        | Jon      |        4962 |
+|   14312 |  2.99 | NEIL        | Jon      |        5190 |
+|   14313 |  7.99 | NEIL        | Mike     |        5253 |
+|   14314 |  4.99 | NEIL        | Jon      |        5278 |
+|   14315 |  8.99 | NEIL        | Jon      |        5805 |
+|   14316 |  2.99 | NEIL        | Mike     |        5887 |
+|   14317 |  7.99 | NEIL        | Jon      |        6345 |
+|   14318 |  4.99 | NEIL        | Jon      |        6598 |
+|   14319 |  3.99 | NEIL        | Mike     |        6730 |
+|   14320 |  4.99 | NEIL        | Mike     |        7192 |
+|   14321 |  2.99 | NEIL        | Jon      |        7572 |
+|   14322 |  5.99 | NEIL        | Mike     |        8273 |
+|   14323 |  2.99 | NEIL        | Mike     |        9843 |
+|   14324 |  6.99 | NEIL        | Jon      |       10286 |
+|   14325 |  5.99 | NEIL        | Jon      |       10712 |
+|   14326 |  5.99 | NEIL        | Mike     |       10945 |
+|   14327 |  2.99 | NEIL        | Jon      |       11251 |
+|   14328 |  4.99 | NEIL        | Jon      |       11318 |
+|   14329 |  3.99 | NEIL        | Jon      |       12061 |
+|   14330 |  5.99 | NEIL        | Jon      |       12295 |
+|   14331 |  4.99 | NEIL        | Jon      |       13038 |
+|   14332 |  8.99 | NEIL        | Mike     |       13192 |
+|   14333 |  4.99 | NEIL        | Mike     |       13254 |
+|   14334 |  4.99 | NEIL        | Mike     |       13908 |
+|   14335 |  0.99 | NEIL        | Jon      |       15180 |
+|   14336 |  1.99 | NEIL        | Jon      |       15414 |
+|   14337 |  5.99 | NEIL        | Mike     |       16014 |
+|   14338 |  0.99 | NEIL        | Mike     |       14616 |
+|   14339 |  0.99 | JESSIE      | Mike     |         173 |
+|   14340 |  1.99 | JESSIE      | Jon      |         190 |
+|   14341 |  5.99 | JESSIE      | Mike     |         615 |
+|   14342 |  5.99 | JESSIE      | Mike     |        1421 |
+|   14343 |  0.99 | JESSIE      | Mike     |        1652 |
+|   14344 |  0.99 | JESSIE      | Mike     |        1859 |
+|   14345 |  2.99 | JESSIE      | Mike     |        1954 |
+|   14346 |  6.99 | JESSIE      | Jon      |        2770 |
+|   14347 |  0.99 | JESSIE      | Mike     |        2956 |
+|   14348 |  8.99 | JESSIE      | Mike     |        4112 |
+|   14349 |  4.99 | JESSIE      | Mike     |        4788 |
+|   14350 |  2.99 | JESSIE      | Jon      |        6781 |
+|   14351 |  0.99 | JESSIE      | Jon      |        6834 |
+|   14352 |  9.99 | JESSIE      | Jon      |        6837 |
+|   14353 |  4.99 | JESSIE      | Jon      |        7555 |
+|   14354 |  8.99 | JESSIE      | Mike     |        8093 |
+|   14355 |  2.99 | JESSIE      | Jon      |        8104 |
+|   14356 |  2.99 | JESSIE      | Jon      |        8250 |
+|   14357 |  2.99 | JESSIE      | Mike     |        8471 |
+|   14358 |  1.99 | JESSIE      | Mike     |        8676 |
+|   14359 |  1.99 | JESSIE      | Jon      |        8786 |
+|   14360 |  3.99 | JESSIE      | Jon      |       10090 |
+|   14361 |  2.99 | JESSIE      | Mike     |       10380 |
+|   14362 |  6.99 | JESSIE      | Mike     |       10614 |
+|   14363 |  7.99 | JESSIE      | Jon      |       11524 |
+|   14364 |  8.99 | JESSIE      | Mike     |       11758 |
+|   14365 |  2.99 | JESSIE      | Mike     |       11918 |
+|   14366 |  0.99 | JESSIE      | Mike     |       12602 |
+|   14367 |  6.99 | JESSIE      | Mike     |       12655 |
+|   14368 |  7.99 | JESSIE      | Mike     |       14263 |
+|   14369 |  4.99 | JESSIE      | Mike     |       14800 |
+|   14370 |  0.99 | JESSIE      | Jon      |       16006 |
+|   14371 |  2.99 | JESSIE      | Jon      |       14018 |
+|   14372 |  5.99 | CHRISTIAN   | Jon      |         304 |
+|   14373 |  0.99 | CHRISTIAN   | Jon      |         940 |
+|   14374 |  4.99 | CHRISTIAN   | Mike     |        1610 |
+|   14375 |  2.99 | CHRISTIAN   | Mike     |        1673 |
+|   14376 |  0.99 | CHRISTIAN   | Mike     |        2436 |
+|   14377 |  1.99 | CHRISTIAN   | Jon      |        3213 |
+|   14378 |  4.99 | CHRISTIAN   | Mike     |        3216 |
+|   14379 |  2.99 | CHRISTIAN   | Mike     |        3735 |
+|   14380 |  4.99 | CHRISTIAN   | Jon      |        4998 |
+|   14381 |  2.99 | CHRISTIAN   | Jon      |        7113 |
+|   14382 |  2.99 | CHRISTIAN   | Mike     |        7662 |
+|   14383 |  0.99 | CHRISTIAN   | Jon      |        8633 |
+|   14384 |  5.99 | CHRISTIAN   | Mike     |        9456 |
+|   14385 |  4.99 | CHRISTIAN   | Jon      |        9464 |
+|   14386 |  5.99 | CHRISTIAN   | Jon      |       10465 |
+|   14387 |  6.99 | CHRISTIAN   | Jon      |       10725 |
+|   14388 |  0.99 | CHRISTIAN   | Mike     |       10796 |
+|   14389 |  5.99 | CHRISTIAN   | Jon      |       11180 |
+|   14390 |  2.99 | CHRISTIAN   | Jon      |       12305 |
+|   14391 |  5.99 | CHRISTIAN   | Mike     |       12691 |
+|   14392 |  4.99 | CHRISTIAN   | Jon      |       12798 |
+|   14393 |  0.99 | CHRISTIAN   | Jon      |       13294 |
+|   14394 |  1.99 | CHRISTIAN   | Jon      |       14816 |
+|   14395 |  2.99 | CHRISTIAN   | Mike     |       14526 |
+|   14396 |  0.99 | JAVIER      | Mike     |          37 |
+|   14397 |  2.99 | JAVIER      | Jon      |         541 |
+|   14398 |  3.99 | JAVIER      | Mike     |         778 |
+|   14399 |  4.99 | JAVIER      | Jon      |         959 |
+|   14400 |  4.99 | JAVIER      | Mike     |        1712 |
+|   14401 |  4.99 | JAVIER      | Mike     |        3228 |
+|   14402 |  4.99 | JAVIER      | Mike     |        4331 |
+|   14403 |  6.99 | JAVIER      | Mike     |        4718 |
+|   14404 |  2.99 | JAVIER      | Mike     |        4743 |
+|   14405 |  6.99 | JAVIER      | Jon      |        4914 |
+|   14406 |  0.99 | JAVIER      | Mike     |        5588 |
+|   14407 |  8.99 | JAVIER      | Jon      |        5890 |
+|   14408 |  2.99 | JAVIER      | Mike     |        6504 |
+|   14409 |  2.99 | JAVIER      | Mike     |        8395 |
+|   14410 |  4.99 | JAVIER      | Mike     |        8645 |
+|   14411 |  0.99 | JAVIER      | Jon      |        9440 |
+|   14412 |  4.99 | JAVIER      | Mike     |        9524 |
+|   14413 |  5.99 | JAVIER      | Jon      |       10322 |
+|   14414 |  3.99 | JAVIER      | Jon      |       10353 |
+|   14415 |  8.99 | JAVIER      | Jon      |       11736 |
+|   14416 |  7.99 | JAVIER      | Mike     |       11855 |
+|   14417 |  2.99 | JAVIER      | Jon      |       12168 |
+|   14418 |  0.99 | JAVIER      | Mike     |       12233 |
+|   14419 |  4.99 | JAVIER      | Jon      |       12673 |
+|   14420 |  0.99 | JAVIER      | Mike     |       12732 |
+|   14421 |  1.99 | JAVIER      | Jon      |       12750 |
+|   14422 |  4.99 | JAVIER      | Mike     |       13631 |
+|   14423 |  0.99 | JAVIER      | Mike     |       13852 |
+|   14424 |  4.99 | JAVIER      | Mike     |       14522 |
+|   14425 |  5.99 | JAVIER      | Jon      |       15075 |
+|   14426 |  6.99 | JAVIER      | Mike     |       15287 |
+|   14427 |  0.99 | JAVIER      | Mike     |       16017 |
+|   14428 |  0.99 | FERNANDO    | Mike     |         237 |
+|   14429 |  6.99 | FERNANDO    | Mike     |         929 |
+|   14430 |  4.99 | FERNANDO    | Mike     |        1582 |
+|   14431 |  2.99 | FERNANDO    | Jon      |        1962 |
+|   14432 |  2.99 | FERNANDO    | Jon      |        2403 |
+|   14433 |  4.99 | FERNANDO    | Mike     |        3483 |
+|   14434 |  0.99 | FERNANDO    | Mike     |        3514 |
+|   14435 |  2.99 | FERNANDO    | Mike     |        4448 |
+|   14436 |  0.99 | FERNANDO    | Jon      |        5196 |
+|   14437 |  5.99 | FERNANDO    | Mike     |        6400 |
+|   14438 |  4.99 | FERNANDO    | Mike     |        7065 |
+|   14439 |  4.99 | FERNANDO    | Jon      |        8535 |
+|   14440 |  4.99 | FERNANDO    | Mike     |        8679 |
+|   14441 |  2.99 | FERNANDO    | Mike     |        8958 |
+|   14442 |  8.99 | FERNANDO    | Mike     |        9411 |
+|   14443 |  4.99 | FERNANDO    | Mike     |        9727 |
+|   14444 |  3.99 | FERNANDO    | Jon      |       10019 |
+|   14445 |  6.99 | FERNANDO    | Mike     |       11473 |
+|   14446 |  2.99 | FERNANDO    | Mike     |       11826 |
+|   14447 |  4.99 | FERNANDO    | Jon      |       11977 |
+|   14448 |  8.99 | FERNANDO    | Jon      |       12052 |
+|   14449 |  4.99 | FERNANDO    | Jon      |       13505 |
+|   14450 |  7.99 | FERNANDO    | Mike     |       15130 |
+|   14451 |  8.99 | FERNANDO    | Mike     |       15978 |
+|   14452 |  0.99 | FERNANDO    | Mike     |       15979 |
+|   14453 |  4.99 | CLINTON     | Jon      |         603 |
+|   14454 |  2.99 | CLINTON     | Mike     |        1445 |
+|   14455 |  2.99 | CLINTON     | Jon      |        2184 |
+|   14456 |  8.99 | CLINTON     | Mike     |        2586 |
+|   14457 |  8.99 | CLINTON     | Jon      |        3134 |
+|   14458 |  0.99 | CLINTON     | Mike     |        3555 |
+|   14459 |  0.99 | CLINTON     | Jon      |        3853 |
+|   14460 |  2.99 | CLINTON     | Mike     |        5630 |
+|   14461 |  5.99 | CLINTON     | Jon      |        5877 |
+|   14462 |  2.99 | CLINTON     | Jon      |        6310 |
+|   14463 |  4.99 | CLINTON     | Mike     |        6409 |
+|   14464 |  0.99 | CLINTON     | Mike     |        6746 |
+|   14465 |  2.99 | CLINTON     | Mike     |        7179 |
+|   14466 |  4.99 | CLINTON     | Jon      |        7810 |
+|   14467 |  4.99 | CLINTON     | Jon      |        8126 |
+|   14468 |  4.99 | CLINTON     | Jon      |        8256 |
+|   14469 |  2.99 | CLINTON     | Mike     |        9967 |
+|   14470 |  4.99 | CLINTON     | Jon      |       12984 |
+|   14471 |  4.99 | CLINTON     | Jon      |       13885 |
+|   14472 |  4.99 | CLINTON     | Mike     |       14010 |
+|   14473 |  0.99 | CLINTON     | Jon      |       14506 |
+|   14474 |  0.99 | CLINTON     | Mike     |       14670 |
+|   14475 |  2.99 | CLINTON     | Mike     |       15149 |
+|   14476 |  8.99 | CLINTON     | Mike     |       15832 |
+|   14477 |  4.99 | CLINTON     | Mike     |       13419 |
+|   14478 |  2.99 | TED         | Jon      |         594 |
+|   14479 |  4.99 | TED         | Jon      |         734 |
+|   14480 |  5.99 | TED         | Mike     |        1314 |
+|   14481 |  4.99 | TED         | Mike     |        1912 |
+|   14482 |  4.99 | TED         | Mike     |        2682 |
+|   14483 |  2.99 | TED         | Jon      |        3189 |
+|   14484 |  4.99 | TED         | Jon      |        3554 |
+|   14485 |  8.99 | TED         | Jon      |        5135 |
+|   14486 |  4.99 | TED         | Mike     |        5369 |
+|   14487 |  2.99 | TED         | Mike     |        5486 |
+|   14488 |  2.99 | TED         | Mike     |        5898 |
+|   14489 |  2.99 | TED         | Jon      |        6130 |
+|   14490 |  0.99 | TED         | Mike     |        6332 |
+|   14491 |  0.99 | TED         | Jon      |        6936 |
+|   14492 |  0.99 | TED         | Mike     |        7694 |
+|   14493 |  0.99 | TED         | Mike     |        8765 |
+|   14494 |  0.99 | TED         | Mike     |        9307 |
+|   14495 |  4.99 | TED         | Mike     |        9643 |
+|   14496 |  4.99 | TED         | Jon      |        9897 |
+|   14497 |  8.99 | TED         | Jon      |        9939 |
+|   14498 |  3.99 | TED         | Jon      |       10701 |
+|   14499 |  5.99 | TED         | Mike     |       10732 |
+|   14500 |  4.99 | TED         | Mike     |       10962 |
+|   14501 |  5.99 | TED         | Jon      |       12089 |
+|   14502 |  1.99 | TED         | Mike     |       13544 |
+|   14503 |  4.99 | TED         | Jon      |       13770 |
+|   14504 |  2.99 | TED         | Jon      |       14572 |
+|   14505 |  0.99 | TED         | Mike     |       14591 |
+|   14506 |  6.99 | TED         | Mike     |       15343 |
+|   14507 |  4.99 | MATHEW      | Jon      |         250 |
+|   14508 |  0.99 | MATHEW      | Mike     |         342 |
+|   14509 |  3.99 | MATHEW      | Jon      |        1282 |
+|   14510 |  0.99 | MATHEW      | Mike     |        1327 |
+|   14511 |  4.99 | MATHEW      | Jon      |        1444 |
+|   14512 |  2.99 | MATHEW      | Mike     |        4035 |
+|   14513 |  0.99 | MATHEW      | Mike     |        4247 |
+|   14514 |  4.99 | MATHEW      | Jon      |        5086 |
+|   14515 |  7.99 | MATHEW      | Jon      |        5139 |
+|   14516 |  2.99 | MATHEW      | Jon      |        5493 |
+|   14517 |  5.99 | MATHEW      | Jon      |        6874 |
+|   14518 |  2.99 | MATHEW      | Mike     |        7781 |
+|   14519 |  6.99 | MATHEW      | Jon      |        8247 |
+|   14520 |  5.99 | MATHEW      | Jon      |        8761 |
+|   14521 |  0.99 | MATHEW      | Jon      |        9250 |
+|   14522 |  7.99 | MATHEW      | Mike     |        9777 |
+|   14523 |  4.99 | MATHEW      | Mike     |        9796 |
+|   14524 |  3.99 | MATHEW      | Jon      |       10922 |
+|   14525 |  2.99 | MATHEW      | Mike     |       12848 |
+|   14526 |  2.99 | MATHEW      | Jon      |       13615 |
+|   14527 |  5.99 | MATHEW      | Jon      |       13778 |
+|   14528 |  2.99 | MATHEW      | Mike     |       15356 |
+|   14529 |  2.99 | TYRONE      | Jon      |        1263 |
+|   14530 |  4.99 | TYRONE      | Jon      |        1290 |
+|   14531 |  2.99 | TYRONE      | Jon      |        2640 |
+|   14532 |  3.99 | TYRONE      | Mike     |        2953 |
+|   14533 |  3.99 | TYRONE      | Mike     |        3340 |
+|   14534 |  4.99 | TYRONE      | Jon      |        4628 |
+|   14535 |  4.99 | TYRONE      | Jon      |        4991 |
+|   14536 |  2.99 | TYRONE      | Mike     |        6103 |
+|   14537 |  7.99 | TYRONE      | Jon      |        6145 |
+|   14538 |  2.99 | TYRONE      | Jon      |        6182 |
+|   14539 |  6.99 | TYRONE      | Mike     |        6748 |
+|   14540 |  0.99 | TYRONE      | Mike     |        6919 |
+|   14541 |  4.99 | TYRONE      | Jon      |        9762 |
+|   14542 |  2.99 | TYRONE      | Jon      |        9815 |
+|   14543 |  8.99 | TYRONE      | Mike     |       10924 |
+|   14544 |  3.99 | TYRONE      | Mike     |       11198 |
+|   14545 |  4.99 | TYRONE      | Jon      |       11324 |
+|   14546 |  6.99 | TYRONE      | Jon      |       11432 |
+|   14547 |  8.99 | TYRONE      | Jon      |       12058 |
+|   14548 |  4.99 | TYRONE      | Jon      |       12201 |
+|   14549 |  6.99 | TYRONE      | Mike     |       12300 |
+|   14550 |  0.99 | TYRONE      | Jon      |       14910 |
+|   14551 |  2.99 | TYRONE      | Jon      |       15079 |
+|   14552 |  3.99 | TYRONE      | Jon      |       15953 |
+|   14553 |  7.99 | DARREN      | Mike     |        1021 |
+|   14554 |  4.99 | DARREN      | Mike     |        1066 |
+|   14555 |  2.99 | DARREN      | Jon      |        1986 |
+|   14556 |  6.99 | DARREN      | Mike     |        2708 |
+|   14557 |  2.99 | DARREN      | Mike     |        5018 |
+|   14558 |  4.99 | DARREN      | Jon      |        5197 |
+|   14559 |  7.99 | DARREN      | Jon      |        6468 |
+|   14560 |  2.99 | DARREN      | Jon      |        6718 |
+|   14561 |  8.99 | DARREN      | Mike     |        8113 |
+|   14562 |  4.99 | DARREN      | Mike     |        8322 |
+|   14563 |  0.99 | DARREN      | Jon      |        9603 |
+|   14564 |  5.99 | DARREN      | Mike     |       10306 |
+|   14565 |  0.99 | DARREN      | Jon      |       11273 |
+|   14566 |  4.99 | DARREN      | Mike     |       12306 |
+|   14567 |  4.99 | DARREN      | Jon      |       12395 |
+|   14568 |  7.99 | DARREN      | Mike     |       12894 |
+|   14569 |  4.99 | DARREN      | Jon      |       13239 |
+|   14570 |  0.99 | DARREN      | Jon      |       13640 |
+|   14571 |  6.99 | DARREN      | Jon      |       14938 |
+|   14572 |  4.99 | DARREN      | Mike     |       15071 |
+|   14573 |  3.99 | DARREN      | Jon      |       15141 |
+|   14574 |  1.99 | DARREN      | Mike     |       15223 |
+|   14575 |  0.99 | DARREN      | Mike     |       15421 |
+|   14576 |  1.99 | DARREN      | Jon      |       15924 |
+|   14577 |  4.99 | LONNIE      | Mike     |         220 |
+|   14578 |  4.99 | LONNIE      | Jon      |         376 |
+|   14579 |  4.99 | LONNIE      | Mike     |        2610 |
+|   14580 | 10.99 | LONNIE      | Jon      |        2957 |
+|   14581 |  0.99 | LONNIE      | Jon      |        5293 |
+|   14582 |  6.99 | LONNIE      | Mike     |        5477 |
+|   14583 |  5.99 | LONNIE      | Jon      |        6077 |
+|   14584 |  5.99 | LONNIE      | Jon      |        6325 |
+|   14585 |  9.99 | LONNIE      | Mike     |        6887 |
+|   14586 |  8.99 | LONNIE      | Jon      |        7672 |
+|   14587 |  4.99 | LONNIE      | Mike     |        8533 |
+|   14588 |  3.99 | LONNIE      | Jon      |        8544 |
+|   14589 |  4.99 | LONNIE      | Mike     |       10280 |
+|   14590 |  0.99 | LONNIE      | Jon      |       11583 |
+|   14591 |  2.99 | LONNIE      | Jon      |       11903 |
+|   14592 |  0.99 | LONNIE      | Mike     |       12819 |
+|   14593 |  0.99 | LONNIE      | Mike     |       13447 |
+|   14594 |  9.99 | LONNIE      | Jon      |       14982 |
+|   14595 |  6.99 | LANCE       | Mike     |         243 |
+|   14596 |  1.99 | LANCE       | Jon      |         476 |
+|   14597 |  4.99 | LANCE       | Jon      |        1720 |
+|   14598 |  2.99 | LANCE       | Mike     |        2426 |
+|   14599 |  4.99 | LANCE       | Jon      |        3070 |
+|   14600 |  2.99 | LANCE       | Mike     |        3128 |
+|   14601 |  5.99 | LANCE       | Jon      |        3467 |
+|   14602 |  2.99 | LANCE       | Mike     |        4887 |
+|   14603 |  4.99 | LANCE       | Jon      |        5467 |
+|   14604 |  4.99 | LANCE       | Jon      |        6013 |
+|   14605 |  2.99 | LANCE       | Jon      |        7312 |
+|   14606 |  2.99 | LANCE       | Mike     |        8580 |
+|   14607 |  4.99 | LANCE       | Jon      |        8845 |
+|   14608 |  2.99 | LANCE       | Mike     |        9505 |
+|   14609 |  0.99 | LANCE       | Mike     |        9999 |
+|   14610 |  0.99 | LANCE       | Jon      |       10257 |
+|   14611 |  4.99 | LANCE       | Mike     |       10520 |
+|   14612 |  9.99 | LANCE       | Jon      |       11241 |
+|   14613 |  2.99 | LANCE       | Mike     |       11681 |
+|   14614 |  0.99 | LANCE       | Mike     |       13187 |
+|   14615 |  1.99 | LANCE       | Jon      |       15281 |
+|   14616 |  1.99 | LANCE       | Mike     |       15785 |
+|   14617 |  2.99 | CODY        | Mike     |         397 |
+|   14618 |  2.99 | CODY        | Mike     |         864 |
+|   14619 |  1.99 | CODY        | Mike     |        1248 |
+|   14620 | 10.99 | CODY        | Jon      |        1434 |
+|   14621 |  0.99 | CODY        | Mike     |        2373 |
+|   14622 |  2.99 | CODY        | Mike     |        2395 |
+|   14623 |  0.99 | CODY        | Mike     |        4395 |
+|   14624 |  2.99 | CODY        | Mike     |        4703 |
+|   14625 |  6.99 | CODY        | Jon      |        4847 |
+|   14626 |  2.99 | CODY        | Jon      |        8566 |
+|   14627 |  5.99 | CODY        | Mike     |        8937 |
+|   14628 |  9.99 | CODY        | Mike     |        8963 |
+|   14629 |  0.99 | CODY        | Mike     |       10735 |
+|   14630 |  3.99 | CODY        | Mike     |       11401 |
+|   14631 |  2.99 | CODY        | Jon      |       11766 |
+|   14632 |  3.99 | CODY        | Jon      |       12640 |
+|   14633 |  4.99 | CODY        | Jon      |       14142 |
+|   14634 |  4.99 | CODY        | Mike     |       14498 |
+|   14635 |  8.99 | CODY        | Jon      |       14651 |
+|   14636 |  2.99 | CODY        | Mike     |       14981 |
+|   14637 |  6.99 | CODY        | Mike     |       15219 |
+|   14638 |  4.99 | CODY        | Mike     |       15605 |
+|   14639 |  0.99 | JULIO       | Jon      |         248 |
+|   14640 |  3.99 | JULIO       | Jon      |         715 |
+|   14641 |  2.99 | JULIO       | Mike     |        2123 |
+|   14642 |  8.99 | JULIO       | Jon      |        3693 |
+|   14643 |  5.99 | JULIO       | Mike     |        3975 |
+|   14644 |  5.99 | JULIO       | Mike     |        4597 |
+|   14645 |  0.99 | JULIO       | Mike     |        5264 |
+|   14646 |  5.99 | JULIO       | Mike     |        7078 |
+|   14647 |  3.99 | JULIO       | Jon      |        8599 |
+|   14648 |  2.99 | JULIO       | Jon      |        8848 |
+|   14649 |  2.99 | JULIO       | Jon      |        9810 |
+|   14650 |  4.99 | JULIO       | Jon      |        9942 |
+|   14651 |  2.99 | JULIO       | Jon      |       10931 |
+|   14652 |  2.99 | JULIO       | Jon      |       11760 |
+|   14653 |  4.99 | JULIO       | Mike     |       12098 |
+|   14654 |  2.99 | JULIO       | Mike     |       12349 |
+|   14655 | 10.99 | JULIO       | Jon      |       12667 |
+|   14656 |  2.99 | JULIO       | Mike     |       12800 |
+|   14657 |  4.99 | JULIO       | Mike     |       13595 |
+|   14658 |  0.99 | JULIO       | Mike     |       15585 |
+|   14659 |  4.99 | JULIO       | Jon      |       15998 |
+|   14660 |  5.99 | KELLY       | Mike     |         197 |
+|   14661 |  6.99 | KELLY       | Mike     |         482 |
+|   14662 |  1.99 | KELLY       | Mike     |        1181 |
+|   14663 |  0.99 | KELLY       | Jon      |        1403 |
+|   14664 |  3.99 | KELLY       | Mike     |        1787 |
+|   14665 |  5.99 | KELLY       | Mike     |        2361 |
+|   14666 |  4.99 | KELLY       | Mike     |        3738 |
+|   14667 |  0.99 | KELLY       | Jon      |        4664 |
+|   14668 |  0.99 | KELLY       | Mike     |        4734 |
+|   14669 |  0.99 | KELLY       | Mike     |        5629 |
+|   14670 |  9.99 | KELLY       | Jon      |        6758 |
+|   14671 |  2.99 | KELLY       | Mike     |        6786 |
+|   14672 |  6.99 | KELLY       | Jon      |        6910 |
+|   14673 |  4.99 | KELLY       | Mike     |        8532 |
+|   14674 |  4.99 | KELLY       | Mike     |        9087 |
+|   14676 |  1.99 | KELLY       | Jon      |        9626 |
+|   14677 |  0.99 | KELLY       | Jon      |       10370 |
+|   14678 |  5.99 | KELLY       | Jon      |       11352 |
+|   14679 |  4.99 | KELLY       | Mike     |       11797 |
+|   14680 |  2.99 | KELLY       | Jon      |       12591 |
+|   14681 |  5.99 | KELLY       | Jon      |       13850 |
+|   14682 |  4.99 | KELLY       | Mike     |       14797 |
+|   14683 |  2.99 | KELLY       | Mike     |       14829 |
+|   14684 |  3.99 | KELLY       | Mike     |       14929 |
+|   14685 |  4.99 | KELLY       | Jon      |       15565 |
+|   14686 |  0.99 | KURT        | Mike     |         306 |
+|   14687 |  8.99 | KURT        | Jon      |         443 |
+|   14688 |  1.99 | KURT        | Jon      |        1094 |
+|   14689 |  8.99 | KURT        | Jon      |        2022 |
+|   14690 |  4.99 | KURT        | Jon      |        3679 |
+|   14691 |  4.99 | KURT        | Mike     |        3765 |
+|   14692 |  4.99 | KURT        | Jon      |        5327 |
+|   14693 |  4.99 | KURT        | Jon      |        5854 |
+|   14694 |  0.99 | KURT        | Mike     |        6605 |
+|   14695 |  4.99 | KURT        | Jon      |        7420 |
+|   14696 |  3.99 | KURT        | Jon      |        7547 |
+|   14697 |  4.99 | KURT        | Mike     |        7835 |
+|   14698 |  3.99 | KURT        | Mike     |        7859 |
+|   14699 |  2.99 | KURT        | Mike     |        8828 |
+|   14700 |  2.99 | KURT        | Mike     |       10903 |
+|   14701 |  4.99 | KURT        | Mike     |       10980 |
+|   14702 |  5.99 | KURT        | Jon      |       11170 |
+|   14703 |  0.99 | KURT        | Jon      |       11361 |
+|   14704 |  0.99 | KURT        | Mike     |       12579 |
+|   14705 |  2.99 | KURT        | Jon      |       12943 |
+|   14706 |  2.99 | KURT        | Jon      |       13307 |
+|   14707 |  9.99 | KURT        | Mike     |       14510 |
+|   14708 |  4.99 | KURT        | Jon      |       14884 |
+|   14709 |  6.99 | ALLAN       | Jon      |         177 |
+|   14710 |  4.99 | ALLAN       | Mike     |         743 |
+|   14711 |  3.99 | ALLAN       | Jon      |         872 |
+|   14712 |  1.99 | ALLAN       | Mike     |        1326 |
+|   14713 |  2.99 | ALLAN       | Mike     |        2280 |
+|   14714 |  0.99 | ALLAN       | Jon      |        2978 |
+|   14715 |  2.99 | ALLAN       | Mike     |        3686 |
+|   14716 |  2.99 | ALLAN       | Jon      |        3777 |
+|   14717 |  7.99 | ALLAN       | Mike     |        4155 |
+|   14718 |  4.99 | ALLAN       | Jon      |        5138 |
+|   14719 |  4.99 | ALLAN       | Jon      |        6490 |
+|   14720 |  5.99 | ALLAN       | Mike     |        9614 |
+|   14721 |  0.99 | ALLAN       | Jon      |       10318 |
+|   14722 |  5.99 | ALLAN       | Mike     |       12860 |
+|   14723 |  3.99 | ALLAN       | Mike     |       13691 |
+|   14724 |  7.99 | ALLAN       | Jon      |       13730 |
+|   14725 |  0.99 | ALLAN       | Jon      |       14188 |
+|   14726 |  6.99 | ALLAN       | Jon      |       14723 |
+|   14727 |  0.99 | ALLAN       | Mike     |       13584 |
+|   14728 |  0.99 | NELSON      | Mike     |           6 |
+|   14729 |  4.99 | NELSON      | Jon      |         852 |
+|   14730 |  3.99 | NELSON      | Mike     |         906 |
+|   14731 |  4.99 | NELSON      | Jon      |        1086 |
+|   14732 |  2.99 | NELSON      | Mike     |        2050 |
+|   14733 |  2.99 | NELSON      | Jon      |        3523 |
+|   14734 |  4.99 | NELSON      | Jon      |        3892 |
+|   14735 |  0.99 | NELSON      | Mike     |        4447 |
+|   14736 |  7.99 | NELSON      | Mike     |        7252 |
+|   14737 |  0.99 | NELSON      | Jon      |        8239 |
+|   14738 |  4.99 | NELSON      | Mike     |        8316 |
+|   14739 |  7.99 | NELSON      | Jon      |        9445 |
+|   14740 |  9.99 | NELSON      | Jon      |        9511 |
+|   14741 |  0.99 | NELSON      | Jon      |        9887 |
+|   14742 |  0.99 | NELSON      | Jon      |       10281 |
+|   14743 |  4.99 | NELSON      | Jon      |       11737 |
+|   14744 |  2.99 | NELSON      | Jon      |       11878 |
+|   14745 |  2.99 | NELSON      | Jon      |       12634 |
+|   14746 |  4.99 | NELSON      | Jon      |       12747 |
+|   14747 |  0.99 | NELSON      | Mike     |       14434 |
+|   14748 |  7.99 | GUY         | Jon      |         922 |
+|   14749 |  6.99 | GUY         | Mike     |        1233 |
+|   14750 |  3.99 | GUY         | Mike     |        1863 |
+|   14751 |  4.99 | GUY         | Jon      |        1883 |
+|   14752 |  2.99 | GUY         | Mike     |        3154 |
+|   14753 |  9.99 | GUY         | Jon      |        3236 |
+|   14754 | 10.99 | GUY         | Mike     |        3272 |
+|   14755 |  4.99 | GUY         | Mike     |        3979 |
+|   14756 |  4.99 | GUY         | Mike     |        5727 |
+|   14757 |  2.99 | GUY         | Mike     |        6695 |
+|   14758 |  0.99 | GUY         | Mike     |        7030 |
+|   14759 |  2.99 | GUY         | Jon      |        7838 |
+|   14760 |  6.99 | GUY         | Mike     |        8628 |
+|   14761 |  2.99 | GUY         | Jon      |        8838 |
+|   14762 |  8.99 | GUY         | Mike     |        8959 |
+|   14763 |  2.99 | GUY         | Mike     |        9616 |
+|   14764 |  0.99 | GUY         | Mike     |        9748 |
+|   14765 |  4.99 | GUY         | Jon      |       10140 |
+|   14766 |  2.99 | GUY         | Mike     |       11246 |
+|   14767 |  0.99 | GUY         | Jon      |       11320 |
+|   14768 |  4.99 | GUY         | Mike     |       11969 |
+|   14769 |  2.99 | GUY         | Mike     |       12063 |
+|   14770 |  4.99 | GUY         | Jon      |       12077 |
+|   14771 | 10.99 | GUY         | Mike     |       13114 |
+|   14772 |  2.99 | GUY         | Jon      |       14071 |
+|   14773 |  4.99 | GUY         | Jon      |       14127 |
+|   14774 |  6.99 | GUY         | Jon      |       14375 |
+|   14775 |  4.99 | GUY         | Mike     |       14687 |
+|   14776 |  9.99 | GUY         | Jon      |       15431 |
+|   14777 |  0.99 | GUY         | Mike     |       15883 |
+|   14778 |  4.99 | GUY         | Jon      |       15977 |
+|   14779 |  2.99 | GUY         | Jon      |       11757 |
+|   14780 |  7.99 | CLAYTON     | Jon      |         155 |
+|   14781 |  2.99 | CLAYTON     | Mike     |         728 |
+|   14782 |  0.99 | CLAYTON     | Mike     |         795 |
+|   14783 |  4.99 | CLAYTON     | Jon      |         969 |
+|   14784 |  3.99 | CLAYTON     | Jon      |        1005 |
+|   14785 |  4.99 | CLAYTON     | Jon      |        2069 |
+|   14786 |  3.99 | CLAYTON     | Mike     |        2776 |
+|   14787 |  5.99 | CLAYTON     | Jon      |        3996 |
+|   14788 |  1.99 | CLAYTON     | Mike     |        5201 |
+|   14789 |  0.99 | CLAYTON     | Jon      |        5528 |
+|   14790 |  0.99 | CLAYTON     | Mike     |        6041 |
+|   14791 |  9.99 | CLAYTON     | Jon      |        7095 |
+|   14792 |  0.99 | CLAYTON     | Mike     |        8986 |
+|   14793 |  2.99 | CLAYTON     | Mike     |        9287 |
+|   14794 |  4.99 | CLAYTON     | Jon      |        9765 |
+|   14795 |  0.99 | CLAYTON     | Jon      |       11380 |
+|   14796 |  2.99 | CLAYTON     | Jon      |       11883 |
+|   14797 |  4.99 | CLAYTON     | Jon      |       12208 |
+|   14798 |  0.99 | CLAYTON     | Jon      |       12868 |
+|   14799 |  3.99 | CLAYTON     | Mike     |       13439 |
+|   14800 |  0.99 | CLAYTON     | Mike     |       14420 |
+|   14801 |  4.99 | CLAYTON     | Jon      |       14609 |
+|   14802 |  2.99 | CLAYTON     | Jon      |       14633 |
+|   14803 |  2.99 | CLAYTON     | Mike     |       14833 |
+|   14804 |  4.99 | CLAYTON     | Mike     |       15377 |
+|   14805 |  6.99 | CLAYTON     | Jon      |       15390 |
+|   14806 |  0.99 | HUGH        | Jon      |         174 |
+|   14807 |  0.99 | HUGH        | Jon      |        2320 |
+|   14808 |  4.99 | HUGH        | Jon      |        3397 |
+|   14809 |  6.99 | HUGH        | Mike     |        4477 |
+|   14810 |  7.99 | HUGH        | Mike     |        5213 |
+|   14811 |  4.99 | HUGH        | Jon      |        6189 |
+|   14812 |  2.99 | HUGH        | Mike     |        7772 |
+|   14813 |  2.99 | HUGH        | Mike     |        8085 |
+|   14814 |  2.99 | HUGH        | Jon      |        8192 |
+|   14815 |  5.99 | HUGH        | Jon      |        8614 |
+|   14816 |  4.99 | HUGH        | Jon      |        8894 |
+|   14817 |  8.99 | HUGH        | Mike     |        9342 |
+|   14818 |  1.99 | HUGH        | Mike     |       11146 |
+|   14819 |  4.99 | HUGH        | Jon      |       11205 |
+|   14820 |  7.99 | HUGH        | Jon      |       11300 |
+|   14821 |  4.99 | HUGH        | Jon      |       12433 |
+|   14822 |  2.99 | HUGH        | Jon      |       12880 |
+|   14823 |  2.99 | HUGH        | Jon      |       13574 |
+|   14824 |  0.99 | HUGH        | Mike     |       13693 |
+|   14825 |  4.99 | HUGH        | Jon      |       14724 |
+|   14826 |  2.99 | HUGH        | Jon      |       15700 |
+|   14827 |  4.99 | MAX         | Jon      |         789 |
+|   14828 |  3.99 | MAX         | Jon      |        1862 |
+|   14829 |  8.99 | MAX         | Mike     |        2460 |
+|   14830 |  6.99 | MAX         | Jon      |        3103 |
+|   14831 |  6.99 | MAX         | Mike     |        3495 |
+|   14832 |  4.99 | MAX         | Jon      |        3793 |
+|   14833 |  2.99 | MAX         | Jon      |        3859 |
+|   14834 |  4.99 | MAX         | Mike     |        3890 |
+|   14835 |  4.99 | MAX         | Jon      |        3891 |
+|   14836 |  4.99 | MAX         | Jon      |        3942 |
+|   14837 |  4.99 | MAX         | Mike     |        4257 |
+|   14838 |  0.99 | MAX         | Jon      |        4662 |
+|   14839 |  4.99 | MAX         | Jon      |        4845 |
+|   14840 |  3.99 | MAX         | Jon      |        4941 |
+|   14841 |  2.99 | MAX         | Mike     |        6069 |
+|   14842 |  0.99 | MAX         | Jon      |        6657 |
+|   14843 |  6.99 | MAX         | Mike     |        6812 |
+|   14844 |  4.99 | MAX         | Mike     |        7890 |
+|   14845 |  4.99 | MAX         | Jon      |        9272 |
+|   14846 |  2.99 | MAX         | Jon      |        9601 |
+|   14847 |  4.99 | MAX         | Jon      |       11710 |
+|   14848 |  2.99 | MAX         | Mike     |       13972 |
+|   14849 |  4.99 | MAX         | Mike     |       15042 |
+|   14850 |  0.99 | MAX         | Mike     |       15506 |
+|   14851 |  2.99 | DWAYNE      | Mike     |         607 |
+|   14852 |  2.99 | DWAYNE      | Mike     |         817 |
+|   14853 |  4.99 | DWAYNE      | Mike     |        1959 |
+|   14854 |  6.99 | DWAYNE      | Mike     |        2279 |
+|   14855 |  2.99 | DWAYNE      | Jon      |        3278 |
+|   14856 |  6.99 | DWAYNE      | Mike     |        3312 |
+|   14857 |  4.99 | DWAYNE      | Jon      |        4902 |
+|   14858 |  2.99 | DWAYNE      | Mike     |        5527 |
+|   14859 |  5.99 | DWAYNE      | Mike     |        5968 |
+|   14860 |  2.99 | DWAYNE      | Mike     |        6144 |
+|   14861 |  6.99 | DWAYNE      | Mike     |       10612 |
+|   14862 |  7.99 | DWAYNE      | Jon      |       10829 |
+|   14863 |  9.99 | DWAYNE      | Jon      |       11589 |
+|   14864 |  0.99 | DWAYNE      | Mike     |       11873 |
+|   14865 |  8.99 | DWAYNE      | Mike     |       12010 |
+|   14866 |  0.99 | DWAYNE      | Mike     |       12014 |
+|   14867 |  4.99 | DWAYNE      | Jon      |       13139 |
+|   14868 |  2.99 | DWAYNE      | Jon      |       14015 |
+|   14869 |  3.99 | DWAYNE      | Mike     |       14098 |
+|   14870 |  0.99 | DWAYNE      | Mike     |       14469 |
+|   14871 |  2.99 | DWAYNE      | Mike     |       14626 |
+|   14872 |  4.99 | DWAYNE      | Jon      |       15690 |
+|   14873 |  1.99 | DWIGHT      | Jon      |        3232 |
+|   14874 |  2.99 | DWIGHT      | Jon      |        4875 |
+|   14875 |  0.99 | DWIGHT      | Mike     |        8161 |
+|   14876 |  3.99 | DWIGHT      | Mike     |        8245 |
+|   14877 |  5.99 | DWIGHT      | Mike     |        9299 |
+|   14878 |  7.99 | DWIGHT      | Jon      |        9990 |
+|   14879 |  7.99 | DWIGHT      | Jon      |       10076 |
+|   14880 |  3.99 | DWIGHT      | Mike     |       10921 |
+|   14881 |  4.99 | DWIGHT      | Mike     |       11168 |
+|   14882 |  4.99 | DWIGHT      | Mike     |       11718 |
+|   14883 |  2.99 | DWIGHT      | Jon      |       11747 |
+|   14884 |  4.99 | DWIGHT      | Jon      |       12091 |
+|   14885 |  2.99 | DWIGHT      | Jon      |       12150 |
+|   14886 |  2.99 | DWIGHT      | Jon      |       12182 |
+|   14887 |  2.99 | DWIGHT      | Mike     |       12388 |
+|   14888 |  4.99 | DWIGHT      | Mike     |       12883 |
+|   14889 |  6.99 | DWIGHT      | Jon      |       15102 |
+|   14890 |  0.99 | ARMANDO     | Mike     |         184 |
+|   14891 |  5.99 | ARMANDO     | Jon      |         772 |
+|   14892 |  3.99 | ARMANDO     | Mike     |        1083 |
+|   14893 |  6.99 | ARMANDO     | Mike     |        2092 |
+|   14894 |  5.99 | ARMANDO     | Jon      |        2593 |
+|   14895 |  0.99 | ARMANDO     | Jon      |        2986 |
+|   14896 |  4.99 | ARMANDO     | Mike     |        3093 |
+|   14897 |  6.99 | ARMANDO     | Jon      |        3438 |
+|   14898 |  2.99 | ARMANDO     | Jon      |        4719 |
+|   14899 |  3.99 | ARMANDO     | Jon      |        4839 |
+|   14900 |  0.99 | ARMANDO     | Mike     |        4846 |
+|   14901 |  0.99 | ARMANDO     | Jon      |        5722 |
+|   14902 |  2.99 | ARMANDO     | Jon      |        6484 |
+|   14903 |  5.99 | ARMANDO     | Mike     |        8909 |
+|   14904 |  4.99 | ARMANDO     | Jon      |       10106 |
+|   14905 |  6.99 | ARMANDO     | Jon      |       10518 |
+|   14906 |  1.99 | ARMANDO     | Mike     |       11466 |
+|   14907 |  3.99 | ARMANDO     | Jon      |       11804 |
+|   14908 |  4.99 | ARMANDO     | Mike     |       12045 |
+|   14909 |  2.99 | ARMANDO     | Mike     |       14176 |
+|   14910 |  2.99 | ARMANDO     | Mike     |       15568 |
+|   14911 |  4.99 | FELIX       | Jon      |         467 |
+|   14912 |  4.99 | FELIX       | Mike     |         478 |
+|   14913 |  0.99 | FELIX       | Mike     |        1666 |
+|   14914 |  6.99 | FELIX       | Jon      |        2988 |
+|   14915 |  3.99 | FELIX       | Mike     |        3050 |
+|   14916 |  0.99 | FELIX       | Mike     |        4651 |
+|   14917 |  1.99 | FELIX       | Mike     |        4851 |
+|   14918 |  0.99 | FELIX       | Mike     |        6459 |
+|   14919 |  3.99 | FELIX       | Jon      |        6713 |
+|   14920 |  4.99 | FELIX       | Jon      |        6823 |
+|   14921 |  0.99 | FELIX       | Jon      |        6898 |
+|   14922 |  0.99 | FELIX       | Mike     |        9336 |
+|   14923 |  2.99 | FELIX       | Mike     |        9341 |
+|   14924 |  1.99 | FELIX       | Jon      |        9366 |
+|   14925 |  6.99 | FELIX       | Jon      |        9367 |
+|   14926 |  0.99 | FELIX       | Mike     |       11181 |
+|   14927 |  1.99 | FELIX       | Mike     |       12555 |
+|   14928 |  2.99 | FELIX       | Mike     |       12789 |
+|   14929 |  2.99 | FELIX       | Mike     |       13540 |
+|   14930 |  2.99 | FELIX       | Jon      |       13794 |
+|   14931 |  0.99 | FELIX       | Jon      |       15236 |
+|   14932 |  5.99 | FELIX       | Jon      |       15570 |
+|   14933 |  0.99 | FELIX       | Jon      |       15914 |
+|   14934 |  4.99 | FELIX       | Mike     |       14278 |
+|   14935 |  4.99 | JIMMIE      | Jon      |        1967 |
+|   14936 |  1.99 | JIMMIE      | Mike     |        2411 |
+|   14937 |  4.99 | JIMMIE      | Jon      |        2544 |
+|   14938 |  4.99 | JIMMIE      | Jon      |        3016 |
+|   14939 | 10.99 | JIMMIE      | Jon      |        3451 |
+|   14940 |  9.99 | JIMMIE      | Mike     |        3731 |
+|   14941 |  0.99 | JIMMIE      | Mike     |        3954 |
+|   14942 |  3.99 | JIMMIE      | Mike     |        3990 |
+|   14943 |  5.99 | JIMMIE      | Mike     |        4192 |
+|   14944 |  2.99 | JIMMIE      | Mike     |        4932 |
+|   14945 |  6.99 | JIMMIE      | Jon      |        5375 |
+|   14946 |  3.99 | JIMMIE      | Mike     |        5492 |
+|   14947 |  7.99 | JIMMIE      | Jon      |        6278 |
+|   14948 |  9.99 | JIMMIE      | Jon      |        6479 |
+|   14949 |  4.99 | JIMMIE      | Jon      |        6742 |
+|   14950 |  0.99 | JIMMIE      | Mike     |        6757 |
+|   14951 |  0.99 | JIMMIE      | Mike     |        7424 |
+|   14952 |  2.99 | JIMMIE      | Mike     |        8523 |
+|   14953 |  4.99 | JIMMIE      | Mike     |        8858 |
+|   14954 |  2.99 | JIMMIE      | Mike     |        8889 |
+|   14955 |  0.99 | JIMMIE      | Jon      |       10707 |
+|   14956 |  0.99 | JIMMIE      | Mike     |       11268 |
+|   14957 |  5.99 | JIMMIE      | Jon      |       11567 |
+|   14958 |  6.99 | JIMMIE      | Jon      |       12040 |
+|   14959 |  1.99 | JIMMIE      | Mike     |       12194 |
+|   14960 |  5.99 | JIMMIE      | Jon      |       13566 |
+|   14961 |  7.99 | JIMMIE      | Jon      |       14235 |
+|   14962 |  5.99 | JIMMIE      | Mike     |       14286 |
+|   14963 |  4.99 | EVERETT     | Jon      |        2576 |
+|   14964 |  0.99 | EVERETT     | Mike     |        2706 |
+|   14965 |  4.99 | EVERETT     | Jon      |        3046 |
+|   14966 |  1.99 | EVERETT     | Mike     |        3370 |
+|   14967 |  5.99 | EVERETT     | Mike     |        3674 |
+|   14968 |  4.99 | EVERETT     | Mike     |        4120 |
+|   14969 |  7.99 | EVERETT     | Mike     |        4370 |
+|   14970 |  1.99 | EVERETT     | Jon      |        5396 |
+|   14971 |  4.99 | EVERETT     | Mike     |        6201 |
+|   14972 |  2.99 | EVERETT     | Mike     |        6915 |
+|   14973 |  1.99 | EVERETT     | Mike     |        7169 |
+|   14974 |  1.99 | EVERETT     | Mike     |        7680 |
+|   14975 |  1.99 | EVERETT     | Mike     |        8631 |
+|   14976 |  0.99 | EVERETT     | Jon      |        9134 |
+|   14977 |  2.99 | EVERETT     | Mike     |        9877 |
+|   14978 |  2.99 | EVERETT     | Jon      |       10146 |
+|   14979 |  3.99 | EVERETT     | Mike     |       10377 |
+|   14980 |  8.99 | EVERETT     | Mike     |       10669 |
+|   14981 |  0.99 | EVERETT     | Jon      |       10876 |
+|   14982 |  1.99 | EVERETT     | Jon      |       11136 |
+|   14983 |  1.99 | EVERETT     | Mike     |       13234 |
+|   14984 |  6.99 | EVERETT     | Jon      |       13248 |
+|   14985 |  4.99 | EVERETT     | Jon      |       13322 |
+|   14986 |  5.99 | EVERETT     | Mike     |       13845 |
+|   14987 |  4.99 | EVERETT     | Mike     |       14342 |
+|   14988 |  4.99 | EVERETT     | Jon      |       14622 |
+|   14989 |  4.99 | EVERETT     | Jon      |       15440 |
+|   14990 |  4.99 | EVERETT     | Mike     |       15877 |
+|   14991 |  2.99 | JORDAN      | Mike     |         137 |
+|   14992 |  4.99 | JORDAN      | Mike     |        1271 |
+|   14993 |  1.99 | JORDAN      | Jon      |        1572 |
+|   14994 |  4.99 | JORDAN      | Mike     |        3941 |
+|   14995 |  2.99 | JORDAN      | Mike     |        4298 |
+|   14996 |  9.99 | JORDAN      | Jon      |        4375 |
+|   14997 |  0.99 | JORDAN      | Mike     |        4453 |
+|   14998 |  2.99 | JORDAN      | Jon      |        5208 |
+|   14999 |  4.99 | JORDAN      | Mike     |        6410 |
+|   15000 |  2.99 | JORDAN      | Mike     |        6945 |
+|   15001 |  4.99 | JORDAN      | Jon      |        7202 |
+|   15002 |  3.99 | JORDAN      | Mike     |        7891 |
+|   15003 |  2.99 | JORDAN      | Mike     |        8753 |
+|   15004 |  5.99 | JORDAN      | Jon      |        8861 |
+|   15005 |  4.99 | JORDAN      | Jon      |        8906 |
+|   15006 |  0.99 | JORDAN      | Mike     |        9265 |
+|   15007 |  5.99 | JORDAN      | Jon      |        9895 |
+|   15008 |  4.99 | JORDAN      | Jon      |       10480 |
+|   15009 |  4.99 | JORDAN      | Mike     |       10702 |
+|   15010 |  7.99 | JORDAN      | Mike     |       10733 |
+|   15011 |  7.99 | JORDAN      | Mike     |       11334 |
+|   15012 |  4.99 | JORDAN      | Mike     |       11788 |
+|   15013 |  5.99 | JORDAN      | Jon      |       14008 |
+|   15014 |  1.99 | JORDAN      | Mike     |       14341 |
+|   15015 |  4.99 | JORDAN      | Jon      |       14363 |
+|   15016 |  2.99 | JORDAN      | Mike     |       14436 |
+|   15017 |  2.99 | JORDAN      | Jon      |       14785 |
+|   15018 |  6.99 | JORDAN      | Mike     |       15352 |
+|   15019 |  5.98 | JORDAN      | Jon      |       12116 |
+|   15020 |  0.00 | JORDAN      | Jon      |       14425 |
+|   15021 |  4.99 | IAN         | Mike     |         902 |
+|   15022 |  4.99 | IAN         | Jon      |         971 |
+|   15023 |  2.99 | IAN         | Jon      |        1193 |
+|   15024 |  2.99 | IAN         | Jon      |        1505 |
+|   15025 |  4.99 | IAN         | Jon      |        1620 |
+|   15026 |  4.99 | IAN         | Mike     |        2119 |
+|   15027 |  5.99 | IAN         | Mike     |        2357 |
+|   15028 |  0.99 | IAN         | Mike     |        2548 |
+|   15029 |  4.99 | IAN         | Mike     |        2950 |
+|   15030 |  4.99 | IAN         | Mike     |        3160 |
+|   15031 |  0.99 | IAN         | Mike     |        3427 |
+|   15032 |  2.99 | IAN         | Jon      |        6361 |
+|   15033 |  0.99 | IAN         | Mike     |        6435 |
+|   15034 |  0.99 | IAN         | Mike     |        6621 |
+|   15035 |  4.99 | IAN         | Mike     |        6843 |
+|   15036 |  0.99 | IAN         | Mike     |        7698 |
+|   15037 | 10.99 | IAN         | Mike     |        8504 |
+|   15038 |  7.99 | IAN         | Jon      |        9839 |
+|   15039 |  2.99 | IAN         | Jon      |       10317 |
+|   15040 |  4.99 | IAN         | Mike     |       10907 |
+|   15041 |  2.99 | IAN         | Mike     |       11371 |
+|   15042 |  2.99 | IAN         | Jon      |       11402 |
+|   15043 |  2.99 | IAN         | Jon      |       12441 |
+|   15044 |  0.99 | IAN         | Jon      |       14139 |
+|   15045 |  0.99 | IAN         | Mike     |       15573 |
+|   15046 |  2.99 | IAN         | Mike     |       15946 |
+|   15047 |  0.99 | IAN         | Mike     |       14415 |
+|   15048 |  2.99 | WALLACE     | Jon      |         788 |
+|   15049 |  2.99 | WALLACE     | Mike     |         941 |
+|   15050 |  5.99 | WALLACE     | Mike     |        1139 |
+|   15051 |  3.99 | WALLACE     | Mike     |        1998 |
+|   15052 |  4.99 | WALLACE     | Mike     |        2705 |
+|   15053 |  3.99 | WALLACE     | Mike     |        2746 |
+|   15054 |  4.99 | WALLACE     | Jon      |        3242 |
+|   15055 |  5.99 | WALLACE     | Jon      |        4732 |
+|   15056 |  4.99 | WALLACE     | Mike     |        4802 |
+|   15057 |  0.99 | WALLACE     | Jon      |        5360 |
+|   15058 |  6.99 | WALLACE     | Jon      |        6065 |
+|   15059 |  8.99 | WALLACE     | Mike     |        6607 |
+|   15060 |  3.99 | WALLACE     | Jon      |        7166 |
+|   15061 |  2.99 | WALLACE     | Mike     |        7430 |
+|   15062 |  2.99 | WALLACE     | Jon      |        7560 |
+|   15063 |  0.99 | WALLACE     | Jon      |        8132 |
+|   15064 |  6.99 | WALLACE     | Jon      |       10868 |
+|   15065 |  4.99 | WALLACE     | Jon      |       12008 |
+|   15066 |  5.99 | WALLACE     | Mike     |       12248 |
+|   15067 |  2.99 | WALLACE     | Jon      |       13225 |
+|   15068 | 10.99 | WALLACE     | Jon      |       13347 |
+|   15069 |  0.99 | WALLACE     | Jon      |       13639 |
+|   15070 |  2.99 | WALLACE     | Mike     |       15212 |
+|   15071 |  2.99 | WALLACE     | Jon      |       15475 |
+|   15072 |  1.99 | WALLACE     | Mike     |       15900 |
+|   15073 |  4.99 | KEN         | Mike     |         758 |
+|   15074 |  5.99 | KEN         | Jon      |         773 |
+|   15075 |  4.99 | KEN         | Jon      |        1545 |
+|   15076 |  0.99 | KEN         | Jon      |        2573 |
+|   15077 |  1.99 | KEN         | Mike     |        4106 |
+|   15078 |  0.99 | KEN         | Jon      |        4436 |
+|   15079 |  3.99 | KEN         | Mike     |        4565 |
+|   15080 |  6.99 | KEN         | Jon      |        4629 |
+|   15081 |  2.99 | KEN         | Jon      |        4711 |
+|   15082 |  5.99 | KEN         | Jon      |        4776 |
+|   15083 |  3.99 | KEN         | Jon      |        4808 |
+|   15084 |  4.99 | KEN         | Jon      |        4825 |
+|   15085 |  0.99 | KEN         | Mike     |        4883 |
+|   15086 |  0.99 | KEN         | Mike     |        5406 |
+|   15087 |  2.99 | KEN         | Jon      |        6326 |
+|   15088 |  0.99 | KEN         | Jon      |        7612 |
+|   15089 |  1.99 | KEN         | Mike     |        8262 |
+|   15090 |  5.99 | KEN         | Mike     |        8610 |
+|   15091 |  6.99 | KEN         | Jon      |        8632 |
+|   15092 |  7.99 | KEN         | Jon      |        8812 |
+|   15093 |  0.99 | KEN         | Jon      |       11829 |
+|   15094 |  1.99 | KEN         | Mike     |       12039 |
+|   15095 |  1.99 | KEN         | Mike     |       12202 |
+|   15096 |  2.99 | KEN         | Mike     |       12832 |
+|   15097 |  9.99 | KEN         | Jon      |       13863 |
+|   15098 |  4.99 | KEN         | Jon      |       14592 |
+|   15099 |  0.99 | KEN         | Jon      |       15507 |
+|   15100 |  3.99 | KEN         | Jon      |       15638 |
+|   15101 |  4.99 | KEN         | Mike     |       15850 |
+|   15102 |  5.99 | BOB         | Jon      |         195 |
+|   15103 |  2.99 | BOB         | Mike     |         985 |
+|   15104 |  2.99 | BOB         | Jon      |        1705 |
+|   15105 |  2.99 | BOB         | Mike     |        4196 |
+|   15106 |  0.99 | BOB         | Jon      |        4385 |
+|   15107 |  2.99 | BOB         | Mike     |        6973 |
+|   15108 | 10.99 | BOB         | Jon      |        7470 |
+|   15109 |  4.99 | BOB         | Jon      |        8426 |
+|   15110 |  0.99 | BOB         | Mike     |        8874 |
+|   15111 |  3.99 | BOB         | Jon      |        9063 |
+|   15112 |  2.99 | BOB         | Jon      |        9929 |
+|   15113 |  6.99 | BOB         | Mike     |       10129 |
+|   15114 |  1.99 | BOB         | Jon      |       10352 |
+|   15115 |  4.99 | BOB         | Jon      |       10401 |
+|   15116 |  2.99 | BOB         | Mike     |       10528 |
+|   15117 |  2.99 | BOB         | Jon      |       11768 |
+|   15118 |  6.99 | BOB         | Jon      |       12197 |
+|   15119 |  2.99 | BOB         | Jon      |       12617 |
+|   15120 |  0.99 | BOB         | Jon      |       13324 |
+|   15121 |  0.99 | BOB         | Jon      |       13558 |
+|   15122 |  0.99 | BOB         | Mike     |       13701 |
+|   15123 |  5.99 | BOB         | Jon      |       14439 |
+|   15124 |  0.99 | BOB         | Mike     |       14593 |
+|   15125 |  8.99 | BOB         | Jon      |       15059 |
+|   15126 |  6.99 | JAIME       | Mike     |         458 |
+|   15127 |  0.99 | JAIME       | Mike     |        1004 |
+|   15128 |  4.99 | JAIME       | Jon      |        1460 |
+|   15129 |  5.99 | JAIME       | Mike     |        2321 |
+|   15130 |  5.99 | JAIME       | Mike     |        3300 |
+|   15131 |  0.99 | JAIME       | Jon      |        3470 |
+|   15132 |  2.99 | JAIME       | Mike     |        3838 |
+|   15133 |  2.99 | JAIME       | Mike     |        4413 |
+|   15134 |  0.99 | JAIME       | Jon      |        5020 |
+|   15135 |  4.99 | JAIME       | Mike     |        5124 |
+|   15136 |  2.99 | JAIME       | Mike     |        6264 |
+|   15137 |  2.99 | JAIME       | Mike     |        6627 |
+|   15138 |  0.99 | JAIME       | Mike     |        6699 |
+|   15139 |  5.99 | JAIME       | Jon      |        7242 |
+|   15140 |  2.99 | JAIME       | Mike     |        9628 |
+|   15141 |  5.99 | JAIME       | Mike     |       10025 |
+|   15142 | 10.99 | JAIME       | Jon      |       10776 |
+|   15143 |  3.99 | JAIME       | Jon      |       10913 |
+|   15144 |  6.99 | JAIME       | Jon      |       11189 |
+|   15145 |  3.99 | JAIME       | Mike     |       11399 |
+|   15146 |  4.99 | JAIME       | Jon      |       11506 |
+|   15147 |  3.99 | JAIME       | Mike     |       11588 |
+|   15148 |  2.99 | JAIME       | Mike     |       11795 |
+|   15149 |  5.99 | JAIME       | Jon      |       12743 |
+|   15150 |  4.99 | JAIME       | Jon      |       13195 |
+|   15151 |  4.99 | JAIME       | Jon      |       13217 |
+|   15152 |  0.99 | JAIME       | Mike     |       13362 |
+|   15153 |  8.99 | JAIME       | Mike     |       13925 |
+|   15154 |  2.99 | JAIME       | Mike     |       15885 |
+|   15155 |  5.99 | CASEY       | Jon      |         234 |
+|   15156 |  4.99 | CASEY       | Jon      |         768 |
+|   15157 |  5.99 | CASEY       | Mike     |        1635 |
+|   15158 |  4.99 | CASEY       | Jon      |        1982 |
+|   15159 |  0.99 | CASEY       | Mike     |        2367 |
+|   15160 |  4.99 | CASEY       | Mike     |        3379 |
+|   15161 |  4.99 | CASEY       | Jon      |        3663 |
+|   15162 |  0.99 | CASEY       | Mike     |        3943 |
+|   15163 |  3.99 | CASEY       | Mike     |        3998 |
+|   15164 |  9.99 | CASEY       | Mike     |        5079 |
+|   15165 |  2.99 | CASEY       | Jon      |        6365 |
+|   15166 |  2.99 | CASEY       | Mike     |        7677 |
+|   15167 |  0.99 | CASEY       | Jon      |        7941 |
+|   15168 |  2.99 | CASEY       | Jon      |        8118 |
+|   15169 |  6.99 | CASEY       | Mike     |        8157 |
+|   15170 |  2.99 | CASEY       | Mike     |        8257 |
+|   15171 |  1.99 | CASEY       | Jon      |        8305 |
+|   15172 |  6.99 | CASEY       | Jon      |        8660 |
+|   15173 |  0.99 | CASEY       | Mike     |        8710 |
+|   15174 |  4.99 | CASEY       | Mike     |        8797 |
+|   15175 |  4.99 | CASEY       | Jon      |        9101 |
+|   15176 |  4.99 | CASEY       | Jon      |        9470 |
+|   15177 |  3.99 | CASEY       | Mike     |        9688 |
+|   15178 |  2.99 | CASEY       | Jon      |        9915 |
+|   15179 |  2.99 | CASEY       | Jon      |       10259 |
+|   15180 |  6.99 | CASEY       | Jon      |       10289 |
+|   15181 |  2.99 | CASEY       | Jon      |       11129 |
+|   15182 |  0.99 | CASEY       | Mike     |       11717 |
+|   15183 |  1.99 | CASEY       | Mike     |       11941 |
+|   15184 |  8.99 | CASEY       | Jon      |       12382 |
+|   15185 |  4.99 | CASEY       | Jon      |       12995 |
+|   15186 |  4.99 | CASEY       | Jon      |       13762 |
+|   15187 |  3.99 | CASEY       | Mike     |       14277 |
+|   15188 |  2.99 | CASEY       | Mike     |       14297 |
+|   15189 |  4.99 | ALFREDO     | Jon      |        2689 |
+|   15190 |  2.99 | ALFREDO     | Mike     |        3010 |
+|   15191 |  5.99 | ALFREDO     | Mike     |        3769 |
+|   15192 |  0.99 | ALFREDO     | Jon      |        4457 |
+|   15193 |  0.99 | ALFREDO     | Jon      |        4576 |
+|   15194 |  4.99 | ALFREDO     | Mike     |        4949 |
+|   15195 |  2.99 | ALFREDO     | Jon      |        6358 |
+|   15196 |  0.99 | ALFREDO     | Jon      |        6551 |
+|   15197 |  2.99 | ALFREDO     | Jon      |        7340 |
+|   15198 |  2.99 | ALFREDO     | Mike     |        8201 |
+|   15199 |  2.99 | ALFREDO     | Mike     |        8629 |
+|   15200 |  7.99 | ALFREDO     | Mike     |        9279 |
+|   15201 |  6.99 | ALFREDO     | Mike     |        9475 |
+|   15202 |  7.99 | ALFREDO     | Jon      |       10708 |
+|   15203 |  2.99 | ALFREDO     | Jon      |       11749 |
+|   15204 |  2.99 | ALFREDO     | Mike     |       12119 |
+|   15205 |  2.99 | ALFREDO     | Jon      |       13031 |
+|   15206 |  2.99 | ALFREDO     | Jon      |       14839 |
+|   15207 |  5.99 | ALFREDO     | Jon      |       15074 |
+|   15208 | 10.99 | ALFREDO     | Jon      |       15594 |
+|   15209 |  4.99 | ALBERTO     | Jon      |        1658 |
+|   15210 |  4.99 | ALBERTO     | Jon      |        2382 |
+|   15211 |  0.99 | ALBERTO     | Jon      |        2668 |
+|   15212 |  4.99 | ALBERTO     | Mike     |        3227 |
+|   15213 |  1.99 | ALBERTO     | Jon      |        3462 |
+|   15214 |  2.99 | ALBERTO     | Mike     |        4322 |
+|   15215 |  2.99 | ALBERTO     | Jon      |        5332 |
+|   15216 |  0.99 | ALBERTO     | Mike     |        5622 |
+|   15217 |  4.99 | ALBERTO     | Mike     |        5776 |
+|   15218 |  2.99 | ALBERTO     | Jon      |        7068 |
+|   15219 |  0.99 | ALBERTO     | Jon      |        8185 |
+|   15220 |  6.99 | ALBERTO     | Jon      |        9583 |
+|   15221 |  0.99 | ALBERTO     | Mike     |        9738 |
+|   15222 |  2.99 | ALBERTO     | Mike     |       10340 |
+|   15223 |  0.99 | ALBERTO     | Jon      |       10689 |
+|   15224 |  0.99 | ALBERTO     | Jon      |       10869 |
+|   15225 |  2.99 | ALBERTO     | Mike     |       11331 |
+|   15226 |  4.99 | ALBERTO     | Mike     |       13883 |
+|   15227 |  5.99 | ALBERTO     | Jon      |       15069 |
+|   15228 |  2.99 | ALBERTO     | Mike     |       15203 |
+|   15229 |  2.99 | ALBERTO     | Jon      |       14531 |
+|   15230 |  4.99 | DAVE        | Jon      |          53 |
+|   15231 |  4.99 | DAVE        | Mike     |         487 |
+|   15232 |  4.99 | DAVE        | Mike     |         624 |
+|   15233 |  1.99 | DAVE        | Mike     |         647 |
+|   15234 |  3.99 | DAVE        | Jon      |        1037 |
+|   15235 |  6.99 | DAVE        | Mike     |        1463 |
+|   15236 |  5.99 | DAVE        | Jon      |        1668 |
+|   15237 |  5.99 | DAVE        | Mike     |        4204 |
+|   15238 |  0.99 | DAVE        | Jon      |        5003 |
+|   15239 |  5.99 | DAVE        | Jon      |        6046 |
+|   15240 |  2.99 | DAVE        | Mike     |        8910 |
+|   15241 |  1.99 | DAVE        | Jon      |        9220 |
+|   15242 |  4.99 | DAVE        | Mike     |        9399 |
+|   15243 |  1.99 | DAVE        | Jon      |        9960 |
+|   15244 |  2.99 | DAVE        | Jon      |       10192 |
+|   15245 |  0.99 | DAVE        | Jon      |       10884 |
+|   15246 |  1.99 | DAVE        | Mike     |       11030 |
+|   15247 |  4.99 | DAVE        | Jon      |       11255 |
+|   15248 |  6.99 | DAVE        | Mike     |       11354 |
+|   15249 |  4.99 | DAVE        | Mike     |       11946 |
+|   15250 |  2.99 | DAVE        | Mike     |       12157 |
+|   15251 |  0.99 | DAVE        | Jon      |       12308 |
+|   15252 |  3.99 | DAVE        | Mike     |       12568 |
+|   15253 |  2.99 | DAVE        | Jon      |       12958 |
+|   15254 |  7.99 | DAVE        | Mike     |       13287 |
+|   15255 |  9.99 | DAVE        | Jon      |       13554 |
+|   15256 |  4.99 | DAVE        | Jon      |       14207 |
+|   15257 |  0.99 | DAVE        | Jon      |       14400 |
+|   15258 |  8.99 | DAVE        | Mike     |       14896 |
+|   15259 |  2.99 | DAVE        | Mike     |       14959 |
+|   15260 |  0.99 | DAVE        | Jon      |       15617 |
+|   15261 |  4.99 | DAVE        | Jon      |       16025 |
+|   15262 |  7.99 | IVAN        | Jon      |        1060 |
+|   15263 |  4.99 | IVAN        | Mike     |        1259 |
+|   15264 |  4.99 | IVAN        | Jon      |        1417 |
+|   15265 |  2.99 | IVAN        | Jon      |        1804 |
+|   15266 |  5.99 | IVAN        | Jon      |        2008 |
+|   15267 |  6.99 | IVAN        | Jon      |        2031 |
+|   15268 |  3.99 | IVAN        | Jon      |        2261 |
+|   15269 |  2.99 | IVAN        | Jon      |        3138 |
+|   15270 |  0.99 | IVAN        | Jon      |        3984 |
+|   15271 |  0.99 | IVAN        | Mike     |        4069 |
+|   15272 |  0.99 | IVAN        | Mike     |        4698 |
+|   15273 |  4.99 | IVAN        | Jon      |        5638 |
+|   15274 |  4.99 | IVAN        | Mike     |        6253 |
+|   15275 |  0.99 | IVAN        | Mike     |        6556 |
+|   15276 |  4.99 | IVAN        | Jon      |        7174 |
+|   15277 |  4.99 | IVAN        | Jon      |        8735 |
+|   15278 |  7.99 | IVAN        | Mike     |        9385 |
+|   15279 |  0.99 | IVAN        | Mike     |        9398 |
+|   15280 |  2.99 | IVAN        | Jon      |        9432 |
+|   15281 |  4.99 | IVAN        | Mike     |        9766 |
+|   15282 |  0.99 | IVAN        | Mike     |       10004 |
+|   15283 |  2.99 | IVAN        | Jon      |       10168 |
+|   15284 |  3.99 | IVAN        | Mike     |       11098 |
+|   15285 |  4.99 | IVAN        | Jon      |       12042 |
+|   15286 |  3.99 | IVAN        | Jon      |       14768 |
+|   15287 |  0.99 | IVAN        | Mike     |       12716 |
+|   15288 |  9.99 | JOHNNIE     | Mike     |         228 |
+|   15289 |  3.99 | JOHNNIE     | Jon      |         689 |
+|   15290 |  4.99 | JOHNNIE     | Mike     |        1254 |
+|   15291 |  3.99 | JOHNNIE     | Jon      |        1400 |
+|   15292 |  4.99 | JOHNNIE     | Mike     |        1756 |
+|   15293 |  4.99 | JOHNNIE     | Jon      |        1990 |
+|   15294 |  2.99 | JOHNNIE     | Mike     |        2327 |
+|   15295 | 10.99 | JOHNNIE     | Mike     |        2977 |
+|   15296 |  2.99 | JOHNNIE     | Jon      |        3616 |
+|   15297 |  4.99 | JOHNNIE     | Mike     |        4162 |
+|   15298 |  4.99 | JOHNNIE     | Jon      |        5789 |
+|   15299 |  8.99 | JOHNNIE     | Jon      |        6676 |
+|   15300 |  8.99 | JOHNNIE     | Mike     |        6792 |
+|   15301 |  5.99 | JOHNNIE     | Mike     |        8084 |
+|   15302 |  4.99 | JOHNNIE     | Mike     |        8638 |
+|   15303 |  1.99 | JOHNNIE     | Jon      |        9300 |
+|   15304 |  4.99 | JOHNNIE     | Mike     |        9408 |
+|   15305 |  2.99 | JOHNNIE     | Mike     |       10227 |
+|   15306 |  2.99 | JOHNNIE     | Jon      |       11080 |
+|   15307 |  7.99 | JOHNNIE     | Jon      |       11191 |
+|   15308 |  2.99 | JOHNNIE     | Mike     |       13228 |
+|   15309 |  2.99 | JOHNNIE     | Jon      |       13266 |
+|   15310 |  0.99 | JOHNNIE     | Mike     |       14956 |
+|   15311 |  4.99 | JOHNNIE     | Mike     |       15841 |
+|   15312 |  7.99 | SIDNEY      | Jon      |         559 |
+|   15313 | 10.99 | SIDNEY      | Jon      |        1889 |
+|   15314 |  0.99 | SIDNEY      | Mike     |        2007 |
+|   15315 |  0.99 | SIDNEY      | Mike     |        2458 |
+|   15316 |  2.99 | SIDNEY      | Mike     |        4601 |
+|   15317 |  4.99 | SIDNEY      | Mike     |        5595 |
+|   15318 |  6.99 | SIDNEY      | Mike     |        5713 |
+|   15319 |  2.99 | SIDNEY      | Jon      |        6108 |
+|   15320 |  4.99 | SIDNEY      | Mike     |        7161 |
+|   15321 |  4.99 | SIDNEY      | Mike     |        7345 |
+|   15322 |  6.99 | SIDNEY      | Jon      |        7713 |
+|   15323 |  0.99 | SIDNEY      | Jon      |        8342 |
+|   15324 |  0.99 | SIDNEY      | Mike     |        8432 |
+|   15325 |  3.99 | SIDNEY      | Mike     |        9081 |
+|   15326 |  5.99 | SIDNEY      | Jon      |        9950 |
+|   15327 |  4.99 | SIDNEY      | Jon      |       10204 |
+|   15328 |  0.99 | SIDNEY      | Mike     |       11114 |
+|   15329 |  4.99 | SIDNEY      | Mike     |       11121 |
+|   15330 |  2.99 | SIDNEY      | Jon      |       11415 |
+|   15331 |  4.99 | SIDNEY      | Mike     |       11426 |
+|   15332 |  4.99 | SIDNEY      | Mike     |       11526 |
+|   15333 |  1.99 | SIDNEY      | Mike     |       12256 |
+|   15334 |  1.99 | SIDNEY      | Jon      |       13377 |
+|   15335 |  6.99 | SIDNEY      | Jon      |       13523 |
+|   15336 |  5.99 | SIDNEY      | Mike     |       13688 |
+|   15337 |  2.99 | BYRON       | Jon      |         827 |
+|   15338 |  4.99 | BYRON       | Mike     |        1613 |
+|   15339 |  5.99 | BYRON       | Jon      |        2622 |
+|   15340 |  1.99 | BYRON       | Mike     |        2995 |
+|   15341 |  7.99 | BYRON       | Mike     |        3295 |
+|   15342 |  0.99 | BYRON       | Jon      |        3768 |
+|   15343 |  2.99 | BYRON       | Mike     |        3930 |
+|   15344 |  4.99 | BYRON       | Jon      |        4023 |
+|   15345 |  0.99 | BYRON       | Mike     |        4085 |
+|   15346 |  0.99 | BYRON       | Mike     |        4609 |
+|   15347 |  2.99 | BYRON       | Mike     |        4770 |
+|   15348 |  5.99 | BYRON       | Mike     |        5036 |
+|   15349 |  9.99 | BYRON       | Jon      |        5522 |
+|   15350 |  2.99 | BYRON       | Jon      |        5903 |
+|   15351 |  7.99 | BYRON       | Mike     |        6693 |
+|   15352 |  4.99 | BYRON       | Mike     |        8400 |
+|   15353 | 10.99 | BYRON       | Jon      |        9837 |
+|   15354 |  4.99 | BYRON       | Jon      |        9846 |
+|   15355 |  2.99 | BYRON       | Jon      |        9963 |
+|   15356 |  5.99 | BYRON       | Jon      |        9971 |
+|   15357 |  0.99 | BYRON       | Mike     |       10296 |
+|   15358 |  2.99 | BYRON       | Mike     |       10887 |
+|   15359 |  0.99 | BYRON       | Mike     |       11043 |
+|   15360 |  5.99 | BYRON       | Jon      |       11912 |
+|   15361 |  1.99 | BYRON       | Mike     |       12017 |
+|   15362 |  1.99 | BYRON       | Mike     |       12125 |
+|   15363 |  6.99 | BYRON       | Mike     |       12269 |
+|   15364 |  0.99 | BYRON       | Mike     |       12791 |
+|   15365 |  2.99 | BYRON       | Jon      |       13113 |
+|   15366 |  0.99 | JULIAN      | Jon      |         433 |
+|   15367 |  0.99 | JULIAN      | Mike     |        1559 |
+|   15368 |  5.99 | JULIAN      | Jon      |        1636 |
+|   15369 |  0.99 | JULIAN      | Mike     |        1817 |
+|   15370 |  0.99 | JULIAN      | Mike     |        2632 |
+|   15371 |  6.99 | JULIAN      | Mike     |        3220 |
+|   15372 |  7.99 | JULIAN      | Mike     |        3583 |
+|   15373 |  4.99 | JULIAN      | Mike     |        4004 |
+|   15374 |  4.99 | JULIAN      | Mike     |        4212 |
+|   15375 |  2.99 | JULIAN      | Jon      |        4890 |
+|   15376 |  4.99 | JULIAN      | Jon      |        5010 |
+|   15377 |  3.99 | JULIAN      | Mike     |        5076 |
+|   15378 |  3.99 | JULIAN      | Mike     |        5077 |
+|   15379 |  2.99 | JULIAN      | Mike     |        5640 |
+|   15380 |  2.99 | JULIAN      | Mike     |        6523 |
+|   15381 |  1.99 | JULIAN      | Mike     |        7093 |
+|   15382 |  2.99 | JULIAN      | Mike     |        7134 |
+|   15383 |  2.99 | JULIAN      | Mike     |        7964 |
+|   15384 |  4.99 | JULIAN      | Mike     |        8303 |
+|   15385 |  7.99 | JULIAN      | Mike     |        9589 |
+|   15386 |  3.99 | JULIAN      | Mike     |        9759 |
+|   15387 |  4.99 | JULIAN      | Mike     |       10347 |
+|   15388 |  3.99 | JULIAN      | Jon      |       11775 |
+|   15389 |  2.99 | JULIAN      | Mike     |       12462 |
+|   15390 |  4.99 | JULIAN      | Mike     |       13589 |
+|   15391 |  4.99 | JULIAN      | Mike     |       14076 |
+|   15392 |  2.99 | JULIAN      | Jon      |       14941 |
+|   15393 |  2.99 | JULIAN      | Jon      |       15214 |
+|   15394 |  2.99 | ISAAC       | Mike     |          17 |
+|   15395 |  0.99 | ISAAC       | Mike     |         395 |
+|   15396 |  4.99 | ISAAC       | Jon      |         454 |
+|   15397 |  2.99 | ISAAC       | Jon      |         769 |
+|   15398 |  4.99 | ISAAC       | Mike     |         774 |
+|   15399 |  2.99 | ISAAC       | Jon      |        1494 |
+|   15400 |  2.99 | ISAAC       | Mike     |        1824 |
+|   15401 |  4.99 | ISAAC       | Jon      |        1866 |
+|   15402 |  6.99 | ISAAC       | Mike     |        3558 |
+|   15403 |  8.99 | ISAAC       | Jon      |        5875 |
+|   15404 |  2.99 | ISAAC       | Jon      |        6907 |
+|   15405 |  0.99 | ISAAC       | Mike     |        7083 |
+|   15406 |  2.99 | ISAAC       | Mike     |        7139 |
+|   15407 |  2.99 | ISAAC       | Jon      |        8711 |
+|   15408 |  0.99 | ISAAC       | Jon      |        8904 |
+|   15409 |  4.99 | ISAAC       | Jon      |        8989 |
+|   15410 |  4.99 | ISAAC       | Mike     |        9733 |
+|   15411 |  4.99 | ISAAC       | Mike     |       10331 |
+|   15412 |  7.99 | ISAAC       | Jon      |       10629 |
+|   15413 |  3.99 | ISAAC       | Mike     |       11097 |
+|   15414 |  4.99 | ISAAC       | Mike     |       11458 |
+|   15415 |  7.99 | ISAAC       | Mike     |       12204 |
+|   15416 |  8.99 | ISAAC       | Jon      |       12289 |
+|   15417 |  5.99 | ISAAC       | Jon      |       12770 |
+|   15418 |  4.99 | ISAAC       | Jon      |       13408 |
+|   15419 |  2.99 | ISAAC       | Jon      |       13465 |
+|   15420 |  2.99 | ISAAC       | Jon      |       14952 |
+|   15421 |  4.99 | ISAAC       | Jon      |       15749 |
+|   15422 |  0.99 | ISAAC       | Jon      |       15857 |
+|   15423 |  2.99 | MORRIS      | Jon      |         755 |
+|   15424 |  0.99 | MORRIS      | Mike     |         968 |
+|   15425 |  4.99 | MORRIS      | Mike     |        1366 |
+|   15426 |  2.99 | MORRIS      | Jon      |        1742 |
+|   15427 |  0.99 | MORRIS      | Mike     |        2309 |
+|   15428 |  8.99 | MORRIS      | Jon      |        2444 |
+|   15429 |  3.99 | MORRIS      | Mike     |        2651 |
+|   15430 |  4.99 | MORRIS      | Jon      |        2799 |
+|   15431 |  6.99 | MORRIS      | Jon      |        3226 |
+|   15432 |  4.99 | MORRIS      | Mike     |        3877 |
+|   15433 |  0.99 | MORRIS      | Jon      |        3889 |
+|   15434 |  4.99 | MORRIS      | Jon      |        3934 |
+|   15435 |  4.99 | MORRIS      | Mike     |        4514 |
+|   15436 |  3.99 | MORRIS      | Jon      |        5597 |
+|   15437 |  4.99 | MORRIS      | Mike     |        5934 |
+|   15438 |  1.99 | MORRIS      | Jon      |        7319 |
+|   15439 |  3.99 | MORRIS      | Mike     |        7605 |
+|   15440 |  4.99 | MORRIS      | Mike     |        8907 |
+|   15441 |  5.99 | MORRIS      | Mike     |        9133 |
+|   15442 |  5.99 | MORRIS      | Jon      |        9548 |
+|   15443 |  8.99 | MORRIS      | Jon      |        9620 |
+|   15444 |  0.99 | MORRIS      | Jon      |        9962 |
+|   15445 |  2.99 | MORRIS      | Mike     |        9979 |
+|   15446 |  2.99 | MORRIS      | Mike     |       10000 |
+|   15447 |  3.99 | MORRIS      | Jon      |       10724 |
+|   15448 |  5.99 | MORRIS      | Jon      |       12112 |
+|   15449 |  4.99 | MORRIS      | Mike     |       12245 |
+|   15450 |  4.99 | MORRIS      | Mike     |       13061 |
+|   15451 |  4.99 | MORRIS      | Mike     |       13326 |
+|   15452 |  4.99 | MORRIS      | Mike     |       14501 |
+|   15453 |  0.99 | MORRIS      | Mike     |       14541 |
+|   15454 |  0.99 | MORRIS      | Mike     |       15634 |
+|   15455 |  5.98 | MORRIS      | Jon      |       11942 |
+|   15456 |  0.00 | MORRIS      | Mike     |       13464 |
+|   15457 |  5.99 | CLIFTON     | Jon      |         291 |
+|   15459 |  3.99 | CLIFTON     | Jon      |        2399 |
+|   15460 |  2.99 | CLIFTON     | Jon      |        3286 |
+|   15461 |  6.99 | CLIFTON     | Jon      |        3401 |
+|   15462 |  0.99 | CLIFTON     | Jon      |        3599 |
+|   15463 |  7.99 | CLIFTON     | Mike     |        3785 |
+|   15464 |  2.99 | CLIFTON     | Mike     |        4922 |
+|   15465 |  2.99 | CLIFTON     | Mike     |        6500 |
+|   15466 |  2.99 | CLIFTON     | Jon      |        6534 |
+|   15467 |  0.99 | CLIFTON     | Jon      |        7197 |
+|   15468 |  4.99 | CLIFTON     | Mike     |        7371 |
+|   15469 |  8.99 | CLIFTON     | Jon      |        7876 |
+|   15470 |  5.99 | CLIFTON     | Mike     |        8043 |
+|   15471 |  6.99 | CLIFTON     | Mike     |        8060 |
+|   15472 |  6.99 | CLIFTON     | Jon      |        8671 |
+|   15473 |  4.99 | CLIFTON     | Jon      |       10323 |
+|   15474 |  0.99 | CLIFTON     | Mike     |       10487 |
+|   15475 |  4.99 | CLIFTON     | Mike     |       10782 |
+|   15476 |  7.99 | CLIFTON     | Mike     |       11054 |
+|   15477 |  0.99 | CLIFTON     | Jon      |       11464 |
+|   15478 |  4.99 | CLIFTON     | Mike     |       12664 |
+|   15479 |  0.99 | CLIFTON     | Jon      |       12671 |
+|   15480 |  3.99 | CLIFTON     | Jon      |       13200 |
+|   15481 |  3.99 | CLIFTON     | Jon      |       13500 |
+|   15482 |  2.99 | CLIFTON     | Jon      |       15480 |
+|   15483 |  2.99 | CLIFTON     | Jon      |       15873 |
+|   15484 |  4.99 | CLIFTON     | Jon      |       16003 |
+|   15485 |  0.99 | WILLARD     | Jon      |         660 |
+|   15486 |  6.99 | WILLARD     | Jon      |        1826 |
+|   15487 |  4.99 | WILLARD     | Jon      |        2615 |
+|   15488 |  2.99 | WILLARD     | Mike     |        3305 |
+|   15489 |  4.99 | WILLARD     | Jon      |        4496 |
+|   15490 |  4.99 | WILLARD     | Mike     |        5377 |
+|   15491 |  0.99 | WILLARD     | Mike     |        5445 |
+|   15492 |  4.99 | WILLARD     | Jon      |        5876 |
+|   15493 |  4.99 | WILLARD     | Mike     |        6784 |
+|   15494 |  0.99 | WILLARD     | Mike     |        6830 |
+|   15495 |  5.99 | WILLARD     | Jon      |        7059 |
+|   15496 |  2.99 | WILLARD     | Mike     |        8179 |
+|   15497 |  2.99 | WILLARD     | Mike     |        8218 |
+|   15498 |  4.99 | WILLARD     | Jon      |        9970 |
+|   15499 |  6.99 | WILLARD     | Mike     |       10029 |
+|   15500 |  2.99 | WILLARD     | Jon      |       10182 |
+|   15501 |  7.99 | WILLARD     | Mike     |       10779 |
+|   15502 |  7.99 | WILLARD     | Mike     |       11199 |
+|   15503 |  5.99 | WILLARD     | Jon      |       13071 |
+|   15504 |  5.99 | WILLARD     | Jon      |       13498 |
+|   15505 |  2.99 | WILLARD     | Jon      |       13552 |
+|   15506 |  0.99 | WILLARD     | Mike     |       15652 |
+|   15507 |  5.99 | DARYL       | Jon      |        2425 |
+|   15508 |  3.99 | DARYL       | Mike     |        2522 |
+|   15509 |  2.99 | DARYL       | Mike     |        3111 |
+|   15510 |  9.99 | DARYL       | Mike     |        4619 |
+|   15511 |  2.99 | DARYL       | Mike     |        4933 |
+|   15512 |  4.99 | DARYL       | Mike     |        6304 |
+|   15513 |  1.99 | DARYL       | Jon      |        6814 |
+|   15514 |  6.99 | DARYL       | Jon      |        6824 |
+|   15515 |  8.99 | DARYL       | Jon      |        6969 |
+|   15516 |  2.99 | DARYL       | Jon      |        7221 |
+|   15517 |  0.99 | DARYL       | Mike     |        8354 |
+|   15518 |  0.99 | DARYL       | Mike     |        8876 |
+|   15519 |  0.99 | DARYL       | Mike     |        8996 |
+|   15520 |  9.99 | DARYL       | Jon      |        9349 |
+|   15521 |  5.99 | DARYL       | Jon      |        9553 |
+|   15522 |  2.99 | DARYL       | Jon      |        9976 |
+|   15523 |  4.99 | DARYL       | Jon      |        9997 |
+|   15524 |  3.99 | DARYL       | Mike     |       11494 |
+|   15525 |  6.99 | DARYL       | Jon      |       12051 |
+|   15526 |  5.99 | DARYL       | Jon      |       12315 |
+|   15527 |  2.99 | DARYL       | Jon      |       14047 |
+|   15528 |  0.99 | DARYL       | Mike     |       14185 |
+|   15529 |  1.99 | DARYL       | Mike     |       14543 |
+|   15530 |  2.99 | DARYL       | Jon      |       14560 |
+|   15531 |  0.99 | DARYL       | Jon      |       15601 |
+|   15532 |  4.99 | DARYL       | Mike     |       15838 |
+|   15533 |  0.99 | DARYL       | Jon      |       15794 |
+|   15534 |  0.99 | ROSS        | Mike     |         611 |
+|   15535 |  0.99 | ROSS        | Mike     |        1469 |
+|   15536 |  1.99 | ROSS        | Jon      |        3571 |
+|   15537 |  1.99 | ROSS        | Jon      |        3867 |
+|   15538 |  1.99 | ROSS        | Jon      |        4169 |
+|   15539 |  3.99 | ROSS        | Jon      |        4590 |
+|   15540 |  6.99 | ROSS        | Mike     |        5937 |
+|   15541 |  2.99 | ROSS        | Mike     |        6089 |
+|   15542 |  2.99 | ROSS        | Jon      |        6170 |
+|   15543 |  0.99 | ROSS        | Mike     |        7620 |
+|   15544 |  4.99 | ROSS        | Jon      |        8784 |
+|   15545 |  3.99 | ROSS        | Mike     |        8839 |
+|   15546 |  0.99 | ROSS        | Mike     |        9199 |
+|   15547 |  3.99 | ROSS        | Mike     |        9239 |
+|   15548 |  5.99 | ROSS        | Mike     |        9460 |
+|   15549 |  4.99 | ROSS        | Jon      |        9604 |
+|   15550 |  0.99 | ROSS        | Jon      |        9865 |
+|   15551 |  3.99 | ROSS        | Mike     |       10723 |
+|   15552 |  3.99 | ROSS        | Jon      |       10965 |
+|   15553 |  8.99 | ROSS        | Mike     |       11164 |
+|   15554 |  2.99 | ROSS        | Jon      |       12670 |
+|   15555 |  2.99 | ROSS        | Jon      |       13313 |
+|   15556 |  2.99 | ROSS        | Jon      |       13742 |
+|   15557 |  2.99 | ROSS        | Jon      |       14818 |
+|   15558 |  6.99 | ROSS        | Mike     |       15157 |
+|   15559 |  6.99 | ROSS        | Mike     |       15630 |
+|   15560 |  4.99 | ROSS        | Mike     |       15947 |
+|   15561 |  4.99 | VIRGIL      | Mike     |         976 |
+|   15562 |  4.99 | VIRGIL      | Mike     |        1151 |
+|   15563 |  3.99 | VIRGIL      | Jon      |        1958 |
+|   15564 |  2.99 | VIRGIL      | Jon      |        2101 |
+|   15565 |  4.99 | VIRGIL      | Mike     |        2137 |
+|   15566 |  2.99 | VIRGIL      | Jon      |        4210 |
+|   15567 |  2.99 | VIRGIL      | Jon      |        4244 |
+|   15568 |  4.99 | VIRGIL      | Mike     |        4338 |
+|   15569 |  0.99 | VIRGIL      | Jon      |        4613 |
+|   15570 |  5.99 | VIRGIL      | Mike     |        4669 |
+|   15571 |  8.99 | VIRGIL      | Mike     |        4815 |
+|   15572 |  1.99 | VIRGIL      | Mike     |        4833 |
+|   15573 |  4.99 | VIRGIL      | Mike     |        5516 |
+|   15574 |  4.99 | VIRGIL      | Mike     |        5707 |
+|   15575 |  2.99 | VIRGIL      | Jon      |        5812 |
+|   15576 |  7.99 | VIRGIL      | Jon      |        7048 |
+|   15577 |  2.99 | VIRGIL      | Mike     |        7783 |
+|   15578 |  2.99 | VIRGIL      | Mike     |        9278 |
+|   15579 |  1.99 | VIRGIL      | Mike     |        9449 |
+|   15580 |  2.99 | VIRGIL      | Jon      |       11443 |
+|   15581 |  2.99 | VIRGIL      | Jon      |       11707 |
+|   15582 |  0.99 | VIRGIL      | Jon      |       13621 |
+|   15583 |  2.99 | VIRGIL      | Jon      |       13712 |
+|   15584 |  8.99 | VIRGIL      | Jon      |       14070 |
+|   15585 |  2.99 | VIRGIL      | Mike     |       14976 |
+|   15586 |  0.99 | VIRGIL      | Mike     |       15403 |
+|   15587 |  4.99 | VIRGIL      | Jon      |       15792 |
+|   15588 |  0.99 | ANDY        | Mike     |         281 |
+|   15589 |  2.99 | ANDY        | Mike     |        1719 |
+|   15590 |  7.99 | ANDY        | Mike     |        2337 |
+|   15591 |  0.99 | ANDY        | Jon      |        3071 |
+|   15592 |  0.99 | ANDY        | Mike     |        3767 |
+|   15593 |  5.99 | ANDY        | Jon      |        6629 |
+|   15594 |  4.99 | ANDY        | Jon      |        7126 |
+|   15595 |  6.99 | ANDY        | Jon      |        7311 |
+|   15596 |  5.99 | ANDY        | Jon      |        7412 |
+|   15597 |  2.99 | ANDY        | Mike     |        7575 |
+|   15598 |  5.99 | ANDY        | Jon      |        8308 |
+|   15599 |  2.99 | ANDY        | Mike     |        8554 |
+|   15600 |  6.99 | ANDY        | Mike     |        8778 |
+|   15601 |  9.99 | ANDY        | Mike     |        9768 |
+|   15602 |  7.99 | ANDY        | Jon      |       11290 |
+|   15603 |  5.99 | ANDY        | Mike     |       11667 |
+|   15604 |  2.99 | ANDY        | Mike     |       11708 |
+|   15605 |  5.99 | ANDY        | Jon      |       13815 |
+|   15606 |  4.99 | ANDY        | Mike     |       14376 |
+|   15607 |  0.99 | ANDY        | Mike     |       14568 |
+|   15608 |  5.99 | ANDY        | Mike     |       15090 |
+|   15609 |  2.99 | ANDY        | Mike     |       15503 |
+|   15610 |  0.99 | ANDY        | Mike     |       15539 |
+|   15611 |  4.99 | ANDY        | Jon      |       15911 |
+|   15612 |  2.99 | ANDY        | Jon      |       12127 |
+|   15613 |  3.99 | MARSHALL    | Mike     |        1428 |
+|   15614 |  9.99 | MARSHALL    | Mike     |        2429 |
+|   15615 |  4.99 | MARSHALL    | Jon      |        2663 |
+|   15616 |  5.99 | MARSHALL    | Jon      |        2845 |
+|   15617 |  3.99 | MARSHALL    | Jon      |        2879 |
+|   15618 |  0.99 | MARSHALL    | Mike     |        3424 |
+|   15619 |  2.99 | MARSHALL    | Mike     |        3779 |
+|   15620 |  4.99 | MARSHALL    | Mike     |        3842 |
+|   15621 |  9.99 | MARSHALL    | Jon      |        3991 |
+|   15622 |  4.99 | MARSHALL    | Mike     |        4464 |
+|   15623 |  0.99 | MARSHALL    | Mike     |        5462 |
+|   15624 |  5.99 | MARSHALL    | Mike     |        5478 |
+|   15625 |  7.99 | MARSHALL    | Jon      |        5747 |
+|   15626 |  6.99 | MARSHALL    | Jon      |        6684 |
+|   15627 |  5.99 | MARSHALL    | Mike     |        7401 |
+|   15628 |  7.99 | MARSHALL    | Jon      |        8568 |
+|   15629 |  7.99 | MARSHALL    | Mike     |        9550 |
+|   15630 |  1.99 | MARSHALL    | Jon      |        9808 |
+|   15631 |  4.99 | MARSHALL    | Jon      |       10301 |
+|   15632 |  2.99 | MARSHALL    | Jon      |       10586 |
+|   15633 |  4.99 | MARSHALL    | Jon      |       10800 |
+|   15634 |  4.99 | MARSHALL    | Jon      |       11002 |
+|   15635 |  0.99 | MARSHALL    | Mike     |       14259 |
+|   15636 |  4.99 | SALVADOR    | Jon      |         379 |
+|   15637 |  4.99 | SALVADOR    | Mike     |         626 |
+|   15638 |  4.99 | SALVADOR    | Mike     |         920 |
+|   15639 |  3.99 | SALVADOR    | Jon      |        1436 |
+|   15640 |  6.99 | SALVADOR    | Jon      |        3317 |
+|   15641 |  2.99 | SALVADOR    | Jon      |        3741 |
+|   15642 |  7.99 | SALVADOR    | Jon      |        3895 |
+|   15643 |  0.99 | SALVADOR    | Mike     |        4410 |
+|   15644 |  0.99 | SALVADOR    | Mike     |        4977 |
+|   15645 |  0.99 | SALVADOR    | Jon      |        6954 |
+|   15646 |  2.99 | SALVADOR    | Mike     |        7186 |
+|   15647 |  4.99 | SALVADOR    | Mike     |        7372 |
+|   15648 |  4.99 | SALVADOR    | Mike     |        7659 |
+|   15649 |  4.99 | SALVADOR    | Jon      |        8879 |
+|   15650 |  3.99 | SALVADOR    | Jon      |        9451 |
+|   15651 |  5.99 | SALVADOR    | Mike     |        9719 |
+|   15652 |  2.99 | SALVADOR    | Jon      |       10073 |
+|   15653 |  4.99 | SALVADOR    | Mike     |       10914 |
+|   15654 |  0.99 | SALVADOR    | Jon      |       10966 |
+|   15655 |  4.99 | SALVADOR    | Mike     |       11213 |
+|   15656 |  6.99 | SALVADOR    | Jon      |       11500 |
+|   15657 |  8.99 | SALVADOR    | Jon      |       12507 |
+|   15658 |  2.99 | SALVADOR    | Jon      |       12541 |
+|   15659 |  5.99 | SALVADOR    | Jon      |       12693 |
+|   15660 |  2.99 | SALVADOR    | Mike     |       12844 |
+|   15661 |  5.99 | SALVADOR    | Jon      |       14102 |
+|   15662 |  5.99 | SALVADOR    | Jon      |       14230 |
+|   15663 |  4.99 | SALVADOR    | Jon      |       14447 |
+|   15664 |  1.99 | SALVADOR    | Mike     |       14930 |
+|   15665 |  0.99 | SALVADOR    | Mike     |       15615 |
+|   15666 |  0.99 | PERRY       | Mike     |        1344 |
+|   15667 |  7.99 | PERRY       | Jon      |        1346 |
+|   15668 |  0.99 | PERRY       | Mike     |        2674 |
+|   15669 |  3.99 | PERRY       | Mike     |        2930 |
+|   15670 |  4.99 | PERRY       | Jon      |        4156 |
+|   15671 |  4.99 | PERRY       | Jon      |        4579 |
+|   15672 |  9.99 | PERRY       | Mike     |        4684 |
+|   15673 |  2.99 | PERRY       | Jon      |        5284 |
+|   15674 |  4.99 | PERRY       | Jon      |        5950 |
+|   15675 |  6.99 | PERRY       | Jon      |        6733 |
+|   15676 |  2.99 | PERRY       | Mike     |        7131 |
+|   15677 |  4.99 | PERRY       | Mike     |        7384 |
+|   15678 |  4.99 | PERRY       | Jon      |        7409 |
+|   15679 |  2.99 | PERRY       | Jon      |        8353 |
+|   15680 |  8.99 | PERRY       | Jon      |        9407 |
+|   15681 |  3.99 | PERRY       | Mike     |        9590 |
+|   15682 |  6.99 | PERRY       | Mike     |        9860 |
+|   15683 |  0.99 | PERRY       | Jon      |       10573 |
+|   15684 |  9.99 | PERRY       | Mike     |       11285 |
+|   15685 |  3.99 | PERRY       | Jon      |       13593 |
+|   15686 |  0.99 | PERRY       | Jon      |       13939 |
+|   15687 |  4.99 | PERRY       | Mike     |       15804 |
+|   15688 |  6.99 | PERRY       | Mike     |       15896 |
+|   15689 |  4.99 | PERRY       | Jon      |       14604 |
+|   15690 |  4.99 | KIRK        | Mike     |         138 |
+|   15691 |  8.99 | KIRK        | Mike     |         900 |
+|   15692 |  2.99 | KIRK        | Mike     |        1260 |
+|   15693 |  0.99 | KIRK        | Jon      |        1540 |
+|   15694 |  6.99 | KIRK        | Jon      |        3487 |
+|   15695 |  4.99 | KIRK        | Jon      |        3733 |
+|   15696 |  2.99 | KIRK        | Jon      |        5382 |
+|   15697 |  2.99 | KIRK        | Mike     |        6679 |
+|   15698 |  2.99 | KIRK        | Jon      |        9786 |
+|   15699 |  2.99 | KIRK        | Jon      |        9896 |
+|   15700 |  2.99 | KIRK        | Mike     |       11034 |
+|   15701 |  0.99 | KIRK        | Mike     |       11763 |
+|   15702 |  4.99 | KIRK        | Mike     |       12013 |
+|   15703 |  0.99 | KIRK        | Mike     |       12898 |
+|   15704 |  2.99 | KIRK        | Jon      |       14043 |
+|   15705 |  1.99 | KIRK        | Mike     |       14392 |
+|   15706 |  2.99 | KIRK        | Jon      |       14533 |
+|   15707 |  3.99 | KIRK        | Mike     |       15666 |
+|   15708 |  0.99 | KIRK        | Jon      |       15684 |
+|   15709 |  4.99 | SERGIO      | Mike     |         181 |
+|   15710 |  0.99 | SERGIO      | Mike     |         361 |
+|   15711 |  2.99 | SERGIO      | Jon      |        1330 |
+|   15712 |  4.99 | SERGIO      | Jon      |        2034 |
+|   15713 |  2.99 | SERGIO      | Mike     |        2220 |
+|   15714 |  4.99 | SERGIO      | Mike     |        2329 |
+|   15715 |  2.99 | SERGIO      | Jon      |        3562 |
+|   15716 |  0.99 | SERGIO      | Jon      |        3969 |
+|   15717 |  3.99 | SERGIO      | Jon      |        5243 |
+|   15718 |  0.99 | SERGIO      | Mike     |        6639 |
+|   15719 |  6.99 | SERGIO      | Jon      |        6665 |
+|   15720 |  8.99 | SERGIO      | Mike     |        7501 |
+|   15721 |  5.99 | SERGIO      | Jon      |        8776 |
+|   15722 |  6.99 | SERGIO      | Jon      |        9720 |
+|   15723 |  4.99 | SERGIO      | Jon      |        9785 |
+|   15724 |  5.99 | SERGIO      | Jon      |        9909 |
+|   15725 |  4.99 | SERGIO      | Jon      |       10224 |
+|   15726 |  2.99 | SERGIO      | Mike     |       10825 |
+|   15727 |  2.99 | SERGIO      | Mike     |       11078 |
+|   15728 |  4.99 | SERGIO      | Jon      |       11403 |
+|   15729 |  4.99 | SERGIO      | Jon      |       12164 |
+|   15730 |  6.99 | SERGIO      | Jon      |       12330 |
+|   15731 |  4.99 | SERGIO      | Jon      |       14710 |
+|   15732 |  2.99 | SERGIO      | Jon      |       15348 |
+|   15733 |  0.99 | SERGIO      | Jon      |       15349 |
+|   15734 |  0.99 | SERGIO      | Mike     |       12144 |
+|   15735 |  2.99 | MARION      | Mike     |         576 |
+|   15736 |  4.99 | MARION      | Mike     |         961 |
+|   15737 |  2.99 | MARION      | Jon      |        1885 |
+|   15738 |  6.99 | MARION      | Jon      |        1903 |
+|   15739 |  7.99 | MARION      | Jon      |        2270 |
+|   15740 |  2.99 | MARION      | Mike     |        2453 |
+|   15741 |  3.99 | MARION      | Jon      |        2920 |
+|   15742 |  4.99 | MARION      | Mike     |        3628 |
+|   15743 |  0.99 | MARION      | Mike     |        4101 |
+|   15744 |  5.99 | MARION      | Jon      |        4207 |
+|   15745 |  2.99 | MARION      | Jon      |        5203 |
+|   15746 |  4.99 | MARION      | Mike     |        5335 |
+|   15747 |  4.99 | MARION      | Mike     |        6368 |
+|   15748 |  2.99 | MARION      | Jon      |        7377 |
+|   15749 |  2.99 | MARION      | Jon      |        7903 |
+|   15750 |  4.99 | MARION      | Mike     |        8421 |
+|   15751 |  2.99 | MARION      | Mike     |        8429 |
+|   15752 |  2.99 | MARION      | Jon      |        8519 |
+|   15753 |  2.99 | MARION      | Mike     |        8769 |
+|   15754 |  2.99 | MARION      | Jon      |        9326 |
+|   15755 |  4.99 | MARION      | Jon      |        9370 |
+|   15756 |  4.99 | MARION      | Jon      |       10373 |
+|   15757 |  2.99 | MARION      | Mike     |       12185 |
+|   15758 |  4.99 | MARION      | Jon      |       12815 |
+|   15759 |  4.99 | MARION      | Mike     |       13064 |
+|   15760 |  1.99 | MARION      | Mike     |       13923 |
+|   15761 |  1.99 | MARION      | Mike     |       15109 |
+|   15762 |  2.99 | MARION      | Mike     |       15158 |
+|   15763 |  4.99 | MARION      | Mike     |       15209 |
+|   15764 |  0.99 | TRACY       | Mike     |         531 |
+|   15765 |  4.99 | TRACY       | Mike     |         596 |
+|   15766 |  4.99 | TRACY       | Mike     |         737 |
+|   15767 |  4.99 | TRACY       | Mike     |        1439 |
+|   15768 |  4.99 | TRACY       | Jon      |        1703 |
+|   15769 |  8.99 | TRACY       | Jon      |        2652 |
+|   15770 |  8.99 | TRACY       | Mike     |        2707 |
+|   15771 |  2.99 | TRACY       | Mike     |        2979 |
+|   15772 |  2.99 | TRACY       | Jon      |        4986 |
+|   15773 |  0.99 | TRACY       | Mike     |        5951 |
+|   15774 |  4.99 | TRACY       | Jon      |        6177 |
+|   15775 |  3.99 | TRACY       | Jon      |        6247 |
+|   15776 |  0.99 | TRACY       | Jon      |        7250 |
+|   15777 |  3.99 | TRACY       | Jon      |        7431 |
+|   15778 |  9.99 | TRACY       | Jon      |        7948 |
+|   15779 |  0.99 | TRACY       | Jon      |        8056 |
+|   15780 |  3.99 | TRACY       | Mike     |        8374 |
+|   15781 |  4.99 | TRACY       | Mike     |        9153 |
+|   15782 |  4.99 | TRACY       | Jon      |       10544 |
+|   15783 |  4.99 | TRACY       | Mike     |       11980 |
+|   15784 |  7.99 | TRACY       | Mike     |       12738 |
+|   15785 |  8.99 | TRACY       | Jon      |       12933 |
+|   15786 |  6.99 | TRACY       | Mike     |       14038 |
+|   15787 |  6.99 | TRACY       | Mike     |       14254 |
+|   15788 |  0.99 | TRACY       | Mike     |       14544 |
+|   15789 |  0.99 | TRACY       | Jon      |       14706 |
+|   15790 |  5.99 | TRACY       | Jon      |       15917 |
+|   15791 |  0.99 | TRACY       | Jon      |       15992 |
+|   15792 |  3.99 | SETH        | Mike     |         602 |
+|   15793 |  7.99 | SETH        | Jon      |        1456 |
+|   15794 |  2.99 | SETH        | Jon      |        2352 |
+|   15795 |  2.99 | SETH        | Jon      |        2775 |
+|   15796 |  6.99 | SETH        | Mike     |        2916 |
+|   15797 |  9.99 | SETH        | Mike     |        2964 |
+|   15798 |  4.99 | SETH        | Jon      |        4685 |
+|   15799 |  2.99 | SETH        | Mike     |        4710 |
+|   15800 |  4.99 | SETH        | Jon      |        4722 |
+|   15801 |  0.99 | SETH        | Mike     |        5165 |
+|   15802 |  2.99 | SETH        | Mike     |        5529 |
+|   15803 |  4.99 | SETH        | Mike     |        5991 |
+|   15804 |  4.99 | SETH        | Jon      |        6232 |
+|   15805 |  4.99 | SETH        | Jon      |        6492 |
+|   15806 |  4.99 | SETH        | Mike     |        7010 |
+|   15807 |  2.99 | SETH        | Jon      |        7665 |
+|   15808 |  5.99 | SETH        | Mike     |        8195 |
+|   15809 |  4.99 | SETH        | Mike     |        8801 |
+|   15810 |  0.99 | SETH        | Jon      |        9126 |
+|   15811 |  4.99 | SETH        | Mike     |        9884 |
+|   15812 |  4.99 | SETH        | Mike     |       10657 |
+|   15813 |  5.99 | SETH        | Jon      |       11578 |
+|   15814 |  3.99 | SETH        | Jon      |       11713 |
+|   15815 |  2.99 | SETH        | Mike     |       14830 |
+|   15816 |  2.99 | SETH        | Jon      |       15458 |
+|   15817 |  0.99 | KENT        | Mike     |        1418 |
+|   15818 |  2.99 | KENT        | Jon      |        3341 |
+|   15819 |  4.99 | KENT        | Jon      |        3435 |
+|   15820 |  0.99 | KENT        | Mike     |        3636 |
+|   15821 | 11.99 | KENT        | Jon      |        4383 |
+|   15822 |  6.99 | KENT        | Mike     |        4581 |
+|   15823 |  5.99 | KENT        | Mike     |        5704 |
+|   15824 |  6.99 | KENT        | Mike     |        5759 |
+|   15825 |  8.99 | KENT        | Mike     |        7118 |
+|   15826 |  2.99 | KENT        | Mike     |        7212 |
+|   15827 |  4.99 | KENT        | Jon      |        7511 |
+|   15828 |  3.99 | KENT        | Mike     |        7549 |
+|   15829 |  0.99 | KENT        | Jon      |        7741 |
+|   15830 |  4.99 | KENT        | Mike     |        7997 |
+|   15831 |  3.99 | KENT        | Mike     |        8149 |
+|   15832 |  5.99 | KENT        | Jon      |        8666 |
+|   15833 |  4.99 | KENT        | Jon      |        8819 |
+|   15834 |  0.99 | KENT        | Mike     |        9684 |
+|   15835 |  4.99 | KENT        | Mike     |       10415 |
+|   15836 |  5.99 | KENT        | Jon      |       12203 |
+|   15837 |  4.99 | KENT        | Jon      |       12227 |
+|   15838 |  4.99 | KENT        | Mike     |       12547 |
+|   15839 |  5.99 | KENT        | Mike     |       12571 |
+|   15840 |  5.99 | KENT        | Mike     |       12934 |
+|   15841 |  2.99 | KENT        | Jon      |       13104 |
+|   15842 |  3.99 | KENT        | Jon      |       13343 |
+|   15843 |  9.99 | KENT        | Mike     |       13867 |
+|   15844 |  6.99 | TERRANCE    | Jon      |        1163 |
+|   15845 |  5.99 | TERRANCE    | Jon      |        1423 |
+|   15846 |  2.99 | TERRANCE    | Mike     |        1479 |
+|   15847 |  0.99 | TERRANCE    | Mike     |        2627 |
+|   15848 |  7.99 | TERRANCE    | Mike     |        3158 |
+|   15849 |  2.99 | TERRANCE    | Jon      |        3560 |
+|   15850 | 11.99 | TERRANCE    | Mike     |        3973 |
+|   15851 |  1.99 | TERRANCE    | Mike     |        4129 |
+|   15852 |  9.99 | TERRANCE    | Mike     |        4145 |
+|   15853 |  0.99 | TERRANCE    | Mike     |        4460 |
+|   15854 |  2.99 | TERRANCE    | Mike     |        4518 |
+|   15855 |  0.99 | TERRANCE    | Mike     |        6937 |
+|   15856 |  0.99 | TERRANCE    | Jon      |        7173 |
+|   15857 |  3.99 | TERRANCE    | Mike     |        7278 |
+|   15858 |  4.99 | TERRANCE    | Jon      |        7364 |
+|   15859 |  2.99 | TERRANCE    | Mike     |        8730 |
+|   15860 |  0.99 | TERRANCE    | Jon      |        8773 |
+|   15861 |  4.99 | TERRANCE    | Mike     |        9268 |
+|   15862 |  3.99 | TERRANCE    | Mike     |        9437 |
+|   15863 |  6.99 | TERRANCE    | Jon      |        9666 |
+|   15864 |  0.99 | TERRANCE    | Jon      |       10383 |
+|   15865 |  2.99 | TERRANCE    | Jon      |       10634 |
+|   15866 |  8.99 | TERRANCE    | Mike     |       11410 |
+|   15867 |  0.99 | TERRANCE    | Jon      |       12043 |
+|   15868 |  0.99 | TERRANCE    | Jon      |       12619 |
+|   15869 |  1.99 | TERRANCE    | Mike     |       12976 |
+|   15870 |  2.99 | TERRANCE    | Mike     |       13157 |
+|   15871 |  3.99 | TERRANCE    | Jon      |       13662 |
+|   15872 |  0.99 | TERRANCE    | Jon      |       14606 |
+|   15873 |  2.99 | RENE        | Mike     |         790 |
+|   15874 |  8.99 | RENE        | Mike     |         991 |
+|   15875 |  5.99 | RENE        | Jon      |        2055 |
+|   15876 |  4.99 | RENE        | Jon      |        2205 |
+|   15877 |  4.99 | RENE        | Mike     |        2441 |
+|   15878 |  4.99 | RENE        | Mike     |        2832 |
+|   15879 |  2.99 | RENE        | Jon      |        3542 |
+|   15880 |  2.99 | RENE        | Jon      |        4075 |
+|   15881 |  3.99 | RENE        | Jon      |        4280 |
+|   15882 |  0.99 | RENE        | Jon      |        4623 |
+|   15883 |  4.99 | RENE        | Jon      |        4781 |
+|   15884 |  0.99 | RENE        | Jon      |        4867 |
+|   15885 |  2.99 | RENE        | Mike     |        6386 |
+|   15886 |  2.99 | RENE        | Mike     |        6731 |
+|   15887 |  4.99 | RENE        | Jon      |        7958 |
+|   15888 |  2.99 | RENE        | Mike     |        8497 |
+|   15889 |  6.99 | RENE        | Jon      |        9329 |
+|   15890 |  6.99 | RENE        | Mike     |        9483 |
+|   15891 |  3.99 | RENE        | Mike     |       10368 |
+|   15892 |  3.99 | RENE        | Jon      |       10533 |
+|   15893 |  5.99 | RENE        | Mike     |       10840 |
+|   15894 |  4.99 | RENE        | Jon      |       10904 |
+|   15895 |  2.99 | RENE        | Jon      |       12744 |
+|   15896 |  6.99 | RENE        | Mike     |       13524 |
+|   15897 |  5.99 | RENE        | Mike     |       14408 |
+|   15898 |  0.99 | RENE        | Mike     |       14653 |
+|   15899 |  4.99 | EDUARDO     | Mike     |         313 |
+|   15900 |  8.99 | EDUARDO     | Mike     |         360 |
+|   15901 |  0.99 | EDUARDO     | Jon      |        1018 |
+|   15902 |  6.99 | EDUARDO     | Mike     |        1045 |
+|   15903 |  5.99 | EDUARDO     | Jon      |        1537 |
+|   15904 |  4.99 | EDUARDO     | Mike     |        1816 |
+|   15905 |  2.99 | EDUARDO     | Mike     |        1950 |
+|   15906 |  6.99 | EDUARDO     | Mike     |        2276 |
+|   15907 |  0.99 | EDUARDO     | Jon      |        2786 |
+|   15908 |  1.99 | EDUARDO     | Jon      |        3302 |
+|   15909 |  0.99 | EDUARDO     | Jon      |        3474 |
+|   15910 |  4.99 | EDUARDO     | Mike     |        3546 |
+|   15911 |  2.99 | EDUARDO     | Jon      |        3960 |
+|   15912 |  5.99 | EDUARDO     | Mike     |        4037 |
+|   15913 |  3.99 | EDUARDO     | Mike     |        4154 |
+|   15914 |  2.99 | EDUARDO     | Jon      |        5386 |
+|   15915 |  6.99 | EDUARDO     | Mike     |        6473 |
+|   15916 |  8.99 | EDUARDO     | Mike     |        7533 |
+|   15917 |  1.99 | EDUARDO     | Mike     |        8567 |
+|   15918 |  2.99 | EDUARDO     | Mike     |        8603 |
+|   15919 |  5.99 | EDUARDO     | Jon      |        8820 |
+|   15920 |  7.99 | EDUARDO     | Mike     |        9545 |
+|   15921 |  3.99 | EDUARDO     | Mike     |        9698 |
+|   15922 |  4.99 | EDUARDO     | Jon      |        9802 |
+|   15923 |  8.99 | EDUARDO     | Jon      |       10704 |
+|   15924 |  4.99 | EDUARDO     | Jon      |       14824 |
+|   15925 |  4.99 | EDUARDO     | Mike     |       14999 |
+|   15926 |  6.99 | TERRENCE    | Mike     |         613 |
+|   15927 |  2.99 | TERRENCE    | Jon      |        1170 |
+|   15928 |  4.99 | TERRENCE    | Jon      |        3371 |
+|   15929 |  9.99 | TERRENCE    | Mike     |        3789 |
+|   15930 |  4.99 | TERRENCE    | Mike     |        4017 |
+|   15931 |  4.99 | TERRENCE    | Mike     |        4241 |
+|   15932 |  2.99 | TERRENCE    | Jon      |        4775 |
+|   15933 |  1.99 | TERRENCE    | Mike     |        5631 |
+|   15934 |  1.99 | TERRENCE    | Mike     |        5952 |
+|   15935 |  6.99 | TERRENCE    | Mike     |        6105 |
+|   15936 |  6.99 | TERRENCE    | Mike     |        6704 |
+|   15937 |  4.99 | TERRENCE    | Mike     |        7086 |
+|   15938 |  0.99 | TERRENCE    | Jon      |        7307 |
+|   15939 |  4.99 | TERRENCE    | Mike     |        7396 |
+|   15940 |  3.99 | TERRENCE    | Jon      |        7490 |
+|   15941 |  2.99 | TERRENCE    | Mike     |        9152 |
+|   15942 |  2.99 | TERRENCE    | Jon      |        9223 |
+|   15943 |  4.99 | TERRENCE    | Mike     |        9354 |
+|   15944 |  0.99 | TERRENCE    | Jon      |        9497 |
+|   15945 |  4.99 | TERRENCE    | Jon      |        9542 |
+|   15946 |  2.99 | TERRENCE    | Mike     |        9631 |
+|   15947 | 10.99 | TERRENCE    | Jon      |        9826 |
+|   15948 |  2.99 | TERRENCE    | Mike     |       10729 |
+|   15949 |  2.99 | TERRENCE    | Mike     |       10932 |
+|   15950 |  0.99 | TERRENCE    | Jon      |       11748 |
+|   15951 |  0.99 | TERRENCE    | Mike     |       12235 |
+|   15952 |  0.99 | TERRENCE    | Mike     |       14334 |
+|   15953 |  2.99 | TERRENCE    | Jon      |       15576 |
+|   15954 |  0.99 | TERRENCE    | Jon      |       15994 |
+|   15955 |  2.99 | TERRENCE    | Jon      |       16016 |
+|   15956 |  4.99 | ENRIQUE     | Jon      |         303 |
+|   15957 |  0.99 | ENRIQUE     | Jon      |         625 |
+|   15958 |  4.99 | ENRIQUE     | Jon      |         667 |
+|   15959 |  1.99 | ENRIQUE     | Jon      |         782 |
+|   15960 |  2.99 | ENRIQUE     | Mike     |         914 |
+|   15961 |  6.99 | ENRIQUE     | Mike     |         974 |
+|   15962 |  1.99 | ENRIQUE     | Mike     |        1644 |
+|   15963 |  1.99 | ENRIQUE     | Mike     |        2767 |
+|   15964 |  3.99 | ENRIQUE     | Jon      |        5742 |
+|   15965 |  2.99 | ENRIQUE     | Mike     |        6015 |
+|   15966 |  0.99 | ENRIQUE     | Mike     |        6017 |
+|   15967 |  4.99 | ENRIQUE     | Mike     |        6197 |
+|   15968 |  4.99 | ENRIQUE     | Jon      |        6883 |
+|   15969 |  3.99 | ENRIQUE     | Mike     |       10094 |
+|   15970 |  4.99 | ENRIQUE     | Jon      |       10692 |
+|   15971 |  2.99 | ENRIQUE     | Mike     |       10756 |
+|   15972 |  0.99 | ENRIQUE     | Jon      |       10804 |
+|   15973 |  4.99 | ENRIQUE     | Jon      |       11009 |
+|   15974 |  3.99 | ENRIQUE     | Jon      |       11852 |
+|   15975 |  0.99 | ENRIQUE     | Mike     |       11934 |
+|   15976 |  4.99 | ENRIQUE     | Jon      |       12560 |
+|   15977 |  4.99 | ENRIQUE     | Mike     |       12878 |
+|   15978 |  4.99 | ENRIQUE     | Mike     |       13648 |
+|   15979 |  3.99 | ENRIQUE     | Mike     |       14050 |
+|   15980 |  0.99 | ENRIQUE     | Mike     |       14417 |
+|   15981 |  0.99 | ENRIQUE     | Mike     |       15405 |
+|   15982 |  6.99 | ENRIQUE     | Mike     |       15899 |
+|   15983 |  0.99 | ENRIQUE     | Mike     |       15423 |
+|   15984 |  2.99 | FREDDIE     | Jon      |          34 |
+|   15985 |  8.99 | FREDDIE     | Jon      |         514 |
+|   15986 |  0.99 | FREDDIE     | Mike     |        2379 |
+|   15987 |  4.99 | FREDDIE     | Mike     |        2696 |
+|   15988 |  1.99 | FREDDIE     | Mike     |        3201 |
+|   15989 |  0.99 | FREDDIE     | Mike     |        5093 |
+|   15990 |  4.99 | FREDDIE     | Mike     |        5348 |
+|   15991 |  2.99 | FREDDIE     | Jon      |        5732 |
+|   15992 |  2.99 | FREDDIE     | Mike     |        6508 |
+|   15993 |  4.99 | FREDDIE     | Jon      |        7968 |
+|   15994 |  4.99 | FREDDIE     | Jon      |        8948 |
+|   15995 |  4.99 | FREDDIE     | Jon      |       10021 |
+|   15996 |  0.99 | FREDDIE     | Mike     |       10214 |
+|   15997 |  5.99 | FREDDIE     | Jon      |       10986 |
+|   15998 |  4.99 | FREDDIE     | Jon      |       11147 |
+|   15999 |  2.99 | FREDDIE     | Jon      |       11223 |
+|   16000 |  2.99 | FREDDIE     | Mike     |       11240 |
+|   16001 |  5.99 | FREDDIE     | Mike     |       11880 |
+|   16002 |  4.99 | FREDDIE     | Mike     |       12081 |
+|   16003 |  0.99 | FREDDIE     | Mike     |       12992 |
+|   16004 |  2.99 | FREDDIE     | Jon      |       13019 |
+|   16005 |  6.99 | FREDDIE     | Mike     |       13152 |
+|   16006 |  2.99 | FREDDIE     | Jon      |       15275 |
+|   16007 |  4.99 | FREDDIE     | Mike     |       15469 |
+|   16008 |  4.99 | FREDDIE     | Mike     |       11652 |
+|   16009 |  2.99 | WADE        | Mike     |        3005 |
+|   16010 |  0.99 | WADE        | Mike     |        3648 |
+|   16011 |  6.99 | WADE        | Jon      |        3950 |
+|   16012 |  4.99 | WADE        | Mike     |        3972 |
+|   16013 |  4.99 | WADE        | Mike     |        4181 |
+|   16014 |  5.99 | WADE        | Jon      |        5688 |
+|   16015 |  4.99 | WADE        | Mike     |        6519 |
+|   16016 |  4.99 | WADE        | Jon      |        6528 |
+|   16017 |  0.99 | WADE        | Jon      |        6575 |
+|   16018 |  3.99 | WADE        | Jon      |        6660 |
+|   16019 |  6.99 | WADE        | Jon      |        7201 |
+|   16020 |  0.99 | WADE        | Jon      |        7354 |
+|   16021 |  0.99 | WADE        | Mike     |        7998 |
+|   16022 |  0.99 | WADE        | Jon      |        8436 |
+|   16023 |  5.99 | WADE        | Mike     |        8511 |
+|   16024 |  4.99 | WADE        | Mike     |        8939 |
+|   16025 |  4.99 | WADE        | Mike     |       10054 |
+|   16026 |  0.99 | WADE        | Jon      |       11350 |
+|   16027 |  2.99 | WADE        | Jon      |       12601 |
+|   16028 |  0.99 | WADE        | Jon      |       14345 |
+|   16029 |  2.99 | WADE        | Jon      |       15307 |
+|   16030 |  7.99 | WADE        | Mike     |       15443 |
+|   16031 |  4.99 | AUSTIN      | Jon      |        1008 |
+|   16032 |  1.99 | AUSTIN      | Mike     |        2272 |
+|   16033 |  6.99 | AUSTIN      | Jon      |        3043 |
+|   16034 |  4.99 | AUSTIN      | Jon      |        3398 |
+|   16035 |  6.99 | AUSTIN      | Mike     |        3429 |
+|   16036 |  0.99 | AUSTIN      | Mike     |        5065 |
+|   16037 |  2.99 | AUSTIN      | Mike     |        5843 |
+|   16038 |  9.99 | AUSTIN      | Jon      |        6800 |
+|   16039 |  2.99 | AUSTIN      | Jon      |        6895 |
+|   16040 |  6.99 | AUSTIN      | Mike     |        8965 |
+|   16041 |  2.99 | AUSTIN      | Jon      |        9630 |
+|   16042 |  2.99 | AUSTIN      | Jon      |        9679 |
+|   16043 |  3.99 | AUSTIN      | Jon      |       11522 |
+|   16044 |  1.99 | AUSTIN      | Mike     |       14233 |
+|   16045 |  4.99 | AUSTIN      | Mike     |       14599 |
+|   16046 |  1.99 | AUSTIN      | Mike     |       14719 |
+|   16047 |  8.99 | AUSTIN      | Jon      |       15590 |
+|   16048 |  2.99 | AUSTIN      | Jon      |       15719 |
+|   16049 |  2.99 | AUSTIN      | Jon      |       15725 |
++---------+-------+-------------+----------+-------------+
+16044 rows in set (0,06 sec)
+
+
+
+```
+
+#### 9. Listar las películas y los idiomas en los que están disponibles.
+
+```sql
+SELECT p.titulo, i.nombre AS idioma
+FROM pelicula as p
+INNER JOIN idioma As i ON i.id_idioma = p.id_idioma;
++-----------------------------+---------+
+| titulo                      | idioma  |
++-----------------------------+---------+
+| ACADEMY DINOSAUR            | English |
+| ACE GOLDFINGER              | English |
+| ADAPTATION HOLES            | English |
+| AFFAIR PREJUDICE            | English |
+| AFRICAN EGG                 | English |
+| AGENT TRUMAN                | English |
+| AIRPLANE SIERRA             | English |
+| AIRPORT POLLOCK             | English |
+| ALABAMA DEVIL               | English |
+| ALADDIN CALENDAR            | English |
+| ALAMO VIDEOTAPE             | English |
+| ALASKA PHANTOM              | English |
+| ALI FOREVER                 | English |
+| ALICE FANTASIA              | English |
+| ALIEN CENTER                | English |
+| ALLEY EVOLUTION             | English |
+| ALONE TRIP                  | English |
+| ALTER VICTORY               | English |
+| AMADEUS HOLY                | English |
+| AMELIE HELLFIGHTERS         | English |
+| AMERICAN CIRCUS             | English |
+| AMISTAD MIDSUMMER           | English |
+| ANACONDA CONFESSIONS        | English |
+| ANALYZE HOOSIERS            | English |
+| ANGELS LIFE                 | English |
+| ANNIE IDENTITY              | English |
+| ANONYMOUS HUMAN             | English |
+| ANTHEM LUKE                 | English |
+| ANTITRUST TOMATOES          | English |
+| ANYTHING SAVANNAH           | English |
+| APACHE DIVINE               | English |
+| APOCALYPSE FLAMINGOS        | English |
+| APOLLO TEEN                 | English |
+| ARABIA DOGMA                | English |
+| ARACHNOPHOBIA ROLLERCOASTER | English |
+| ARGONAUTS TOWN              | English |
+| ARIZONA BANG                | English |
+| ARK RIDGEMONT               | English |
+| ARMAGEDDON LOST             | English |
+| ARMY FLINTSTONES            | English |
+| ARSENIC INDEPENDENCE        | English |
+| ARTIST COLDBLOODED          | English |
+| ATLANTIS CAUSE              | English |
+| ATTACKS HATE                | English |
+| ATTRACTION NEWTON           | English |
+| AUTUMN CROW                 | English |
+| BABY HALL                   | English |
+| BACKLASH UNDEFEATED         | English |
+| BADMAN DAWN                 | English |
+| BAKED CLEOPATRA             | English |
+| BALLOON HOMEWARD            | English |
+| BALLROOM MOCKINGBIRD        | English |
+| BANG KWAI                   | English |
+| BANGER PINOCCHIO            | English |
+| BARBARELLA STREETCAR        | English |
+| BAREFOOT MANCHURIAN         | English |
+| BASIC EASY                  | English |
+| BEACH HEARTBREAKERS         | English |
+| BEAR GRACELAND              | English |
+| BEAST HUNCHBACK             | English |
+| BEAUTY GREASE               | English |
+| BED HIGHBALL                | English |
+| BEDAZZLED MARRIED           | English |
+| BEETHOVEN EXORCIST          | English |
+| BEHAVIOR RUNAWAY            | English |
+| BENEATH RUSH                | English |
+| BERETS AGENT                | English |
+| BETRAYED REAR               | English |
+| BEVERLY OUTLAW              | English |
+| BIKINI BORROWERS            | English |
+| BILKO ANONYMOUS             | English |
+| BILL OTHERS                 | English |
+| BINGO TALENTED              | English |
+| BIRCH ANTITRUST             | English |
+| BIRD INDEPENDENCE           | English |
+| BIRDCAGE CASPER             | English |
+| BIRDS PERDITION             | English |
+| BLACKOUT PRIVATE            | English |
+| BLADE POLISH                | English |
+| BLANKET BEVERLY             | English |
+| BLINDNESS GUN               | English |
+| BLOOD ARGONAUTS             | English |
+| BLUES INSTINCT              | English |
+| BOILED DARES                | English |
+| BONNIE HOLOCAUST            | English |
+| BOOGIE AMELIE               | English |
+| BOONDOCK BALLROOM           | English |
+| BORN SPINAL                 | English |
+| BORROWERS BEDAZZLED         | English |
+| BOULEVARD MOB               | English |
+| BOUND CHEAPER               | English |
+| BOWFINGER GABLES            | English |
+| BRANNIGAN SUNRISE           | English |
+| BRAVEHEART HUMAN            | English |
+| BREAKFAST GOLDFINGER        | English |
+| BREAKING HOME               | English |
+| BRIDE INTRIGUE              | English |
+| BRIGHT ENCOUNTERS           | English |
+| BRINGING HYSTERICAL         | English |
+| BROOKLYN DESERT             | English |
+| BROTHERHOOD BLANKET         | English |
+| BUBBLE GROSSE               | English |
+| BUCKET BROTHERHOOD          | English |
+| BUGSY SONG                  | English |
+| BULL SHAWSHANK              | English |
+| BULWORTH COMMANDMENTS       | English |
+| BUNCH MINDS                 | English |
+| BUTCH PANTHER               | English |
+| BUTTERFLY CHOCOLAT          | English |
+| CABIN FLASH                 | English |
+| CADDYSHACK JEDI             | English |
+| CALENDAR GUNFIGHT           | English |
+| CALIFORNIA BIRDS            | English |
+| CAMELOT VACATION            | English |
+| CAMPUS REMEMBER             | English |
+| CANDIDATE PERDITION         | English |
+| CANDLES GRAPES              | English |
+| CANYON STOCK                | English |
+| CAPER MOTIONS               | English |
+| CARIBBEAN LIBERTY           | English |
+| CAROL TEXAS                 | English |
+| CARRIE BUNCH                | English |
+| CASABLANCA SUPER            | English |
+| CASPER DRAGONFLY            | English |
+| CASSIDY WYOMING             | English |
+| CASUALTIES ENCINO           | English |
+| CAT CONEHEADS               | English |
+| CATCH AMISTAD               | English |
+| CAUSE DATE                  | English |
+| CELEBRITY HORN              | English |
+| CENTER DINOSAUR             | English |
+| CHAINSAW UPTOWN             | English |
+| CHAMBER ITALIAN             | English |
+| CHAMPION FLATLINERS         | English |
+| CHANCE RESURRECTION         | English |
+| CHAPLIN LICENSE             | English |
+| CHARADE DUFFEL              | English |
+| CHARIOTS CONSPIRACY         | English |
+| CHASING FIGHT               | English |
+| CHEAPER CLYDE               | English |
+| CHICAGO NORTH               | English |
+| CHICKEN HELLFIGHTERS        | English |
+| CHILL LUCK                  | English |
+| CHINATOWN GLADIATOR         | English |
+| CHISUM BEHAVIOR             | English |
+| CHITTY LOCK                 | English |
+| CHOCOLAT HARRY              | English |
+| CHOCOLATE DUCK              | English |
+| CHRISTMAS MOONSHINE         | English |
+| CIDER DESIRE                | English |
+| CINCINATTI WHISPERER        | English |
+| CIRCUS YOUTH                | English |
+| CITIZEN SHREK               | English |
+| CLASH FREDDY                | English |
+| CLEOPATRA DEVIL             | English |
+| CLERKS ANGELS               | English |
+| CLOCKWORK PARADISE          | English |
+| CLONES PINOCCHIO            | English |
+| CLOSER BANG                 | English |
+| CLUB GRAFFITI               | English |
+| CLUE GRAIL                  | English |
+| CLUELESS BUCKET             | English |
+| CLYDE THEORY                | English |
+| COAST RAINBOW               | English |
+| COLDBLOODED DARLING         | English |
+| COLOR PHILADELPHIA          | English |
+| COMA HEAD                   | English |
+| COMANCHEROS ENEMY           | English |
+| COMFORTS RUSH               | English |
+| COMMAND DARLING             | English |
+| COMMANDMENTS EXPRESS        | English |
+| CONEHEADS SMOOCHY           | English |
+| CONFESSIONS MAGUIRE         | English |
+| CONFIDENTIAL INTERVIEW      | English |
+| CONFUSED CANDLES            | English |
+| CONGENIALITY QUEST          | English |
+| CONNECTICUT TRAMP           | English |
+| CONNECTION MICROCOSMOS      | English |
+| CONQUERER NUTS              | English |
+| CONSPIRACY SPIRIT           | English |
+| CONTACT ANONYMOUS           | English |
+| CONTROL ANTHEM              | English |
+| CONVERSATION DOWNHILL       | English |
+| CORE SUIT                   | English |
+| COWBOY DOOM                 | English |
+| CRAFT OUTFIELD              | English |
+| CRANES RESERVOIR            | English |
+| CRAZY HOME                  | English |
+| CREATURES SHAKESPEARE       | English |
+| CREEPERS KANE               | English |
+| CROOKED FROGMEN             | English |
+| CROSSING DIVORCE            | English |
+| CROSSROADS CASUALTIES       | English |
+| CROW GREASE                 | English |
+| CROWDS TELEMARK             | English |
+| CRUELTY UNFORGIVEN          | English |
+| CRUSADE HONEY               | English |
+| CRYSTAL BREAKING            | English |
+| CUPBOARD SINNERS            | English |
+| CURTAIN VIDEOTAPE           | English |
+| CYCLONE FAMILY              | English |
+| DADDY PITTSBURGH            | English |
+| DAISY MENAGERIE             | English |
+| DALMATIONS SWEDEN           | English |
+| DANCES NONE                 | English |
+| DANCING FEVER               | English |
+| DANGEROUS UPTOWN            | English |
+| DARES PLUTO                 | English |
+| DARKNESS WAR                | English |
+| DARKO DORADO                | English |
+| DARLING BREAKING            | English |
+| DARN FORRESTER              | English |
+| DATE SPEED                  | English |
+| DAUGHTER MADIGAN            | English |
+| DAWN POND                   | English |
+| DAY UNFAITHFUL              | English |
+| DAZED PUNK                  | English |
+| DECEIVER BETRAYED           | English |
+| DEEP CRUSADE                | English |
+| DEER VIRGINIAN              | English |
+| DELIVERANCE MULHOLLAND      | English |
+| DESERT POSEIDON             | English |
+| DESIRE ALIEN                | English |
+| DESPERATE TRAINSPOTTING     | English |
+| DESTINATION JERK            | English |
+| DESTINY SATURDAY            | English |
+| DETAILS PACKER              | English |
+| DETECTIVE VISION            | English |
+| DEVIL DESIRE                | English |
+| DIARY PANIC                 | English |
+| DINOSAUR SECRETARY          | English |
+| DIRTY ACE                   | English |
+| DISCIPLE MOTHER             | English |
+| DISTURBING SCARFACE         | English |
+| DIVIDE MONSTER              | English |
+| DIVINE RESURRECTION         | English |
+| DIVORCE SHINING             | English |
+| DOCTOR GRAIL                | English |
+| DOGMA FAMILY                | English |
+| DOLLS RAGE                  | English |
+| DONNIE ALLEY                | English |
+| DOOM DANCING                | English |
+| DOORS PRESIDENT             | English |
+| DORADO NOTTING              | English |
+| DOUBLE WRATH                | English |
+| DOUBTFIRE LABYRINTH         | English |
+| DOWNHILL ENOUGH             | English |
+| DOZEN LION                  | English |
+| DRACULA CRYSTAL             | English |
+| DRAGON SQUAD                | English |
+| DRAGONFLY STRANGERS         | English |
+| DREAM PICKUP                | English |
+| DRIFTER COMMANDMENTS        | English |
+| DRIVER ANNIE                | English |
+| DRIVING POLISH              | English |
+| DROP WATERFRONT             | English |
+| DRUMLINE CYCLONE            | English |
+| DRUMS DYNAMITE              | English |
+| DUCK RACER                  | English |
+| DUDE BLINDNESS              | English |
+| DUFFEL APOCALYPSE           | English |
+| DUMBO LUST                  | English |
+| DURHAM PANKY                | English |
+| DWARFS ALTER                | English |
+| DYING MAKER                 | English |
+| DYNAMITE TARZAN             | English |
+| EAGLES PANKY                | English |
+| EARLY HOME                  | English |
+| EARRING INSTINCT            | English |
+| EARTH VISION                | English |
+| EASY GLADIATOR              | English |
+| EDGE KISSING                | English |
+| EFFECT GLADIATOR            | English |
+| EGG IGBY                    | English |
+| EGYPT TENENBAUMS            | English |
+| ELEMENT FREDDY              | English |
+| ELEPHANT TROJAN             | English |
+| ELF MURDER                  | English |
+| ELIZABETH SHANE             | English |
+| EMPIRE MALKOVICH            | English |
+| ENCINO ELF                  | English |
+| ENCOUNTERS CURTAIN          | English |
+| ENDING CROWDS               | English |
+| ENEMY ODDS                  | English |
+| ENGLISH BULWORTH            | English |
+| ENOUGH RAGING               | English |
+| ENTRAPMENT SATISFACTION     | English |
+| ESCAPE METROPOLIS           | English |
+| EVE RESURRECTION            | English |
+| EVERYONE CRAFT              | English |
+| EVOLUTION ALTER             | English |
+| EXCITEMENT EVE              | English |
+| EXORCIST STING              | English |
+| EXPECATIONS NATURAL         | English |
+| EXPENDABLE STALLION         | English |
+| EXPRESS LONELY              | English |
+| EXTRAORDINARY CONQUERER     | English |
+| EYES DRIVING                | English |
+| FACTORY DRAGON              | English |
+| FALCON VOLUME               | English |
+| FAMILY SWEET                | English |
+| FANTASIA PARK               | English |
+| FANTASY TROOPERS            | English |
+| FARGO GANDHI                | English |
+| FATAL HAUNTED               | English |
+| FEATHERS METAL              | English |
+| FELLOWSHIP AUTUMN           | English |
+| FERRIS MOTHER               | English |
+| FEUD FROGMEN                | English |
+| FEVER EMPIRE                | English |
+| FICTION CHRISTMAS           | English |
+| FIDDLER LOST                | English |
+| FIDELITY DEVIL              | English |
+| FIGHT JAWBREAKER            | English |
+| FINDING ANACONDA            | English |
+| FIRE WOLVES                 | English |
+| FIREBALL PHILADELPHIA       | English |
+| FIREHOUSE VIETNAM           | English |
+| FISH OPUS                   | English |
+| FLAMINGOS CONNECTICUT       | English |
+| FLASH WARS                  | English |
+| FLATLINERS KILLER           | English |
+| FLIGHT LIES                 | English |
+| FLINTSTONES HAPPINESS       | English |
+| FLOATS GARDEN               | English |
+| FLYING HOOK                 | English |
+| FOOL MOCKINGBIRD            | English |
+| FOREVER CANDIDATE           | English |
+| FORREST SONS                | English |
+| FORRESTER COMANCHEROS       | English |
+| FORWARD TEMPLE              | English |
+| FRANKENSTEIN STRANGER       | English |
+| FREAKY POCUS                | English |
+| FREDDY STORM                | English |
+| FREEDOM CLEOPATRA           | English |
+| FRENCH HOLIDAY              | English |
+| FRIDA SLIPPER               | English |
+| FRISCO FORREST              | English |
+| FROGMEN BREAKING            | English |
+| FRONTIER CABIN              | English |
+| FROST HEAD                  | English |
+| FUGITIVE MAGUIRE            | English |
+| FULL FLATLINERS             | English |
+| FURY MURDER                 | English |
+| GABLES METROPOLIS           | English |
+| GALAXY SWEETHEARTS          | English |
+| GAMES BOWFINGER             | English |
+| GANDHI KWAI                 | English |
+| GANGS PRIDE                 | English |
+| GARDEN ISLAND               | English |
+| GASLIGHT CRUSADE            | English |
+| GATHERING CALENDAR          | English |
+| GENTLEMEN STAGE             | English |
+| GHOST GROUNDHOG             | English |
+| GHOSTBUSTERS ELF            | English |
+| GIANT TROOPERS              | English |
+| GILBERT PELICAN             | English |
+| GILMORE BOILED              | English |
+| GLADIATOR WESTWARD          | English |
+| GLASS DYING                 | English |
+| GLEAMING JAWBREAKER         | English |
+| GLORY TRACY                 | English |
+| GO PURPLE                   | English |
+| GODFATHER DIARY             | English |
+| GOLD RIVER                  | English |
+| GOLDFINGER SENSIBILITY      | English |
+| GOLDMINE TYCOON             | English |
+| GONE TROUBLE                | English |
+| GOODFELLAS SALUTE           | English |
+| GORGEOUS BINGO              | English |
+| GOSFORD DONNIE              | English |
+| GRACELAND DYNAMITE          | English |
+| GRADUATE LORD               | English |
+| GRAFFITI LOVE               | English |
+| GRAIL FRANKENSTEIN          | English |
+| GRAPES FURY                 | English |
+| GREASE YOUTH                | English |
+| GREATEST NORTH              | English |
+| GREEDY ROOTS                | English |
+| GREEK EVERYONE              | English |
+| GRINCH MASSAGE              | English |
+| GRIT CLOCKWORK              | English |
+| GROOVE FICTION              | English |
+| GROSSE WONDERFUL            | English |
+| GROUNDHOG UNCUT             | English |
+| GUMP DATE                   | English |
+| GUN BONNIE                  | English |
+| GUNFIGHT MOON               | English |
+| GUNFIGHTER MUSSOLINI        | English |
+| GUYS FALCON                 | English |
+| HALF OUTFIELD               | English |
+| HALL CASSIDY                | English |
+| HALLOWEEN NUTS              | English |
+| HAMLET WISDOM               | English |
+| HANDICAP BOONDOCK           | English |
+| HANGING DEEP                | English |
+| HANKY OCTOBER               | English |
+| HANOVER GALAXY              | English |
+| HAPPINESS UNITED            | English |
+| HARDLY ROBBERS              | English |
+| HAROLD FRENCH               | English |
+| HARPER DYING                | English |
+| HARRY IDAHO                 | English |
+| HATE HANDICAP               | English |
+| HAUNTED ANTITRUST           | English |
+| HAUNTING PIANIST            | English |
+| HAWK CHILL                  | English |
+| HEAD STRANGER               | English |
+| HEARTBREAKERS BRIGHT        | English |
+| HEAVEN FREEDOM              | English |
+| HEAVENLY GUN                | English |
+| HEAVYWEIGHTS BEAST          | English |
+| HEDWIG ALTER                | English |
+| HELLFIGHTERS SIERRA         | English |
+| HIGH ENCINO                 | English |
+| HIGHBALL POTTER             | English |
+| HILLS NEIGHBORS             | English |
+| HOBBIT ALIEN                | English |
+| HOCUS FRIDA                 | English |
+| HOLES BRANNIGAN             | English |
+| HOLIDAY GAMES               | English |
+| HOLLOW JEOPARDY             | English |
+| HOLLYWOOD ANONYMOUS         | English |
+| HOLOCAUST HIGHBALL          | English |
+| HOLY TADPOLE                | English |
+| HOME PITY                   | English |
+| HOMEWARD CIDER              | English |
+| HOMICIDE PEACH              | English |
+| HONEY TIES                  | English |
+| HOOK CHARIOTS               | English |
+| HOOSIERS BIRDCAGE           | English |
+| HOPE TOOTSIE                | English |
+| HORN WORKING                | English |
+| HORROR REIGN                | English |
+| HOTEL HAPPINESS             | English |
+| HOURS RAGE                  | English |
+| HOUSE DYNAMITE              | English |
+| HUMAN GRAFFITI              | English |
+| HUNCHBACK IMPOSSIBLE        | English |
+| HUNGER ROOF                 | English |
+| HUNTER ALTER                | English |
+| HUNTING MUSKETEERS          | English |
+| HURRICANE AFFAIR            | English |
+| HUSTLER PARTY               | English |
+| HYDE DOCTOR                 | English |
+| HYSTERICAL GRAIL            | English |
+| ICE CROSSING                | English |
+| IDAHO LOVE                  | English |
+| IDENTITY LOVER              | English |
+| IDOLS SNATCHERS             | English |
+| IGBY MAKER                  | English |
+| ILLUSION AMELIE             | English |
+| IMAGE PRINCESS              | English |
+| IMPACT ALADDIN              | English |
+| IMPOSSIBLE PREJUDICE        | English |
+| INCH JET                    | English |
+| INDEPENDENCE HOTEL          | English |
+| INDIAN LOVE                 | English |
+| INFORMER DOUBLE             | English |
+| INNOCENT USUAL              | English |
+| INSECTS STONE               | English |
+| INSIDER ARIZONA             | English |
+| INSTINCT AIRPORT            | English |
+| INTENTIONS EMPIRE           | English |
+| INTERVIEW LIAISONS          | English |
+| INTOLERABLE INTENTIONS      | English |
+| INTRIGUE WORST              | English |
+| INVASION CYCLONE            | English |
+| IRON MOON                   | English |
+| ISHTAR ROCKETEER            | English |
+| ISLAND EXORCIST             | English |
+| ITALIAN AFRICAN             | English |
+| JACKET FRISCO               | English |
+| JADE BUNCH                  | English |
+| JAPANESE RUN                | English |
+| JASON TRAP                  | English |
+| JAWBREAKER BROOKLYN         | English |
+| JAWS HARRY                  | English |
+| JEDI BENEATH                | English |
+| JEEPERS WEDDING             | English |
+| JEKYLL FROGMEN              | English |
+| JEOPARDY ENCINO             | English |
+| JERICHO MULAN               | English |
+| JERK PAYCHECK               | English |
+| JERSEY SASSY                | English |
+| JET NEIGHBORS               | English |
+| JINGLE SAGEBRUSH            | English |
+| JOON NORTHWEST              | English |
+| JUGGLER HARDLY              | English |
+| JUMANJI BLADE               | English |
+| JUMPING WRATH               | English |
+| JUNGLE CLOSER               | English |
+| KANE EXORCIST               | English |
+| KARATE MOON                 | English |
+| KENTUCKIAN GIANT            | English |
+| KICK SAVANNAH               | English |
+| KILL BROTHERHOOD            | English |
+| KILLER INNOCENT             | English |
+| KING EVOLUTION              | English |
+| KISS GLORY                  | English |
+| KISSING DOLLS               | English |
+| KNOCK WARLOCK               | English |
+| KRAMER CHOCOLATE            | English |
+| KWAI HOMEWARD               | English |
+| LABYRINTH LEAGUE            | English |
+| LADY STAGE                  | English |
+| LADYBUGS ARMAGEDDON         | English |
+| LAMBS CINCINATTI            | English |
+| LANGUAGE COWBOY             | English |
+| LAWLESS VISION              | English |
+| LAWRENCE LOVE               | English |
+| LEAGUE HELLFIGHTERS         | English |
+| LEATHERNECKS DWARFS         | English |
+| LEBOWSKI SOLDIERS           | English |
+| LEGALLY SECRETARY           | English |
+| LEGEND JEDI                 | English |
+| LESSON CLEOPATRA            | English |
+| LIAISONS SWEET              | English |
+| LIBERTY MAGNIFICENT         | English |
+| LICENSE WEEKEND             | English |
+| LIES TREATMENT              | English |
+| LIFE TWISTED                | English |
+| LIGHTS DEER                 | English |
+| LION UNCUT                  | English |
+| LOATHING LEGALLY            | English |
+| LOCK REAR                   | English |
+| LOLA AGENT                  | English |
+| LOLITA WORLD                | English |
+| LONELY ELEPHANT             | English |
+| LORD ARIZONA                | English |
+| LOSE INCH                   | English |
+| LOSER HUSTLER               | English |
+| LOST BIRD                   | English |
+| LOUISIANA HARRY             | English |
+| LOVE SUICIDES               | English |
+| LOVELY JINGLE               | English |
+| LOVER TRUMAN                | English |
+| LOVERBOY ATTACKS            | English |
+| LUCK OPUS                   | English |
+| LUCKY FLYING                | English |
+| LUKE MUMMY                  | English |
+| LUST LOCK                   | English |
+| MADIGAN DORADO              | English |
+| MADISON TRAP                | English |
+| MADNESS ATTACKS             | English |
+| MADRE GABLES                | English |
+| MAGIC MALLRATS              | English |
+| MAGNIFICENT CHITTY          | English |
+| MAGNOLIA FORRESTER          | English |
+| MAGUIRE APACHE              | English |
+| MAIDEN HOME                 | English |
+| MAJESTIC FLOATS             | English |
+| MAKER GABLES                | English |
+| MALKOVICH PET               | English |
+| MALLRATS UNITED             | English |
+| MALTESE HOPE                | English |
+| MANCHURIAN CURTAIN          | English |
+| MANNEQUIN WORST             | English |
+| MARRIED GO                  | English |
+| MARS ROMAN                  | English |
+| MASK PEACH                  | English |
+| MASKED BUBBLE               | English |
+| MASSACRE USUAL              | English |
+| MASSAGE IMAGE               | English |
+| MATRIX SNOWMAN              | English |
+| MAUDE MOD                   | English |
+| MEET CHOCOLATE              | English |
+| MEMENTO ZOOLANDER           | English |
+| MENAGERIE RUSHMORE          | English |
+| MERMAID INSECTS             | English |
+| METAL ARMAGEDDON            | English |
+| METROPOLIS COMA             | English |
+| MICROCOSMOS PARADISE        | English |
+| MIDNIGHT WESTWARD           | English |
+| MIDSUMMER GROUNDHOG         | English |
+| MIGHTY LUCK                 | English |
+| MILE MULAN                  | English |
+| MILLION ACE                 | English |
+| MINDS TRUMAN                | English |
+| MINE TITANS                 | English |
+| MINORITY KISS               | English |
+| MIRACLE VIRTUAL             | English |
+| MISSION ZOOLANDER           | English |
+| MIXED DOORS                 | English |
+| MOB DUFFEL                  | English |
+| MOCKINGBIRD HOLLYWOOD       | English |
+| MOD SECRETARY               | English |
+| MODEL FISH                  | English |
+| MODERN DORADO               | English |
+| MONEY HAROLD                | English |
+| MONSOON CAUSE               | English |
+| MONSTER SPARTACUS           | English |
+| MONTEREY LABYRINTH          | English |
+| MONTEZUMA COMMAND           | English |
+| MOON BUNCH                  | English |
+| MOONSHINE CABIN             | English |
+| MOONWALKER FOOL             | English |
+| MOSQUITO ARMAGEDDON         | English |
+| MOTHER OLEANDER             | English |
+| MOTIONS DETAILS             | English |
+| MOULIN WAKE                 | English |
+| MOURNING PURPLE             | English |
+| MOVIE SHAKESPEARE           | English |
+| MULAN MOON                  | English |
+| MULHOLLAND BEAST            | English |
+| MUMMY CREATURES             | English |
+| MUPPET MILE                 | English |
+| MURDER ANTITRUST            | English |
+| MUSCLE BRIGHT               | English |
+| MUSIC BOONDOCK              | English |
+| MUSKETEERS WAIT             | English |
+| MUSSOLINI SPOILERS          | English |
+| MYSTIC TRUMAN               | English |
+| NAME DETECTIVE              | English |
+| NASH CHOCOLAT               | English |
+| NATIONAL STORY              | English |
+| NATURAL STOCK               | English |
+| NECKLACE OUTBREAK           | English |
+| NEIGHBORS CHARADE           | English |
+| NEMO CAMPUS                 | English |
+| NETWORK PEAK                | English |
+| NEWSIES STORY               | English |
+| NEWTON LABYRINTH            | English |
+| NIGHTMARE CHILL             | English |
+| NONE SPIKING                | English |
+| NOON PAPI                   | English |
+| NORTH TEQUILA               | English |
+| NORTHWEST POLISH            | English |
+| NOTORIOUS REUNION           | English |
+| NOTTING SPEAKEASY           | English |
+| NOVOCAINE FLIGHT            | English |
+| NUTS TIES                   | English |
+| OCTOBER SUBMARINE           | English |
+| ODDS BOOGIE                 | English |
+| OKLAHOMA JUMANJI            | English |
+| OLEANDER CLUE               | English |
+| OPEN AFRICAN                | English |
+| OPERATION OPERATION         | English |
+| OPPOSITE NECKLACE           | English |
+| OPUS ICE                    | English |
+| ORANGE GRAPES               | English |
+| ORDER BETRAYED              | English |
+| ORIENT CLOSER               | English |
+| OSCAR GOLD                  | English |
+| OTHERS SOUP                 | English |
+| OUTBREAK DIVINE             | English |
+| OUTFIELD MASSACRE           | English |
+| OUTLAW HANKY                | English |
+| OZ LIAISONS                 | English |
+| PACIFIC AMISTAD             | English |
+| PACKER MADIGAN              | English |
+| PAJAMA JAWBREAKER           | English |
+| PANIC CLUB                  | English |
+| PANKY SUBMARINE             | English |
+| PANTHER REDS                | English |
+| PAPI NECKLACE               | English |
+| PARADISE SABRINA            | English |
+| PARIS WEEKEND               | English |
+| PARK CITIZEN                | English |
+| PARTY KNOCK                 | English |
+| PAST SUICIDES               | English |
+| PATHS CONTROL               | English |
+| PATIENT SISTER              | English |
+| PATRIOT ROMAN               | English |
+| PATTON INTERVIEW            | English |
+| PAYCHECK WAIT               | English |
+| PEACH INNOCENT              | English |
+| PEAK FOREVER                | English |
+| PEARL DESTINY               | English |
+| PELICAN COMFORTS            | English |
+| PERDITION FARGO             | English |
+| PERFECT GROOVE              | English |
+| PERSONAL LADYBUGS           | English |
+| PET HAUNTING                | English |
+| PHANTOM GLORY               | English |
+| PHILADELPHIA WIFE           | English |
+| PIANIST OUTFIELD            | English |
+| PICKUP DRIVING              | English |
+| PILOT HOOSIERS              | English |
+| PINOCCHIO SIMON             | English |
+| PIRATES ROXANNE             | English |
+| PITTSBURGH HUNCHBACK        | English |
+| PITY BOUND                  | English |
+| PIZZA JUMANJI               | English |
+| PLATOON INSTINCT            | English |
+| PLUTO OLEANDER              | English |
+| POCUS PULP                  | English |
+| POLISH BROOKLYN             | English |
+| POLLOCK DELIVERANCE         | English |
+| POND SEATTLE                | English |
+| POSEIDON FOREVER            | English |
+| POTLUCK MIXED               | English |
+| POTTER CONNECTICUT          | English |
+| PREJUDICE OLEANDER          | English |
+| PRESIDENT BANG              | English |
+| PRIDE ALAMO                 | English |
+| PRIMARY GLASS               | English |
+| PRINCESS GIANT              | English |
+| PRIVATE DROP                | English |
+| PRIX UNDEFEATED             | English |
+| PSYCHO SHRUNK               | English |
+| PULP BEVERLY                | English |
+| PUNK DIVORCE                | English |
+| PURE RUNNER                 | English |
+| PURPLE MOVIE                | English |
+| QUEEN LUKE                  | English |
+| QUEST MUSSOLINI             | English |
+| QUILLS BULL                 | English |
+| RACER EGG                   | English |
+| RAGE GAMES                  | English |
+| RAGING AIRPLANE             | English |
+| RAIDERS ANTITRUST           | English |
+| RAINBOW SHOCK               | English |
+| RANDOM GO                   | English |
+| RANGE MOONWALKER            | English |
+| REAP UNFAITHFUL             | English |
+| REAR TRADING                | English |
+| REBEL AIRPORT               | English |
+| RECORDS ZORRO               | English |
+| REDEMPTION COMFORTS         | English |
+| REDS POCUS                  | English |
+| REEF SALUTE                 | English |
+| REIGN GENTLEMEN             | English |
+| REMEMBER DIARY              | English |
+| REQUIEM TYCOON              | English |
+| RESERVOIR ADAPTATION        | English |
+| RESURRECTION SILVERADO      | English |
+| REUNION WITCHES             | English |
+| RIDER CADDYSHACK            | English |
+| RIDGEMONT SUBMARINE         | English |
+| RIGHT CRANES                | English |
+| RINGS HEARTBREAKERS         | English |
+| RIVER OUTLAW                | English |
+| ROAD ROXANNE                | English |
+| ROBBERS JOON                | English |
+| ROBBERY BRIGHT              | English |
+| ROCK INSTINCT               | English |
+| ROCKETEER MOTHER            | English |
+| ROCKY WAR                   | English |
+| ROLLERCOASTER BRINGING      | English |
+| ROMAN PUNK                  | English |
+| ROOF CHAMPION               | English |
+| ROOM ROMAN                  | English |
+| ROOTS REMEMBER              | English |
+| ROSES TREASURE              | English |
+| ROUGE SQUAD                 | English |
+| ROXANNE REBEL               | English |
+| RUGRATS SHAKESPEARE         | English |
+| RULES HUMAN                 | English |
+| RUN PACIFIC                 | English |
+| RUNAWAY TENENBAUMS          | English |
+| RUNNER MADIGAN              | English |
+| RUSH GOODFELLAS             | English |
+| RUSHMORE MERMAID            | English |
+| SABRINA MIDNIGHT            | English |
+| SADDLE ANTITRUST            | English |
+| SAGEBRUSH CLUELESS          | English |
+| SAINTS BRIDE                | English |
+| SALUTE APOLLO               | English |
+| SAMURAI LION                | English |
+| SANTA PARIS                 | English |
+| SASSY PACKER                | English |
+| SATISFACTION CONFIDENTIAL   | English |
+| SATURDAY LAMBS              | English |
+| SATURN NAME                 | English |
+| SAVANNAH TOWN               | English |
+| SCALAWAG DUCK               | English |
+| SCARFACE BANG               | English |
+| SCHOOL JACKET               | English |
+| SCISSORHANDS SLUMS          | English |
+| SCORPION APOLLO             | English |
+| SEA VIRGIN                  | English |
+| SEABISCUIT PUNK             | English |
+| SEARCHERS WAIT              | English |
+| SEATTLE EXPECATIONS         | English |
+| SECRET GROUNDHOG            | English |
+| SECRETARY ROUGE             | English |
+| SECRETS PARADISE            | English |
+| SENSE GREEK                 | English |
+| SENSIBILITY REAR            | English |
+| SEVEN SWARM                 | English |
+| SHAKESPEARE SADDLE          | English |
+| SHANE DARKNESS              | English |
+| SHANGHAI TYCOON             | English |
+| SHAWSHANK BUBBLE            | English |
+| SHEPHERD MIDSUMMER          | English |
+| SHINING ROSES               | English |
+| SHIP WONDERLAND             | English |
+| SHOCK CABIN                 | English |
+| SHOOTIST SUPERFLY           | English |
+| SHOW LORD                   | English |
+| SHREK LICENSE               | English |
+| SHRUNK DIVINE               | English |
+| SIDE ARK                    | English |
+| SIEGE MADRE                 | English |
+| SIERRA DIVIDE               | English |
+| SILENCE KANE                | English |
+| SILVERADO GOLDFINGER        | English |
+| SIMON NORTH                 | English |
+| SINNERS ATLANTIS            | English |
+| SISTER FREDDY               | English |
+| SKY MIRACLE                 | English |
+| SLACKER LIAISONS            | English |
+| SLEEPING SUSPECTS           | English |
+| SLEEPLESS MONSOON           | English |
+| SLEEPY JAPANESE             | English |
+| SLEUTH ORIENT               | English |
+| SLING LUKE                  | English |
+| SLIPPER FIDELITY            | English |
+| SLUMS DUCK                  | English |
+| SMILE EARRING               | English |
+| SMOKING BARBARELLA          | English |
+| SMOOCHY CONTROL             | English |
+| SNATCH SLIPPER              | English |
+| SNATCHERS MONTEZUMA         | English |
+| SNOWMAN ROLLERCOASTER       | English |
+| SOLDIERS EVOLUTION          | English |
+| SOMETHING DUCK              | English |
+| SONG HEDWIG                 | English |
+| SONS INTERVIEW              | English |
+| SORORITY QUEEN              | English |
+| SOUP WISDOM                 | English |
+| SOUTH WAIT                  | English |
+| SPARTACUS CHEAPER           | English |
+| SPEAKEASY DATE              | English |
+| SPEED SUIT                  | English |
+| SPICE SORORITY              | English |
+| SPIKING ELEMENT             | English |
+| SPINAL ROCKY                | English |
+| SPIRIT FLINTSTONES          | English |
+| SPIRITED CASUALTIES         | English |
+| SPLASH GUMP                 | English |
+| SPLENDOR PATTON             | English |
+| SPOILERS HELLFIGHTERS       | English |
+| SPY MILE                    | English |
+| SQUAD FISH                  | English |
+| STAGE WORLD                 | English |
+| STAGECOACH ARMAGEDDON       | English |
+| STALLION SUNDANCE           | English |
+| STAMPEDE DISTURBING         | English |
+| STAR OPERATION              | English |
+| STATE WASTELAND             | English |
+| STEEL SANTA                 | English |
+| STEERS ARMAGEDDON           | English |
+| STEPMOM DREAM               | English |
+| STING PERSONAL              | English |
+| STOCK GLASS                 | English |
+| STONE FIRE                  | English |
+| STORM HAPPINESS             | English |
+| STORY SIDE                  | English |
+| STRAIGHT HOURS              | English |
+| STRANGELOVE DESIRE          | English |
+| STRANGER STRANGERS          | English |
+| STRANGERS GRAFFITI          | English |
+| STREAK RIDGEMONT            | English |
+| STREETCAR INTENTIONS        | English |
+| STRICTLY SCARFACE           | English |
+| SUBMARINE BED               | English |
+| SUGAR WONKA                 | English |
+| SUICIDES SILENCE            | English |
+| SUIT WALLS                  | English |
+| SUMMER SCARFACE             | English |
+| SUN CONFESSIONS             | English |
+| SUNDANCE INVASION           | English |
+| SUNRISE LEAGUE              | English |
+| SUNSET RACER                | English |
+| SUPER WYOMING               | English |
+| SUPERFLY TRIP               | English |
+| SUSPECTS QUILLS             | English |
+| SWARM GOLD                  | English |
+| SWEDEN SHINING              | English |
+| SWEET BROTHERHOOD           | English |
+| SWEETHEARTS SUSPECTS        | English |
+| TADPOLE PARK                | English |
+| TALENTED HOMICIDE           | English |
+| TARZAN VIDEOTAPE            | English |
+| TAXI KICK                   | English |
+| TEEN APOLLO                 | English |
+| TELEGRAPH VOYAGE            | English |
+| TELEMARK HEARTBREAKERS      | English |
+| TEMPLE ATTRACTION           | English |
+| TENENBAUMS COMMAND          | English |
+| TEQUILA PAST                | English |
+| TERMINATOR CLUB             | English |
+| TEXAS WATCH                 | English |
+| THEORY MERMAID              | English |
+| THIEF PELICAN               | English |
+| THIN SAGEBRUSH              | English |
+| TIES HUNGER                 | English |
+| TIGHTS DAWN                 | English |
+| TIMBERLAND SKY              | English |
+| TITANIC BOONDOCK            | English |
+| TITANS JERK                 | English |
+| TOMATOES HELLFIGHTERS       | English |
+| TOMORROW HUSTLER            | English |
+| TOOTSIE PILOT               | English |
+| TORQUE BOUND                | English |
+| TOURIST PELICAN             | English |
+| TOWERS HURRICANE            | English |
+| TOWN ARK                    | English |
+| TRACY CIDER                 | English |
+| TRADING PINOCCHIO           | English |
+| TRAFFIC HOBBIT              | English |
+| TRAIN BUNCH                 | English |
+| TRAINSPOTTING STRANGERS     | English |
+| TRAMP OTHERS                | English |
+| TRANSLATION SUMMER          | English |
+| TRAP GUYS                   | English |
+| TREASURE COMMAND            | English |
+| TREATMENT JEKYLL            | English |
+| TRIP NEWTON                 | English |
+| TROJAN TOMORROW             | English |
+| TROOPERS METAL              | English |
+| TROUBLE DATE                | English |
+| TRUMAN CRAZY                | English |
+| TURN STAR                   | English |
+| TUXEDO MILE                 | English |
+| TWISTED PIRATES             | English |
+| TYCOON GATHERING            | English |
+| UNBREAKABLE KARATE          | English |
+| UNCUT SUICIDES              | English |
+| UNDEFEATED DALMATIONS       | English |
+| UNFAITHFUL KILL             | English |
+| UNFORGIVEN ZOOLANDER        | English |
+| UNITED PILOT                | English |
+| UNTOUCHABLES SUNRISE        | English |
+| UPRISING UPTOWN             | English |
+| UPTOWN YOUNG                | English |
+| USUAL UNTOUCHABLES          | English |
+| VACATION BOONDOCK           | English |
+| VALENTINE VANISHING         | English |
+| VALLEY PACKER               | English |
+| VAMPIRE WHALE               | English |
+| VANILLA DAY                 | English |
+| VANISHED GARDEN             | English |
+| VANISHING ROCKY             | English |
+| VARSITY TRIP                | English |
+| VELVET TERMINATOR           | English |
+| VERTIGO NORTHWEST           | English |
+| VICTORY ACADEMY             | English |
+| VIDEOTAPE ARSENIC           | English |
+| VIETNAM SMOOCHY             | English |
+| VILLAIN DESPERATE           | English |
+| VIRGIN DAISY                | English |
+| VIRGINIAN PLUTO             | English |
+| VIRTUAL SPOILERS            | English |
+| VISION TORQUE               | English |
+| VOICE PEACH                 | English |
+| VOLCANO TEXAS               | English |
+| VOLUME HOUSE                | English |
+| VOYAGE LEGALLY              | English |
+| WAGON JAWS                  | English |
+| WAIT CIDER                  | English |
+| WAKE JAWS                   | English |
+| WALLS ARTIST                | English |
+| WANDA CHAMBER               | English |
+| WAR NOTTING                 | English |
+| WARDROBE PHANTOM            | English |
+| WARLOCK WEREWOLF            | English |
+| WARS PLUTO                  | English |
+| WASH HEAVENLY               | English |
+| WASTELAND DIVINE            | English |
+| WATCH TRACY                 | English |
+| WATERFRONT DELIVERANCE      | English |
+| WATERSHIP FRONTIER          | English |
+| WEDDING APOLLO              | English |
+| WEEKEND PERSONAL            | English |
+| WEREWOLF LOLA               | English |
+| WEST LION                   | English |
+| WESTWARD SEABISCUIT         | English |
+| WHALE BIKINI                | English |
+| WHISPERER GIANT             | English |
+| WIFE TURN                   | English |
+| WILD APOLLO                 | English |
+| WILLOW TRACY                | English |
+| WIND PHANTOM                | English |
+| WINDOW SIDE                 | English |
+| WISDOM WORKER               | English |
+| WITCHES PANIC               | English |
+| WIZARD COLDBLOODED          | English |
+| WOLVES DESIRE               | English |
+| WOMEN DORADO                | English |
+| WON DARES                   | English |
+| WONDERFUL DROP              | English |
+| WONDERLAND CHRISTMAS        | English |
+| WONKA SEA                   | English |
+| WORDS HUNTER                | English |
+| WORKER TARZAN               | English |
+| WORKING MICROCOSMOS         | English |
+| WORLD LEATHERNECKS          | English |
+| WORST BANGER                | English |
+| WRATH MILE                  | English |
+| WRONG BEHAVIOR              | English |
+| WYOMING STORM               | English |
+| YENTL IDAHO                 | English |
+| YOUNG LANGUAGE              | English |
+| YOUTH KICK                  | English |
+| ZHIVAGO CORE                | English |
+| ZOOLANDER FICTION           | English |
+| ZORRO ARK                   | English |
++-----------------------------+---------+
+
+
+```
+
+10. #### Encontrar todos los empleados y los almacenes que gestionan.
+
+```sql
+SELECT e.nombre AS nombre_empleado_jefe, e.apellidos As apellidos_empleado_jefe, a.id_almacen
+FROM empleado AS e
+INNER JOIN almacen as a ON a.id_empleado_jefe = e.id_empleado;
++----------------------+-------------------------+------------+
+| nombre_empleado_jefe | apellidos_empleado_jefe | id_almacen |
++----------------------+-------------------------+------------+
+| Jon                  | Stephens                |          2 |
+| Ringo                | Rooksby                 |          1 |
++----------------------+-------------------------+------------+
+
+
+```
+
+11. #### Obtener los títulos de las películas que nunca han sido alquiladas.
+
+```sql
+SELECT p.titulo, p.id_pelicula
+FROM pelicula as p
+INNER JOIN inventario AS i ON i.id_pelicula = p.id_pelicula
+WHERE i.id_inventario NOT IN (SELECT id_inventario
+FROM alquiler);
++------------------+-------------+
+| titulo           | id_pelicula |
++------------------+-------------+
+| ACADEMY DINOSAUR |           1 |
++------------------+-------------+
+1 row in set (0,02 sec)
+
+
+```
+
+12. #### Listar los empleados que trabajan en el mismo almacén que el empleado con id_empleado = 1.
+
+```sql
+SELECT e.nombre, a.id_almacen
+FROM empleado AS e
+INNER JOIN almacen as a ON a.id_almacen = e.id_almacen
+WHERE a.id_almacen = (SELECT a.id_almacen
+FROM empleado AS e
+INNER JOIN almacen as a On a.id_almacen = e.id_almacen
+WHERE e.id_empleado = 1);
++--------+------------+
+| nombre | id_almacen |
++--------+------------+
+| Mike   |          2 |
+| Jon    |          2 |
+| Pepe   |          2 |
++--------+------------+
+3 rows in set (0,00 sec)
+
+
+```
+
+13. #### Encontrar el nombre de las ciudades que no tienen ningún cliente registrado.
+
+```sql
+SELECT c.nombre AS ciudad_sin_cliente
+FROM cliente as cl
+RIGHT JOIN direccion AS d ON cl.id_direccion = d.id_direccion
+RIGHT JOIN ciudad AS c ON d.id_ciudad = c.id_ciudad;
+
++----------------------------+
+| ciudad_sin_cliente         |
++----------------------------+
+| A Corua (La Corua)         |
+| Abha                       |
+| Abu Dhabi                  |
+| Acua                       |
+| Adana                      |
+| Addis Abeba                |
+| Aden                       |
+| Adoni                      |
+| Ahmadnagar                 |
+| Akishima                   |
+| Akron                      |
+| al-Ayn                     |
+| al-Hawiya                  |
+| al-Manama                  |
+| al-Qadarif                 |
+| al-Qatif                   |
+| Alessandria                |
+| Allappuzha (Alleppey)      |
+| Allende                    |
+| Almirante Brown            |
+| Alvorada                   |
+| Ambattur                   |
+| Amersfoort                 |
+| Amroha                     |
+| Angra dos Reis             |
+| Anpolis                    |
+| Antofagasta                |
+| Aparecida de Goinia        |
+| Apeldoorn                  |
+| Araatuba                   |
+| Arak                       |
+| Arecibo                    |
+| Arlington                  |
+| Ashdod                     |
+| Ashgabat                   |
+| Ashqelon                   |
+| Asuncin                    |
+| Athenai                    |
+| Atinsk                     |
+| Atlixco                    |
+| Augusta-Richmond County    |
+| Aurora                     |
+| Avellaneda                 |
+| Bag                        |
+| Baha Blanca                |
+| Baicheng                   |
+| Baiyin                     |
+| Baku                       |
+| Balaiha                    |
+| Balikesir                  |
+| Balurghat                  |
+| Bamenda                    |
+| Bandar Seri Begawan        |
+| Banjul                     |
+| Barcelona                  |
+| Basel                      |
+| Bat Yam                    |
+| Batman                     |
+| Batna                      |
+| Battambang                 |
+| Baybay                     |
+| Bayugan                    |
+| Bchar                      |
+| Beira                      |
+| Bellevue                   |
+| Belm                       |
+| Benguela                   |
+| Beni-Mellal                |
+| Benin City                 |
+| Bergamo                    |
+| Berhampore (Baharampur)    |
+| Bern                       |
+| Bhavnagar                  |
+| Bhilwara                   |
+| Bhimavaram                 |
+| Bhopal                     |
+| Bhusawal                   |
+| Bijapur                    |
+| Bilbays                    |
+| Binzhou                    |
+| Birgunj                    |
+| Bislig                     |
+| Blumenau                   |
+| Boa Vista                  |
+| Boksburg                   |
+| Botosani                   |
+| Botshabelo                 |
+| Bradford                   |
+| Braslia                    |
+| Bratislava                 |
+| Brescia                    |
+| Brest                      |
+| Brindisi                   |
+| Brockton                   |
+| Bucuresti                  |
+| Buenaventura               |
+| Bydgoszcz                  |
+| Cabuyao                    |
+| Callao                     |
+| Cam Ranh                   |
+| Cape Coral                 |
+| Caracas                    |
+| Carmen                     |
+| Cavite                     |
+| Cayenne                    |
+| Celaya                     |
+| Chandrapur                 |
+| Changhwa                   |
+| Changzhou                  |
+| Chapra                     |
+| Charlotte Amalie           |
+| Chatsworth                 |
+| Cheju                      |
+| Chiayi                     |
+| Chisinau                   |
+| Chungho                    |
+| Cianjur                    |
+| Ciomas                     |
+| Ciparay                    |
+| Citrus Heights             |
+| Citt del Vaticano          |
+| Ciudad del Este            |
+| Clarksville                |
+| Coacalco de Berriozbal     |
+| Coatzacoalcos              |
+| Compton                    |
+| Coquimbo                   |
+| Crdoba                     |
+| Cuauhtmoc                  |
+| Cuautla                    |
+| Cuernavaca                 |
+| Cuman                      |
+| Czestochowa                |
+| Dadu                       |
+| Dallas                     |
+| Datong                     |
+| Daugavpils                 |
+| Davao                      |
+| Daxian                     |
+| Dayton                     |
+| Deba Habe                  |
+| Denizli                    |
+| Dhaka                      |
+| Dhule (Dhulia)             |
+| Dongying                   |
+| Donostia-San Sebastin      |
+| Dos Quebradas              |
+| Duisburg                   |
+| Dundee                     |
+| Dzerzinsk                  |
+| Ede                        |
+| Effon-Alaiye               |
+| El Alto                    |
+| El Fuerte                  |
+| El Monte                   |
+| Elista                     |
+| Emeishan                   |
+| Emmen                      |
+| Enshi                      |
+| Erlangen                   |
+| Escobar                    |
+| Esfahan                    |
+| Eskisehir                  |
+| Etawah                     |
+| Ezeiza                     |
+| Ezhou                      |
+| Faaa                       |
+| Fengshan                   |
+| Firozabad                  |
+| Florencia                  |
+| Fontana                    |
+| Fukuyama                   |
+| Funafuti                   |
+| Fuyu                       |
+| Fuzhou                     |
+| Gandhinagar                |
+| Garden Grove               |
+| Garland                    |
+| Gatineau                   |
+| Gaziantep                  |
+| Gijn                       |
+| Gingoog                    |
+| Goinia                     |
+| Gorontalo                  |
+| Grand Prairie              |
+| Graz                       |
+| Greensboro                 |
+| Guadalajara                |
+| Guaruj                     |
+| guas Lindas de Gois        |
+| Gulbarga                   |
+| Hagonoy                    |
+| Haining                    |
+| Haiphong                   |
+| Haldia                     |
+| Halifax                    |
+| Halisahar                  |
+| Halle/Saale                |
+| Hami                       |
+| Hamilton                   |
+| Hanoi                      |
+| Hidalgo                    |
+| Higashiosaka               |
+| Hino                       |
+| Hiroshima                  |
+| Hodeida                    |
+| Hohhot                     |
+| Hoshiarpur                 |
+| Hsichuh                    |
+| Huaian                     |
+| Hubli-Dharwad              |
+| Huejutla de Reyes          |
+| Huixquilucan               |
+| Hunuco                     |
+| Ibirit                     |
+| Idfu                       |
+| Ife                        |
+| Ikerre                     |
+| Iligan                     |
+| Ilorin                     |
+| Imus                       |
+| Inegl                      |
+| Ipoh                       |
+| Isesaki                    |
+| Ivanovo                    |
+| Iwaki                      |
+| Iwakuni                    |
+| Iwatsuki                   |
+| Izumisano                  |
+| Jaffna                     |
+| Jaipur                     |
+| Jakarta                    |
+| Jalib al-Shuyukh           |
+| Jamalpur                   |
+| Jaroslavl                  |
+| Jastrzebie-Zdrj            |
+| Jedda                      |
+| Jelets                     |
+| Jhansi                     |
+| Jinchang                   |
+| Jining                     |
+| Jinzhou                    |
+| Jodhpur                    |
+| Johannesburg               |
+| Joliet                     |
+| Jos Azueta                 |
+| Juazeiro do Norte          |
+| Juiz de Fora               |
+| Junan                      |
+| Jurez                      |
+| Kabul                      |
+| Kaduna                     |
+| Kakamigahara               |
+| Kaliningrad                |
+| Kalisz                     |
+| Kamakura                   |
+| Kamarhati                  |
+| Kamjanets-Podilskyi        |
+| Kamyin                     |
+| Kanazawa                   |
+| Kanchrapara                |
+| Kansas City                |
+| Karnal                     |
+| Katihar                    |
+| Kermanshah                 |
+| Kilis                      |
+| Kimberley                  |
+| Kimchon                    |
+| Kingstown                  |
+| Kirovo-Tepetsk             |
+| Kisumu                     |
+| Kitwe                      |
+| Klerksdorp                 |
+| Kolpino                    |
+| Konotop                    |
+| Koriyama                   |
+| Korla                      |
+| Korolev                    |
+| Kowloon and New Kowloon    |
+| Kragujevac                 |
+| Ktahya                     |
+| Kuching                    |
+| Kumbakonam                 |
+| Kurashiki                  |
+| Kurgan                     |
+| Kursk                      |
+| Kuwana                     |
+| La Paz                     |
+| La Plata                   |
+| La Romana                  |
+| Laiwu                      |
+| Lancaster                  |
+| Laohekou                   |
+| Lapu-Lapu                  |
+| Laredo                     |
+| Lausanne                   |
+| Le Mans                    |
+| Lengshuijiang              |
+| Leshan                     |
+| Lethbridge                 |
+| Lethbridge                 |
+| Lhokseumawe                |
+| Liaocheng                  |
+| Liepaja                    |
+| Lilongwe                   |
+| Lima                       |
+| Lincoln                    |
+| Linz                       |
+| Lipetsk                    |
+| Livorno                    |
+| Ljubertsy                  |
+| Loja                       |
+| London                     |
+| London                     |
+| Lublin                     |
+| Lubumbashi                 |
+| Lungtan                    |
+| Luzinia                    |
+| Madiun                     |
+| Mahajanga                  |
+| Maikop                     |
+| Malm                       |
+| Manchester                 |
+| Mandaluyong                |
+| Mandi Bahauddin            |
+| Mannheim                   |
+| Maracabo                   |
+| Mardan                     |
+| Maring                     |
+| Masqat                     |
+| Matamoros                  |
+| Matsue                     |
+| Meixian                    |
+| Memphis                    |
+| Merlo                      |
+| Mexicali                   |
+| Miraj                      |
+| Mit Ghamr                  |
+| Miyakonojo                 |
+| Mogiljov                   |
+| Molodetno                  |
+| Monclova                   |
+| Monywa                     |
+| Moscow                     |
+| Mosul                      |
+| Mukateve                   |
+| Munger (Monghyr)           |
+| Mwanza                     |
+| Mwene-Ditu                 |
+| Myingyan                   |
+| Mysore                     |
+| Naala-Porto                |
+| Nabereznyje Telny          |
+| Nador                      |
+| Nagaon                     |
+| Nagareyama                 |
+| Najafabad                  |
+| Naju                       |
+| Nakhon Sawan               |
+| Nam Dinh                   |
+| Namibe                     |
+| Nantou                     |
+| Nanyang                    |
+| NDjamna                    |
+| Newcastle                  |
+| Nezahualcyotl              |
+| Nha Trang                  |
+| Niznekamsk                 |
+| Novi Sad                   |
+| Novoterkassk               |
+| Nukualofa                  |
+| Nuuk                       |
+| Nyeri                      |
+| Ocumare del Tuy            |
+| Ogbomosho                  |
+| Okara                      |
+| Okayama                    |
+| Okinawa                    |
+| Olomouc                    |
+| Omdurman                   |
+| Omiya                      |
+| Ondo                       |
+| Onomichi                   |
+| Oshawa                     |
+| Osmaniye                   |
+| ostka                      |
+| Otsu                       |
+| Oulu                       |
+| Ourense (Orense)           |
+| Owo                        |
+| Oyo                        |
+| Ozamis                     |
+| Paarl                      |
+| Pachuca de Soto            |
+| Pak Kret                   |
+| Palghat (Palakkad)         |
+| Pangkal Pinang             |
+| Papeete                    |
+| Parbhani                   |
+| Pathankot                  |
+| Patiala                    |
+| Patras                     |
+| Pavlodar                   |
+| Pemalang                   |
+| Peoria                     |
+| Pereira                    |
+| Phnom Penh                 |
+| Pingxiang                  |
+| Pjatigorsk                 |
+| Plock                      |
+| Po                         |
+| Ponce                      |
+| Pontianak                  |
+| Poos de Caldas             |
+| Portoviejo                 |
+| Probolinggo                |
+| Pudukkottai                |
+| Pune                       |
+| Purnea (Purnia)            |
+| Purwakarta                 |
+| Pyongyang                  |
+| Qalyub                     |
+| Qinhuangdao                |
+| Qomsheh                    |
+| Quilmes                    |
+| Rae Bareli                 |
+| Rajkot                     |
+| Rampur                     |
+| Rancagua                   |
+| Ranchi                     |
+| Richmond Hill              |
+| Rio Claro                  |
+| Rizhao                     |
+| Roanoke                    |
+| Robamba                    |
+| Rockford                   |
+| Ruse                       |
+| Rustenburg                 |
+| s-Hertogenbosch            |
+| Saarbrcken                 |
+| Sagamihara                 |
+| Saint Louis                |
+| Saint-Denis                |
+| Sal                        |
+| Salala                     |
+| Salamanca                  |
+| Salinas                    |
+| Salzburg                   |
+| Sambhal                    |
+| San Bernardino             |
+| San Felipe de Puerto Plata |
+| San Felipe del Progreso    |
+| San Juan Bautista Tuxtepec |
+| San Lorenzo                |
+| San Miguel de Tucumn       |
+| Sanaa                      |
+| Santa Brbara dOeste        |
+| Santa F                    |
+| Santa Rosa                 |
+| Santiago de Compostela     |
+| Santiago de Compostela     |
+| Santiago de Compostela     |
+| Santiago de Compostela     |
+| Santiago de Compostela     |
+| Santiago de Compostela     |
+| Santiago de los Caballeros |
+| Santo Andr                 |
+| Sanya                      |
+| Sasebo                     |
+| Satna                      |
+| Sawhaj                     |
+| Serpuhov                   |
+| Shahr-e Kord               |
+| Shanwei                    |
+| Shaoguan                   |
+| Sharja                     |
+| Shenzhen                   |
+| Shikarpur                  |
+| Shimoga                    |
+| Shimonoseki                |
+| Shivapuri                  |
+| Shubra al-Khayma           |
+| Siegen                     |
+| Siliguri (Shiliguri)       |
+| Simferopol                 |
+| Sincelejo                  |
+| Sirjan                     |
+| Sivas                      |
+| Skikda                     |
+| Smolensk                   |
+| So Bernardo do Campo       |
+| So Leopoldo                |
+| Sogamoso                   |
+| Sokoto                     |
+| Songkhla                   |
+| Sorocaba                   |
+| Soshanguve                 |
+| Sousse                     |
+| South Hill                 |
+| Southampton                |
+| Southend-on-Sea            |
+| Southport                  |
+| Springs                    |
+| Stara Zagora               |
+| Sterling Heights           |
+| Stockport                  |
+| Sucre                      |
+| Suihua                     |
+| Sullana                    |
+| Sultanbeyli                |
+| Sumqayit                   |
+| Sumy                       |
+| Sungai Petani              |
+| Sunnyvale                  |
+| Surakarta                  |
+| Syktyvkar                  |
+| Syrakusa                   |
+| Szkesfehrvr                |
+| Tabora                     |
+| Tabriz                     |
+| Tabuk                      |
+| Tafuna                     |
+| Taguig                     |
+| Taizz                      |
+| Talavera                   |
+| Tallahassee                |
+| Tama                       |
+| Tambaram                   |
+| Tanauan                    |
+| Tandil                     |
+| Tangail                    |
+| Tanshui                    |
+| Tanza                      |
+| Tarlac                     |
+| Tarsus                     |
+| Tartu                      |
+| Teboksary                  |
+| Tegal                      |
+| Tel Aviv-Jaffa             |
+| Tete                       |
+| Tianjin                    |
+| Tiefa                      |
+| Tieli                      |
+| Tokat                      |
+| Tonghae                    |
+| Tongliao                   |
+| Torren                     |
+| Touliu                     |
+| Toulon                     |
+| Toulouse                   |
+| Trshavn                    |
+| Tsaotun                    |
+| Tsuyama                    |
+| Tuguegarao                 |
+| Tychy                      |
+| Udaipur                    |
+| Udine                      |
+| Ueda                       |
+| Uijongbu                   |
+| Uluberia                   |
+| Urawa                      |
+| Uruapan                    |
+| Usak                       |
+| Usolje-Sibirskoje          |
+| Uttarpara-Kotrung          |
+| Vaduz                      |
+| Valencia                   |
+| Valle de la Pascua         |
+| Valle de Santiago          |
+| Valparai                   |
+| Vancouver                  |
+| Varanasi (Benares)         |
+| Vicente Lpez               |
+| Vijayawada                 |
+| Vila Velha                 |
+| Vilnius                    |
+| Vinh                       |
+| Vitria de Santo Anto       |
+| Warren                     |
+| Weifang                    |
+| Witten                     |
+| Woodridge                  |
+| Woodridge                  |
+| Wroclaw                    |
+| Xiangfan                   |
+| Xiangtan                   |
+| Xintai                     |
+| Xinxiang                   |
+| Yamuna Nagar               |
+| Yangor                     |
+| Yantai                     |
+| Yaound                     |
+| Yerevan                    |
+| Yinchuan                   |
+| Yingkou                    |
+| York                       |
+| Yuncheng                   |
+| Yuzhou                     |
+| Zalantun                   |
+| Zanzibar                   |
+| Zaoyang                    |
+| Zapopan                    |
+| Zaria                      |
+| Zeleznogorsk               |
+| Zhezqazghan                |
+| Zhoushan                   |
+| Ziguinchor                 |
++----------------------------+
+607 rows in set (0,00 sec)
+
+```
+
+14. #### Obtener los nombres y apellidos de los actores que han participado en más de 10 películas.(having)
+
+```sql
+SELECT c.nombre AS nombre_Actor, c.apellidos AS apellidos_actor, COUNT(p.id_pelicula) AS peliculas_actuadas
+FROM pelicula AS p
+INNER JOIN pelicula_actor AS pa ON pa.id_pelicula = p.id_pelicula
+INNER JOIN actor AS c ON pa.id_actor = c.id_actor
+GROUP BY c.id_actor
+HAVING peliculas_actuadas >10;
+
++--------------+-----------------+--------------------+
+| nombre_Actor | apellidos_actor | peliculas_actuadas |
++--------------+-----------------+--------------------+
+| PENELOPE     | GUINESS         |                 19 |
+| NICK         | WAHLBERG        |                 25 |
+| ED           | CHASE           |                 22 |
+| JENNIFER     | DAVIS           |                 22 |
+| JOHNNY       | LOLLOBRIGIDA    |                 29 |
+| BETTE        | NICHOLSON       |                 20 |
+| GRACE        | MOSTEL          |                 30 |
+| MATTHEW      | JOHANSSON       |                 20 |
+| JOE          | SWANK           |                 25 |
+| CHRISTIAN    | GABLE           |                 22 |
+| ZERO         | CAGE            |                 25 |
+| KARL         | BERRY           |                 31 |
+| UMA          | WOOD            |                 35 |
+| VIVIEN       | BERGEN          |                 30 |
+| CUBA         | OLIVIER         |                 28 |
+| FRED         | COSTNER         |                 27 |
+| HELEN        | VOIGHT          |                 32 |
+| DAN          | TORN            |                 22 |
+| BOB          | FAWCETT         |                 25 |
+| LUCILLE      | TRACY           |                 30 |
+| KIRSTEN      | PALTROW         |                 27 |
+| ELVIS        | MARX            |                 26 |
+| SANDRA       | KILMER          |                 37 |
+| CAMERON      | STREEP          |                 24 |
+| KEVIN        | BLOOM           |                 21 |
+| RIP          | CRAWFORD        |                 33 |
+| JULIA        | MCQUEEN         |                 33 |
+| WOODY        | HOFFMAN         |                 31 |
+| ALEC         | WAYNE           |                 29 |
+| SANDRA       | PECK            |                 19 |
+| SISSY        | SOBIESKI        |                 18 |
+| TIM          | HACKMAN         |                 23 |
+| MILLA        | PECK            |                 24 |
+| AUDREY       | OLIVIER         |                 25 |
+| JUDY         | DEAN            |                 15 |
+| BURT         | DUKAKIS         |                 29 |
+| VAL          | BOLGER          |                 35 |
+| TOM          | MCKELLEN        |                 25 |
+| GOLDIE       | BRODY           |                 28 |
+| JOHNNY       | CAGE            |                 29 |
+| JODIE        | DEGENERES       |                 29 |
+| TOM          | MIRANDA         |                 27 |
+| KIRK         | JOVOVICH        |                 26 |
+| NICK         | STALLONE        |                 30 |
+| REESE        | KILMER          |                 32 |
+| PARKER       | GOLDBERG        |                 24 |
+| JULIA        | BARRYMORE       |                 24 |
+| FRANCES      | DAY-LEWIS       |                 26 |
+| ANNE         | CRONYN          |                 27 |
+| NATALIE      | HOPKINS         |                 32 |
+| GARY         | PHOENIX         |                 25 |
+| CARMEN       | HUNT            |                 26 |
+| MENA         | TEMPLE          |                 30 |
+| PENELOPE     | PINKETT         |                 25 |
+| FAY          | KILMER          |                 20 |
+| DAN          | HARRIS          |                 28 |
+| JUDE         | CRUISE          |                 30 |
+| CHRISTIAN    | AKROYD          |                 32 |
+| DUSTIN       | TAUTOU          |                 27 |
+| HENRY        | BERRY           |                 35 |
+| CHRISTIAN    | NEESON          |                 25 |
+| JAYNE        | NEESON          |                 29 |
+| CAMERON      | WRAY            |                 19 |
+| RAY          | JOHANSSON       |                 30 |
+| ANGELA       | HUDSON          |                 34 |
+| MARY         | TANDY           |                 31 |
+| JESSICA      | BAILEY          |                 23 |
+| RIP          | WINSLET         |                 30 |
+| KENNETH      | PALTROW         |                 21 |
+| MICHELLE     | MCCONAUGHEY     |                 23 |
+| ADAM         | GRANT           |                 18 |
+| SEAN         | WILLIAMS        |                 26 |
+| GARY         | PENN            |                 26 |
+| MILLA        | KEITEL          |                 28 |
+| BURT         | POSEY           |                 24 |
+| ANGELINA     | ASTAIRE         |                 31 |
+| CARY         | MCCONAUGHEY     |                 24 |
+| GROUCHO      | SINATRA         |                 26 |
+| MAE          | HOFFMAN         |                 28 |
+| RALPH        | CRUZ            |                 28 |
+| SCARLETT     | DAMON           |                 36 |
+| WOODY        | JOLIE           |                 31 |
+| BEN          | WILLIS          |                 33 |
+| JAMES        | PITT            |                 31 |
+| MINNIE       | ZELLWEGER       |                 31 |
+| GREG         | CHAPLIN         |                 27 |
+| SPENCER      | PECK            |                 21 |
+| KENNETH      | PESCI           |                 20 |
+| CHARLIZE     | DENCH           |                 24 |
+| SEAN         | GUINESS         |                 33 |
+| CHRISTOPHER  | BERRY           |                 20 |
+| KIRSTEN      | AKROYD          |                 34 |
+| ELLEN        | PRESLEY         |                 25 |
+| KENNETH      | TORN            |                 33 |
+| DARYL        | WAHLBERG        |                 31 |
+| GENE         | WILLIS          |                 23 |
+| MEG          | HAWKE           |                 27 |
+| CHRIS        | BRIDGES         |                 27 |
+| JIM          | MOSTEL          |                 26 |
+| SPENCER      | DEPP            |                 24 |
+| SUSAN        | DAVIS           |                 33 |
+| WALTER       | TORN            |                 41 |
+| MATTHEW      | LEIGH           |                 30 |
+| PENELOPE     | CRONYN          |                 31 |
+| SIDNEY       | CROWE           |                 34 |
+| GROUCHO      | DUNST           |                 35 |
+| GINA         | DEGENERES       |                 42 |
+| WARREN       | NOLTE           |                 34 |
+| SYLVESTER    | DERN            |                 22 |
+| SUSAN        | DAVIS           |                 21 |
+| CAMERON      | ZELLWEGER       |                 33 |
+| RUSSELL      | BACALL          |                 25 |
+| MORGAN       | HOPKINS         |                 27 |
+| MORGAN       | MCDORMAND       |                 25 |
+| HARRISON     | BALE            |                 28 |
+| DAN          | STREEP          |                 24 |
+| RENEE        | TRACY           |                 33 |
+| CUBA         | ALLEN           |                 25 |
+| WARREN       | JACKMAN         |                 32 |
+| PENELOPE     | MONROE          |                 27 |
+| LIZA         | BERGMAN         |                 25 |
+| SALMA        | NOLTE           |                 25 |
+| JULIANNE     | DENCH           |                 32 |
+| SCARLETT     | BENING          |                 26 |
+| ALBERT       | NOLTE           |                 31 |
+| FRANCES      | TOMEI           |                 23 |
+| KEVIN        | GARLAND         |                 33 |
+| CATE         | MCQUEEN         |                 30 |
+| DARYL        | CRAWFORD        |                 30 |
+| GRETA        | KEITEL          |                 27 |
+| JANE         | JACKMAN         |                 25 |
+| ADAM         | HOPPER          |                 22 |
+| RICHARD      | PENN            |                 30 |
+| GENE         | HOPKINS         |                 22 |
+| RITA         | REYNOLDS        |                 20 |
+| ED           | MANSFIELD       |                 32 |
+| MORGAN       | WILLIAMS        |                 27 |
+| LUCILLE      | DEE             |                 24 |
+| EWAN         | GOODING         |                 33 |
+| WHOOPI       | HURT            |                 32 |
+| CATE         | HARRIS          |                 28 |
+| JADA         | RYDER           |                 31 |
+| RIVER        | DEAN            |                 31 |
+| ANGELA       | WITHERSPOON     |                 35 |
+| KIM          | ALLEN           |                 28 |
+| ALBERT       | JOHANSSON       |                 33 |
+| FAY          | WINSLET         |                 31 |
+| EMILY        | DEE             |                 14 |
+| RUSSELL      | TEMPLE          |                 31 |
+| JAYNE        | NOLTE           |                 34 |
+| GEOFFREY     | HESTON          |                 26 |
+| BEN          | HARRIS          |                 23 |
+| MINNIE       | KILMER          |                 20 |
+| MERYL        | GIBSON          |                 28 |
+| IAN          | TANDY           |                 31 |
+| FAY          | WOOD            |                 22 |
+| GRETA        | MALDEN          |                 32 |
+| VIVIEN       | BASINGER        |                 35 |
+| LAURA        | BRODY           |                 26 |
+| CHRIS        | DEPP            |                 20 |
+| HARVEY       | HOPE            |                 32 |
+| OPRAH        | KILMER          |                 25 |
+| CHRISTOPHER  | WEST            |                 21 |
+| HUMPHREY     | WILLIS          |                 26 |
+| AL           | GARLAND         |                 26 |
+| NICK         | DEGENERES       |                 22 |
+| LAURENCE     | BULLOCK         |                 26 |
+| WILL         | WILSON          |                 31 |
+| KENNETH      | HOFFMAN         |                 29 |
+| MENA         | HOPPER          |                 24 |
+| OLYMPIA      | PFEIFFER        |                 28 |
+| GROUCHO      | WILLIAMS        |                 25 |
+| ALAN         | DREYFUSS        |                 27 |
+| MICHAEL      | BENING          |                 24 |
+| WILLIAM      | HACKMAN         |                 27 |
+| JON          | CHASE           |                 29 |
+| GENE         | MCKELLEN        |                 27 |
+| LISA         | MONROE          |                 23 |
+| ED           | GUINESS         |                 29 |
+| JEFF         | SILVERSTONE     |                 25 |
+| MATTHEW      | CARREY          |                 39 |
+| DEBBIE       | AKROYD          |                 24 |
+| RUSSELL      | CLOSE           |                 19 |
+| HUMPHREY     | GARLAND         |                 29 |
+| MICHAEL      | BOLGER          |                 30 |
+| JULIA        | ZELLWEGER       |                 16 |
+| RENEE        | BALL            |                 33 |
+| ROCK         | DUKAKIS         |                 30 |
+| CUBA         | BIRCH           |                 24 |
+| AUDREY       | BAILEY          |                 27 |
+| GREGORY      | GOODING         |                 30 |
+| JOHN         | SUVARI          |                 29 |
+| BURT         | TEMPLE          |                 23 |
+| MERYL        | ALLEN           |                 22 |
+| JAYNE        | SILVERSTONE     |                 27 |
+| BELA         | WALKEN          |                 30 |
+| REESE        | WEST            |                 33 |
+| MARY         | KEITEL          |                 40 |
+| JULIA        | FAWCETT         |                 15 |
+| THORA        | TEMPLE          |                 20 |
++--------------+-----------------+--------------------+
+
+
+```
+
+15. #### Encontrar los nombres y apellidos de los clientes que han realizado un pago mayor a 100.
+
+```sql
+SELECT c.nombre As nombre_cliente, c.apellidos AS apellidos_cliente
+FROM cliente AS c
+INNER JOIN pago as p ON p.id_cliente = c.id_cliente
+WHERE p.total> 100;
+Empty set (0,00 sec)
+
+```
+
+16. #### Listar los títulos de las películas lanzadas en el mismo año que la película con id_pelicula = 2.
+
+```sql
+SELECT titulo
+FROM pelicula
+WHERE anyo_lanzamiento = (SELECT anyo_lanzamiento
+    FROM pelicula
+    WHERE id_pelicula = 2
+);
+
++-----------------------------+
+| titulo                      |
++-----------------------------+
+| ACADEMY DINOSAUR            |
+| ACE GOLDFINGER              |
+| ADAPTATION HOLES            |
+| AFFAIR PREJUDICE            |
+| AFRICAN EGG                 |
+| AGENT TRUMAN                |
+| AIRPLANE SIERRA             |
+| AIRPORT POLLOCK             |
+| ALABAMA DEVIL               |
+| ALADDIN CALENDAR            |
+| ALAMO VIDEOTAPE             |
+| ALASKA PHANTOM              |
+| ALI FOREVER                 |
+| ALICE FANTASIA              |
+| ALIEN CENTER                |
+| ALLEY EVOLUTION             |
+| ALONE TRIP                  |
+| ALTER VICTORY               |
+| AMADEUS HOLY                |
+| AMELIE HELLFIGHTERS         |
+| AMERICAN CIRCUS             |
+| AMISTAD MIDSUMMER           |
+| ANACONDA CONFESSIONS        |
+| ANALYZE HOOSIERS            |
+| ANGELS LIFE                 |
+| ANNIE IDENTITY              |
+| ANONYMOUS HUMAN             |
+| ANTHEM LUKE                 |
+| ANTITRUST TOMATOES          |
+| ANYTHING SAVANNAH           |
+| APACHE DIVINE               |
+| APOCALYPSE FLAMINGOS        |
+| APOLLO TEEN                 |
+| ARABIA DOGMA                |
+| ARACHNOPHOBIA ROLLERCOASTER |
+| ARGONAUTS TOWN              |
+| ARIZONA BANG                |
+| ARK RIDGEMONT               |
+| ARMAGEDDON LOST             |
+| ARMY FLINTSTONES            |
+| ARSENIC INDEPENDENCE        |
+| ARTIST COLDBLOODED          |
+| ATLANTIS CAUSE              |
+| ATTACKS HATE                |
+| ATTRACTION NEWTON           |
+| AUTUMN CROW                 |
+| BABY HALL                   |
+| BACKLASH UNDEFEATED         |
+| BADMAN DAWN                 |
+| BAKED CLEOPATRA             |
+| BALLOON HOMEWARD            |
+| BALLROOM MOCKINGBIRD        |
+| BANG KWAI                   |
+| BANGER PINOCCHIO            |
+| BARBARELLA STREETCAR        |
+| BAREFOOT MANCHURIAN         |
+| BASIC EASY                  |
+| BEACH HEARTBREAKERS         |
+| BEAR GRACELAND              |
+| BEAST HUNCHBACK             |
+| BEAUTY GREASE               |
+| BED HIGHBALL                |
+| BEDAZZLED MARRIED           |
+| BEETHOVEN EXORCIST          |
+| BEHAVIOR RUNAWAY            |
+| BENEATH RUSH                |
+| BERETS AGENT                |
+| BETRAYED REAR               |
+| BEVERLY OUTLAW              |
+| BIKINI BORROWERS            |
+| BILKO ANONYMOUS             |
+| BILL OTHERS                 |
+| BINGO TALENTED              |
+| BIRCH ANTITRUST             |
+| BIRD INDEPENDENCE           |
+| BIRDCAGE CASPER             |
+| BIRDS PERDITION             |
+| BLACKOUT PRIVATE            |
+| BLADE POLISH                |
+| BLANKET BEVERLY             |
+| BLINDNESS GUN               |
+| BLOOD ARGONAUTS             |
+| BLUES INSTINCT              |
+| BOILED DARES                |
+| BONNIE HOLOCAUST            |
+| BOOGIE AMELIE               |
+| BOONDOCK BALLROOM           |
+| BORN SPINAL                 |
+| BORROWERS BEDAZZLED         |
+| BOULEVARD MOB               |
+| BOUND CHEAPER               |
+| BOWFINGER GABLES            |
+| BRANNIGAN SUNRISE           |
+| BRAVEHEART HUMAN            |
+| BREAKFAST GOLDFINGER        |
+| BREAKING HOME               |
+| BRIDE INTRIGUE              |
+| BRIGHT ENCOUNTERS           |
+| BRINGING HYSTERICAL         |
+| BROOKLYN DESERT             |
+| BROTHERHOOD BLANKET         |
+| BUBBLE GROSSE               |
+| BUCKET BROTHERHOOD          |
+| BUGSY SONG                  |
+| BULL SHAWSHANK              |
+| BULWORTH COMMANDMENTS       |
+| BUNCH MINDS                 |
+| BUTCH PANTHER               |
+| BUTTERFLY CHOCOLAT          |
+| CABIN FLASH                 |
+| CADDYSHACK JEDI             |
+| CALENDAR GUNFIGHT           |
+| CALIFORNIA BIRDS            |
+| CAMELOT VACATION            |
+| CAMPUS REMEMBER             |
+| CANDIDATE PERDITION         |
+| CANDLES GRAPES              |
+| CANYON STOCK                |
+| CAPER MOTIONS               |
+| CARIBBEAN LIBERTY           |
+| CAROL TEXAS                 |
+| CARRIE BUNCH                |
+| CASABLANCA SUPER            |
+| CASPER DRAGONFLY            |
+| CASSIDY WYOMING             |
+| CASUALTIES ENCINO           |
+| CAT CONEHEADS               |
+| CATCH AMISTAD               |
+| CAUSE DATE                  |
+| CELEBRITY HORN              |
+| CENTER DINOSAUR             |
+| CHAINSAW UPTOWN             |
+| CHAMBER ITALIAN             |
+| CHAMPION FLATLINERS         |
+| CHANCE RESURRECTION         |
+| CHAPLIN LICENSE             |
+| CHARADE DUFFEL              |
+| CHARIOTS CONSPIRACY         |
+| CHASING FIGHT               |
+| CHEAPER CLYDE               |
+| CHICAGO NORTH               |
+| CHICKEN HELLFIGHTERS        |
+| CHILL LUCK                  |
+| CHINATOWN GLADIATOR         |
+| CHISUM BEHAVIOR             |
+| CHITTY LOCK                 |
+| CHOCOLAT HARRY              |
+| CHOCOLATE DUCK              |
+| CHRISTMAS MOONSHINE         |
+| CIDER DESIRE                |
+| CINCINATTI WHISPERER        |
+| CIRCUS YOUTH                |
+| CITIZEN SHREK               |
+| CLASH FREDDY                |
+| CLEOPATRA DEVIL             |
+| CLERKS ANGELS               |
+| CLOCKWORK PARADISE          |
+| CLONES PINOCCHIO            |
+| CLOSER BANG                 |
+| CLUB GRAFFITI               |
+| CLUE GRAIL                  |
+| CLUELESS BUCKET             |
+| CLYDE THEORY                |
+| COAST RAINBOW               |
+| COLDBLOODED DARLING         |
+| COLOR PHILADELPHIA          |
+| COMA HEAD                   |
+| COMANCHEROS ENEMY           |
+| COMFORTS RUSH               |
+| COMMAND DARLING             |
+| COMMANDMENTS EXPRESS        |
+| CONEHEADS SMOOCHY           |
+| CONFESSIONS MAGUIRE         |
+| CONFIDENTIAL INTERVIEW      |
+| CONFUSED CANDLES            |
+| CONGENIALITY QUEST          |
+| CONNECTICUT TRAMP           |
+| CONNECTION MICROCOSMOS      |
+| CONQUERER NUTS              |
+| CONSPIRACY SPIRIT           |
+| CONTACT ANONYMOUS           |
+| CONTROL ANTHEM              |
+| CONVERSATION DOWNHILL       |
+| CORE SUIT                   |
+| COWBOY DOOM                 |
+| CRAFT OUTFIELD              |
+| CRANES RESERVOIR            |
+| CRAZY HOME                  |
+| CREATURES SHAKESPEARE       |
+| CREEPERS KANE               |
+| CROOKED FROGMEN             |
+| CROSSING DIVORCE            |
+| CROSSROADS CASUALTIES       |
+| CROW GREASE                 |
+| CROWDS TELEMARK             |
+| CRUELTY UNFORGIVEN          |
+| CRUSADE HONEY               |
+| CRYSTAL BREAKING            |
+| CUPBOARD SINNERS            |
+| CURTAIN VIDEOTAPE           |
+| CYCLONE FAMILY              |
+| DADDY PITTSBURGH            |
+| DAISY MENAGERIE             |
+| DALMATIONS SWEDEN           |
+| DANCES NONE                 |
+| DANCING FEVER               |
+| DANGEROUS UPTOWN            |
+| DARES PLUTO                 |
+| DARKNESS WAR                |
+| DARKO DORADO                |
+| DARLING BREAKING            |
+| DARN FORRESTER              |
+| DATE SPEED                  |
+| DAUGHTER MADIGAN            |
+| DAWN POND                   |
+| DAY UNFAITHFUL              |
+| DAZED PUNK                  |
+| DECEIVER BETRAYED           |
+| DEEP CRUSADE                |
+| DEER VIRGINIAN              |
+| DELIVERANCE MULHOLLAND      |
+| DESERT POSEIDON             |
+| DESIRE ALIEN                |
+| DESPERATE TRAINSPOTTING     |
+| DESTINATION JERK            |
+| DESTINY SATURDAY            |
+| DETAILS PACKER              |
+| DETECTIVE VISION            |
+| DEVIL DESIRE                |
+| DIARY PANIC                 |
+| DINOSAUR SECRETARY          |
+| DIRTY ACE                   |
+| DISCIPLE MOTHER             |
+| DISTURBING SCARFACE         |
+| DIVIDE MONSTER              |
+| DIVINE RESURRECTION         |
+| DIVORCE SHINING             |
+| DOCTOR GRAIL                |
+| DOGMA FAMILY                |
+| DOLLS RAGE                  |
+| DONNIE ALLEY                |
+| DOOM DANCING                |
+| DOORS PRESIDENT             |
+| DORADO NOTTING              |
+| DOUBLE WRATH                |
+| DOUBTFIRE LABYRINTH         |
+| DOWNHILL ENOUGH             |
+| DOZEN LION                  |
+| DRACULA CRYSTAL             |
+| DRAGON SQUAD                |
+| DRAGONFLY STRANGERS         |
+| DREAM PICKUP                |
+| DRIFTER COMMANDMENTS        |
+| DRIVER ANNIE                |
+| DRIVING POLISH              |
+| DROP WATERFRONT             |
+| DRUMLINE CYCLONE            |
+| DRUMS DYNAMITE              |
+| DUCK RACER                  |
+| DUDE BLINDNESS              |
+| DUFFEL APOCALYPSE           |
+| DUMBO LUST                  |
+| DURHAM PANKY                |
+| DWARFS ALTER                |
+| DYING MAKER                 |
+| DYNAMITE TARZAN             |
+| EAGLES PANKY                |
+| EARLY HOME                  |
+| EARRING INSTINCT            |
+| EARTH VISION                |
+| EASY GLADIATOR              |
+| EDGE KISSING                |
+| EFFECT GLADIATOR            |
+| EGG IGBY                    |
+| EGYPT TENENBAUMS            |
+| ELEMENT FREDDY              |
+| ELEPHANT TROJAN             |
+| ELF MURDER                  |
+| ELIZABETH SHANE             |
+| EMPIRE MALKOVICH            |
+| ENCINO ELF                  |
+| ENCOUNTERS CURTAIN          |
+| ENDING CROWDS               |
+| ENEMY ODDS                  |
+| ENGLISH BULWORTH            |
+| ENOUGH RAGING               |
+| ENTRAPMENT SATISFACTION     |
+| ESCAPE METROPOLIS           |
+| EVE RESURRECTION            |
+| EVERYONE CRAFT              |
+| EVOLUTION ALTER             |
+| EXCITEMENT EVE              |
+| EXORCIST STING              |
+| EXPECATIONS NATURAL         |
+| EXPENDABLE STALLION         |
+| EXPRESS LONELY              |
+| EXTRAORDINARY CONQUERER     |
+| EYES DRIVING                |
+| FACTORY DRAGON              |
+| FALCON VOLUME               |
+| FAMILY SWEET                |
+| FANTASIA PARK               |
+| FANTASY TROOPERS            |
+| FARGO GANDHI                |
+| FATAL HAUNTED               |
+| FEATHERS METAL              |
+| FELLOWSHIP AUTUMN           |
+| FERRIS MOTHER               |
+| FEUD FROGMEN                |
+| FEVER EMPIRE                |
+| FICTION CHRISTMAS           |
+| FIDDLER LOST                |
+| FIDELITY DEVIL              |
+| FIGHT JAWBREAKER            |
+| FINDING ANACONDA            |
+| FIRE WOLVES                 |
+| FIREBALL PHILADELPHIA       |
+| FIREHOUSE VIETNAM           |
+| FISH OPUS                   |
+| FLAMINGOS CONNECTICUT       |
+| FLASH WARS                  |
+| FLATLINERS KILLER           |
+| FLIGHT LIES                 |
+| FLINTSTONES HAPPINESS       |
+| FLOATS GARDEN               |
+| FLYING HOOK                 |
+| FOOL MOCKINGBIRD            |
+| FOREVER CANDIDATE           |
+| FORREST SONS                |
+| FORRESTER COMANCHEROS       |
+| FORWARD TEMPLE              |
+| FRANKENSTEIN STRANGER       |
+| FREAKY POCUS                |
+| FREDDY STORM                |
+| FREEDOM CLEOPATRA           |
+| FRENCH HOLIDAY              |
+| FRIDA SLIPPER               |
+| FRISCO FORREST              |
+| FROGMEN BREAKING            |
+| FRONTIER CABIN              |
+| FROST HEAD                  |
+| FUGITIVE MAGUIRE            |
+| FULL FLATLINERS             |
+| FURY MURDER                 |
+| GABLES METROPOLIS           |
+| GALAXY SWEETHEARTS          |
+| GAMES BOWFINGER             |
+| GANDHI KWAI                 |
+| GANGS PRIDE                 |
+| GARDEN ISLAND               |
+| GASLIGHT CRUSADE            |
+| GATHERING CALENDAR          |
+| GENTLEMEN STAGE             |
+| GHOST GROUNDHOG             |
+| GHOSTBUSTERS ELF            |
+| GIANT TROOPERS              |
+| GILBERT PELICAN             |
+| GILMORE BOILED              |
+| GLADIATOR WESTWARD          |
+| GLASS DYING                 |
+| GLEAMING JAWBREAKER         |
+| GLORY TRACY                 |
+| GO PURPLE                   |
+| GODFATHER DIARY             |
+| GOLD RIVER                  |
+| GOLDFINGER SENSIBILITY      |
+| GOLDMINE TYCOON             |
+| GONE TROUBLE                |
+| GOODFELLAS SALUTE           |
+| GORGEOUS BINGO              |
+| GOSFORD DONNIE              |
+| GRACELAND DYNAMITE          |
+| GRADUATE LORD               |
+| GRAFFITI LOVE               |
+| GRAIL FRANKENSTEIN          |
+| GRAPES FURY                 |
+| GREASE YOUTH                |
+| GREATEST NORTH              |
+| GREEDY ROOTS                |
+| GREEK EVERYONE              |
+| GRINCH MASSAGE              |
+| GRIT CLOCKWORK              |
+| GROOVE FICTION              |
+| GROSSE WONDERFUL            |
+| GROUNDHOG UNCUT             |
+| GUMP DATE                   |
+| GUN BONNIE                  |
+| GUNFIGHT MOON               |
+| GUNFIGHTER MUSSOLINI        |
+| GUYS FALCON                 |
+| HALF OUTFIELD               |
+| HALL CASSIDY                |
+| HALLOWEEN NUTS              |
+| HAMLET WISDOM               |
+| HANDICAP BOONDOCK           |
+| HANGING DEEP                |
+| HANKY OCTOBER               |
+| HANOVER GALAXY              |
+| HAPPINESS UNITED            |
+| HARDLY ROBBERS              |
+| HAROLD FRENCH               |
+| HARPER DYING                |
+| HARRY IDAHO                 |
+| HATE HANDICAP               |
+| HAUNTED ANTITRUST           |
+| HAUNTING PIANIST            |
+| HAWK CHILL                  |
+| HEAD STRANGER               |
+| HEARTBREAKERS BRIGHT        |
+| HEAVEN FREEDOM              |
+| HEAVENLY GUN                |
+| HEAVYWEIGHTS BEAST          |
+| HEDWIG ALTER                |
+| HELLFIGHTERS SIERRA         |
+| HIGH ENCINO                 |
+| HIGHBALL POTTER             |
+| HILLS NEIGHBORS             |
+| HOBBIT ALIEN                |
+| HOCUS FRIDA                 |
+| HOLES BRANNIGAN             |
+| HOLIDAY GAMES               |
+| HOLLOW JEOPARDY             |
+| HOLLYWOOD ANONYMOUS         |
+| HOLOCAUST HIGHBALL          |
+| HOLY TADPOLE                |
+| HOME PITY                   |
+| HOMEWARD CIDER              |
+| HOMICIDE PEACH              |
+| HONEY TIES                  |
+| HOOK CHARIOTS               |
+| HOOSIERS BIRDCAGE           |
+| HOPE TOOTSIE                |
+| HORN WORKING                |
+| HORROR REIGN                |
+| HOTEL HAPPINESS             |
+| HOURS RAGE                  |
+| HOUSE DYNAMITE              |
+| HUMAN GRAFFITI              |
+| HUNCHBACK IMPOSSIBLE        |
+| HUNGER ROOF                 |
+| HUNTER ALTER                |
+| HUNTING MUSKETEERS          |
+| HURRICANE AFFAIR            |
+| HUSTLER PARTY               |
+| HYDE DOCTOR                 |
+| HYSTERICAL GRAIL            |
+| ICE CROSSING                |
+| IDAHO LOVE                  |
+| IDENTITY LOVER              |
+| IDOLS SNATCHERS             |
+| IGBY MAKER                  |
+| ILLUSION AMELIE             |
+| IMAGE PRINCESS              |
+| IMPACT ALADDIN              |
+| IMPOSSIBLE PREJUDICE        |
+| INCH JET                    |
+| INDEPENDENCE HOTEL          |
+| INDIAN LOVE                 |
+| INFORMER DOUBLE             |
+| INNOCENT USUAL              |
+| INSECTS STONE               |
+| INSIDER ARIZONA             |
+| INSTINCT AIRPORT            |
+| INTENTIONS EMPIRE           |
+| INTERVIEW LIAISONS          |
+| INTOLERABLE INTENTIONS      |
+| INTRIGUE WORST              |
+| INVASION CYCLONE            |
+| IRON MOON                   |
+| ISHTAR ROCKETEER            |
+| ISLAND EXORCIST             |
+| ITALIAN AFRICAN             |
+| JACKET FRISCO               |
+| JADE BUNCH                  |
+| JAPANESE RUN                |
+| JASON TRAP                  |
+| JAWBREAKER BROOKLYN         |
+| JAWS HARRY                  |
+| JEDI BENEATH                |
+| JEEPERS WEDDING             |
+| JEKYLL FROGMEN              |
+| JEOPARDY ENCINO             |
+| JERICHO MULAN               |
+| JERK PAYCHECK               |
+| JERSEY SASSY                |
+| JET NEIGHBORS               |
+| JINGLE SAGEBRUSH            |
+| JOON NORTHWEST              |
+| JUGGLER HARDLY              |
+| JUMANJI BLADE               |
+| JUMPING WRATH               |
+| JUNGLE CLOSER               |
+| KANE EXORCIST               |
+| KARATE MOON                 |
+| KENTUCKIAN GIANT            |
+| KICK SAVANNAH               |
+| KILL BROTHERHOOD            |
+| KILLER INNOCENT             |
+| KING EVOLUTION              |
+| KISS GLORY                  |
+| KISSING DOLLS               |
+| KNOCK WARLOCK               |
+| KRAMER CHOCOLATE            |
+| KWAI HOMEWARD               |
+| LABYRINTH LEAGUE            |
+| LADY STAGE                  |
+| LADYBUGS ARMAGEDDON         |
+| LAMBS CINCINATTI            |
+| LANGUAGE COWBOY             |
+| LAWLESS VISION              |
+| LAWRENCE LOVE               |
+| LEAGUE HELLFIGHTERS         |
+| LEATHERNECKS DWARFS         |
+| LEBOWSKI SOLDIERS           |
+| LEGALLY SECRETARY           |
+| LEGEND JEDI                 |
+| LESSON CLEOPATRA            |
+| LIAISONS SWEET              |
+| LIBERTY MAGNIFICENT         |
+| LICENSE WEEKEND             |
+| LIES TREATMENT              |
+| LIFE TWISTED                |
+| LIGHTS DEER                 |
+| LION UNCUT                  |
+| LOATHING LEGALLY            |
+| LOCK REAR                   |
+| LOLA AGENT                  |
+| LOLITA WORLD                |
+| LONELY ELEPHANT             |
+| LORD ARIZONA                |
+| LOSE INCH                   |
+| LOSER HUSTLER               |
+| LOST BIRD                   |
+| LOUISIANA HARRY             |
+| LOVE SUICIDES               |
+| LOVELY JINGLE               |
+| LOVER TRUMAN                |
+| LOVERBOY ATTACKS            |
+| LUCK OPUS                   |
+| LUCKY FLYING                |
+| LUKE MUMMY                  |
+| LUST LOCK                   |
+| MADIGAN DORADO              |
+| MADISON TRAP                |
+| MADNESS ATTACKS             |
+| MADRE GABLES                |
+| MAGIC MALLRATS              |
+| MAGNIFICENT CHITTY          |
+| MAGNOLIA FORRESTER          |
+| MAGUIRE APACHE              |
+| MAIDEN HOME                 |
+| MAJESTIC FLOATS             |
+| MAKER GABLES                |
+| MALKOVICH PET               |
+| MALLRATS UNITED             |
+| MALTESE HOPE                |
+| MANCHURIAN CURTAIN          |
+| MANNEQUIN WORST             |
+| MARRIED GO                  |
+| MARS ROMAN                  |
+| MASK PEACH                  |
+| MASKED BUBBLE               |
+| MASSACRE USUAL              |
+| MASSAGE IMAGE               |
+| MATRIX SNOWMAN              |
+| MAUDE MOD                   |
+| MEET CHOCOLATE              |
+| MEMENTO ZOOLANDER           |
+| MENAGERIE RUSHMORE          |
+| MERMAID INSECTS             |
+| METAL ARMAGEDDON            |
+| METROPOLIS COMA             |
+| MICROCOSMOS PARADISE        |
+| MIDNIGHT WESTWARD           |
+| MIDSUMMER GROUNDHOG         |
+| MIGHTY LUCK                 |
+| MILE MULAN                  |
+| MILLION ACE                 |
+| MINDS TRUMAN                |
+| MINE TITANS                 |
+| MINORITY KISS               |
+| MIRACLE VIRTUAL             |
+| MISSION ZOOLANDER           |
+| MIXED DOORS                 |
+| MOB DUFFEL                  |
+| MOCKINGBIRD HOLLYWOOD       |
+| MOD SECRETARY               |
+| MODEL FISH                  |
+| MODERN DORADO               |
+| MONEY HAROLD                |
+| MONSOON CAUSE               |
+| MONSTER SPARTACUS           |
+| MONTEREY LABYRINTH          |
+| MONTEZUMA COMMAND           |
+| MOON BUNCH                  |
+| MOONSHINE CABIN             |
+| MOONWALKER FOOL             |
+| MOSQUITO ARMAGEDDON         |
+| MOTHER OLEANDER             |
+| MOTIONS DETAILS             |
+| MOULIN WAKE                 |
+| MOURNING PURPLE             |
+| MOVIE SHAKESPEARE           |
+| MULAN MOON                  |
+| MULHOLLAND BEAST            |
+| MUMMY CREATURES             |
+| MUPPET MILE                 |
+| MURDER ANTITRUST            |
+| MUSCLE BRIGHT               |
+| MUSIC BOONDOCK              |
+| MUSKETEERS WAIT             |
+| MUSSOLINI SPOILERS          |
+| MYSTIC TRUMAN               |
+| NAME DETECTIVE              |
+| NASH CHOCOLAT               |
+| NATIONAL STORY              |
+| NATURAL STOCK               |
+| NECKLACE OUTBREAK           |
+| NEIGHBORS CHARADE           |
+| NEMO CAMPUS                 |
+| NETWORK PEAK                |
+| NEWSIES STORY               |
+| NEWTON LABYRINTH            |
+| NIGHTMARE CHILL             |
+| NONE SPIKING                |
+| NOON PAPI                   |
+| NORTH TEQUILA               |
+| NORTHWEST POLISH            |
+| NOTORIOUS REUNION           |
+| NOTTING SPEAKEASY           |
+| NOVOCAINE FLIGHT            |
+| NUTS TIES                   |
+| OCTOBER SUBMARINE           |
+| ODDS BOOGIE                 |
+| OKLAHOMA JUMANJI            |
+| OLEANDER CLUE               |
+| OPEN AFRICAN                |
+| OPERATION OPERATION         |
+| OPPOSITE NECKLACE           |
+| OPUS ICE                    |
+| ORANGE GRAPES               |
+| ORDER BETRAYED              |
+| ORIENT CLOSER               |
+| OSCAR GOLD                  |
+| OTHERS SOUP                 |
+| OUTBREAK DIVINE             |
+| OUTFIELD MASSACRE           |
+| OUTLAW HANKY                |
+| OZ LIAISONS                 |
+| PACIFIC AMISTAD             |
+| PACKER MADIGAN              |
+| PAJAMA JAWBREAKER           |
+| PANIC CLUB                  |
+| PANKY SUBMARINE             |
+| PANTHER REDS                |
+| PAPI NECKLACE               |
+| PARADISE SABRINA            |
+| PARIS WEEKEND               |
+| PARK CITIZEN                |
+| PARTY KNOCK                 |
+| PAST SUICIDES               |
+| PATHS CONTROL               |
+| PATIENT SISTER              |
+| PATRIOT ROMAN               |
+| PATTON INTERVIEW            |
+| PAYCHECK WAIT               |
+| PEACH INNOCENT              |
+| PEAK FOREVER                |
+| PEARL DESTINY               |
+| PELICAN COMFORTS            |
+| PERDITION FARGO             |
+| PERFECT GROOVE              |
+| PERSONAL LADYBUGS           |
+| PET HAUNTING                |
+| PHANTOM GLORY               |
+| PHILADELPHIA WIFE           |
+| PIANIST OUTFIELD            |
+| PICKUP DRIVING              |
+| PILOT HOOSIERS              |
+| PINOCCHIO SIMON             |
+| PIRATES ROXANNE             |
+| PITTSBURGH HUNCHBACK        |
+| PITY BOUND                  |
+| PIZZA JUMANJI               |
+| PLATOON INSTINCT            |
+| PLUTO OLEANDER              |
+| POCUS PULP                  |
+| POLISH BROOKLYN             |
+| POLLOCK DELIVERANCE         |
+| POND SEATTLE                |
+| POSEIDON FOREVER            |
+| POTLUCK MIXED               |
+| POTTER CONNECTICUT          |
+| PREJUDICE OLEANDER          |
+| PRESIDENT BANG              |
+| PRIDE ALAMO                 |
+| PRIMARY GLASS               |
+| PRINCESS GIANT              |
+| PRIVATE DROP                |
+| PRIX UNDEFEATED             |
+| PSYCHO SHRUNK               |
+| PULP BEVERLY                |
+| PUNK DIVORCE                |
+| PURE RUNNER                 |
+| PURPLE MOVIE                |
+| QUEEN LUKE                  |
+| QUEST MUSSOLINI             |
+| QUILLS BULL                 |
+| RACER EGG                   |
+| RAGE GAMES                  |
+| RAGING AIRPLANE             |
+| RAIDERS ANTITRUST           |
+| RAINBOW SHOCK               |
+| RANDOM GO                   |
+| RANGE MOONWALKER            |
+| REAP UNFAITHFUL             |
+| REAR TRADING                |
+| REBEL AIRPORT               |
+| RECORDS ZORRO               |
+| REDEMPTION COMFORTS         |
+| REDS POCUS                  |
+| REEF SALUTE                 |
+| REIGN GENTLEMEN             |
+| REMEMBER DIARY              |
+| REQUIEM TYCOON              |
+| RESERVOIR ADAPTATION        |
+| RESURRECTION SILVERADO      |
+| REUNION WITCHES             |
+| RIDER CADDYSHACK            |
+| RIDGEMONT SUBMARINE         |
+| RIGHT CRANES                |
+| RINGS HEARTBREAKERS         |
+| RIVER OUTLAW                |
+| ROAD ROXANNE                |
+| ROBBERS JOON                |
+| ROBBERY BRIGHT              |
+| ROCK INSTINCT               |
+| ROCKETEER MOTHER            |
+| ROCKY WAR                   |
+| ROLLERCOASTER BRINGING      |
+| ROMAN PUNK                  |
+| ROOF CHAMPION               |
+| ROOM ROMAN                  |
+| ROOTS REMEMBER              |
+| ROSES TREASURE              |
+| ROUGE SQUAD                 |
+| ROXANNE REBEL               |
+| RUGRATS SHAKESPEARE         |
+| RULES HUMAN                 |
+| RUN PACIFIC                 |
+| RUNAWAY TENENBAUMS          |
+| RUNNER MADIGAN              |
+| RUSH GOODFELLAS             |
+| RUSHMORE MERMAID            |
+| SABRINA MIDNIGHT            |
+| SADDLE ANTITRUST            |
+| SAGEBRUSH CLUELESS          |
+| SAINTS BRIDE                |
+| SALUTE APOLLO               |
+| SAMURAI LION                |
+| SANTA PARIS                 |
+| SASSY PACKER                |
+| SATISFACTION CONFIDENTIAL   |
+| SATURDAY LAMBS              |
+| SATURN NAME                 |
+| SAVANNAH TOWN               |
+| SCALAWAG DUCK               |
+| SCARFACE BANG               |
+| SCHOOL JACKET               |
+| SCISSORHANDS SLUMS          |
+| SCORPION APOLLO             |
+| SEA VIRGIN                  |
+| SEABISCUIT PUNK             |
+| SEARCHERS WAIT              |
+| SEATTLE EXPECATIONS         |
+| SECRET GROUNDHOG            |
+| SECRETARY ROUGE             |
+| SECRETS PARADISE            |
+| SENSE GREEK                 |
+| SENSIBILITY REAR            |
+| SEVEN SWARM                 |
+| SHAKESPEARE SADDLE          |
+| SHANE DARKNESS              |
+| SHANGHAI TYCOON             |
+| SHAWSHANK BUBBLE            |
+| SHEPHERD MIDSUMMER          |
+| SHINING ROSES               |
+| SHIP WONDERLAND             |
+| SHOCK CABIN                 |
+| SHOOTIST SUPERFLY           |
+| SHOW LORD                   |
+| SHREK LICENSE               |
+| SHRUNK DIVINE               |
+| SIDE ARK                    |
+| SIEGE MADRE                 |
+| SIERRA DIVIDE               |
+| SILENCE KANE                |
+| SILVERADO GOLDFINGER        |
+| SIMON NORTH                 |
+| SINNERS ATLANTIS            |
+| SISTER FREDDY               |
+| SKY MIRACLE                 |
+| SLACKER LIAISONS            |
+| SLEEPING SUSPECTS           |
+| SLEEPLESS MONSOON           |
+| SLEEPY JAPANESE             |
+| SLEUTH ORIENT               |
+| SLING LUKE                  |
+| SLIPPER FIDELITY            |
+| SLUMS DUCK                  |
+| SMILE EARRING               |
+| SMOKING BARBARELLA          |
+| SMOOCHY CONTROL             |
+| SNATCH SLIPPER              |
+| SNATCHERS MONTEZUMA         |
+| SNOWMAN ROLLERCOASTER       |
+| SOLDIERS EVOLUTION          |
+| SOMETHING DUCK              |
+| SONG HEDWIG                 |
+| SONS INTERVIEW              |
+| SORORITY QUEEN              |
+| SOUP WISDOM                 |
+| SOUTH WAIT                  |
+| SPARTACUS CHEAPER           |
+| SPEAKEASY DATE              |
+| SPEED SUIT                  |
+| SPICE SORORITY              |
+| SPIKING ELEMENT             |
+| SPINAL ROCKY                |
+| SPIRIT FLINTSTONES          |
+| SPIRITED CASUALTIES         |
+| SPLASH GUMP                 |
+| SPLENDOR PATTON             |
+| SPOILERS HELLFIGHTERS       |
+| SPY MILE                    |
+| SQUAD FISH                  |
+| STAGE WORLD                 |
+| STAGECOACH ARMAGEDDON       |
+| STALLION SUNDANCE           |
+| STAMPEDE DISTURBING         |
+| STAR OPERATION              |
+| STATE WASTELAND             |
+| STEEL SANTA                 |
+| STEERS ARMAGEDDON           |
+| STEPMOM DREAM               |
+| STING PERSONAL              |
+| STOCK GLASS                 |
+| STONE FIRE                  |
+| STORM HAPPINESS             |
+| STORY SIDE                  |
+| STRAIGHT HOURS              |
+| STRANGELOVE DESIRE          |
+| STRANGER STRANGERS          |
+| STRANGERS GRAFFITI          |
+| STREAK RIDGEMONT            |
+| STREETCAR INTENTIONS        |
+| STRICTLY SCARFACE           |
+| SUBMARINE BED               |
+| SUGAR WONKA                 |
+| SUICIDES SILENCE            |
+| SUIT WALLS                  |
+| SUMMER SCARFACE             |
+| SUN CONFESSIONS             |
+| SUNDANCE INVASION           |
+| SUNRISE LEAGUE              |
+| SUNSET RACER                |
+| SUPER WYOMING               |
+| SUPERFLY TRIP               |
+| SUSPECTS QUILLS             |
+| SWARM GOLD                  |
+| SWEDEN SHINING              |
+| SWEET BROTHERHOOD           |
+| SWEETHEARTS SUSPECTS        |
+| TADPOLE PARK                |
+| TALENTED HOMICIDE           |
+| TARZAN VIDEOTAPE            |
+| TAXI KICK                   |
+| TEEN APOLLO                 |
+| TELEGRAPH VOYAGE            |
+| TELEMARK HEARTBREAKERS      |
+| TEMPLE ATTRACTION           |
+| TENENBAUMS COMMAND          |
+| TEQUILA PAST                |
+| TERMINATOR CLUB             |
+| TEXAS WATCH                 |
+| THEORY MERMAID              |
+| THIEF PELICAN               |
+| THIN SAGEBRUSH              |
+| TIES HUNGER                 |
+| TIGHTS DAWN                 |
+| TIMBERLAND SKY              |
+| TITANIC BOONDOCK            |
+| TITANS JERK                 |
+| TOMATOES HELLFIGHTERS       |
+| TOMORROW HUSTLER            |
+| TOOTSIE PILOT               |
+| TORQUE BOUND                |
+| TOURIST PELICAN             |
+| TOWERS HURRICANE            |
+| TOWN ARK                    |
+| TRACY CIDER                 |
+| TRADING PINOCCHIO           |
+| TRAFFIC HOBBIT              |
+| TRAIN BUNCH                 |
+| TRAINSPOTTING STRANGERS     |
+| TRAMP OTHERS                |
+| TRANSLATION SUMMER          |
+| TRAP GUYS                   |
+| TREASURE COMMAND            |
+| TREATMENT JEKYLL            |
+| TRIP NEWTON                 |
+| TROJAN TOMORROW             |
+| TROOPERS METAL              |
+| TROUBLE DATE                |
+| TRUMAN CRAZY                |
+| TURN STAR                   |
+| TUXEDO MILE                 |
+| TWISTED PIRATES             |
+| TYCOON GATHERING            |
+| UNBREAKABLE KARATE          |
+| UNCUT SUICIDES              |
+| UNDEFEATED DALMATIONS       |
+| UNFAITHFUL KILL             |
+| UNFORGIVEN ZOOLANDER        |
+| UNITED PILOT                |
+| UNTOUCHABLES SUNRISE        |
+| UPRISING UPTOWN             |
+| UPTOWN YOUNG                |
+| USUAL UNTOUCHABLES          |
+| VACATION BOONDOCK           |
+| VALENTINE VANISHING         |
+| VALLEY PACKER               |
+| VAMPIRE WHALE               |
+| VANILLA DAY                 |
+| VANISHED GARDEN             |
+| VANISHING ROCKY             |
+| VARSITY TRIP                |
+| VELVET TERMINATOR           |
+| VERTIGO NORTHWEST           |
+| VICTORY ACADEMY             |
+| VIDEOTAPE ARSENIC           |
+| VIETNAM SMOOCHY             |
+| VILLAIN DESPERATE           |
+| VIRGIN DAISY                |
+| VIRGINIAN PLUTO             |
+| VIRTUAL SPOILERS            |
+| VISION TORQUE               |
+| VOICE PEACH                 |
+| VOLCANO TEXAS               |
+| VOLUME HOUSE                |
+| VOYAGE LEGALLY              |
+| WAGON JAWS                  |
+| WAIT CIDER                  |
+| WAKE JAWS                   |
+| WALLS ARTIST                |
+| WANDA CHAMBER               |
+| WAR NOTTING                 |
+| WARDROBE PHANTOM            |
+| WARLOCK WEREWOLF            |
+| WARS PLUTO                  |
+| WASH HEAVENLY               |
+| WASTELAND DIVINE            |
+| WATCH TRACY                 |
+| WATERFRONT DELIVERANCE      |
+| WATERSHIP FRONTIER          |
+| WEDDING APOLLO              |
+| WEEKEND PERSONAL            |
+| WEREWOLF LOLA               |
+| WEST LION                   |
+| WESTWARD SEABISCUIT         |
+| WHALE BIKINI                |
+| WHISPERER GIANT             |
+| WIFE TURN                   |
+| WILD APOLLO                 |
+| WILLOW TRACY                |
+| WIND PHANTOM                |
+| WINDOW SIDE                 |
+| WISDOM WORKER               |
+| WITCHES PANIC               |
+| WIZARD COLDBLOODED          |
+| WOLVES DESIRE               |
+| WOMEN DORADO                |
+| WON DARES                   |
+| WONDERFUL DROP              |
+| WONDERLAND CHRISTMAS        |
+| WONKA SEA                   |
+| WORDS HUNTER                |
+| WORKER TARZAN               |
+| WORKING MICROCOSMOS         |
+| WORLD LEATHERNECKS          |
+| WORST BANGER                |
+| WRATH MILE                  |
+| WRONG BEHAVIOR              |
+| WYOMING STORM               |
+| YENTL IDAHO                 |
+| YOUNG LANGUAGE              |
+| YOUTH KICK                  |
+| ZHIVAGO CORE                |
+| ZOOLANDER FICTION           |
+| ZORRO ARK                   |
++-----------------------------+
+
+
+```
+
