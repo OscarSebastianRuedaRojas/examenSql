@@ -34130,17 +34130,60 @@ INNER JOIN almacen as a ON a.id_empleado_jefe = e.id_empleado;
 11. #### Obtener los títulos de las películas que nunca han sido alquiladas.
 
 ```sql
-SELECT p.titulo, p.id_pelicula
-FROM pelicula as p
-INNER JOIN inventario AS i ON i.id_pelicula = p.id_pelicula
-WHERE i.id_inventario NOT IN (SELECT id_inventario
-FROM alquiler);
-+------------------+-------------+
-| titulo           | id_pelicula |
-+------------------+-------------+
-| ACADEMY DINOSAUR |           1 |
-+------------------+-------------+
-1 row in set (0,02 sec)
+SELECT p.titulo, a.id_alquiler
+FROM pelicula AS p
+LEFT JOIN inventario AS i ON i.id_pelicula  = p.id_pelicula  
+LEFT JOIN alquiler AS a ON a.id_inventario = i.id_inventario 
+WHERE a.id_inventario IS NULL;
++------------------------+-------------+
+| titulo                 | id_alquiler |
++------------------------+-------------+
+| ACADEMY DINOSAUR       |        NULL |
+| ALICE FANTASIA         |        NULL |
+| APOLLO TEEN            |        NULL |
+| ARGONAUTS TOWN         |        NULL |
+| ARK RIDGEMONT          |        NULL |
+| ARSENIC INDEPENDENCE   |        NULL |
+| BOONDOCK BALLROOM      |        NULL |
+| BUTCH PANTHER          |        NULL |
+| CATCH AMISTAD          |        NULL |
+| CHINATOWN GLADIATOR    |        NULL |
+| CHOCOLATE DUCK         |        NULL |
+| COMMANDMENTS EXPRESS   |        NULL |
+| CROSSING DIVORCE       |        NULL |
+| CROWDS TELEMARK        |        NULL |
+| CRYSTAL BREAKING       |        NULL |
+| DAZED PUNK             |        NULL |
+| DELIVERANCE MULHOLLAND |        NULL |
+| FIREHOUSE VIETNAM      |        NULL |
+| FLOATS GARDEN          |        NULL |
+| FRANKENSTEIN STRANGER  |        NULL |
+| GLADIATOR WESTWARD     |        NULL |
+| GUMP DATE              |        NULL |
+| HATE HANDICAP          |        NULL |
+| HOCUS FRIDA            |        NULL |
+| KENTUCKIAN GIANT       |        NULL |
+| KILL BROTHERHOOD       |        NULL |
+| MUPPET MILE            |        NULL |
+| ORDER BETRAYED         |        NULL |
+| PEARL DESTINY          |        NULL |
+| PERDITION FARGO        |        NULL |
+| PSYCHO SHRUNK          |        NULL |
+| RAIDERS ANTITRUST      |        NULL |
+| RAINBOW SHOCK          |        NULL |
+| ROOF CHAMPION          |        NULL |
+| SISTER FREDDY          |        NULL |
+| SKY MIRACLE            |        NULL |
+| SUICIDES SILENCE       |        NULL |
+| TADPOLE PARK           |        NULL |
+| TREASURE COMMAND       |        NULL |
+| VILLAIN DESPERATE      |        NULL |
+| VOLUME HOUSE           |        NULL |
+| WAKE JAWS              |        NULL |
+| WALLS ARTIST           |        NULL |
++------------------------+-------------+
+43 rows in set (0,01 sec)
+
 
 
 ```
